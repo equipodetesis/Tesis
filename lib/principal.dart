@@ -16,31 +16,33 @@ class principal extends StatelessWidget{
       ),
       body: ListView.builder(
         itemCount: items.length,
-        itemBuilder:(context,index){
-          final lista.ListItem item=items[index];
-
-          return Container(
-            height: 100.0,
-
-            child:ListTile(
-
-              title: Text(item.Nombre),
+        itemBuilder:(context,index)=> Column(
+          children: <Widget>[
+             Divider(height: 10.0),
+            ListTile(
               leading: CircleAvatar(
-                backgroundImage:AssetImage(item.imagen) ,
-
+                foregroundColor: Theme.of(context).primaryColor,
+                backgroundColor: Colors.lightBlueAccent,
+                backgroundImage: AssetImage('Imagenes/incognito.png'),
               ),
-              onTap: (){
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Baseformularios(item)),
-                );
-              },
-
-            ) ,
-          );
-
-
-        } ,
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  new Text(
+                    items[index].Nombre,
+                    style: new TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+              subtitle: Container(
+                  padding: const EdgeInsets.only(top: 5.0),
+                  child: new Text(
+                    items[index].fechacita,
+                    style: new TextStyle(color: Colors.grey, fontSize: 15.0),
+                  ),
+            )
+            ) ],
+        )
       ) ,
     );
   }

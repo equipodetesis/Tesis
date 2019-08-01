@@ -8,7 +8,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<ListItem> list= new List<ListItem>();
-    list.add(ListItem('Imagenesincognito.png','Aqui Estara Un Paciente'));
+    list.add(ListItem('Imagenes/incognito.png','Aqui Estara Un Paciente',"Fecha a futuro"));
     return MaterialApp(
       title: 'Historias Clinicas',
       theme: ThemeData(

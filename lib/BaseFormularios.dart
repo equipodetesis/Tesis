@@ -9,23 +9,36 @@ class Baseformularios extends StatelessWidget{
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      appBar: AppBar(title: Text("Historias clinicas"),),
+      appBar: AppBar(title: Text("Historias clinicas"),
+       centerTitle: true,
+      ),
       body: Center(child: Text('My Page!')),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              child: CircleAvatar(
-                backgroundImage: AssetImage(header.imagen),
-                child: Container(
-                  margin: EdgeInsets.fromLTRB(0.0,100.0 ,0.0, 0.0),
-
-                  child:  Text(header.Nombre,),
-                ),
-              ),
-
-              decoration: BoxDecoration(color: Colors.black26,),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  CircleAvatar(
+                    backgroundImage: AssetImage(header.imagen),
+                  ),
+                  Text(header.Nombre,
+                  textScaleFactor: 15.0,
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  MaterialButton(
+                    onPressed: (){
+                      //funcion de la camara aqui
+                    },
+                    child: Text("Cambiar foto"),
+                  )
+                ],
+              )
             ),
             ListTile(
               title: Text("General"),

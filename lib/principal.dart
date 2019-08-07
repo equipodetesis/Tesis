@@ -1,50 +1,102 @@
 import 'package:flutter/material.dart';
 import 'ListItem.dart' as lista;
 import 'BaseFormularios.dart';
-class principal extends StatelessWidget{
-
+import 'ListController.dart';
+class principal extends StatefulWidget{
   final String title;
   final List<lista.ListItem> items;
-
-  principal(this.title, this.items);
+  principal({Key key, this.title, this.items}):super(key:key);
   @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
-      body: ListView.builder(
-        itemCount: items.length,
-        itemBuilder:(context,index)=> Column(
-          children: <Widget>[
-             Divider(height: 10.0),
-            ListTile(
-              leading: CircleAvatar(
-                foregroundColor: Theme.of(context).primaryColor,
-                backgroundColor: Colors.lightBlueAccent,
-                backgroundImage: AssetImage('Imagenes/incognito.png'),
-              ),
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  new Text(
-                    items[index].Nombre,
-                    style: new TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-              subtitle: Container(
-                  padding: const EdgeInsets.only(top: 5.0),
-                  child: new Text(
-                    items[index].fechacita,
-                    style: new TextStyle(color: Colors.grey, fontSize: 15.0),
-                  ),
-            )
-            ) ],
-        )
-      ) ,
-    );
+  PrincipalState createState() => new PrincipalState(title,items);
+
+
+}
+
+class PrincipalState extends State<principal> {
+  final String title;
+  final List<lista.ListItem> items;
+  Icon actionIcon= Icon(Icons.search,color: Colors.white);
+  bool _IsSearching;
+  String _searchText = "";
+  final key =  GlobalKey<ScaffoldState>();
+  final TextEditingController _searchQuery =  TextEditingController();
+  Widget appBarTitle =  Text("Search Sample", style:TextStyle(color: Colors.white),);
+
+  PrincipalState(this.title, this.items){
+    _searchQuery.addListener((){
+      if(_searchQuery.text.isEmpty){
+        setState(() {
+          _IsSearching=true;
+          _searchText="";
+        });
+      }
+      else{
+        setState(() {
+          _IsSearching=true;
+          _searchText=_searchQuery.text;
+        });
+      }
+    });
+
   }
 
+  @override
+  void initState() {
+    super.initState();
+    _IsSearching = false;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: appBarTitle,
+        actions: <Widget>[
+            IconButton(
+              icon: actionIcon,
+              onPressed: (){
+                setState(() {
+                  if (this.actionIcon.icon == Icons.search) {
+                    this.actionIcon =  Icon(Icons.close, color: Colors.white,);
+                    this.appBarTitle =  TextField(
+                      controller: _searchQuery,
+                      style: new TextStyle(
+                        color: Colors.white,
+
+                      ),
+                      decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.search, color: Colors.white),
+                          hintText: "Search...",
+                          hintStyle:  TextStyle(color: Colors.white)
+                      ),
+                    );
+                    _handleSearchStart();
+                }
+                  else{
+                    _handleSearchEnd();
+                  }
+                }
+                );
+              },
+            )
+        ],
+      ),
+      body:  ListController(items, _IsSearching,_searchText),
+    );
+  }
+  void _handleSearchStart() {
+    setState(() {
+      _IsSearching = true;
+    });
+  }
+
+  void _handleSearchEnd() {
+    setState(() {
+      this.actionIcon =Icon(Icons.search, color: Colors.white,);
+      this.appBarTitle =
+      Text("Historias clinicas", style:  TextStyle(color: Colors.white),);
+      _IsSearching = false;
+      _searchQuery.clear();
+    });
+  }
 }

@@ -16,14 +16,17 @@ class ListController extends StatelessWidget{
     List<ListItem> items= new List<ListItem>();
 
     if(search){
+      if(!searchtext.isEmpty)
       for(int i=0;i<preitems.length;i++){
         if(preitems[i].Nombre.toLowerCase().contains(searchtext.toLowerCase())){
           items.add(preitems[i]);
         }
       }
+      else
+        items=preitems;
     }
     else
-      List<ListItem> items=preitems;
+      items=preitems;
 
     return ListView.builder(
         itemCount: items.length,

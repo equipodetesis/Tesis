@@ -20,7 +20,7 @@ class PrincipalState extends State<principal> {
   String _searchText = "";
   final key =  GlobalKey<ScaffoldState>();
   final TextEditingController _searchQuery =  TextEditingController();
-  Widget appBarTitle =  Text("Search Sample", style:TextStyle(color: Colors.white),);
+  Widget appBarTitle =  Text("Historias clinicas", style:TextStyle(color: Colors.white),);
 
   PrincipalState(this.title, this.items){
     _searchQuery.addListener((){
@@ -66,7 +66,7 @@ class PrincipalState extends State<principal> {
                       ),
                       decoration: InputDecoration(
                           prefixIcon: Icon(Icons.search, color: Colors.white),
-                          hintText: "Search...",
+                          hintText: "Buscar...",
                           hintStyle:  TextStyle(color: Colors.white)
                       ),
                     );
@@ -81,7 +81,7 @@ class PrincipalState extends State<principal> {
             )
         ],
       ),
-      body:  ListController(items, _IsSearching,_searchText),
+      body: ListController(items, _IsSearching,_searchText),
     );
   }
   void _handleSearchStart() {

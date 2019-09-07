@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "176792153508",
+    "firebase_url": "https://expedientes-odontologicos.firebaseio.com",
+    "project_id": "expedientes-odontologicos",
+    "storage_bucket": "expedientes-odontologicos.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:176792153508:android:605baaf4f4431ebc",
+        "android_client_info": {
+          "package_name": "com.cam.expedientesodontologicos_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "176792153508-higccpbjt2rhfhbi522pi0kh3b571t4t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAG7Td1278HFIgzpboaVi5jZA_5_URg9MY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "176792153508-higccpbjt2rhfhbi522pi0kh3b571t4t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

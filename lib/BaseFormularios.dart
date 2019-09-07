@@ -17,29 +17,42 @@ class Baseformularios extends StatelessWidget{
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            DrawerHeader(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  CircleAvatar(
-                    backgroundImage: AssetImage(header.imagen),
-                  ),
-                  Text(header.Nombre,
-                  textScaleFactor: 15.0,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  MaterialButton(
-                    onPressed: (){
-                      //funcion de la camara aqui
-                    },
-                    child: Text("Cambiar foto"),
+            AspectRatio(
+              aspectRatio: 0.001/0.001,
+              child:  DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.blueAccent,
+                ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      AspectRatio(
+                        child:CircleAvatar(
+                          backgroundImage: AssetImage("Imagenes/zelda.jpg"),
+                          backgroundColor: Colors.black12,
+                          foregroundColor:Colors.white ,
+                        ),
+                        aspectRatio: 0.001/0.0004,
+                      ),
+
+                      Text(header.Nombre,
+                        textScaleFactor: 1.5,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      MaterialButton(
+                        onPressed: (){
+                          //funcion de la camara aqui
+                        },
+                        child: Text("Cambiar foto",style: TextStyle(color: Colors.white),),
+                      )
+                    ],
                   )
-                ],
-              )
+              ),
             ),
+
             ListTile(
               title: Text("General"),
               onTap: (){

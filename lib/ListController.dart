@@ -14,6 +14,7 @@ class ListController extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     List<ListItem> items= new List<ListItem>();
+
     if(search){
       for(int i=0;i<preitems.length;i++){
         if(preitems[i].Nombre.toLowerCase().contains(searchtext.toLowerCase())){
@@ -26,7 +27,6 @@ class ListController extends StatelessWidget{
 
     return ListView.builder(
         itemCount: items.length,
-
         itemBuilder:(context,index)=> Column(
           children: <Widget>[
             Divider(height: 10.0),

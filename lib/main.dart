@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'ListItem.dart';
 import 'principal.dart';
+import 'package:expedientesodontologicos_app/Formularios/General_I.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: principal(title: "Lista de pacientes",items: list),
+      home: principal(items: list, title: "Lista pacientes",),
     );
   }
 }

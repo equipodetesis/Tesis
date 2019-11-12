@@ -1,78 +1,101 @@
 import 'package:flutter/material.dart';
 import 'ListItem.dart';
-class Baseformularios extends StatelessWidget{
+import 'package:expedientesodontologicos_app/Formularios/General_I.dart';
+import 'package:expedientesodontologicos_app/Formularios/motivo_e_historia_II_III.dart';
+class Baseformularios extends StatefulWidget {
+  final ListItem header;
+  Baseformularios(this.header);
+  @override
+  _BaseformulariosState createState() => _BaseformulariosState(header);
+}
+
+class _BaseformulariosState extends State<Baseformularios> {
   final ListItem header;
 
-  Baseformularios(this.header);
-
+  _BaseformulariosState(this.header);
+  Widget bodycontent = Center(child: Text('My Page!'));
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+// TODO: implement build
     return Scaffold(
       appBar: AppBar(title: Text("Historias clinicas"),
-       centerTitle: true,
+        centerTitle: true,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.check),
+            onPressed: (){
+
+            },
+          )
+        ],
       ),
-      body: Center(child: Text('My Page!')),
+      body: bodycontent,
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  CircleAvatar(
-                    backgroundImage: AssetImage(header.imagen),
-                  ),
-                  Text(header.Nombre,
-                  textScaleFactor: 15.0,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    CircleAvatar(
+                      backgroundImage: AssetImage(header.imagen),
                     ),
-                  ),
-                  MaterialButton(
-                    onPressed: (){
-                      //funcion de la camara aqui
-                    },
-                    child: Text("Cambiar foto"),
-                  )
-                ],
-              )
+                    Text(header.Nombre,
+                      textScaleFactor: 15.0,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    MaterialButton(
+                      onPressed: () {
+//funcion de la camara aqui
+                      },
+                      child: Text("Cambiar foto"),
+                    )
+                  ],
+                )
             ),
             ListTile(
               title: Text("General"),
-              onTap: (){
-                Navigator.pop(context);
+              onTap: () {
+                setState(() {
+                  bodycontent = General_I();
+                  Navigator.pop(context);
+                });
               },
             ),
             ListTile(
               title: Text("Peridograma"),
-              onTap: (){
-                Navigator.pop(context);
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => motivo_historia()),
+                );
               },
             ),
             ListTile(
               title: Text("Restaurativa"),
-              onTap: (){
+              onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
               title: Text("Control de placa"),
-              onTap: (){
+              onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
               title: Text("Cirugia"),
-              onTap: (){
+              onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
               title: Text("Endodoncia"),
-              onTap: (){
+              onTap: () {
                 Navigator.pop(context);
               },
             )

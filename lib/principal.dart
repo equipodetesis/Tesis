@@ -1,3 +1,4 @@
+import 'package:expedientesodontologicos_app/Loggin/BaseAuth.dart';
 import 'package:flutter/material.dart';
 import 'ListItem.dart' as lista;
 import 'ListController.dart';
@@ -5,19 +6,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class principal extends StatefulWidget{
   final String title;
-  final List<lista.ListItem> items;
-  principal({Key key, this.title, this.items}):super(key:key);
+  final BaseAuth auth;
+  principal(this.auth,this.title,{Key key,}):super(key:key);
   @override
-  PrincipalState createState() => new PrincipalState(title,items);
+  PrincipalState createState() => new PrincipalState(title,auth);
 
 
 }
 
 class PrincipalState extends State<principal> {
   final String title;
-  final List<lista.ListItem> items;
+  final List<lista.ListItem> items=List<lista.ListItem>();
  Firestore database=Firestore.instance;
-
+  final BaseAuth auth;
   Icon actionIcon= Icon(Icons.search,color: Colors.white);
   bool _IsSearching;
   String _searchText = "";
@@ -25,7 +26,7 @@ class PrincipalState extends State<principal> {
   final TextEditingController _searchQuery =  TextEditingController();
   Widget appBarTitle =  Text("Historias clinicas", style:TextStyle(color: Colors.white),);
 
-  PrincipalState(this.title, this.items){
+  PrincipalState(this.title, this.auth){
     _searchQuery.addListener((){
       if(_searchQuery.text.isEmpty){
         setState(() {
@@ -52,6 +53,15 @@ class PrincipalState extends State<principal> {
 
   @override
   Widget build(BuildContext context) {
+    if(auth.getCurrentUser()==null)
+      return Scaffold(
+        body: Center(
+          child: Container(
+            child: Text("falla en autenticacion"),
+          ),
+        ),
+      );
+    else
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),

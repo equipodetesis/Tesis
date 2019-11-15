@@ -1,3 +1,4 @@
+import 'package:expedientesodontologicos_app/Loggin/Loggin.dart';
 import 'package:flutter/material.dart';
 import 'ListItem.dart';
 import 'principal.dart';
@@ -23,7 +24,8 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: principal(title: "Lista de pacientes",items: list),
+      //home: principal(title: "Lista de pacientes",items: list),
+      home: Loggin(),
     );
   }
 }

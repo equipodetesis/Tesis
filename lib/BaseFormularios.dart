@@ -21,7 +21,7 @@ class Baseformularios extends StatelessWidget{
               aspectRatio: 0.001/0.001,
               child:  DrawerHeader(
                 decoration: BoxDecoration(
-                  color: Colors.blueAccent,
+                  gradient: LinearGradient(colors: [Colors.white,Colors.blueAccent])
                 ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,

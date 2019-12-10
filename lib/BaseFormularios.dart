@@ -1,18 +1,36 @@
 import 'package:flutter/material.dart';
+import 'Formularios/I_II_III_IV.dart';
 import 'ListItem.dart';
-class Baseformularios extends StatelessWidget{
-  final ListItem header;
 
+class Baseformularios extends StatefulWidget {
+  final ListItem header;
   Baseformularios(this.header);
+  @override
+  _BaseformulariosState createState() => _BaseformulariosState(header);
+}
+
+class _BaseformulariosState extends State<Baseformularios> {
+  final ListItem header;
+  _BaseformulariosState(this.header);
+
+  Widget bodycontent = Center(child: Text('My Page!'));
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(title: Text("Historias clinicas"),
-       centerTitle: true,
+        centerTitle: true,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.check),
+            onPressed: (){
+
+            },
+          )
+        ],
       ),
-      body: Center(child: Text('My Page!')),
+      body: bodycontent,
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -20,9 +38,9 @@ class Baseformularios extends StatelessWidget{
             AspectRatio(
               aspectRatio: 0.001/0.001,
               child:  DrawerHeader(
-                decoration: BoxDecoration(
-                  color: Colors.blueAccent,
-                ),
+                  decoration: BoxDecoration(
+                    color: Colors.blueAccent,
+                  ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
@@ -56,6 +74,9 @@ class Baseformularios extends StatelessWidget{
             ListTile(
               title: Text("General"),
               onTap: (){
+                setState(() {
+                  bodycontent = General_I();
+                });
                 Navigator.pop(context);
               },
             ),
@@ -94,5 +115,7 @@ class Baseformularios extends StatelessWidget{
       ),
     );
   }
+
+
 
 }

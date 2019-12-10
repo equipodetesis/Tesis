@@ -1,3 +1,4 @@
+
 import 'package:expedientesodontologicos_app/Loggin/BaseAuth.dart';
 import 'package:flutter/material.dart';
 import 'ListItem.dart' as lista;
@@ -6,10 +7,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class principal extends StatefulWidget{
 
+
   principal({Key key,}):super(key:key);
   @override
   PrincipalState createState() => new PrincipalState();
-
 
 }
 
@@ -23,6 +24,7 @@ class PrincipalState extends State<principal> {
   final key =  GlobalKey<ScaffoldState>();
   final TextEditingController _searchQuery =  TextEditingController();
   Widget appBarTitle =  Text("Historias clinicas", style:TextStyle(color: Colors.white),);
+
 
   PrincipalState(){
     _searchQuery.addListener((){
@@ -95,8 +97,6 @@ class PrincipalState extends State<principal> {
       body: ListController(items, _IsSearching,_searchText,database),
     );
 
-
-
   }
   void _handleSearchStart() {
     setState(() {
@@ -108,7 +108,7 @@ class PrincipalState extends State<principal> {
     setState(() {
       this.actionIcon =Icon(Icons.search, color: Colors.white,);
       this.appBarTitle =
-      Text("Historias clinicas", style:  TextStyle(color: Colors.white),);
+          Text("Historias clinicas", style:  TextStyle(color: Colors.white),);
       _IsSearching = false;
       _searchQuery.clear();
     });

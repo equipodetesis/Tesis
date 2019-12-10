@@ -22,6 +22,7 @@ class ListController extends StatelessWidget{
 
     return  StreamBuilder<QuerySnapshot>(
       stream: stream,
+
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
           if (snapshot.hasError)
             return new Text('Error: ${snapshot.error}');
@@ -35,6 +36,7 @@ class ListController extends StatelessWidget{
                 children: snapshot.data.documents.map((DocumentSnapshot document){
                  ListItem item= ListItem("https://firebasestorage.googleapis.com/v0/b/expedientes-odontologicos.appspot.com/o/54462699_10214142660262421_7801861136030105600_n.jpg?alt=media&token=5060a01b-917e-42e5-ac5c-6cd8bff61f3b",
                  document["Nombre"],document["edad"]);
+
                   return
                     searchtext==null||searchtext==""? Column(
                       children: <Widget>[
@@ -109,11 +111,13 @@ class ListController extends StatelessWidget{
                         )
                       ],
                     )
+
                   :Container();
                 }).toList()
               );
           }
         },
+
     );
 
   }

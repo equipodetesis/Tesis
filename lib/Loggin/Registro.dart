@@ -1,16 +1,23 @@
 import 'package:expedientesodontologicos_app/Loggin/BaseAuth.dart';
 import 'package:expedientesodontologicos_app/Loggin/FireAuth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class Registro extends StatelessWidget{
+class Registro extends StatefulWidget{
+Registro({Key key,}):super(key:key);
+  @override
+  _RegistroState createState() => _RegistroState();
+}
 
+class _RegistroState extends State<Registro> {
+  String _email;
+  String _password;
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     //TextEditingController usuario, pasword;
     BaseAuth fireuser=Auth();
-    String _email;
-    String _password;
     return Scaffold(
       body: Center(
         child: Container(
@@ -23,6 +30,8 @@ class Registro extends StatelessWidget{
             ),
             padding: EdgeInsets.all(10.0),
             child: Form(
+              key: _formKey,
+              autovalidate: true,
               child: ListView(
                 shrinkWrap: true,
                 children: <Widget>[
@@ -42,7 +51,12 @@ class Registro extends StatelessWidget{
                             color: Colors.grey,
                           )),
                       validator: (value) => value.isEmpty ? 'Email can\'t be empty' : null,
-                      onSaved: (value) => _email = value.trim(),
+                      onSaved:  (value){
+                        setState(() {
+                          _email = value.trim();
+                          print("el value:"+value);
+                        });
+                      },
                     ),
                   ),
                   Padding(
@@ -58,7 +72,11 @@ class Registro extends StatelessWidget{
                             color: Colors.grey,
                           )),
                       validator: (value) => value.isEmpty ? 'Password can\'t be empty' : null,
-                      onSaved: (value) => _password = value.trim(),
+                      onSaved: (value){
+                        setState(() {
+                          _password = value.trim();
+                        });
+                      },
                     ),
                   ),
                   Container(
@@ -69,8 +87,10 @@ class Registro extends StatelessWidget{
                       child: Text("Crear cuenta",style: TextStyle(color: Colors.white),),
                       color: Colors.amberAccent,
                       splashColor: Colors.deepOrange,
-                      onPressed: (){
-                        var uid= fireuser.signUp(_email,_password);
+                      onPressed: () async {
+                        _formKey.currentState.save();
+                        print(_password);
+                        FirebaseUser uid=await fireuser.signUp(_email,_password);
                         if (uid != null)
                           fireuser.sendEmailVerification();
                           Navigator.pop(context);
@@ -91,7 +111,4 @@ class Registro extends StatelessWidget{
       ),
     );
   }
-
-
-
 }

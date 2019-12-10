@@ -1,17 +1,23 @@
 import 'package:expedientesodontologicos_app/Loggin/BaseAuth.dart';
 import 'package:expedientesodontologicos_app/Loggin/FireAuth.dart';
+import 'package:expedientesodontologicos_app/Loggin/LoginState.dart';
 import 'package:expedientesodontologicos_app/principal.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:expedientesodontologicos_app/Loggin/Registro.dart';
-class Loggin extends StatelessWidget{
+import 'package:provider/provider.dart';
+class Loggin extends StatefulWidget{
 
   @override
+  _LogginState createState() => _LogginState();
+}
+
+class _LogginState extends State<Loggin> {
+  String _email;
+  String _password;
+  final _formKey = GlobalKey<FormState>();
+  @override
   Widget build(BuildContext context) {
-   //TextEditingController usuario, pasword;
-    BaseAuth fireuser=Auth();
-    String _email;
-    String _password;
     return Scaffold(
       body: Center(
         child: Container(
@@ -24,6 +30,8 @@ class Loggin extends StatelessWidget{
           ),
           padding: EdgeInsets.all(10.0),
           child: Form(
+            key: _formKey,
+            autovalidate: true,
             child: ListView(
               shrinkWrap: true,
               children: <Widget>[
@@ -42,7 +50,7 @@ class Loggin extends StatelessWidget{
                       Icons.mail,
                       color: Colors.grey,
                     )),
-                validator: (value) => value.isEmpty ? 'Email can\'t be empty' : null,
+                validator: (value) => value.isEmpty ? 'Este campo no puede estar vacio' : null,
                 onSaved: (value) => _email = value.trim(),
               ),
             ),
@@ -58,7 +66,7 @@ class Loggin extends StatelessWidget{
                       Icons.lock,
                       color: Colors.grey,
                     )),
-                validator: (value) => value.isEmpty ? 'Password can\'t be empty' : null,
+                validator: (value) => value.isEmpty ? 'Este campo no puede estar vacio' : null,
                 onSaved: (value) => _password = value.trim(),
               ),
             ),
@@ -70,10 +78,14 @@ class Loggin extends StatelessWidget{
                     child: Text("Ingresar",style: TextStyle(color: Colors.white),),
                     color: Colors.amberAccent,
                     splashColor: Colors.deepOrange,
-                    onPressed: (){
-                    var uid= fireuser.signIn(_email, _password);
-                    if (uid != null)
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>principal(fireuser,"Pacientes")));
+                    onPressed: () async {
+                     if( _formKey.currentState.validate())
+                       _formKey.currentState.save();
+                     print("Waaaaaaa"+_email);
+
+                     Provider.of<LoginState>(context).login(_email, _password);
+                    if (Provider.of<LoginState>(context).isok())
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>principal()));
                     },
                     materialTapTargetSize: MaterialTapTargetSize.padded,
                   ),
@@ -91,7 +103,4 @@ class Loggin extends StatelessWidget{
       ),
     );
   }
-
-
-
 }

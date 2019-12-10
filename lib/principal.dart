@@ -5,20 +5,18 @@ import 'ListController.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class principal extends StatefulWidget{
-  final String title;
-  final BaseAuth auth;
-  principal(this.auth,this.title,{Key key,}):super(key:key);
+
+  principal({Key key,}):super(key:key);
   @override
-  PrincipalState createState() => new PrincipalState(title,auth);
+  PrincipalState createState() => new PrincipalState();
 
 
 }
 
 class PrincipalState extends State<principal> {
-  final String title;
+
   final List<lista.ListItem> items=List<lista.ListItem>();
  Firestore database=Firestore.instance;
-  final BaseAuth auth;
   Icon actionIcon= Icon(Icons.search,color: Colors.white);
   bool _IsSearching;
   String _searchText = "";
@@ -26,7 +24,7 @@ class PrincipalState extends State<principal> {
   final TextEditingController _searchQuery =  TextEditingController();
   Widget appBarTitle =  Text("Historias clinicas", style:TextStyle(color: Colors.white),);
 
-  PrincipalState(this.title, this.auth){
+  PrincipalState(){
     _searchQuery.addListener((){
       if(_searchQuery.text.isEmpty){
         setState(() {
@@ -53,16 +51,8 @@ class PrincipalState extends State<principal> {
 
   @override
   Widget build(BuildContext context) {
-    if(auth.getCurrentUser()==null)
+
       return Scaffold(
-        body: Center(
-          child: Container(
-            child: Text("falla en autenticacion"),
-          ),
-        ),
-      );
-    else
-    return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: (){},
@@ -73,37 +63,40 @@ class PrincipalState extends State<principal> {
       appBar: AppBar(
         title: appBarTitle,
         actions: <Widget>[
-            IconButton(
-              icon: actionIcon,
-              onPressed: (){
-                setState(() {
-                  if (this.actionIcon.icon == Icons.search) {
-                    this.actionIcon =  Icon(Icons.close, color: Colors.white,);
-                    this.appBarTitle =  TextField(
-                      controller: _searchQuery,
-                      style: new TextStyle(
-                        color: Colors.white,
+          IconButton(
+            icon: actionIcon,
+            onPressed: (){
+              setState(() {
+                if (this.actionIcon.icon == Icons.search) {
+                  this.actionIcon =  Icon(Icons.close, color: Colors.white,);
+                  this.appBarTitle =  TextField(
+                    controller: _searchQuery,
+                    style: new TextStyle(
+                      color: Colors.white,
 
-                      ),
-                      decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.search, color: Colors.white),
-                          hintText: "Buscar...",
-                          hintStyle:  TextStyle(color: Colors.white)
-                      ),
-                    );
-                    _handleSearchStart();
+                    ),
+                    decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.search, color: Colors.white),
+                        hintText: "Buscar...",
+                        hintStyle:  TextStyle(color: Colors.white)
+                    ),
+                  );
+                  _handleSearchStart();
                 }
-                  else{
-                    _handleSearchEnd();
-                  }
+                else{
+                  _handleSearchEnd();
                 }
-                );
-              },
-            )
+              }
+              );
+            },
+          )
         ],
       ),
       body: ListController(items, _IsSearching,_searchText,database),
     );
+
+
+
   }
   void _handleSearchStart() {
     setState(() {

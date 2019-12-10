@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'Formularios/I_II_III_IV.dart';
 import 'ListItem.dart';
-<<<<<<< HEAD
 
-=======
-import 'package:expedientesodontologicos_app/Formularios/General_I.dart';
-import 'package:expedientesodontologicos_app/Formularios/motivo_e_historia_II_III.dart';
->>>>>>> 078ffe48abe8362b6ee055cf3eaec2cdf7900f48
 class Baseformularios extends StatefulWidget {
   final ListItem header;
   Baseformularios(this.header);
@@ -16,18 +11,13 @@ class Baseformularios extends StatefulWidget {
 
 class _BaseformulariosState extends State<Baseformularios> {
   final ListItem header;
-<<<<<<< HEAD
   _BaseformulariosState(this.header);
 
   Widget bodycontent = Center(child: Text('My Page!'));
-=======
->>>>>>> 078ffe48abe8362b6ee055cf3eaec2cdf7900f48
 
-  _BaseformulariosState(this.header);
-  Widget bodycontent = Center(child: Text('My Page!'));
   @override
   Widget build(BuildContext context) {
-// TODO: implement build
+    // TODO: implement build
     return Scaffold(
       appBar: AppBar(title: Text("Historias clinicas"),
         centerTitle: true,
@@ -45,7 +35,6 @@ class _BaseformulariosState extends State<Baseformularios> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-<<<<<<< HEAD
             AspectRatio(
               aspectRatio: 0.001/0.001,
               child:  DrawerHeader(
@@ -80,79 +69,44 @@ class _BaseformulariosState extends State<Baseformularios> {
                     ],
                   )
               ),
-=======
-            DrawerHeader(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    CircleAvatar(
-                      backgroundImage: AssetImage(header.imagen),
-                    ),
-                    Text(header.Nombre,
-                      textScaleFactor: 15.0,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    MaterialButton(
-                      onPressed: () {
-//funcion de la camara aqui
-                      },
-                      child: Text("Cambiar foto"),
-                    )
-                  ],
-                )
->>>>>>> 078ffe48abe8362b6ee055cf3eaec2cdf7900f48
             ),
 
             ListTile(
               title: Text("General"),
-<<<<<<< HEAD
               onTap: (){
                 setState(() {
                   bodycontent = General_I();
                 });
                 Navigator.pop(context);
-=======
-              onTap: () {
-                setState(() {
-                  bodycontent = General_I();
-                  Navigator.pop(context);
-                });
->>>>>>> 078ffe48abe8362b6ee055cf3eaec2cdf7900f48
               },
             ),
             ListTile(
               title: Text("Peridograma"),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => motivo_historia()),
-                );
+              onTap: (){
+                Navigator.pop(context);
               },
             ),
             ListTile(
               title: Text("Restaurativa"),
-              onTap: () {
+              onTap: (){
                 Navigator.pop(context);
               },
             ),
             ListTile(
               title: Text("Control de placa"),
-              onTap: () {
+              onTap: (){
                 Navigator.pop(context);
               },
             ),
             ListTile(
               title: Text("Cirugia"),
-              onTap: () {
+              onTap: (){
                 Navigator.pop(context);
               },
             ),
             ListTile(
               title: Text("Endodoncia"),
-              onTap: () {
+              onTap: (){
                 Navigator.pop(context);
               },
             )
@@ -162,9 +116,4 @@ class _BaseformulariosState extends State<Baseformularios> {
     );
   }
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 078ffe48abe8362b6ee055cf3eaec2cdf7900f48
 }

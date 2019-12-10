@@ -8,6 +8,32 @@ class motivo_historia extends StatefulWidget {
 class _motivo_historiaState extends State<motivo_historia> {
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     return Scaffold();
+=======
+    return Form(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          TextFormField(
+            validator: (value){
+              if(value.isEmpty){
+                return "por favor llene el campo";
+              }
+            },
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16.0),
+            child: RaisedButton(
+              onPressed: (){
+                Scaffold.of(context).showSnackBar(SnackBar(content: Text("Procesando datos"),));
+              },
+              child: Text("Submit"),
+            ),
+          )
+        ],
+      ),
+    );
+>>>>>>> 078ffe48abe8362b6ee055cf3eaec2cdf7900f48
   }
 }

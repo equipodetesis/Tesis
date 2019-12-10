@@ -42,6 +42,14 @@ class General_I_State extends State<General_I>{
       child: Scaffold(
         appBar: AppBar(
           title: Text("General"),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.check),
+              onPressed: (){
+                print(nombre.text + "\n" + sexo.text + "\n" + estado_civil + "\n" + direccion.text  + "\n" + edad.text);
+              },
+            )
+          ],
           bottom: TabBar(
             tabs: <Widget>[
               Tab(

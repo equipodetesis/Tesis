@@ -1,23 +1,23 @@
+
+import 'package:expedientesodontologicos_app/Loggin/BaseAuth.dart';
 import 'package:flutter/material.dart';
 import 'ListItem.dart' as lista;
 import 'ListController.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class principal extends StatefulWidget{
-  final String title;
-  final List<lista.ListItem> items;
-  principal({Key key, this.title, this.items}):super(key:key);
-  @override
-  PrincipalState createState() => new PrincipalState(title,items);
 
+
+  principal({Key key,}):super(key:key);
+  @override
+  PrincipalState createState() => new PrincipalState();
 
 }
 
 class PrincipalState extends State<principal> {
-  final String title;
-  final List<lista.ListItem> items;
-  Firestore database=Firestore.instance;
 
+  final List<lista.ListItem> items=List<lista.ListItem>();
+ Firestore database=Firestore.instance;
   Icon actionIcon= Icon(Icons.search,color: Colors.white);
   bool _IsSearching;
   String _searchText = "";
@@ -25,7 +25,8 @@ class PrincipalState extends State<principal> {
   final TextEditingController _searchQuery =  TextEditingController();
   Widget appBarTitle =  Text("Historias clinicas", style:TextStyle(color: Colors.white),);
 
-  PrincipalState(this.title, this.items){
+
+  PrincipalState(){
     _searchQuery.addListener((){
       if(_searchQuery.text.isEmpty){
         setState(() {
@@ -52,7 +53,8 @@ class PrincipalState extends State<principal> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+
+      return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: (){},
@@ -94,6 +96,7 @@ class PrincipalState extends State<principal> {
       ),
       body: ListController(items, _IsSearching,_searchText,database),
     );
+
   }
   void _handleSearchStart() {
     setState(() {

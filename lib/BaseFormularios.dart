@@ -38,15 +38,18 @@ class _BaseformulariosState extends State<Baseformularios> {
             AspectRatio(
               aspectRatio: 0.001/0.001,
               child:  DrawerHeader(
-                  decoration: BoxDecoration(
-                    color: Colors.blueAccent,
-                  ),
+
+                decoration: BoxDecoration(
+
+                  gradient: LinearGradient(colors: [Colors.white,Colors.blueAccent])
+
+                ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       AspectRatio(
                         child:CircleAvatar(
-                          backgroundImage: AssetImage("Imagenes/zelda.jpg"),
+                          backgroundImage: NetworkImage(header.imagen),
                           backgroundColor: Colors.black12,
                           foregroundColor:Colors.white ,
                         ),

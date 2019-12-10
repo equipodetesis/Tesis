@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:line_awesome_icons/line_awesome_icons.dart';
 
 class General_I extends StatefulWidget{
   @override
@@ -10,12 +12,16 @@ class General_I extends StatefulWidget{
 
 }
 class General_I_State extends State<General_I>{
-  TextEditingController nombre = TextEditingController(),sexo = TextEditingController()
-  ,estado_civil = TextEditingController(),direccion = TextEditingController(),emergencia = TextEditingController()
+  TextEditingController nombre = TextEditingController(), estado_civil = TextEditingController(),
+      direccion = TextEditingController(),emergencia = TextEditingController()
   ,procedencia = TextEditingController(),telefono = TextEditingController(),ocupacion = TextEditingController()
   ,referencia = TextEditingController(),fecha_inicio = TextEditingController(),edad = TextEditingController();
 
-  TextEditingController motivo = TextEditingController(), historia = TextEditingController();
+  TextEditingController motivo = TextEditingController(), historia = TextEditingController(), tratamiento = TextEditingController()
+  , dientes_perdidos = TextEditingController(), causa_dientesperdidos = TextEditingController(),
+  experiencias_exodoncias = TextEditingController(), higiene_oral = TextEditingController(), Tipo_cepillo  = TextEditingController()
+  , tecnica_cepillado  = TextEditingController(), frecuencia_cepillado = TextEditingController(), ayudas_higiene_extras = TextEditingController();
+
   DateTime fecha = DateTime.now();
   DateTime fecha_selec = DateTime.now();
   List sexos =["Masculino","Femenino"];
@@ -46,7 +52,7 @@ class General_I_State extends State<General_I>{
             IconButton(
               icon: Icon(Icons.check),
               onPressed: (){
-                print(nombre.text + "\n" + sexo.text + "\n" + estado_civil + "\n" + direccion.text  + "\n" + edad.text);
+                print(nombre.text + "\n" + _currentsexo + "\n" + estado_civil.text + "\n" + direccion.text  + "\n" + edad.text);
               },
             )
           ],
@@ -103,6 +109,7 @@ class General_I_State extends State<General_I>{
                         onChanged: (value){
                           setState(() {
                             _currentsexo = value;
+
                           });
                         },
                       ),
@@ -210,6 +217,7 @@ class General_I_State extends State<General_I>{
             child: TextFormField(
               decoration: InputDecoration(labelText: "Motivo de la consulta", icon: Icon(Icons.format_align_justify)),
               controller: motivo,
+              minLines: 1,
               maxLines: 6,
             ),
           ),
@@ -218,6 +226,7 @@ class General_I_State extends State<General_I>{
             child: TextFormField(
               decoration: InputDecoration(labelText: "Historia de la enfermedad actual", icon: Icon(Icons.format_align_justify)),
               controller: historia,
+              minLines: 1,
               maxLines: 6,
             ),
           ),
@@ -244,6 +253,21 @@ class General_I_State extends State<General_I>{
             ),
           ),
 
+          Container(
+            margin: EdgeInsets.all(10),
+            child: TextFormField(
+              decoration: InputDecoration(labelText: "Tratamiento Recibido", icon: Icon(Icons.healing)),
+              controller: tratamiento,
+            ),
+          ),
+
+          Container(
+            margin: EdgeInsets.all(10),
+            child: TextFormField(
+              decoration: InputDecoration(labelText: "Dientes Perdidos",),
+              controller: tratamiento,
+            ),
+          ),
         ],
       ),
     );

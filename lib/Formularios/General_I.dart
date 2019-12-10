@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class General_I extends StatefulWidget{
   @override
@@ -10,60 +11,154 @@ class General_I extends StatefulWidget{
 }
 class General_I_State extends State<General_I>{
   TextEditingController nombre,sexo,estado_civil,direccion,emergencia,procedencia,telefono,ocupacion,referencia,fecha_inicio,edad;
+  String fecha = DateFormat.yMd(DateTime.now()).toString();
+  List sexos =["Masculino","Femenino"];
+  List<DropdownMenuItem> _sexolist;
+  String _currentsexo;
+
+  @override
+  void initState() {
+    _sexolist = getDropdownMenuItem(sexos);
+    _currentsexo = sexos[0];
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Form(child: Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        TextFormField(
-          controller: nombre,
-        ),
-      TextFormField(
-      controller: sexo,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("General I"),
 
       ),
+      body: Form(
+          child: SingleChildScrollView(
+          child: Column(
 
-      TextFormField(
-      controller: estado_civil,
+          children: <Widget>[
 
-    ),
-        TextFormField(
-          controller: direccion,
+           Container(
 
-        ),
-        TextFormField(
-          controller: procedencia,
+              margin: const EdgeInsets.all(10.0),
+              child: TextFormField(
+                decoration: (InputDecoration( labelText: "Nombre", icon: Icon(Icons.person), )),
+                controller: nombre,
+              ) ,
+            ),
 
-        ),
-        TextFormField(
-          controller: telefono,
+            Row(
+              children: <Widget>[
+               Container(
+                   child: Icon(Icons.brightness_5),
+               margin: EdgeInsets.only(left: 10),),
 
-        )
-        ,
-        TextFormField(
-          controller: ocupacion,
+                Expanded(
+                  child: Container(
+                    margin: EdgeInsets.only(left: 15),
+                    child: DropdownButton(
+                      isExpanded: true,
+                      items: _sexolist,
+                      value: _currentsexo,
+                      onChanged: (value){
+                        setState(() {
+                          _currentsexo = value;
+                        });
+                      },
+                    ),
+                  ),
+                ),
+              ],
+            ),
 
-        )
-        ,
-        TextFormField(
-          controller: this.emergencia,
+            Container(
+              margin: const EdgeInsets.all(10.0),
+              child: TextFormField(
+                decoration: (InputDecoration( labelText: "Estado civil", icon: Icon(Icons.donut_large), )),
+                controller: estado_civil,
+              ) ,
+            ),
 
-        ),
-        TextFormField(
-          controller: referencia,
+            Container(
+              margin: const EdgeInsets.all(10.0),
+              child: TextFormField(
+                decoration: (InputDecoration( labelText: "Direccion", icon: Icon(Icons.location_on), )),
+                controller: direccion,
+              ) ,
+            ),
 
-        ),
-        TextFormField(
-          controller: fecha_inicio,
+            Container(
+              margin: const EdgeInsets.all(10.0),
+              child: TextFormField(
+                decoration: (InputDecoration( labelText: "Procedencia", icon: Icon(Icons.trip_origin), )),
+                controller: procedencia,
+              ) ,
+            ),
 
-        ),
-        TextFormField(
-          controller: edad,
+            Container(
+              margin: const EdgeInsets.all(10.0),
+              child: TextFormField(
+                decoration: (InputDecoration( labelText: "Telefono", icon: Icon(Icons.phone_android),)),
+                keyboardType: TextInputType.number,
+                controller: telefono,
+              ) ,
+            ),
 
-        )
-   ]
+            Container(
+              margin: const EdgeInsets.all(10.0),
+              child: TextFormField(
+                decoration: (InputDecoration( labelText: "Ocupacion", icon: Icon(Icons.work), )),
+                controller: ocupacion,
+              ) ,
+            ),
+
+            Container(
+              margin: const EdgeInsets.all(10.0),
+              child: TextFormField(
+                decoration: (InputDecoration( labelText: "Emergencia", icon: Icon(Icons.report_problem), )),
+                controller: emergencia,
+              ) ,
+            ),
+
+            Container(
+              margin: const EdgeInsets.all(10.0),
+              child: TextFormField(
+                decoration: (InputDecoration( labelText: "Referencia", icon: Icon(Icons.record_voice_over), )),
+                controller: referencia,
+              ) ,
+            ),
+
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Text(
+                 fecha,
+                style: TextStyle(fontSize: 22.0),
+              ),
+            ),
+
+
+            Container(
+              margin: const EdgeInsets.all(10.0),
+              child: TextFormField(
+                decoration: (InputDecoration( labelText: "Edad", icon: Icon(Icons.cake), )),
+                controller: edad,
+                keyboardType: TextInputType.number,
+              ) ,
+            ),
+          ]
+      )
     )
-    );
+      ),
+    ) ;
+  }
+
+  List<DropdownMenuItem> getDropdownMenuItem(List items){
+    List<DropdownMenuItem> menuItems = List<DropdownMenuItem>();
+    for(String item in items){
+      menuItems.add(DropdownMenuItem(
+          child: Text(item),
+      value: item));
+    }
+    return menuItems;
   }
 
 }

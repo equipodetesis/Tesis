@@ -1,6 +1,9 @@
 
 import 'package:expedientesodontologicos_app/Loggin/BaseAuth.dart';
+import 'package:expedientesodontologicos_app/Loggin/LoginState.dart';
+import 'package:expedientesodontologicos_app/Menus/Constansts.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'ListItem.dart' as lista;
 import 'ListController.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -91,8 +94,23 @@ class PrincipalState extends State<principal> {
               }
               );
             },
+          ),
+          PopupMenuButton<String>(
+            itemBuilder: (BuildContext context){
+              return Constants.choices.map((String eleccion){
+                return PopupMenuItem<String>(
+                  value: eleccion,
+                  child: Text(eleccion),
+                );
+              }).toList();
+            },
+            onSelected: (String elegido){
+              if(elegido == Constants.SignOut)
+                Provider.of<LoginState>(context).logout();
+            },
           )
         ],
+
       ),
       body: ListController(items, _IsSearching,_searchText,database),
     );

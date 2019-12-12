@@ -7,8 +7,15 @@ class LoginState with ChangeNotifier{
   bool islogged=false;
   BaseAuth fireuser=Auth();
   bool loading=false;
-  bool isok()=>islogged;
+  bool isok(){
+    getCurrentUser().then((user){
+      if(user!=null){
+        islogged=true;
+      }
 
+    });
+    return islogged;
+  }
 void login(_email,_password) async{
   loading=true;
   notifyListeners();
@@ -24,8 +31,9 @@ void login(_email,_password) async{
     notifyListeners();
   }
 }
-void logout(){
+void logout() async {
   islogged=false;
+  await fireuser.signOut();
   notifyListeners();
 }
 Future<FirebaseUser> getCurrentUser() async {

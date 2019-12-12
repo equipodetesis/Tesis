@@ -19,7 +19,8 @@ class _BaseformulariosState extends State<Baseformularios> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      appBar: AppBar(title: Text("Historias clinicas"),
+      appBar: AppBar(
+        title: Text("Historias clinicas"),
         centerTitle: true,
         actions: <Widget>[
           IconButton(

@@ -11,6 +11,7 @@ class LoginState with ChangeNotifier{
     getCurrentUser().then((user){
       if(user!=null){
         islogged=true;
+
       }
 
     });
@@ -20,8 +21,8 @@ void login(_email,_password) async{
   loading=true;
   notifyListeners();
   var user= await fireuser.signIn(_email, _password);
-
-  if (user == null) {
+print(user.uid);
+  if (user.uid == null) {
     islogged=false;
     loading=false;
     notifyListeners();

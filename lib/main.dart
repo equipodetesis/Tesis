@@ -5,6 +5,7 @@ import 'package:expedientesodontologicos_app/Loggin/LoginState.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'principal.dart';
+import 'package:expedientesodontologicos_app/Formularios/General_I.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -14,17 +15,16 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider<LoginState>(
       create: (context)=>LoginState(),
       child:Consumer<LoginState>(
-        builder: (context,provider,child)=>
-            MaterialApp(
-                title: 'Historias Clinicas',
-                theme: ThemeData(
-                  primarySwatch: Colors.blue,
-                ),
-                home: provider.isok()? principal():Loggin()
-            ),
-
+        builder: (context,provider,child) {
+          return MaterialApp(
+              title: 'Historias Clinicas',
+              theme: ThemeData(
+                primarySwatch: Colors.blue,
+              ),
+              home: provider.isok() ? principal() : Loggin()
+          );
+        }
       ),
-
     );
   }
 }

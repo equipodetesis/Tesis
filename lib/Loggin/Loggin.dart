@@ -34,11 +34,19 @@ class _LogginState extends State<Loggin> {
             child: ListView(
               shrinkWrap: true,
               children: <Widget>[
-                CircleAvatar(
-                  backgroundColor: Colors.black,
+                Padding(
+                  padding: const EdgeInsets.all(80.0),
+                  child: AspectRatio(
+                    child: CircleAvatar(
+
+                      backgroundColor: Colors.black,
+                      backgroundImage: AssetImage("Imagenes/zelda.jpg"),
+                    ),
+                    aspectRatio: 2/2,
+                  ),
                 ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(0.0, 100.0, 0.0, 0.0),
+              padding: const EdgeInsets.fromLTRB(0.0, 1.0, 0.0, 0.0),
               child: new TextFormField(
                 maxLines: 1,
                 keyboardType: TextInputType.emailAddress,
@@ -54,7 +62,7 @@ class _LogginState extends State<Loggin> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
+              padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
               child: new TextFormField(
                 maxLines: 1,
                 obscureText: true,

@@ -86,6 +86,25 @@ class _LogginState extends State<Loggin> {
                      Provider.of<LoginState>(context).login(_email, _password);
                     if (Provider.of<LoginState>(context).isok())
                       Navigator.push(context, MaterialPageRoute(builder: (context)=>principal()));
+                    else
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context){
+                          return AlertDialog(
+                            elevation: 2.0,
+                            title: Text("Error de autenticación"),
+                            content: Text("El correo o la contraseña ingresados son invalidos"),
+                            actions: <Widget>[
+                              FlatButton(
+                                child: Text("Cerrar"),
+                                onPressed: (){
+                                  Navigator.of(context).pop();
+                                },
+                              )
+                            ],
+                          );
+                        }
+                      );
                     },
                     materialTapTargetSize: MaterialTapTargetSize.padded,
                   ),

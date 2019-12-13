@@ -89,18 +89,20 @@ class _LogginState extends State<Loggin> {
                      if( _formKey.currentState.validate())
                        _formKey.currentState.save();
                      print("Waaaaaaa"+_email);
-
-                     Provider.of<LoginState>(context).login(_email, _password);
-                    if (Provider.of<LoginState>(context).isok())
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>principal()));
-                    else
+                     try {
+                       Provider.of<LoginState>(context).login(
+                           _email, _password);
+                       if (Provider.of<LoginState>(context).isok())
+                         Navigator.push(context, MaterialPageRoute(
+                             builder: (context) => principal()));
+                     }catch(e){
                       showDialog(
                         context: context,
                         builder: (BuildContext context){
                           return AlertDialog(
                             elevation: 2.0,
                             title: Text("Error de autenticación"),
-                            content: Text("El correo o la contraseña ingresados son invalidos"),
+                            content: Text(e),
                             actions: <Widget>[
                               FlatButton(
                                 child: Text("Cerrar"),
@@ -111,7 +113,7 @@ class _LogginState extends State<Loggin> {
                             ],
                           );
                         }
-                      );
+                      );}
                     },
                     materialTapTargetSize: MaterialTapTargetSize.padded,
                   ),

@@ -7,12 +7,15 @@ class LoginState with ChangeNotifier{
   bool islogged=false;
   BaseAuth fireuser=Auth();
   bool loading=false;
+  bool error=false;
+
   bool isok(){
     getCurrentUser().then((user){
       if(user!=null){
         islogged=true;
 
-      }
+      }else
+        error=true;
 
     });
     return islogged;
@@ -24,6 +27,7 @@ void login(_email,_password) async{
 print(user.uid);
   if (user.uid == null) {
     islogged=false;
+    error=true;
     loading=false;
     notifyListeners();
   }else{

@@ -38,7 +38,6 @@ class _LogginState extends State<Loggin> {
                   padding: const EdgeInsets.all(80.0),
                   child: AspectRatio(
                     child: CircleAvatar(
-
                       backgroundColor: Colors.black,
                       backgroundImage: AssetImage("Imagenes/zelda.jpg"),
                     ),
@@ -89,31 +88,32 @@ class _LogginState extends State<Loggin> {
                      if( _formKey.currentState.validate())
                        _formKey.currentState.save();
                      print("Waaaaaaa"+_email);
-                     try {
-                       Provider.of<LoginState>(context).login(
-                           _email, _password);
-                       if (Provider.of<LoginState>(context).isok())
-                         Navigator.push(context, MaterialPageRoute(
-                             builder: (context) => principal()));
-                     }catch(e){
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context){
-                          return AlertDialog(
-                            elevation: 2.0,
-                            title: Text("Error de autenticación"),
-                            content: Text(e),
-                            actions: <Widget>[
-                              FlatButton(
-                                child: Text("Cerrar"),
-                                onPressed: (){
-                                  Navigator.of(context).pop();
-                                },
-                              )
-                            ],
-                          );
-                        }
-                      );}
+
+                       try {
+                         Provider.of<LoginState>(context).login(
+                             _email, _password);
+                       } on Exception catch (e) {
+                         showDialog(
+                             context: context,
+                             builder: (BuildContext context){
+                               return AlertDialog(
+                                 elevation: 2.0,
+                                 title: Text("Error de autenticación"),
+                                 content: Text(e.toString()),
+                                 actions: <Widget>[
+                                   FlatButton(
+                                     child: Text("Cerrar"),
+                                     onPressed: (){
+                                       Navigator.of(context).pop();
+                                     },
+                                   )
+                                 ],
+                               );
+                             }
+                         );
+                       }
+
+
                     },
                     materialTapTargetSize: MaterialTapTargetSize.padded,
                   ),

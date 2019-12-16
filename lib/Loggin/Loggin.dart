@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:expedientesodontologicos_app/Loggin/Registro.dart';
 import 'package:provider/provider.dart';
+import 'package:line_awesome_icons/line_awesome_icons.dart';
 class Loggin extends StatefulWidget{
 
   @override
@@ -123,6 +124,13 @@ class _LogginState extends State<Loggin> {
                   onPressed: (){
                     Navigator.push(context, MaterialPageRoute(builder: (context)=>Registro()));
                   },
+                ),
+                FlatButton.icon(
+                  icon: Icon(LineAwesomeIcons.google),
+                  label: Text("Inicia sesión con Google"),
+                  onPressed: () async {
+                     await Provider.of<LoginState>(context).loginGoogle();
+                  }
                 )
               ],
             ),

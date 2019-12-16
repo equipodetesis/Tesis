@@ -36,6 +36,20 @@ print(user.uid);
     notifyListeners();
   }
 }
+void loginGoogle() async {
+    var user= await fireuser.googleSignin();
+    print(user.uid);
+    if (user.uid == null) {
+      islogged=false;
+      error=true;
+      loading=false;
+      notifyListeners();
+    }else{
+      islogged=true;
+      loading=false;
+      notifyListeners();
+    }
+}
 void logout() async {
   islogged=false;
   await fireuser.signOut();

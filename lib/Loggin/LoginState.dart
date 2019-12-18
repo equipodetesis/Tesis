@@ -17,6 +17,7 @@ class LoginState with ChangeNotifier{
       }else
         error=true;
 
+      return islogged;
     });
     return islogged;
   }

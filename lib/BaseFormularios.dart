@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'Formularios/I_II_III_IV.dart';
+import 'Formularios/V_VI_VII.dart';
 import 'ListItem.dart';
 
 class Baseformularios extends StatefulWidget {
@@ -79,7 +80,16 @@ class _BaseformulariosState extends State<Baseformularios> {
               title: Text("General"),
               onTap: (){
                 setState(() {
-                  bodycontent = General_I();
+                  bodycontent = I_II_III_IV();
+                });
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text("Historia Medica"),
+              onTap: (){
+                setState(() {
+                  bodycontent = V_VI_VII();
                 });
                 Navigator.pop(context);
               },

@@ -4,6 +4,7 @@ import 'package:expedientesodontologicos_app/principal.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:expedientesodontologicos_app/Loggin/Registro.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
 class Loggin extends StatefulWidget{
@@ -126,7 +127,7 @@ class _LogginState extends State<Loggin> {
                   },
                 ),
                 FlatButton.icon(
-                  icon: Icon(LineAwesomeIcons.google),
+                  icon: Icon(FontAwesomeIcons.google),
                   label: Text("Inicia sesión con Google"),
                   onPressed: () async {
                      await Provider.of<LoginState>(context).loginGoogle();

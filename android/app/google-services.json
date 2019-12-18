@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "176792153508-oanvru6s30t5mnljmh8m1gfa6i890n14.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cam.expedientesodontologicos_app",
+            "certificate_hash": "44a0d059a2491d3de22ca8414960ebadc9cfe3db"
+          }
+        },
+        {
           "client_id": "176792153508-higccpbjt2rhfhbi522pi0kh3b571t4t.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -30,6 +38,13 @@
             {
               "client_id": "176792153508-higccpbjt2rhfhbi522pi0kh3b571t4t.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "176792153508-eb3bfvk7aeln0k4nj42o1vku57ecgnib.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.cam.expedientesodontologicosapp"
+              }
             }
           ]
         }

@@ -7,11 +7,15 @@ class LoginState with ChangeNotifier{
   bool islogged=false;
   BaseAuth fireuser=Auth();
   bool loading=false;
+  bool error=false;
+
   bool isok(){
     getCurrentUser().then((user){
       if(user!=null){
         islogged=true;
-      }
+
+      }else
+        error=true;
 
     });
     return islogged;
@@ -20,9 +24,10 @@ void login(_email,_password) async{
   loading=true;
   notifyListeners();
   var user= await fireuser.signIn(_email, _password);
-
-  if (user == null) {
+print(user.uid);
+  if (user.uid == null) {
     islogged=false;
+    error=true;
     loading=false;
     notifyListeners();
   }else{
@@ -30,6 +35,20 @@ void login(_email,_password) async{
     loading=false;
     notifyListeners();
   }
+}
+void loginGoogle() async {
+    var user= await fireuser.googleSignin();
+    print(user.uid);
+    if (user.uid == null) {
+      islogged=false;
+      error=true;
+      loading=false;
+      notifyListeners();
+    }else{
+      islogged=true;
+      loading=false;
+      notifyListeners();
+    }
 }
 void logout() async {
   islogged=false;

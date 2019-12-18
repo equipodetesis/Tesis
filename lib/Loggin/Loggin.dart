@@ -1,11 +1,11 @@
-import 'package:expedientesodontologicos_app/Loggin/BaseAuth.dart';
-import 'package:expedientesodontologicos_app/Loggin/FireAuth.dart';
+
 import 'package:expedientesodontologicos_app/Loggin/LoginState.dart';
 import 'package:expedientesodontologicos_app/principal.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:expedientesodontologicos_app/Loggin/Registro.dart';
 import 'package:provider/provider.dart';
+import 'package:line_awesome_icons/line_awesome_icons.dart';
 class Loggin extends StatefulWidget{
 
   @override
@@ -35,11 +35,18 @@ class _LogginState extends State<Loggin> {
             child: ListView(
               shrinkWrap: true,
               children: <Widget>[
-                CircleAvatar(
-                  backgroundColor: Colors.black,
+                Padding(
+                  padding: const EdgeInsets.all(80.0),
+                  child: AspectRatio(
+                    child: CircleAvatar(
+                      backgroundColor: Colors.black,
+                      backgroundImage: AssetImage("Imagenes/zelda.jpg"),
+                    ),
+                    aspectRatio: 2/2,
+                  ),
                 ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(0.0, 100.0, 0.0, 0.0),
+              padding: const EdgeInsets.fromLTRB(0.0, 1.0, 0.0, 0.0),
               child: new TextFormField(
                 maxLines: 1,
                 keyboardType: TextInputType.emailAddress,
@@ -55,7 +62,7 @@ class _LogginState extends State<Loggin> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
+              padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
               child: new TextFormField(
                 maxLines: 1,
                 obscureText: true,
@@ -84,9 +91,31 @@ class _LogginState extends State<Loggin> {
 
                      print(_email);
 
-                     Provider.of<LoginState>(context).login(_email, _password);
-                    if (Provider.of<LoginState>(context).isok())
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>principal()));
+                       try {
+                         Provider.of<LoginState>(context).login(
+                             _email, _password);
+                       } on Exception catch (e) {
+                         showDialog(
+                             context: context,
+                             builder: (BuildContext context){
+                               return AlertDialog(
+                                 elevation: 2.0,
+                                 title: Text("Error de autenticación"),
+                                 content: Text(e.toString()),
+                                 actions: <Widget>[
+                                   FlatButton(
+                                     child: Text("Cerrar"),
+                                     onPressed: (){
+                                       Navigator.of(context).pop();
+                                     },
+                                   )
+                                 ],
+                               );
+                             }
+                         );
+                       }
+
+
                     },
                     materialTapTargetSize: MaterialTapTargetSize.padded,
                   ),
@@ -96,6 +125,13 @@ class _LogginState extends State<Loggin> {
                   onPressed: (){
                     Navigator.push(context, MaterialPageRoute(builder: (context)=>Registro()));
                   },
+                ),
+                FlatButton.icon(
+                  icon: Icon(LineAwesomeIcons.google),
+                  label: Text("Inicia sesión con Google"),
+                  onPressed: () async {
+                     await Provider.of<LoginState>(context).loginGoogle();
+                  }
                 )
               ],
             ),

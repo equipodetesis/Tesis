@@ -4,7 +4,6 @@ import 'package:expedientesodontologicos_app/Loggin/LoginState.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'principal.dart';
-import 'package:expedientesodontologicos_app/Formularios/General_I.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {

@@ -89,7 +89,8 @@ class _LogginState extends State<Loggin> {
                     onPressed: () async {
                      if( _formKey.currentState.validate())
                        _formKey.currentState.save();
-                     print("Waaaaaaa"+_email);
+
+                     print(_email);
 
                        try {
                          Provider.of<LoginState>(context).login(

@@ -55,6 +55,14 @@
     		</array>
     	</dict>
     </array>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Requerido para foto del paciente</string>
+
+    <key>NSCameraUsageDescription</key>
+    <string>Requerido para foto del paciente</string>
+
+    <key>NSMicrophoneUsageDescription</key>
+    <string>nescesario para libreria imagepicker</string>
 </dict>
 
 </plist>

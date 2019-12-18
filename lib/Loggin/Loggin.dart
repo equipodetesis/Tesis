@@ -95,7 +95,7 @@ class _LogginState extends State<Loggin> {
                        try {
                          Provider.of<LoginState>(context).login(
                              _email, _password);
-                       } on Exception catch (e) {
+                       } on Error catch (e) {
                          showDialog(
                              context: context,
                              builder: (BuildContext context){

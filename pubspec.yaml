@@ -29,7 +29,7 @@ dependencies:
   path_provider:
   provider:
   google_sign_in:
-
+  image_picker:
   flutter:
     sdk: flutter
   # The following adds the Cupertino Icons font to your application.

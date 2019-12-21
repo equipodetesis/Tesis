@@ -1,3 +1,4 @@
+import 'package:expedientesodontologicos_app/Imagenes/SubirFoto.dart';
 import 'package:flutter/material.dart';
 import 'Formularios/I_II_III_IV.dart';
 import 'Formularios/V_VI_VII.dart';
@@ -65,11 +66,25 @@ class _BaseformulariosState extends State<Baseformularios> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      MaterialButton(
-                        onPressed: (){
-                          //funcion de la camara aqui
-                        },
-                        child: Text("Cambiar foto",style: TextStyle(color: Colors.white),),
+                      Row(
+                        children: <Widget>[
+                          MaterialButton(
+                            onPressed: (){
+                              //funcion de la camara aqui
+                              SubirFoto f;
+                              f.tomarFoto(header.Nombre+"_foto");
+                            },
+                            child: Text("Tomar foto",style: TextStyle(color: Colors.white),),
+                          ),
+                          MaterialButton(
+                            onPressed: (){
+                              //funcion de la camara aqui
+                              SubirFoto f;
+                              f.galeryFoto(header.Nombre+"_foto");
+                            },
+                            child: Text("Cambiar foto",style: TextStyle(color: Colors.white),),
+                          )
+                        ],
                       )
                     ],
                   )

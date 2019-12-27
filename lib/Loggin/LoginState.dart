@@ -11,13 +11,8 @@ class LoginState with ChangeNotifier{
 
   bool isok(){
     getCurrentUser().then((user){
-      if(user!=null){
+      if(user!=null)
         islogged=true;
-
-      }else
-        error=true;
-
-      return islogged;
     });
     return islogged;
   }

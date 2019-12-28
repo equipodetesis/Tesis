@@ -8,6 +8,7 @@ class LoginState with ChangeNotifier{
   BaseAuth fireuser=Auth();
   bool loading=false;
   bool error=false;
+  String uid;
 
   bool isok(){
     getCurrentUser().then((user){
@@ -21,6 +22,7 @@ void login(_email,_password) async{
   notifyListeners();
   var user= await fireuser.signIn(_email, _password);
 print(user.uid);
+uid=user.uid;
   if (user.uid == null) {
     islogged=false;
     error=true;
@@ -35,6 +37,7 @@ print(user.uid);
 void loginGoogle() async {
     var user= await fireuser.googleSignin();
     print(user.uid);
+    uid=user.uid;
     if (user.uid == null) {
       islogged=false;
       error=true;

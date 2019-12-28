@@ -2,14 +2,27 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 
-class Clientes{
+class General with ChangeNotifier{
   String nombre,apellido,sexo,estado_civil,direccion,emergencia,procedencia,telefono,ocupacion,referencia,fecha_inicio,foto,userid;
-  int edad;
+  String edad;
 
-  Clientes(this.nombre, this.apellido, this.sexo, this.estado_civil,
-      this.direccion, this.emergencia, this.procedencia, this.telefono,
-      this.ocupacion, this.referencia, this.fecha_inicio, this.foto,
-      this.userid, this.edad);
+   void set(nombre,apellido,edad,sexo,estadocivil,direccion,emergenia,procedencia,telefono,ocupacion,referencia,fecha_inicio,foto,userid){
+     this.nombre=nombre;
+     this.apellido=apellido;
+     this.edad=edad;
+     this.sexo=sexo;
+     this.estado_civil=estado_civil;
+     this.direccion=direccion;
+     this.emergencia=emergencia;
+     this.procedencia=procedencia;
+     this.telefono=telefono;
+     this.ocupacion=ocupacion;
+     this.referencia=referencia;
+     this.fecha_inicio=fecha_inicio;
+     this.foto=foto;
+     this.userid=userid;
+     notifyListeners();
+   }
   //Las funcionse son addCliente y updateCliente
   Future<void> addCLiente() async {
     final HttpsCallable callable = CloudFunctions.instance.getHttpsCallable(

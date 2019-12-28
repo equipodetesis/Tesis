@@ -1,8 +1,11 @@
 import 'dart:async';
+import 'package:expedientesodontologicos_app/Loggin/LoginState.dart';
+import 'package:expedientesodontologicos_app/ModelosFormularios/General.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:expedientesodontologicos_app/Util/Util.dart';
+import 'package:provider/provider.dart';
 
 class I_II_III_IV extends StatefulWidget {
   @override
@@ -57,7 +60,23 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
   Widget build(BuildContext context) {
     general = generalI();
     motivohistoria = motivoHistoria();
-
+    String userid="";
+    Provider.of<LoginState>(context).getCurrentUser().then((user){
+     userid=user.uid;
+    });
+    Provider.of<General>(context).set(nombre.toString(),
+        "Apellido hay que quitar en la funcion",
+        edad.toString(),
+        _currentsexo,
+        estado_civil.toString(),
+        direccion.toString(),
+        emergencia.toString(),
+        procedencia.toString(),
+        telefono.toString(),
+        ocupacion.toString(),
+        referencia.toString(),
+        fecha_inicio.toString(),
+        "",userid);
     return DefaultTabController(
       length: 2,
       child: Scaffold(

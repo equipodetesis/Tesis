@@ -42,7 +42,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
   ];
   List _enfermedadesdisponible = List();
   List _current_enfermedades = List();
-  List<DropdownMenuItem> _items_enfermedades;
+  List<List<DropdownMenuItem>> _items_enfermedades = List();
 
   bool eliminableI = false;
 
@@ -50,15 +50,14 @@ class _V_VI_VII_State extends State<V_VI_VII> {
   void initState() {
     _itemslocal = Util().getDropdownMenuItem(listlocales);
     _currentlocal = _itemslocal.first.value;
-    _items_enfermedades = ajustarlistaenfermedades(_todasenfermedades, _current_enfermedades);
-    _current_enfermedades.add(_items_enfermedades.first.value);
-
+    aniadirnuevalista();
     // TODO: implement initState
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -77,8 +76,9 @@ class _V_VI_VII_State extends State<V_VI_VII> {
         ),
         body: TabBarView(
           children: <Widget>[
-            historiaMedica(), 
-          enfermedades()],
+           historiaMedica() ,
+           enfermedades() 
+          ],
         ),
       ),
     );
@@ -181,8 +181,10 @@ class _V_VI_VII_State extends State<V_VI_VII> {
   Widget enfermedades() {
     return SingleChildScrollView(
       child: Column(
-        children: <Widget>[
-          Row(
+        children: [
+          Column(
+            children: _current_enfermedades.map((value){
+            return Row(
             children: <Widget>[
               Container(
                 child: Icon(FontAwesomeIcons.hospital),
@@ -190,29 +192,51 @@ class _V_VI_VII_State extends State<V_VI_VII> {
               ),
               Expanded(
                 child: Container(
-                  margin: EdgeInsets.all(1),
+                  margin: EdgeInsets.all(10),
                   child: DropdownButton(
                     isExpanded: true,
-                    items: _items_enfermedades,
-                    value: _current_enfermedades.first,
+                    items: _items_enfermedades[_current_enfermedades.indexOf(value)],
+                    value: _current_enfermedades[_current_enfermedades.indexOf(value)],
                     itemHeight: 48,
-                    onChanged: (value) {
+                    onChanged: (selection) {
                       setState(() {
-                        _current_enfermedades = value;
+                        _current_enfermedades[_current_enfermedades.indexOf(value)] = selection;
+
                       });
                     },
                   ),
                 ),
               ),
             ],
+          );
+          }).toList(),
           ),
-        ],
+          FlatButton(
+            child: Text("Añadir"),
+            onPressed: (){
+              aniadirnuevalista();
+            },
+            )
+        ]
       ),
     );
   }
 
-  List<DropdownMenuItem> ajustarlistaenfermedades(
-      List listacompleta, List listaseleccionadas) {
+  void aniadirnuevalista() {
+      setState(() {
+        _items_enfermedades.add(ajustarlistaenfermedades(_todasenfermedades, _current_enfermedades));
+        _current_enfermedades.add(_items_enfermedades.last.first.value);
+      });
+  }
+
+  void actualizarlistas(){
+    setState(() {
+      _items_enfermedades.forEach((value){
+        ajustarlistaenfermedades(_todasenfermedades, _current_enfermedades, exception: _items_enfermedades.indexOf(value));
+      });
+    });
+  }
+  List<DropdownMenuItem> ajustarlistaenfermedades(List listacompleta, List listaseleccionadas, {int exception}) {
     if (listaseleccionadas.length == 0) {
       return Util().getDropdownMenuItem(listacompleta);
     } else {

@@ -57,25 +57,28 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+  @override
   Widget build(BuildContext context) {
     general = generalI();
     motivohistoria = motivoHistoria();
-    String userid="";
-    Provider.of<LoginState>(context).getCurrentUser().then((user){
-     userid=user.uid;
-    });
-    Provider.of<General>(context).set(nombre.toString(),
+    String userid=Provider.of<LoginState>(context).uid;;
+    Provider.of<LoginState>(context).uid;
+    Provider.of<General>(context).set(nombre.text,
         "Apellido hay que quitar en la funcion",
-        edad.toString(),
+        edad.text,
         _currentsexo,
-        estado_civil.toString(),
-        direccion.toString(),
-        emergencia.toString(),
-        procedencia.toString(),
-        telefono.toString(),
-        ocupacion.toString(),
-        referencia.toString(),
-        fecha_inicio.toString(),
+        estado_civil.text,
+        direccion.text,
+        emergencia.text,
+        procedencia.text,
+        telefono.text,
+        ocupacion.text,
+        referencia.text,
+        fecha_inicio.text,
         "",userid);
     return DefaultTabController(
       length: 2,

@@ -21,59 +21,52 @@ class _BaseformulariosState extends State<Baseformularios> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<General>(
-          create: (context)=>General(),
-        )
-      ],
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text("Historias clinicas"),
-          centerTitle: true,
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.check),
-              onPressed: (){
-                print(Provider.of<General>(context).nombre);
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Historias clinicas"),
+        centerTitle: true,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.check),
+            onPressed: (){
+              print(Provider.of<General>(context).nombre);
               Provider.of<General>(context).addCLiente();
-              },
-            )
-          ],
-        ),
-        body: bodycontent,
-        drawer: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: <Widget>[
-              AspectRatio(
-                aspectRatio: 0.001/0.001,
-                child:  DrawerHeader(
+            },
+          )
+        ],
+      ),
+      body: bodycontent,
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            AspectRatio(
+              aspectRatio: 0.001/0.001,
+              child:  DrawerHeader(
 
-                  decoration: BoxDecoration(
+                decoration: BoxDecoration(
 
-                    gradient: LinearGradient(colors: [Colors.white,Colors.blueAccent])
+                  gradient: LinearGradient(colors: [Colors.white,Colors.blueAccent])
 
-                  ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        AspectRatio(
-                          child:CircleAvatar(
-                            backgroundImage: NetworkImage(header.imagen),
-                            backgroundColor: Colors.black12,
-                            foregroundColor:Colors.white ,
-                          ),
-                          aspectRatio: 0.001/0.0004,
+                ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      AspectRatio(
+                        child:CircleAvatar(
+                          backgroundImage: NetworkImage(header.imagen),
+                          backgroundColor: Colors.black12,
+                          foregroundColor:Colors.white ,
                         ),
+                        aspectRatio: 0.001/0.0004,
+                      ),
 
-                        Text(header.Nombre,
-                          textScaleFactor: 1.5,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+                      Text(header.Nombre,
+                        textScaleFactor: 1.5,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),),
                         Row(
                           children: <Widget>[
                             MaterialButton(
@@ -97,58 +90,58 @@ class _BaseformulariosState extends State<Baseformularios> {
                       ],
                     )
                 ),
-              ),
 
-              ListTile(
-                title: Text("General"),
-                onTap: (){
-                  setState(() {
-                    bodycontent = I_II_III_IV();
-                  });
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                title: Text("Historia Medica"),
-                onTap: (){
-                  setState(() {
-                    bodycontent = V_VI_VII();
-                  });
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                title: Text("Peridograma"),
-                onTap: (){
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                title: Text("Restaurativa"),
-                onTap: (){
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                title: Text("Control de placa"),
-                onTap: (){
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                title: Text("Cirugia"),
-                onTap: (){
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                title: Text("Endodoncia"),
-                onTap: (){
-                  Navigator.pop(context);
-                },
-              )
-            ],
-          ),
+    ),
+
+            ListTile(
+              title: Text("General"),
+              onTap: (){
+                setState(() {
+                  bodycontent = I_II_III_IV();
+                });
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text("Historia Medica"),
+              onTap: (){
+                setState(() {
+                  bodycontent = V_VI_VII();
+                });
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text("Peridograma"),
+              onTap: (){
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text("Restaurativa"),
+              onTap: (){
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text("Control de placa"),
+              onTap: (){
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text("Cirugia"),
+              onTap: (){
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text("Endodoncia"),
+              onTap: (){
+                Navigator.pop(context);
+              },
+            )
+          ],
         ),
       ),
     );

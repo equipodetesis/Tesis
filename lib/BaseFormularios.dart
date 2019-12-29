@@ -77,18 +77,18 @@ class _BaseformulariosState extends State<Baseformularios> {
                         Row(
                           children: <Widget>[
                             MaterialButton(
-                              onPressed: (){
+                              onPressed: () async {
                                 //funcion de la camara aqui
                                 SubirFoto f;
-                                f.tomarFoto(header.Nombre+"_foto");
+                                await f.tomarFoto(header.Nombre+"_foto");
                               },
                               child: Text("Tomar foto",style: TextStyle(color: Colors.white),),
                             ),
                             MaterialButton(
-                              onPressed: (){
+                              onPressed: () async {
                                 //funcion de la camara aqui
                                 SubirFoto f;
-                                f.galeryFoto(header.Nombre+"_foto");
+                                await f.galeryFoto(header.Nombre+"_foto");
                               },
                               child: Text("Cambiar foto",style: TextStyle(color: Colors.white),),
                             )

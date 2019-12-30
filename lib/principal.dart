@@ -60,7 +60,9 @@ class PrincipalState extends State<principal> {
       return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: (){},
+        onPressed: (){
+
+        },
         hoverColor: Colors.black,
         isExtended: true,
         tooltip: "Agregar nuevo paciente",

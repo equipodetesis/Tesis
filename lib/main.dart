@@ -27,9 +27,18 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               primarySwatch: Colors.blue,
             ),
-            home:  Provider.of<LoginState>(context).islogged? principal() : Loggin()
+            home:  FutureBuilder<bool>(
+              future:Provider.of<LoginState>(context).isok() ,
+              initialData: false,
+            builder: (context,log){
+              return log.data?principal():Loggin()??Center(child:CircularProgressIndicator(
+                backgroundColor: Colors.deepOrange,
+              ));
+            },
+            )
         );
   }
+
 }
 
 

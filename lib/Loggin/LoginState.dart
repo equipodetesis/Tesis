@@ -10,20 +10,21 @@ class LoginState with ChangeNotifier{
   bool error=false;
   String uid;
 
-  void isok() async{
+  Future<bool> isok() async{
     loading=true;
    var user= await getCurrentUser();
     uid=user.uid;
-    if (user.uid == null) {
+    if (uid == null) {
       islogged=false;
       error=true;
       loading=false;
-      notifyListeners();
     }else{
       islogged=true;
       loading=false;
-      notifyListeners();
     }
+    bool log=islogged;
+
+    return log;
   }
 void login(_email,_password) async{
   loading=true;

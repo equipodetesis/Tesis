@@ -65,8 +65,8 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
   Widget build(BuildContext context) {
     general = generalI();
     motivohistoria = motivoHistoria();
-    String userid=Provider.of<LoginState>(context).uid;;
-    Provider.of<LoginState>(context).uid;
+    String userid=Provider.of<LoginState>(context).uid;
+
     Provider.of<General>(context).set(nombre.text,
         "Apellido hay que quitar en la funcion",
         edad.text,

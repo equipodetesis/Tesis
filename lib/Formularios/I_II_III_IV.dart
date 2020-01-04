@@ -51,7 +51,7 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
   void initState() {
     _sexolist = Util().getDropdownMenuItem(sexos);
     _currentsexo = sexos[0];
-
+    datos();
     // TODO: implement initState
     super.initState();
   }
@@ -65,21 +65,7 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
   Widget build(BuildContext context) {
     general = generalI();
     motivohistoria = motivoHistoria();
-    String userid=Provider.of<LoginState>(context).uid;
 
-    Provider.of<General>(context).set(nombre.text,
-        "Apellido hay que quitar en la funcion",
-        edad.text,
-        _currentsexo,
-        estado_civil.text,
-        direccion.text,
-        emergencia.text,
-        procedencia.text,
-        telefono.text,
-        ocupacion.text,
-        referencia.text,
-        fecha_inicio.text,
-        "",userid);
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -382,5 +368,22 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
         ],
       ),
     );
+  }
+  void datos(){
+    String userid=Provider.of<LoginState>(context).uid;
+    print(userid+"Heeeeyyy");
+    Provider.of<General>(context).set(nombre.text,
+        "Apellido hay que quitar en la funcion",
+        edad.text,
+        _currentsexo,
+        estado_civil.text,
+        direccion.text,
+        emergencia.text,
+        procedencia.text,
+        telefono.text,
+        ocupacion.text,
+        referencia.text,
+        fecha_inicio.text,
+        "",userid);
   }
 }

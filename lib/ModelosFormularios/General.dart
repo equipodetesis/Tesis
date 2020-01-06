@@ -7,7 +7,9 @@ class General with ChangeNotifier{
   String nombre,apellido,sexo,estado_civil,direccion,emergencia,procedencia,telefono,ocupacion,referencia,fecha_inicio,foto,userid;
   String edad;
 
-   void set(nombre,apellido,edad,sexo,estadocivil,direccion,emergenia,procedencia,telefono,ocupacion,referencia,fecha_inicio,foto,userid){
+  General();
+
+  void set(nombre,apellido,edad,sexo,estadocivil,direccion,emergenia,procedencia,telefono,ocupacion,referencia,fecha_inicio,foto,userid){
      this.nombre=nombre;
      this.apellido=apellido;
      this.edad=edad;

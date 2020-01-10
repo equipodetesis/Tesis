@@ -14,6 +14,8 @@ class Endodoncia{
       otrossintomas_de_dolor, protrusiva ,se_alivia_con_analgesicos, sobremor_horizon, sobremor_verti,userid;
 
 
+  Endodoncia();
+
   Endodoncia.set(this.Desde_cuando_aparecio_el_dolor, this.Dimen_vertical_oclusion,
       this.Dimen_vertical_reposo, this.Discontinuidad_de_la_lamina_pura,
       this.Ensancha_del_espacio_del_Ligamiento_preden, this.Lateralidad_D,

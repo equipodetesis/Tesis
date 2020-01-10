@@ -101,11 +101,13 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
           controller: nombre,
           keyboardType: TextInputType.text,
           onChanged: ((value){
-            if(value!=null || value.length>0)
-              setState(() {
-                String userid=Provider.of<LoginState>(context).uid;
-                print(userid+"Heeeeyyy");
-                Provider.of<General>(context).set(nombre.text,
+            if(value!=null || value.length>0) {
+              String userid = Provider.of<LoginState>(context).uid;
+              print(userid + "Heeeeyyy");
+              Provider.of<General>(context).userid = userid;
+              Provider.of<General>(context).nombre = value;
+              print(Provider.of<General>(context).nombre+ "Heeeeyyy");
+              /* Provider.of<General>(context).set(nombre.text,
                     "Apellido hay que quitar en la funcion",
                     edad.text,
                     _currentsexo,
@@ -117,8 +119,8 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
                     ocupacion.text,
                     referencia.text,
                     fecha_inicio.text,
-                    "",userid);
-              });
+                    "",userid);*/
+            }
           }),
         ),
       ),

@@ -13,12 +13,13 @@ class LoginState with ChangeNotifier{
   Future<bool> isok() async{
     loading=true;
    var user= await getCurrentUser();
-    uid=user.uid;
-    if (uid == null) {
+
+    if (user == null) {
       islogged=false;
       error=true;
       loading=false;
     }else{
+      uid=user.uid;
       islogged=true;
       loading=false;
     }

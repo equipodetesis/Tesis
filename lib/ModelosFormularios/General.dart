@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 
-class General with ChangeNotifier{
+class General {
   String nombre,apellido,sexo,estado_civil,direccion,emergencia,procedencia,telefono,ocupacion,referencia,fecha_inicio,foto,userid;
   String edad;
 
@@ -24,7 +24,6 @@ class General with ChangeNotifier{
      this.fecha_inicio=fecha_inicio;
      this.foto=foto;
      this.userid=userid;
-     notifyListeners();
    }
 
   General.fromJson(Map<String, dynamic> data)

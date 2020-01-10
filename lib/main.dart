@@ -10,7 +10,7 @@ void main(){
     providers: [
       ChangeNotifierProvider<LoginState>(
         create: (context) => LoginState(),),
-      ChangeNotifierProvider<General>(
+      Provider<General>(
         create: (context) => General(),),
     ],
     child: MyApp()

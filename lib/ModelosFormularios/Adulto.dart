@@ -21,14 +21,14 @@ class Adulto{
         higiene_oral=data["higiene_oral"] , tipo_cepillo =data["tipo_cepillo"], tecnica_cepillado=data["tipo_cepillado"] ,
         frecuencia_cepillado=data["frec_cepillado"] , ayudas_higiene_extras=data["ayudas_higiene_extra"] ,
         cuidadoMedico=data["cuidado_medico"],hospital=data["hospital"],expediente=data["expediente_medico"],ultimoexamenmedico=data["ult_exam_medico"],
-        nombredelmedico=data["nombre_medico"];
+        nombredelmedico=data["nombre_medico"],enfermedades=data["enfermedades"];
   Map<String,dynamic> toMap()=>{
     "motivo_consulta":motivo , "historia_enfermedad_actual":historia, "tratamiento":tratamiento , "dientes_perdidos":dientes_perdidos ,
     "causa_dientes_perdidos":causa_dientesperdidos , "exper_exodocias":experiencias_exodoncias ,
     "higiene_oral":higiene_oral , "tipo_cepillo":tipo_cepillo, "tipo_cepillado":tecnica_cepillado ,
     "frec_cepillado":frecuencia_cepillado , "ayudas_higiene_extra":ayudas_higiene_extras ,
     "cuidado_medico":cuidadoMedico,"hospital":hospital,"expediente_medico":expediente,"ult_exam_medico":ultimoexamenmedico,
-    "nombre_medico":nombredelmedico
+    "nombre_medico":nombredelmedico,"enfermedades":enfermedades
   };
   Future<void> addAdult() async {
     final HttpsCallable callable = CloudFunctions.instance.getHttpsCallable(

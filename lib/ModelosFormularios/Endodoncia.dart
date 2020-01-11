@@ -87,15 +87,15 @@ class Endodoncia{
         "se_alivia_con_analgesicos":se_alivia_con_analgesicos, "sobremor_horizon":sobremor_horizon,
         "sobremor_verti":sobremor_verti
       };
-  Future<void> addCLiente() async {
+  Future<void> addEndo() async {
     final HttpsCallable callable = CloudFunctions.instance.getHttpsCallable(
-      functionName: 'addCliente',
+      functionName: 'addexpEndodoncia',
     );
     dynamic resp = await callable.call(this.toMap()).whenComplete((){print("Ingresado con exito");});
   }
-  Future<void> updateCLiente() async {
+  Future<void> updateEndo() async {
     final HttpsCallable callable = CloudFunctions.instance.getHttpsCallable(
-      functionName: 'updateCliente',
+      functionName: 'updatexpEndodoncia',
     );
     dynamic resp = await callable.call(this.toMap()).whenComplete((){print("Ingresado con exito");});
   }

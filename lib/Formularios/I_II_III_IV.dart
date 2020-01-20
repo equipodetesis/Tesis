@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:expedientesodontologicos_app/Loggin/LoginState.dart';
+import 'package:expedientesodontologicos_app/ModelosFormularios/Adulto.dart';
 import 'package:expedientesodontologicos_app/ModelosFormularios/General.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -103,23 +104,10 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
           onChanged: ((value){
             if(value!=null || value.length>0) {
               String userid = Provider.of<LoginState>(context).uid;
-              print(userid + "Heeeeyyy");
+              print(userid + "==============================");
               Provider.of<General>(context).userid = userid;
               Provider.of<General>(context).nombre = value;
-              print(Provider.of<General>(context).nombre+ "Heeeeyyy");
-              /* Provider.of<General>(context).set(nombre.text,
-                    "Apellido hay que quitar en la funcion",
-                    edad.text,
-                    _currentsexo,
-                    estado_civil.text,
-                    direccion.text,
-                    emergencia.text,
-                    procedencia.text,
-                    telefono.text,
-                    ocupacion.text,
-                    referencia.text,
-                    fecha_inicio.text,
-                    "",userid);*/
+              print(Provider.of<General>(context).nombre+ "==============================");
             }
           }),
         ),
@@ -140,6 +128,7 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
                 onChanged: (value) {
                   setState(() {
                     _currentsexo = value;
+                    Provider.of<General>(context).sexo = value;
                   });
                 },
               ),
@@ -156,6 +145,9 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
           )),
           controller: estado_civil,
           keyboardType: TextInputType.text,
+          onChanged: (value){
+            Provider.of<General>(context).estado_civil = value;
+          },
         ),
       ),
       Container(
@@ -167,6 +159,9 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
           )),
           controller: direccion,
           keyboardType: TextInputType.text,
+          onChanged: (value){
+            Provider.of<General>(context).direccion = value;
+          },
         ),
       ),
       Container(
@@ -178,6 +173,9 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
           )),
           controller: procedencia,
           keyboardType: TextInputType.text,
+          onChanged: (value){
+            Provider.of<General>(context).procedencia = value;
+          },
         ),
       ),
       Container(
@@ -189,6 +187,9 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
           )),
           controller: telefono,
           keyboardType: TextInputType.phone,
+          onChanged: (value){
+            Provider.of<General>(context).telefono = value;
+          },
         ),
       ),
       Container(
@@ -200,6 +201,9 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
           )),
           controller: ocupacion,
           keyboardType: TextInputType.text,
+          onChanged: (value){
+            Provider.of<General>(context).ocupacion = value;
+          },
         ),
       ),
       Container(
@@ -211,6 +215,9 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
           )),
           controller: emergencia,
           keyboardType: TextInputType.text,
+          onChanged: (value){
+            Provider.of<General>(context).emergencia = value;
+          },
         ),
       ),
       Container(
@@ -222,6 +229,9 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
           )),
           controller: referencia,
           keyboardType: TextInputType.text,
+          onChanged: (value){
+            Provider.of<General>(context).referencia = value;
+          },
         ),
       ),
       ListTile(
@@ -244,6 +254,9 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
           )),
           controller: edad,
           keyboardType: TextInputType.number,
+          onChanged: (value){
+            Provider.of<General>(context).edad = value;
+          },
         ),
       ),
     ]));
@@ -264,6 +277,9 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
               minLines: 1,
               maxLines: 6,
               keyboardType: TextInputType.multiline,
+              onChanged: (value){
+            Provider.of<Adulto>(context).motivo = value;
+          },
             ),
           ),
           Container(
@@ -276,6 +292,9 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
               minLines: 1,
               maxLines: 6,
               keyboardType: TextInputType.multiline,
+              onChanged: (value){
+            Provider.of<Adulto>(context).historia = value;
+          },
             ),
           ),
           ListTile(
@@ -292,6 +311,7 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
                   .then((fecha) {
                 setState(() {
                   fecha_selec = fecha;
+                  Provider.of<Adulto>(context).fecha_ultima_visita = DateFormat("y-M-d").format(fecha);
                 });
               });
             },
@@ -304,6 +324,9 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
                   icon: Icon(FontAwesomeIcons.bandAid)),
               controller: tratamiento,
               keyboardType: TextInputType.text,
+              onChanged: (value){
+            Provider.of<Adulto>(context).tratamiento_recibido = value;
+          },
             ),
           ),
           Container(
@@ -314,6 +337,9 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
                   icon: Icon(FontAwesomeIcons.tooth)),
               controller: dientes_perdidos,
               keyboardType: TextInputType.number,
+              onChanged: (value){
+            Provider.of<Adulto>(context).dientes_perdidos = value;
+          },
             ),
           ),
           Container(
@@ -324,6 +350,9 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
                   icon: Icon(FontAwesomeIcons.tooth)),
               controller: causa_dientesperdidos,
               keyboardType: TextInputType.text,
+              onChanged: (value){
+            Provider.of<Adulto>(context).causa_dientesperdidos = value;
+          },
             ),
           ),
           Container(
@@ -334,6 +363,9 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
                   icon: Icon(FontAwesomeIcons.teeth)),
               controller: experiencias_exodoncias,
               keyboardType: TextInputType.text,
+              onChanged: (value){
+            Provider.of<Adulto>(context).experiencias_exodoncias = value;
+          },
             ),
           ),
           Container(
@@ -344,6 +376,9 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
                   icon: Icon(FontAwesomeIcons.teeth)),
               controller: higiene_oral,
               keyboardType: TextInputType.text,
+              onChanged: (value){
+            Provider.of<Adulto>(context).higiene_oral = value;
+          },
             ),
           ),
           Container(
@@ -354,6 +389,9 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
                   icon: Icon(FontAwesomeIcons.tooth)),
               controller: tipo_cepillo,
               keyboardType: TextInputType.text,
+              onChanged: (value){
+            Provider.of<Adulto>(context).tipo_cepillo = value;
+          },
             ),
           ),
           Container(
@@ -364,6 +402,9 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
                   icon: Icon(FontAwesomeIcons.teeth)),
               controller: tecnica_cepillado,
               keyboardType: TextInputType.text,
+              onChanged: (value){
+            Provider.of<Adulto>(context).tecnica_cepillado = value;
+          },
             ),
           ),
           Container(
@@ -374,6 +415,9 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
                   icon: Icon(FontAwesomeIcons.teeth)),
               controller: frecuencia_cepillado,
               keyboardType: TextInputType.text,
+              onChanged: (value){
+            Provider.of<Adulto>(context).frecuencia_cepillado = value;
+          },
             ),
           ),
           Container(
@@ -384,6 +428,9 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
                   icon: Icon(FontAwesomeIcons.plusCircle)),
               controller: ayudas_higiene_extras,
               keyboardType: TextInputType.text,
+              onChanged: (value){
+            Provider.of<Adulto>(context).ayudas_higiene_extras = value;
+          },
             ),
           ),
         ],

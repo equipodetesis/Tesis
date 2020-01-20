@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'Formularios/I_II_III_IV.dart';
 import 'Formularios/V_VI_VII.dart';
 import 'ListItem.dart';
+import 'ModelosFormularios/Adulto.dart';
 
 class Baseformularios extends StatefulWidget {
   final ListItem header;
@@ -30,7 +31,8 @@ I_II_III_IV formI= I_II_III_IV();
             icon: Icon(Icons.check),
             onPressed: (){
               print(Provider.of<General>(context).nombre);
-              Provider.of<General>(context).addCLiente();
+              print(Provider.of<Adulto>(context).motivo);
+              //Provider.of<General>(context).addCLiente();
             },
           )
         ],

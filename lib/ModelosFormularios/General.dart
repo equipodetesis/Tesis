@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 
 class General {
-  String nombre,apellido,sexo,estado_civil,direccion,emergencia,procedencia,telefono,ocupacion,referencia,fecha_inicio,foto,userid;
+  String nombre,apellido,sexo,estado_civil,direccion,emergencia,procedencia,telefono,ocupacion,referencia,fecha_inicio,foto,userid,pacienteid;
   String edad;
 
   General();
@@ -26,7 +26,7 @@ class General {
      this.userid=userid;
    }
 
-  General.fromJson(Map<String, dynamic> data)
+  General.fromJson(Map<String, dynamic> data,String pacienteid)
   :userid = data["UserID"],
   nombre=data['Nombre'],
   apellido=data["Apellido"],
@@ -40,7 +40,8 @@ class General {
   emergencia=data["emergencia"],
   referencia=data["referencia"],
    foto=data["foto"],
-  edad=data["edad"];
+  edad=data["edad"],
+  pacienteid=data["pacienteid"];
 
   Map<String,dynamic> toMap()=>{
      "UserID":userid,
@@ -57,6 +58,7 @@ class General {
      "referencia":referencia,
      "foto": foto,
      "edad":edad,
+    "pacienteid":pacienteid
    };
   //Las funcionse son addCliente y updateCliente
   Future<void> addCLiente() async {

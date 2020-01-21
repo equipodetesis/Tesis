@@ -65,7 +65,7 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
   Widget build(BuildContext context) {
     general = generalI();
     motivohistoria = motivoHistoria();
-
+    Provider.of<General>(context).fecha_inicio=DateFormat("y-M-d").format(fecha);
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -278,6 +278,7 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
               maxLines: 6,
               keyboardType: TextInputType.multiline,
               onChanged: (value){
+                Provider.of<Adulto>(context).Userid=Provider.of<LoginState>(context).uid;
             Provider.of<Adulto>(context).motivo = value;
           },
             ),

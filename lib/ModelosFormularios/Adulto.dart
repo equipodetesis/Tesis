@@ -12,7 +12,7 @@ class Adulto{
   region_vestibular,paladar_duro,orofaringe,piso_boca,lengua,cara_dorsal,cara_ventral,bordes,encia,dientes,prescencia_calculo,salivacion
   ;
  List Revision_organos=List<String>();
-
+  String Userid;
  Adulto();
 
   Adulto.fromjson(Map<String, dynamic> data):

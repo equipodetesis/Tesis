@@ -8,20 +8,34 @@ import 'ListItem.dart';
 import 'ModelosFormularios/Adulto.dart';
 
 class Baseformularios extends StatefulWidget {
-  final ListItem header;
+  final General header;
   Baseformularios(this.header);
   @override
   _BaseformulariosState createState() => _BaseformulariosState(header);
 }
 
 class _BaseformulariosState extends State<Baseformularios> {
-  final ListItem header;
+  final General header;
   _BaseformulariosState(this.header);
+  I_II_III_IV formI= I_II_III_IV();
 
-  Widget bodycontent = Center(child: Text('My Page!'));
-I_II_III_IV formI= I_II_III_IV();
+  bool actualizacion=false;
+
   @override
   Widget build(BuildContext context) {
+    Widget bodycontent = formI;
+    String foto;
+    String nombre="Nuevo registro";
+    if(header==null){
+     Provider.of<General>(context).foto="https://firebasestorage.googleapis.com/v0/b/expedientes-odontologicos.appspot.com/o/54462699_10214142660262421_7801861136030105600_n.jpg?alt=media&token=5060a01b-917e-42e5-ac5c-6cd8bff61f3b";
+     foto=Provider.of<General>(context).foto;
+    }
+    else{
+      actualizacion=true;
+      foto=header.foto;
+      nombre=header.nombre;
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Historias clinicas"),
@@ -32,7 +46,13 @@ I_II_III_IV formI= I_II_III_IV();
             onPressed: (){
               print(Provider.of<General>(context).nombre);
               print(Provider.of<Adulto>(context).motivo);
-              //Provider.of<General>(context).addCLiente();
+              if(actualizacion){
+                //updates
+              }else{
+                //adds
+              Provider.of<General>(context).addCLiente();
+
+              }
             },
           )
         ],
@@ -56,14 +76,14 @@ I_II_III_IV formI= I_II_III_IV();
                     children: <Widget>[
                       AspectRatio(
                         child:CircleAvatar(
-                          backgroundImage: NetworkImage(header.imagen),
+                          backgroundImage: NetworkImage(foto),
                           backgroundColor: Colors.black12,
                           foregroundColor:Colors.white ,
                         ),
                         aspectRatio: 0.001/0.0004,
                       ),
 
-                      Text(header.Nombre,
+                      Text(nombre,
                         textScaleFactor: 1.5,
                         style: TextStyle(
                           color: Colors.white,
@@ -75,7 +95,8 @@ I_II_III_IV formI= I_II_III_IV();
                               onPressed: () async {
                                 //funcion de la camara aqui
                                 SubirFoto f;
-                                await f.tomarFoto(header.Nombre+"_foto");
+                                Provider.of<General>(context).foto=await f.tomarFoto(header.nombre+"_foto");
+
                               },
                               child: Text("Tomar foto",style: TextStyle(color: Colors.white),),
                             ),
@@ -83,7 +104,7 @@ I_II_III_IV formI= I_II_III_IV();
                               onPressed: () async {
                                 //funcion de la camara aqui
                                 SubirFoto f;
-                                await f.galeryFoto(header.Nombre+"_foto");
+                                Provider.of<General>(context).foto=await f.galeryFoto(header.nombre+"_foto");
                               },
                               child: Text("Cambiar foto",style: TextStyle(color: Colors.white),),
                             )

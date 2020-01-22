@@ -51,7 +51,7 @@ class _BaseformulariosState extends State<Baseformularios> {
               }else{
                 //adds
               Provider.of<General>(context).addCLiente();
-
+              Provider.of<Adulto>(context).addAdult();
               }
             },
           )

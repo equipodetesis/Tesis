@@ -9,7 +9,7 @@ class V_VI_VII extends StatefulWidget {
 }
 
 class _V_VI_VII_State extends State<V_VI_VII> {
-
+  
   String _currentlocal;
   List<DropdownMenuItem> _itemslocal;
   List<String> listlocales = ["Hospital", "Clínica"];

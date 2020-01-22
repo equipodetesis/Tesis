@@ -30,6 +30,7 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
   void initState() {
     _sexolist = Util().getDropdownMenuItem(sexos);
     _currentsexo = sexos[0];
+    Provider.of<General>(context).sexo = sexos[0];
     // TODO: implement initState
     super.initState();
   }

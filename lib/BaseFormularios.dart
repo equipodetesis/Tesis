@@ -8,32 +8,32 @@ import 'ListItem.dart';
 import 'ModelosFormularios/Adulto.dart';
 
 class Baseformularios extends StatefulWidget {
-  final General header;
-  Baseformularios(this.header);
+  Baseformularios();
   @override
-  _BaseformulariosState createState() => _BaseformulariosState(header);
+  _BaseformulariosState createState() => _BaseformulariosState();
 }
 
 class _BaseformulariosState extends State<Baseformularios> {
-  final General header;
-  _BaseformulariosState(this.header);
+
+  _BaseformulariosState();
   I_II_III_IV formI= I_II_III_IV();
-
+  String nombre="Nuevo registro";
   bool actualizacion=false;
-
+  Widget bodycontent ;
+  String foto;
   @override
   Widget build(BuildContext context) {
-    Widget bodycontent = formI;
-    String foto;
-    String nombre="Nuevo registro";
-    if(header==null){
+    bodycontent=formI;
+
+    if(Provider.of<General>(context).foto.isEmpty){
      Provider.of<General>(context).foto="https://firebasestorage.googleapis.com/v0/b/expedientes-odontologicos.appspot.com/o/54462699_10214142660262421_7801861136030105600_n.jpg?alt=media&token=5060a01b-917e-42e5-ac5c-6cd8bff61f3b";
      foto=Provider.of<General>(context).foto;
-    }
-    else{
+
+    }else{
       actualizacion=true;
-      foto=header.foto;
-      nombre=header.nombre;
+
+      foto=Provider.of<General>(context).foto;
+      nombre=Provider.of<General>(context).nombre;
     }
 
     return Scaffold(
@@ -44,13 +44,22 @@ class _BaseformulariosState extends State<Baseformularios> {
           IconButton(
             icon: Icon(Icons.check),
             onPressed: (){
-              print(Provider.of<General>(context).nombre);
-              print(Provider.of<Adulto>(context).motivo);
+
+
               if(actualizacion){
                 //updates
+                if(Provider.of<General>(context).cambiado){
+                  print(Provider.of<General>(context).pacienteid);
+                  Provider.of<General>(context).updateCLiente();
+                }
+
               }else{
                 //adds
+                if(Provider.of<General>(context).cambiado){
               Provider.of<General>(context).addCLiente();
+               // print("Hola?");
+                }
+                Navigator.pop(context);
 
               }
             },
@@ -95,7 +104,11 @@ class _BaseformulariosState extends State<Baseformularios> {
                               onPressed: () async {
                                 //funcion de la camara aqui
                                 SubirFoto f;
-                                Provider.of<General>(context).foto=await f.tomarFoto(header.nombre+"_foto");
+                                Provider.of<General>(context).foto=await f.tomarFoto(Provider.of<General>(context).nombre+"_foto");
+                                setState(() {
+                                  foto=Provider.of<General>(context).foto;
+                                });
+
 
                               },
                               child: Text("Tomar foto",style: TextStyle(color: Colors.white),),
@@ -104,7 +117,12 @@ class _BaseformulariosState extends State<Baseformularios> {
                               onPressed: () async {
                                 //funcion de la camara aqui
                                 SubirFoto f;
-                                Provider.of<General>(context).foto=await f.galeryFoto(header.nombre+"_foto");
+                                Provider.of<General>(context).foto=await f.galeryFoto(Provider.of<General>(context).nombre+"_foto");
+                                setState(() {
+                                  foto=Provider.of<General>(context).foto;
+                                });
+
+
                               },
                               child: Text("Cambiar foto",style: TextStyle(color: Colors.white),),
                             )

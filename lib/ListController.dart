@@ -21,7 +21,7 @@ class ListController extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     Stream<QuerySnapshot> stream;
-    stream=database.collection("Usuario/"+Provider.of<LoginState>(context).uid+"/Cliente/").snapshots();
+    stream=database.collection("Usuarios/"+Provider.of<LoginState>(context).uid+"/Cliente/").snapshots();
     String pacienteid;
     return  StreamBuilder<QuerySnapshot>(
       stream: stream,
@@ -36,10 +36,11 @@ class ListController extends StatelessWidget{
             default:
               return new ListView(
                 children: snapshot.data.documents.map((DocumentSnapshot document){
-                  General general=General.fromJson(document.data,document.documentID);
+                  General general=General();
+                  general.fromJson(document.data);
                   print(general.nombre);
                  ListItem item= ListItem(general.foto,
-                 general.nombre,general.fecha_inicio);
+                     general.nombre,general.fecha_inicio);
 
                   return
                     searchtext==null||searchtext==""? Column(
@@ -65,9 +66,12 @@ class ListController extends StatelessWidget{
                           ],
                         ),
                         onTap: (){
+                          print(pacienteid);
+                          Provider.of<General>(context).fromJson(document.data);
+                          Provider.of<General>(context).pacienteid=document.documentID;
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => Baseformularios(general)),
+                            MaterialPageRoute(builder: (context) => Baseformularios()),
                           );},
                         subtitle: Container(
                           padding: const EdgeInsets.only(top: 5.0),
@@ -101,9 +105,11 @@ class ListController extends StatelessWidget{
                               ],
                             ),
                             onTap: (){
+                              Provider.of<General>(context).fromJson(document.data);
+                              Provider.of<General>(context).pacienteid=document.documentID;
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => Baseformularios(general)),
+                                MaterialPageRoute(builder: (context) => Baseformularios()),
                               );},
                             subtitle: Container(
                               padding: const EdgeInsets.only(top: 5.0),
@@ -116,7 +122,7 @@ class ListController extends StatelessWidget{
                       ],
                     )
 
-                  :Container();
+                  :Container(child: Center(child: Text("No hay resultados"),),);
                 }).toList()
               );
           }

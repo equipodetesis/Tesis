@@ -9,6 +9,8 @@ import 'ListItem.dart' as lista;
 import 'ListController.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'ModelosFormularios/General.dart';
+
 class principal extends StatefulWidget{
 
 
@@ -62,7 +64,8 @@ class PrincipalState extends State<principal> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: (){
-           Navigator.push(context,  MaterialPageRoute(builder: (context) => Baseformularios(null)));
+          Provider.of<General>(context).clear();
+           Navigator.push(context,  MaterialPageRoute(builder: (context) => Baseformularios()));
         },
         hoverColor: Colors.black,
         isExtended: true,

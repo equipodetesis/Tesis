@@ -22,6 +22,7 @@ class Adulto{
         frecuencia_cepillado=data["frec_cepillado"] , ayudas_higiene_extras=data["ayudas_higiene_extra"] ,
         cuidadoMedico=data["cuidado_medico"],hospital=data["hospital"],expediente=data["expediente_medico"],fecha_ultimo_examen_medico=data["ult_exam_medico"],
         nombredelmedico=data["nombre_medico"],enfermedades=data["enfermedades"];
+
   Map<String,dynamic> toMap()=>{
     "motivo_consulta":motivo , "historia_enfermedad_actual":historia, "fecha_ultima_visita":fecha_ultima_visita, "tratamiento":tratamiento_recibido , "dientes_perdidos":dientes_perdidos ,
     "causa_dientes_perdidos":causa_dientesperdidos , "exper_exodocias":experiencias_exodoncias ,

@@ -24,7 +24,6 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
       telefono = TextEditingController(),
       ocupacion = TextEditingController(),
       referencia = TextEditingController(),
-      fecha_inicio = TextEditingController(),
       edad = TextEditingController();
 
   TextEditingController motivo = TextEditingController(),
@@ -41,18 +40,19 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
 
   DateTime fecha = DateTime.now();
   DateTime fecha_selec = DateTime.now();
-
+   String fecha_inicio="";
   List sexos = ["Masculino", "Femenino"];
   List<DropdownMenuItem> _sexolist;
   String _currentsexo;
-
+ bool actualizar = false;
   Widget general;
   Widget motivohistoria;
   @override
   void initState() {
     _sexolist = Util().getDropdownMenuItem(sexos);
     _currentsexo = sexos[0];
-    // TODO: implement initState
+
+
     super.initState();
   }
 
@@ -65,7 +65,15 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
   Widget build(BuildContext context) {
     general = generalI();
     motivohistoria = motivoHistoria();
-    Provider.of<General>(context).fecha_inicio=DateFormat("y-M-d").format(fecha);
+
+    if(Provider.of<General>(context).fecha_inicio.isEmpty){
+      Provider.of<General>(context).sexo = _currentsexo;
+      print("hola");
+      Provider.of<General>(context).fecha_inicio=DateFormat("y-M-d").format(fecha);
+      fecha_inicio=Provider.of<General>(context).fecha_inicio;
+    }
+    else
+      actualizar=true;
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -99,15 +107,15 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
             labelText: "Nombre",
             icon: Icon(Icons.person),
           )),
-          controller: nombre,
+          //controller: nombre,
+          initialValue: Provider.of<General>(context).nombre,
           keyboardType: TextInputType.text,
           onChanged: ((value){
             if(value!=null || value.length>0) {
-              String userid = Provider.of<LoginState>(context).uid;
-              print(userid + "==============================");
-              Provider.of<General>(context).userid = userid;
+              Provider.of<General>(context).userid = Provider.of<LoginState>(context).uid;
               Provider.of<General>(context).nombre = value;
-              print(Provider.of<General>(context).nombre+ "==============================");
+              Provider.of<General>(context).cambiado=true;
+
             }
           }),
         ),
@@ -124,11 +132,12 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
               child: DropdownButton(
                 isExpanded: true,
                 items: _sexolist,
-                value: _currentsexo,
+                value: Provider.of<General>(context).sexo,
                 onChanged: (value) {
                   setState(() {
-                    _currentsexo = value;
+                    Provider.of<General>(context).userid = Provider.of<LoginState>(context).uid;
                     Provider.of<General>(context).sexo = value;
+                    Provider.of<General>(context).cambiado=true;
                   });
                 },
               ),
@@ -143,10 +152,13 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
             labelText: "Estado civil",
             icon: Icon(FontAwesomeIcons.userFriends),
           )),
-          controller: estado_civil,
+          //controller: estado_civil,
           keyboardType: TextInputType.text,
+          initialValue: Provider.of<General>(context).estado_civil,
           onChanged: (value){
             Provider.of<General>(context).estado_civil = value;
+            Provider.of<General>(context).userid = Provider.of<LoginState>(context).uid;
+            Provider.of<General>(context).cambiado=true;
           },
         ),
       ),
@@ -157,10 +169,13 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
             labelText: "Direccion",
             icon: Icon(Icons.location_on),
           )),
-          controller: direccion,
+          //controller: direccion,
           keyboardType: TextInputType.text,
+          initialValue: Provider.of<General>(context).direccion,
           onChanged: (value){
+            Provider.of<General>(context).userid = Provider.of<LoginState>(context).uid;
             Provider.of<General>(context).direccion = value;
+            Provider.of<General>(context).cambiado=true;
           },
         ),
       ),
@@ -171,10 +186,13 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
             labelText: "Procedencia",
             icon: Icon(FontAwesomeIcons.city),
           )),
-          controller: procedencia,
+          //controller: procedencia,
           keyboardType: TextInputType.text,
+          initialValue: Provider.of<General>(context).procedencia,
           onChanged: (value){
+            Provider.of<General>(context).userid = Provider.of<LoginState>(context).uid;
             Provider.of<General>(context).procedencia = value;
+            Provider.of<General>(context).cambiado=true;
           },
         ),
       ),
@@ -185,10 +203,13 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
             labelText: "Telefono",
             icon: Icon(Icons.phone_android),
           )),
-          controller: telefono,
+          //controller: telefono,
           keyboardType: TextInputType.phone,
+          initialValue: Provider.of<General>(context).telefono,
           onChanged: (value){
+            Provider.of<General>(context).userid = Provider.of<LoginState>(context).uid;
             Provider.of<General>(context).telefono = value;
+            Provider.of<General>(context).cambiado=true;
           },
         ),
       ),
@@ -199,10 +220,13 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
             labelText: "Ocupacion",
             icon: Icon(Icons.work),
           )),
-          controller: ocupacion,
+          //controller: ocupacion,
           keyboardType: TextInputType.text,
+          initialValue: Provider.of<General>(context).ocupacion,
           onChanged: (value){
             Provider.of<General>(context).ocupacion = value;
+            Provider.of<General>(context).userid = Provider.of<LoginState>(context).uid;
+            Provider.of<General>(context).cambiado=true;
           },
         ),
       ),
@@ -213,10 +237,13 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
             labelText: "Emergencia",
             icon: Icon(Icons.report_problem),
           )),
-          controller: emergencia,
+          //controller: emergencia,
           keyboardType: TextInputType.text,
+          initialValue: Provider.of<General>(context).emergencia,
           onChanged: (value){
             Provider.of<General>(context).emergencia = value;
+            Provider.of<General>(context).userid = Provider.of<LoginState>(context).uid;
+            Provider.of<General>(context).cambiado=true;
           },
         ),
       ),
@@ -227,17 +254,20 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
             labelText: "Referencia",
             icon: Icon(Icons.record_voice_over),
           )),
-          controller: referencia,
+          //controller: referencia,
           keyboardType: TextInputType.text,
+          initialValue: Provider.of<General>(context).referencia,
           onChanged: (value){
             Provider.of<General>(context).referencia = value;
+            Provider.of<General>(context).userid = Provider.of<LoginState>(context).uid;
+            Provider.of<General>(context).cambiado=true;
           },
         ),
       ),
       ListTile(
         leading: Icon(Icons.calendar_today),
         title: Text(
-          DateFormat("y-M-d").format(fecha),
+          Provider.of<General>(context).fecha_inicio,
           textAlign: TextAlign.start,
           style: TextStyle(
             fontSize: 20.0,
@@ -252,10 +282,13 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
             labelText: "Edad",
             icon: Icon(Icons.cake),
           )),
-          controller: edad,
+          //controller: edad,
           keyboardType: TextInputType.number,
+          initialValue: Provider.of<General>(context).edad,
           onChanged: (value){
             Provider.of<General>(context).edad = value;
+            Provider.of<General>(context).userid = Provider.of<LoginState>(context).uid;
+            Provider.of<General>(context).cambiado=true;
           },
         ),
       ),

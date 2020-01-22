@@ -22,8 +22,13 @@ class _BaseformulariosState extends State<Baseformularios> {
   Widget bodycontent ;
   String foto;
   @override
-  Widget build(BuildContext context) {
+  void initState() {
     bodycontent=formI;
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) {
+
 
     if(Provider.of<General>(context).foto.isEmpty){
      Provider.of<General>(context).foto="https://firebasestorage.googleapis.com/v0/b/expedientes-odontologicos.appspot.com/o/54462699_10214142660262421_7801861136030105600_n.jpg?alt=media&token=5060a01b-917e-42e5-ac5c-6cd8bff61f3b";
@@ -49,7 +54,7 @@ class _BaseformulariosState extends State<Baseformularios> {
               if(actualizacion){
                 //updates
                 if(Provider.of<General>(context).cambiado){
-                  print(Provider.of<General>(context).pacienteid);
+                  print(Provider.of<General>(context).pacienteid+"!!!!!!");
                   Provider.of<General>(context).updateCLiente();
                 }
 

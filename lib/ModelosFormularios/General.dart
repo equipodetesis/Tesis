@@ -10,6 +10,7 @@ class General {
   General();
 
 
+
   void fromJson(Map<String, dynamic> data) {
     userid = data["UserID"];
     nombre=data['Nombre'];
@@ -25,6 +26,7 @@ class General {
     referencia=data["referencia"];
     foto=data["foto"];
     edad=data["edad"];
+    pacienteid=pacienteid;
 
   }
   Map<String,dynamic> toMap()=>{
@@ -42,6 +44,7 @@ class General {
      "referencia":referencia,
      "foto": foto,
      "edad":edad,
+    "Paciente_id":pacienteid
    };
   void clear(){
     userid = "";

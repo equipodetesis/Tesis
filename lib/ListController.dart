@@ -66,7 +66,6 @@ class ListController extends StatelessWidget{
                           ],
                         ),
                         onTap: (){
-                          print(pacienteid);
                           Provider.of<General>(context).fromJson(document.data);
                           Provider.of<General>(context).pacienteid=document.documentID;
                           Navigator.push(

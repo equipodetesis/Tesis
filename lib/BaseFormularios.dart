@@ -30,7 +30,7 @@ I_II_III_IV formI= I_II_III_IV();
             icon: Icon(Icons.check),
             onPressed: (){
               print(Provider.of<General>(context).nombre);
-              Provider.of<General>(context).addCLiente();
+              //Provider.of<General>(context).addCLiente();
             },
           )
         ],

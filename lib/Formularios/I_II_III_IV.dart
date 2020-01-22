@@ -103,23 +103,10 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
           onChanged: ((value){
             if(value!=null || value.length>0) {
               String userid = Provider.of<LoginState>(context).uid;
-              print(userid + "Heeeeyyy");
+              print(userid + "==============================");
               Provider.of<General>(context).userid = userid;
               Provider.of<General>(context).nombre = value;
-              print(Provider.of<General>(context).nombre+ "Heeeeyyy");
-              /* Provider.of<General>(context).set(nombre.text,
-                    "Apellido hay que quitar en la funcion",
-                    edad.text,
-                    _currentsexo,
-                    estado_civil.text,
-                    direccion.text,
-                    emergencia.text,
-                    procedencia.text,
-                    telefono.text,
-                    ocupacion.text,
-                    referencia.text,
-                    fecha_inicio.text,
-                    "",userid);*/
+              print(Provider.of<General>(context).nombre+ "==============================");
             }
           }),
         ),
@@ -140,6 +127,7 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
                 onChanged: (value) {
                   setState(() {
                     _currentsexo = value;
+                    Provider.of<General>(context).sexo = value;
                   });
                 },
               ),
@@ -156,6 +144,9 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
           )),
           controller: estado_civil,
           keyboardType: TextInputType.text,
+          onChanged: (value){
+            Provider.of<General>(context).estado_civil = value;
+          },
         ),
       ),
       Container(
@@ -167,6 +158,9 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
           )),
           controller: direccion,
           keyboardType: TextInputType.text,
+          onChanged: (value){
+            Provider.of<General>(context).direccion = value;
+          },
         ),
       ),
       Container(
@@ -178,6 +172,9 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
           )),
           controller: procedencia,
           keyboardType: TextInputType.text,
+          onChanged: (value){
+            Provider.of<General>(context).procedencia = value;
+          },
         ),
       ),
       Container(

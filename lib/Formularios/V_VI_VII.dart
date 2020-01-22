@@ -201,7 +201,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                     onChanged: (selection) {
                       setState(() {
                         _current_enfermedades[_current_enfermedades.indexOf(value)] = selection;
-
+                        actualizarlistas();
                       });
                     },
                   ),
@@ -226,13 +226,14 @@ class _V_VI_VII_State extends State<V_VI_VII> {
       setState(() {
         _items_enfermedades.add(ajustarlistaenfermedades(_todasenfermedades, _current_enfermedades));
         _current_enfermedades.add(_items_enfermedades.last.first.value);
+        actualizarlistas();
       });
   }
 
   void actualizarlistas(){
     setState(() {
       _items_enfermedades.forEach((value){
-        ajustarlistaenfermedades(_todasenfermedades, _current_enfermedades, exception: _items_enfermedades.indexOf(value));
+        value = ajustarlistaenfermedades(_todasenfermedades, _current_enfermedades, exception: _items_enfermedades.indexOf(value));
       });
     });
   }
@@ -241,9 +242,14 @@ class _V_VI_VII_State extends State<V_VI_VII> {
       return Util().getDropdownMenuItem(listacompleta);
     } else {
       List listtemp = listacompleta;
-
+      int i = 0;
       listaseleccionadas.forEach((value) {
+        if(i!= exception){
         listtemp.remove(value);
+        }else{
+
+        }
+        i++;
       });
 
       return Util().getDropdownMenuItem(listtemp);

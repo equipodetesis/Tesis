@@ -9,10 +9,6 @@ class V_VI_VII extends StatefulWidget {
 }
 
 class _V_VI_VII_State extends State<V_VI_VII> {
-  TextEditingController cuidado_medico = TextEditingController(),
-      num_expediente = TextEditingController(),
-      medicamentos = TextEditingController(),
-      nombre_medico = TextEditingController();
 
   String _currentlocal;
   List<DropdownMenuItem> _itemslocal;
@@ -94,7 +90,6 @@ class _V_VI_VII_State extends State<V_VI_VII> {
             labelText: "¿Ha estado el paciente bajo cuidado medico?",
             icon: Icon(FontAwesomeIcons.briefcaseMedical),
           )),
-          controller: cuidado_medico,
           keyboardType: TextInputType.text,
         ),
       ),
@@ -128,7 +123,6 @@ class _V_VI_VII_State extends State<V_VI_VII> {
             labelText: "Expediente",
             icon: Icon(FontAwesomeIcons.fileAlt),
           )),
-          controller: num_expediente,
           keyboardType: TextInputType.number,
         ),
       ),
@@ -160,7 +154,6 @@ class _V_VI_VII_State extends State<V_VI_VII> {
             labelText: "Describa drogas o medicamentos que toma",
             icon: Icon(FontAwesomeIcons.pills),
           )),
-          controller: cuidado_medico,
           keyboardType: TextInputType.text,
         ),
       ),
@@ -171,7 +164,6 @@ class _V_VI_VII_State extends State<V_VI_VII> {
             labelText: "Nombre del medico",
             icon: Icon(FontAwesomeIcons.userMd),
           )),
-          controller: cuidado_medico,
           keyboardType: TextInputType.text,
         ),
       ),

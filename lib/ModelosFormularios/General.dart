@@ -9,22 +9,6 @@ class General {
  bool cambiado=false;
   General();
 
-  void set(nombre,apellido,edad,sexo,estadocivil,direccion,emergenia,procedencia,telefono,ocupacion,referencia,fecha_inicio,foto,userid){
-     this.nombre=nombre;
-     this.apellido=apellido;
-     this.edad=edad;
-     this.sexo=sexo;
-     this.estado_civil=estado_civil;
-     this.direccion=direccion;
-     this.emergencia=emergencia;
-     this.procedencia=procedencia;
-     this.telefono=telefono;
-     this.ocupacion=ocupacion;
-     this.referencia=referencia;
-     this.fecha_inicio=fecha_inicio;
-     this.foto=foto;
-     this.userid=userid;
-   }
 
   void fromJson(Map<String, dynamic> data) {
     userid = data["UserID"];

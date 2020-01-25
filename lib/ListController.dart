@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'ListItem.dart';
 import 'BaseFormularios.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'Loggin/LoginState.dart';
+import 'ModelosFormularios/General.dart';
 // ignore: must_be_immutable
 class ListController extends StatelessWidget{
-  List<ListItem> preitems=new List<ListItem>();
   bool search;
   String searchtext;
   Firestore database;
-  ListController( List<ListItem> items, bool search,String searchtext,Firestore database){
-    this.preitems=items;
+  ListController(  bool search,String searchtext,Firestore database){
+
     this.search=search;
     this.searchtext=searchtext;
     this.database=database;
@@ -18,11 +21,10 @@ class ListController extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     Stream<QuerySnapshot> stream;
-    stream=database.collection('Clientes').snapshots();
-
+    stream=database.collection("Usuarios/"+Provider.of<LoginState>(context).uid+"/Cliente/").snapshots();
+    String pacienteid;
     return  StreamBuilder<QuerySnapshot>(
       stream: stream,
-
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
           if (snapshot.hasError)
             return new Text('Error: ${snapshot.error}');
@@ -34,8 +36,11 @@ class ListController extends StatelessWidget{
             default:
               return new ListView(
                 children: snapshot.data.documents.map((DocumentSnapshot document){
-                 ListItem item= ListItem("https://firebasestorage.googleapis.com/v0/b/expedientes-odontologicos.appspot.com/o/54462699_10214142660262421_7801861136030105600_n.jpg?alt=media&token=5060a01b-917e-42e5-ac5c-6cd8bff61f3b",
-                 document["Nombre"],document["edad"]);
+                  General general=General();
+                  general.fromJson(document.data);
+                  print(general.nombre);
+                 ListItem item= ListItem(general.foto,
+                     general.nombre,general.fecha_inicio);
 
                   return
                     searchtext==null||searchtext==""? Column(
@@ -61,9 +66,11 @@ class ListController extends StatelessWidget{
                           ],
                         ),
                         onTap: (){
+                          Provider.of<General>(context).fromJson(document.data);
+                          Provider.of<General>(context).pacienteid=document.documentID;
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => Baseformularios(item)),
+                            MaterialPageRoute(builder: (context) => Baseformularios()),
                           );},
                         subtitle: Container(
                           padding: const EdgeInsets.only(top: 5.0),
@@ -97,9 +104,11 @@ class ListController extends StatelessWidget{
                               ],
                             ),
                             onTap: (){
+                              Provider.of<General>(context).fromJson(document.data);
+                              Provider.of<General>(context).pacienteid=document.documentID;
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => Baseformularios(item)),
+                                MaterialPageRoute(builder: (context) => Baseformularios()),
                               );},
                             subtitle: Container(
                               padding: const EdgeInsets.only(top: 5.0),
@@ -112,7 +121,7 @@ class ListController extends StatelessWidget{
                       ],
                     )
 
-                  :Container();
+                  :Container(child: Center(child: Text("No hay resultados"),),);
                 }).toList()
               );
           }

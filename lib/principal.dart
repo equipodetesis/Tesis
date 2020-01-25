@@ -4,9 +4,12 @@ import 'package:expedientesodontologicos_app/Loggin/LoginState.dart';
 import 'package:expedientesodontologicos_app/Menus/Constansts.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'BaseFormularios.dart';
 import 'ListItem.dart' as lista;
 import 'ListController.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'ModelosFormularios/General.dart';
 
 class principal extends StatefulWidget{
 
@@ -61,7 +64,8 @@ class PrincipalState extends State<principal> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: (){
-
+          Provider.of<General>(context).clear();
+           Navigator.push(context,  MaterialPageRoute(builder: (context) => Baseformularios()));
         },
         hoverColor: Colors.black,
         isExtended: true,
@@ -114,7 +118,7 @@ class PrincipalState extends State<principal> {
         ],
 
       ),
-      body: ListController(items, _IsSearching,_searchText,database),
+      body: ListController( _IsSearching,_searchText,database),
     );
 
   }

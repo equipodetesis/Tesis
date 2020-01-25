@@ -4,44 +4,31 @@ import 'package:flutter/material.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 
 class General {
-  String nombre,apellido,sexo,estado_civil,direccion,emergencia,procedencia,telefono,ocupacion,referencia,fecha_inicio,foto,userid;
+  String nombre,apellido,sexo,estado_civil,direccion,emergencia,procedencia,telefono,ocupacion,referencia,fecha_inicio,foto,userid,pacienteid;
   String edad;
-
+ bool cambiado=false;
   General();
 
-  void set(nombre,apellido,edad,sexo,estadocivil,direccion,emergenia,procedencia,telefono,ocupacion,referencia,fecha_inicio,foto,userid){
-     this.nombre=nombre;
-     this.apellido=apellido;
-     this.edad=edad;
-     this.sexo=sexo;
-     this.estado_civil=estado_civil;
-     this.direccion=direccion;
-     this.emergencia=emergencia;
-     this.procedencia=procedencia;
-     this.telefono=telefono;
-     this.ocupacion=ocupacion;
-     this.referencia=referencia;
-     this.fecha_inicio=fecha_inicio;
-     this.foto=foto;
-     this.userid=userid;
-   }
 
-  General.fromJson(Map<String, dynamic> data)
-  :userid = data["UserID"],
-  nombre=data['Nombre'],
-  apellido=data["Apellido"],
-   estado_civil=data["EstadoCivil"] ,
-   direccion=data["direccion"],
-  procedencia=data["procedencia"],
-  telefono=data["Telefono"],
-  ocupacion=data["Ocupacion"],
-  sexo=data["Sexo"],
-  fecha_inicio=data["fecha_inicio"],
-  emergencia=data["emergencia"],
-  referencia=data["referencia"],
-   foto=data["foto"],
-  edad=data["edad"];
 
+  void fromJson(Map<String, dynamic> data) {
+    userid = data["UserID"];
+    nombre=data['Nombre'];
+    apellido=data["Apellido"];
+    estado_civil=data["EstadoCivil"] ;
+    direccion=data["direccion"];
+    procedencia=data["procedencia"];
+    telefono=data["Telefono"];
+    ocupacion=data["Ocupacion"];
+    sexo=data["Sexo"];
+    fecha_inicio=data["fecha_inicio"];
+    emergencia=data["emergencia"];
+    referencia=data["referencia"];
+    foto=data["foto"];
+    edad=data["edad"];
+    pacienteid=pacienteid;
+
+  }
   Map<String,dynamic> toMap()=>{
      "UserID":userid,
      'Nombre': nombre,
@@ -57,7 +44,25 @@ class General {
      "referencia":referencia,
      "foto": foto,
      "edad":edad,
+    "Paciente_id":pacienteid
    };
+  void clear(){
+    userid = "";
+    nombre="";
+    apellido="";
+    estado_civil="" ;
+    direccion="";
+    procedencia="";
+    telefono="";
+    ocupacion="";
+    sexo=null;
+    fecha_inicio="";
+    emergencia="";
+    referencia="";
+    foto="";
+    edad="";
+    pacienteid="";
+  }
   //Las funcionse son addCliente y updateCliente
   Future<void> addCLiente() async {
     final HttpsCallable callable = CloudFunctions.instance.getHttpsCallable(
@@ -67,7 +72,7 @@ class General {
   }
   Future<void> updateCLiente() async {
     final HttpsCallable callable = CloudFunctions.instance.getHttpsCallable(
-      functionName: 'updateCliente',
+      functionName: 'UpdateCliente',
     );
     dynamic resp = await callable.call(this.toMap()).whenComplete((){print("Ingresado con exito");});
   }

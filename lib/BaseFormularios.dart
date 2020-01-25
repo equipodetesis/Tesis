@@ -32,7 +32,8 @@ I_II_III_IV formI= I_II_III_IV();
             onPressed: (){
               print(Provider.of<General>(context).nombre);
               print(Provider.of<Adulto>(context).motivo);
-              //Provider.of<General>(context).addCLiente();
+              Provider.of<General>(context).addCLiente();
+              Provider.of<Adulto>(context).addAdult();
             },
           )
         ],

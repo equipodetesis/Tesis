@@ -1,7 +1,9 @@
+import 'package:expedientesodontologicos_app/ModelosFormularios/Adulto.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:expedientesodontologicos_app/Util/Util.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class V_VI_VII extends StatefulWidget {
   @override
@@ -91,6 +93,10 @@ class _V_VI_VII_State extends State<V_VI_VII> {
             icon: Icon(FontAwesomeIcons.briefcaseMedical),
           )),
           keyboardType: TextInputType.text,
+          initialValue: Provider.of<Adulto>(context).cuidadoMedico,
+          onChanged: (value){
+            Provider.of<Adulto>(context).cuidadoMedico = value;
+          },
         ),
       ),
       Row(
@@ -109,6 +115,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                 onChanged: (value) {
                   setState(() {
                     _currentlocal = value;
+                    
                   });
                 },
               ),
@@ -124,6 +131,10 @@ class _V_VI_VII_State extends State<V_VI_VII> {
             icon: Icon(FontAwesomeIcons.fileAlt),
           )),
           keyboardType: TextInputType.number,
+          initialValue: Provider.of<Adulto>(context).expediente,
+          onChanged: (value){
+            Provider.of<Adulto>(context).expediente = value;
+          },
         ),
       ),
       ListTile(
@@ -143,6 +154,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
               .then((fecha) {
             setState(() {
               ultimo_examen_medico = fecha;
+              Provider.of<Adulto>(context).fecha_ultimo_examen_medico = DateFormat("y-M-d").format(fecha);
             });
           });
         },
@@ -155,6 +167,10 @@ class _V_VI_VII_State extends State<V_VI_VII> {
             icon: Icon(FontAwesomeIcons.pills),
           )),
           keyboardType: TextInputType.text,
+          initialValue: Provider.of<Adulto>(context).medicamentos,
+          onChanged: (value){
+            Provider.of<Adulto>(context).medicamentos = value;
+          },
         ),
       ),
       Container(
@@ -165,6 +181,10 @@ class _V_VI_VII_State extends State<V_VI_VII> {
             icon: Icon(FontAwesomeIcons.userMd),
           )),
           keyboardType: TextInputType.text,
+          initialValue: Provider.of<Adulto>(context).nombredelmedico,
+          onChanged: (value){
+            Provider.of<Adulto>(context).nombredelmedico = value;
+          },
         ),
       ),
     ]));
@@ -193,6 +213,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                     onChanged: (selection) {
                       setState(() {
                         _current_enfermedades[_current_enfermedades.indexOf(value)] = selection;
+                        Provider.of<Adulto>(context).enfermedades = _current_enfermedades;
                         actualizarlistas();
                       });
                     },
@@ -208,7 +229,162 @@ class _V_VI_VII_State extends State<V_VI_VII> {
             onPressed: (){
               aniadirnuevalista();
             },
-            )
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Text(
+                "Si alguna de estas enfermedades persiste, indique:",
+                style: TextStyle(fontSize: 15),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.all(10.0),
+              child: TextFormField(
+                decoration: (InputDecoration(
+                  labelText: "Que enfermedad",
+                  icon: Icon(FontAwesomeIcons.briefcaseMedical),
+                )),
+                keyboardType: TextInputType.text,
+                initialValue: Provider.of<Adulto>(context).enfermedad_persiste,
+                onChanged: (value){
+                  Provider.of<Adulto>(context).enfermedad_persiste = value;
+                },
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.all(10.0),
+              child: TextFormField(
+                decoration: (InputDecoration(
+                  labelText: "Inicio",
+                  icon: Icon(FontAwesomeIcons.calendarDay),
+                )),
+                keyboardType: TextInputType.text,
+                initialValue: Provider.of<Adulto>(context).iniciacion_enf,
+                onChanged: (value){
+                  Provider.of<Adulto>(context).iniciacion_enf = value;
+                },
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.all(10.0),
+              child: TextFormField(
+                decoration: (InputDecoration(
+                  labelText: "Curso",
+                  icon: Icon(FontAwesomeIcons.calendarWeek),
+                )),
+                keyboardType: TextInputType.text,
+                initialValue: Provider.of<Adulto>(context).curso,
+                onChanged: (value){
+                  Provider.of<Adulto>(context).curso = value;
+                },
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.all(10.0),
+              child: TextFormField(
+                decoration: (InputDecoration(
+                  labelText: "Tratamiento",
+                  icon: Icon(FontAwesomeIcons.capsules),
+                )),
+                keyboardType: TextInputType.text,
+                initialValue: Provider.of<Adulto>(context).tratamiento,
+                onChanged: (value){
+                  Provider.of<Adulto>(context).tratamiento = value;
+                },
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.all(10.0),
+              child: TextFormField(
+                decoration: (InputDecoration(
+                  labelText: "Estado Actual",
+                  icon: Icon(FontAwesomeIcons.userInjured),
+                )),
+                keyboardType: TextInputType.text,
+                initialValue: Provider.of<Adulto>(context).estadoactual,
+                onChanged: (value){
+                  Provider.of<Adulto>(context).estadoactual = value;
+                },
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.all(10.0),
+              child: TextFormField(
+                decoration: (InputDecoration(
+                  labelText: "Describa 'Otros'",
+                  icon: Icon(FontAwesomeIcons.briefcaseMedical),
+                )),
+                keyboardType: TextInputType.text,
+                initialValue: Provider.of<Adulto>(context).otros_enfermedades_padecidas,
+                onChanged: (value){
+                  Provider.of<Adulto>(context).otros_enfermedades_padecidas = value;
+                },
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.all(10),
+              child: Text(
+                "Ha sido sometido a:",
+                style: TextStyle(fontSize: 15),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.all(10.0),
+              child: TextFormField(
+                decoration: (InputDecoration(
+                  labelText: "Operaciones",
+                  icon: Icon(FontAwesomeIcons.userNurse),
+                )),
+                keyboardType: TextInputType.text,
+                initialValue: Provider.of<Adulto>(context).operaciones,
+                onChanged: (value){
+                  Provider.of<Adulto>(context).operaciones = value;
+                },
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.all(10.0),
+              child: TextFormField(
+                decoration: (InputDecoration(
+                  labelText: "Transfuciones sanguineas",
+                  icon: Icon(FontAwesomeIcons.vials),
+                )),
+                keyboardType: TextInputType.text,
+                initialValue: Provider.of<Adulto>(context).trans_sanguine_somet,
+                onChanged: (value){
+                  Provider.of<Adulto>(context).trans_sanguine_somet = value;
+                },
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.all(10.0),
+              child: TextFormField(
+                decoration: (InputDecoration(
+                  labelText: "Radioterapia",
+                  icon: Icon(FontAwesomeIcons.portrait),
+                )),
+                keyboardType: TextInputType.text,
+                initialValue: Provider.of<Adulto>(context).radioterapia,
+                onChanged: (value){
+                  Provider.of<Adulto>(context).radioterapia = value;
+                },
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.all(10.0),
+              child: TextFormField(
+                decoration: (InputDecoration(
+                  labelText: "Vacunas recibidas especifique",
+                  icon: Icon(FontAwesomeIcons.plusCircle),
+                )),
+                keyboardType: TextInputType.text,
+                initialValue: Provider.of<Adulto>(context).vacunas_recibidas,
+                onChanged: (value){
+                  Provider.of<Adulto>(context).vacunas_recibidas = value;
+                },
+              ),
+            ),
+
         ]
       ),
     );

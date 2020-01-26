@@ -57,7 +57,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
   Widget build(BuildContext context) {
     
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -69,13 +69,17 @@ class _V_VI_VII_State extends State<V_VI_VII> {
               Tab(
                 child: Text("Enfermedades padecidas"),
               ),
+              Tab(
+                child: Text("Historia Familiar personal y social"),
+              )
             ],
           ),
         ),
         body: TabBarView(
           children: <Widget>[
            historiaMedica() ,
-           enfermedades() 
+           enfermedades() ,
+           historia_fam_per_soc(),
           ],
         ),
       ),
@@ -390,6 +394,44 @@ class _V_VI_VII_State extends State<V_VI_VII> {
     );
   }
 
+  Widget historia_fam_per_soc(){
+    return SingleChildScrollView(
+      child: Column(
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.all(10),
+            child: TextFormField(
+              decoration: InputDecoration(
+                  labelText: "Historia familiar",
+                  icon: Icon(FontAwesomeIcons.fileAlt)),
+              minLines: 1,
+              maxLines: 6,
+              keyboardType: TextInputType.multiline,
+              initialValue: Provider.of<Adulto>(context).historia_familiar,
+              onChanged: (value){
+               Provider.of<Adulto>(context).historia_familiar = value;
+              },
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.all(10),
+            child: TextFormField(
+              decoration: InputDecoration(
+                  labelText: "Historia personal y social",
+                  icon: Icon(FontAwesomeIcons.fileAlt)),
+              minLines: 1,
+              maxLines: 6,
+              keyboardType: TextInputType.multiline,
+              initialValue:Provider.of<Adulto>(context).historia_personal_social ,
+              onChanged: (value){
+                Provider.of<Adulto>(context).historia_personal_social = value;
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
   void aniadirnuevalista() {
       setState(() {
         _items_enfermedades.add(ajustarlistaenfermedades(_todasenfermedades, _current_enfermedades));

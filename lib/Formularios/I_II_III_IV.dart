@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:expedientesodontologicos_app/Loggin/LoginState.dart';
 import 'package:expedientesodontologicos_app/ModelosFormularios/Adulto.dart';
 import 'package:expedientesodontologicos_app/ModelosFormularios/General.dart';

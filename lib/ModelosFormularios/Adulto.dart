@@ -10,12 +10,12 @@ class Adulto{
   radioterapia="", vacunas_recibidas="";
 
   //aun no en los formularios , revision_medica a punto de considerarse inecesaria, de aqui hacia abajo no estan contemplados a subirse por ahora
-  String historia_familiar,historia_personal_social,otros_sintomas,describa_revision,presionsan_max,presionsan_min,temperatura,pulsaciones,ritmo,descripcio_examenes,
+  String historia_familiar,historia_personal_social,otros_sintomas,describa_revision,presionsan_max,presionsan_min,temperatura,pulsaciones,ritmo,descripcion_examenes,
   revision_medica,actitudemocional,examenfisico_caracuello,
   //examen clinico bucal, se pregunta 2 veces por higiene oral...
   region_vestibular,paladar_duro,orofaringe,piso_boca,lengua,cara_dorsal,cara_ventral,bordes,encia,dientes,prescencia_calculo,salivacion
   ;
- List Revision_organos=List<String>();
+ List revision_organos=List<String>();
   String Userid;
  Adulto();
 
@@ -47,7 +47,7 @@ class Adulto{
     );
     dynamic resp = await callable.call(this.toMap()).whenComplete((){print("Expediente adulto añadido con exito");});
   }
-  Future<void> updateAdult() async {
+  Future<void> UpdateAdult() async {
     final HttpsCallable callable = CloudFunctions.instance.getHttpsCallable(
       functionName: 'updateExpAdulto',
     );

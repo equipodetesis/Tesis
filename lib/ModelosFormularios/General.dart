@@ -70,7 +70,7 @@ class General {
     );
     dynamic resp = await callable.call(this.toMap()).whenComplete((){print("Ingresado con exito");});
   }
-  Future<void> updateCLiente() async {
+  Future<void> UpdateCLiente() async {
     final HttpsCallable callable = CloudFunctions.instance.getHttpsCallable(
       functionName: 'UpdateCliente',
     );

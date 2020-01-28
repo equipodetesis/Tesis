@@ -1,11 +1,10 @@
+import 'package:expedientesodontologicos_app/Formularios/VIII_XV.dart';
 import 'package:expedientesodontologicos_app/Imagenes/SubirFoto.dart';
 import 'package:expedientesodontologicos_app/ModelosFormularios/General.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'Formularios/I_II_III_IV.dart';
 import 'Formularios/V_VI_VII.dart';
-import 'ListItem.dart';
-import 'ModelosFormularios/Adulto.dart';
 
 class Baseformularios extends StatefulWidget {
   Baseformularios();
@@ -53,7 +52,7 @@ class _BaseformulariosState extends State<Baseformularios> {
                 //updates
                 if(Provider.of<General>(context).cambiado){
                   print(Provider.of<General>(context).pacienteid+"!!!!!!");
-                  Provider.of<General>(context).updateCLiente();
+                  Provider.of<General>(context).UpdateCLiente();
                 }
 
               }else{
@@ -147,10 +146,19 @@ class _BaseformulariosState extends State<Baseformularios> {
               },
             ),
             ListTile(
-              title: Text("Historia Medica"),
+              title: Text("Expediente Adulto"),
               onTap: (){
                 setState(() {
                   bodycontent = V_VI_VII();
+                });
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text("Expediente Adulto2"),
+              onTap: (){
+                setState(() {
+                  bodycontent = VIII_XV();
                 });
                 Navigator.pop(context);
               },

@@ -13,7 +13,7 @@ class Adulto{
   String historia_familiar,historia_personal_social,otros_sintomas,describa_revision,presionsan_max,presionsan_min,temperatura,pulsaciones,ritmo,descripcion_examenes,
   revision_medica,actitudemocional,examenfisico_caracuello,
   //examen clinico bucal, se pregunta 2 veces por higiene oral...
-  region_vestibular,paladar_duro,orofaringe,piso_boca,lengua,cara_dorsal,cara_ventral,bordes,encia,dientes,prescencia_calculo,salivacion
+  region_vestibular,paladar_duro,paladar_blando,orofaringe,piso_boca,lengua,cara_dorsal,cara_ventral,bordes,encia,dientes,prescencia_calculo,salivacion
   ;
  List revision_organos=List<String>();
   String Userid;

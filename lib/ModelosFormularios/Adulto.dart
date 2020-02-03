@@ -1,5 +1,7 @@
 
 import 'package:cloud_functions/cloud_functions.dart';
+import 'package:expedientesodontologicos_app/model/model.dart';
+import 'package:flutter/foundation.dart';
 
 class Adulto{
   String motivo , historia, fecha_ultima_visita, tratamiento_recibido , dientes_perdidos , causa_dientesperdidos , experiencias_exodoncias , higiene_oral , tipo_cepillo , tecnica_cepillado ,
@@ -53,4 +55,5 @@ class Adulto{
     );
     dynamic resp = await callable.call(this.toMap()).whenComplete((){print("Expediente adulto actualizado con exito");});
   }
+
 }

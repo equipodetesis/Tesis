@@ -106,7 +106,7 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
           ),
           Expanded(
             child: Container(
-              margin: EdgeInsets.all(1),
+              margin: EdgeInsets.all(10),
               child: DropdownButton(
                 isExpanded: true,
                 items: _sexolist,

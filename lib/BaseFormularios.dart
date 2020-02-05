@@ -30,13 +30,12 @@ class _BaseformulariosState extends State<Baseformularios> {
   Widget build(BuildContext context) {
 
 
-    if(Provider.of<General>(context).foto.isEmpty){
+    if(!Provider.of<General>(context).actualizar){
      Provider.of<General>(context).foto="https://firebasestorage.googleapis.com/v0/b/expedientes-odontologicos.appspot.com/o/54462699_10214142660262421_7801861136030105600_n.jpg?alt=media&token=5060a01b-917e-42e5-ac5c-6cd8bff61f3b";
      foto=Provider.of<General>(context).foto;
 
     }else{
       actualizacion=true;
-
       foto=Provider.of<General>(context).foto;
       nombre=Provider.of<General>(context).nombre;
     }
@@ -50,23 +49,17 @@ class _BaseformulariosState extends State<Baseformularios> {
             icon: Icon(Icons.check),
             onPressed: (){
 
-
-              if(actualizacion){
                 //updates
                 if(Provider.of<General>(context).cambiado){
                   print(Provider.of<General>(context).pacienteid+"!!!!!!");
                   Provider.of<General>(context).updateCLiente();
-                }
 
-              }else{
-                //adds
-                if(Provider.of<General>(context).cambiado){
-              Provider.of<General>(context).addCLiente();
-               // print("Hola?");
+                }
+                if(Provider.of<Adulto>(context).cambiado){
+                  Provider.of<Adulto>(context).addAdult();
                 }
                 Navigator.pop(context);
 
-              }
             },
           )
         ],

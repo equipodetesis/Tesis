@@ -51,8 +51,6 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
   void initState() {
     _sexolist = Util().getDropdownMenuItem(sexos);
     _currentsexo = sexos[0];
-
-
     super.initState();
   }
 
@@ -312,7 +310,9 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
               keyboardType: TextInputType.multiline,
               onChanged: (value){
                 Provider.of<Adulto>(context).Userid=Provider.of<LoginState>(context).uid;
-            Provider.of<Adulto>(context).motivo = value;
+                Provider.of<Adulto>(context).clienteid=Provider.of<General>(context).pacienteid;
+                Provider.of<Adulto>(context).cambiado=true;
+                Provider.of<Adulto>(context).motivo = value;
           },
             ),
           ),
@@ -327,6 +327,9 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
               maxLines: 6,
               keyboardType: TextInputType.multiline,
               onChanged: (value){
+                Provider.of<Adulto>(context).Userid=Provider.of<LoginState>(context).uid;
+                Provider.of<Adulto>(context).clienteid=Provider.of<General>(context).pacienteid;
+                Provider.of<Adulto>(context).cambiado=true;
             Provider.of<Adulto>(context).historia = value;
           },
             ),
@@ -346,6 +349,9 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
                 setState(() {
                   fecha_selec = fecha;
                   Provider.of<Adulto>(context).fecha_ultima_visita = DateFormat("y-M-d").format(fecha);
+                  Provider.of<Adulto>(context).Userid=Provider.of<LoginState>(context).uid;
+                  Provider.of<Adulto>(context).clienteid=Provider.of<General>(context).pacienteid;
+                  Provider.of<Adulto>(context).cambiado=true;
                 });
               });
             },
@@ -360,6 +366,9 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
               keyboardType: TextInputType.text,
               onChanged: (value){
             Provider.of<Adulto>(context).tratamiento_recibido = value;
+            Provider.of<Adulto>(context).Userid=Provider.of<LoginState>(context).uid;
+            Provider.of<Adulto>(context).clienteid=Provider.of<General>(context).pacienteid;
+            Provider.of<Adulto>(context).cambiado=true;
           },
             ),
           ),
@@ -373,6 +382,9 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
               keyboardType: TextInputType.number,
               onChanged: (value){
             Provider.of<Adulto>(context).dientes_perdidos = value;
+            Provider.of<Adulto>(context).Userid=Provider.of<LoginState>(context).uid;
+            Provider.of<Adulto>(context).clienteid=Provider.of<General>(context).pacienteid;
+            Provider.of<Adulto>(context).cambiado=true;
           },
             ),
           ),
@@ -386,6 +398,9 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
               keyboardType: TextInputType.text,
               onChanged: (value){
             Provider.of<Adulto>(context).causa_dientesperdidos = value;
+            Provider.of<Adulto>(context).Userid=Provider.of<LoginState>(context).uid;
+            Provider.of<Adulto>(context).clienteid=Provider.of<General>(context).pacienteid;
+            Provider.of<Adulto>(context).cambiado=true;
           },
             ),
           ),
@@ -399,6 +414,9 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
               keyboardType: TextInputType.text,
               onChanged: (value){
             Provider.of<Adulto>(context).experiencias_exodoncias = value;
+            Provider.of<Adulto>(context).Userid=Provider.of<LoginState>(context).uid;
+            Provider.of<Adulto>(context).clienteid=Provider.of<General>(context).pacienteid;
+            Provider.of<Adulto>(context).cambiado=true;
           },
             ),
           ),
@@ -412,6 +430,9 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
               keyboardType: TextInputType.text,
               onChanged: (value){
             Provider.of<Adulto>(context).higiene_oral = value;
+            Provider.of<Adulto>(context).Userid=Provider.of<LoginState>(context).uid;
+            Provider.of<Adulto>(context).clienteid=Provider.of<General>(context).pacienteid;
+            Provider.of<Adulto>(context).cambiado=true;
           },
             ),
           ),
@@ -425,6 +446,9 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
               keyboardType: TextInputType.text,
               onChanged: (value){
             Provider.of<Adulto>(context).tipo_cepillo = value;
+            Provider.of<Adulto>(context).Userid=Provider.of<LoginState>(context).uid;
+            Provider.of<Adulto>(context).clienteid=Provider.of<General>(context).pacienteid;
+            Provider.of<Adulto>(context).cambiado=true;
           },
             ),
           ),
@@ -438,6 +462,9 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
               keyboardType: TextInputType.text,
               onChanged: (value){
             Provider.of<Adulto>(context).tecnica_cepillado = value;
+            Provider.of<Adulto>(context).Userid=Provider.of<LoginState>(context).uid;
+            Provider.of<Adulto>(context).clienteid=Provider.of<General>(context).pacienteid;
+            Provider.of<Adulto>(context).cambiado=true;
           },
             ),
           ),
@@ -451,6 +478,9 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
               keyboardType: TextInputType.text,
               onChanged: (value){
             Provider.of<Adulto>(context).frecuencia_cepillado = value;
+            Provider.of<Adulto>(context).Userid=Provider.of<LoginState>(context).uid;
+            Provider.of<Adulto>(context).clienteid=Provider.of<General>(context).pacienteid;
+            Provider.of<Adulto>(context).cambiado=true;
           },
             ),
           ),
@@ -464,6 +494,9 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
               keyboardType: TextInputType.text,
               onChanged: (value){
             Provider.of<Adulto>(context).ayudas_higiene_extras = value;
+            Provider.of<Adulto>(context).Userid=Provider.of<LoginState>(context).uid;
+            Provider.of<Adulto>(context).clienteid=Provider.of<General>(context).pacienteid;
+            Provider.of<Adulto>(context).cambiado=true;
           },
             ),
           ),

@@ -6,7 +6,7 @@ import 'package:cloud_functions/cloud_functions.dart';
 class General {
   String nombre,apellido,sexo,estado_civil,direccion,emergencia,procedencia,telefono,ocupacion,referencia,fecha_inicio,foto,userid,pacienteid;
   String edad;
- bool cambiado=false;
+ bool cambiado=false,actualizar=false;
   General();
 
 
@@ -47,6 +47,8 @@ class General {
     "Paciente_id":pacienteid
    };
   void clear(){
+    cambiado=false;
+    actualizar=false;
     userid = "";
     nombre="";
     apellido="";

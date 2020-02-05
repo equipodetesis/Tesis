@@ -1,7 +1,11 @@
+import 'package:expedientesodontologicos_app/Loggin/LoginState.dart';
+import 'package:expedientesodontologicos_app/ModelosFormularios/Adulto.dart';
+import 'package:expedientesodontologicos_app/ModelosFormularios/General.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:expedientesodontologicos_app/Util/Util.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class V_VI_VII extends StatefulWidget {
   @override
@@ -91,6 +95,13 @@ class _V_VI_VII_State extends State<V_VI_VII> {
             icon: Icon(FontAwesomeIcons.briefcaseMedical),
           )),
           keyboardType: TextInputType.text,
+          initialValue:  Provider.of<Adulto>(context).cuidadoMedico,
+          onChanged: (value){
+            Provider.of<Adulto>(context).Userid=Provider.of<LoginState>(context).uid;
+            Provider.of<Adulto>(context).clienteid=Provider.of<General>(context).pacienteid;
+            Provider.of<Adulto>(context).cambiado=true;
+            Provider.of<Adulto>(context).cuidadoMedico=value;
+          },
         ),
       ),
       Row(
@@ -109,6 +120,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                 onChanged: (value) {
                   setState(() {
                     _currentlocal = value;
+                    //laaandy aqui es mejor un textformfield...
                   });
                 },
               ),
@@ -124,6 +136,13 @@ class _V_VI_VII_State extends State<V_VI_VII> {
             icon: Icon(FontAwesomeIcons.fileAlt),
           )),
           keyboardType: TextInputType.number,
+          initialValue:  Provider.of<Adulto>(context).expediente,
+          onChanged: (value){
+            Provider.of<Adulto>(context).Userid=Provider.of<LoginState>(context).uid;
+            Provider.of<Adulto>(context).clienteid=Provider.of<General>(context).pacienteid;
+            Provider.of<Adulto>(context).cambiado=true;
+            Provider.of<Adulto>(context).expediente=value;
+          },
         ),
       ),
       ListTile(
@@ -142,7 +161,11 @@ class _V_VI_VII_State extends State<V_VI_VII> {
               .selectDate(context, ultimo_examen_medico, DateTime.now())
               .then((fecha) {
             setState(() {
-              ultimo_examen_medico = fecha;
+              ultimo_examen_medico= fecha;
+              Provider.of<Adulto>(context).fecha_ultimo_examen_medico=DateFormat("y-M-d").format(ultimo_examen_medico);
+              Provider.of<Adulto>(context).Userid=Provider.of<LoginState>(context).uid;
+              Provider.of<Adulto>(context).clienteid=Provider.of<General>(context).pacienteid;
+              Provider.of<Adulto>(context).cambiado=true;
             });
           });
         },
@@ -155,6 +178,13 @@ class _V_VI_VII_State extends State<V_VI_VII> {
             icon: Icon(FontAwesomeIcons.pills),
           )),
           keyboardType: TextInputType.text,
+          initialValue:  Provider.of<Adulto>(context).tratamiento_recibido,
+          onChanged: (value){
+            Provider.of<Adulto>(context).Userid=Provider.of<LoginState>(context).uid;
+            Provider.of<Adulto>(context).clienteid=Provider.of<General>(context).pacienteid;
+            Provider.of<Adulto>(context).cambiado=true;
+            Provider.of<Adulto>(context).tratamiento_recibido=value;
+          },
         ),
       ),
       Container(
@@ -165,6 +195,13 @@ class _V_VI_VII_State extends State<V_VI_VII> {
             icon: Icon(FontAwesomeIcons.userMd),
           )),
           keyboardType: TextInputType.text,
+          initialValue: Provider.of<Adulto>(context).nombredelmedico,
+          onChanged: (value){
+            Provider.of<Adulto>(context).Userid=Provider.of<LoginState>(context).uid;
+            Provider.of<Adulto>(context).clienteid=Provider.of<General>(context).pacienteid;
+            Provider.of<Adulto>(context).cambiado=true;
+            Provider.of<Adulto>(context).nombredelmedico=value;
+          },
         ),
       ),
     ]));
@@ -193,6 +230,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                     onChanged: (selection) {
                       setState(() {
                         _current_enfermedades[_current_enfermedades.indexOf(value)] = selection;
+
                         actualizarlistas();
                       });
                     },
@@ -207,6 +245,10 @@ class _V_VI_VII_State extends State<V_VI_VII> {
             child: Text("Añadir"),
             onPressed: (){
               aniadirnuevalista();
+              Provider.of<Adulto>(context).enfermedades=_current_enfermedades;
+              Provider.of<Adulto>(context).Userid=Provider.of<LoginState>(context).uid;
+              Provider.of<Adulto>(context).clienteid=Provider.of<General>(context).pacienteid;
+              Provider.of<Adulto>(context).cambiado=true;
             },
             )
         ]
@@ -218,6 +260,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
       setState(() {
         _items_enfermedades.add(ajustarlistaenfermedades(_todasenfermedades, _current_enfermedades));
         _current_enfermedades.add(_items_enfermedades.last.first.value);
+
         actualizarlistas();
       });
   }

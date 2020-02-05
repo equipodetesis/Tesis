@@ -1,7 +1,7 @@
 
-import 'package:expedientesodontologicos_app/Loggin/BaseAuth.dart';
 import 'package:expedientesodontologicos_app/Loggin/LoginState.dart';
 import 'package:expedientesodontologicos_app/Menus/Constansts.dart';
+import 'package:expedientesodontologicos_app/NewCliente.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'BaseFormularios.dart';
@@ -65,7 +65,7 @@ class PrincipalState extends State<principal> {
         child: Icon(Icons.add),
         onPressed: (){
           Provider.of<General>(context).clear();
-           Navigator.push(context,  MaterialPageRoute(builder: (context) => Baseformularios()));
+           Navigator.push(context,  MaterialPageRoute(builder: (context) => NewCliente()));
         },
         hoverColor: Colors.black,
         isExtended: true,

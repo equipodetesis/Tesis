@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:expedientesodontologicos_app/Loggin/LoginState.dart';
 import 'package:expedientesodontologicos_app/ModelosFormularios/Adulto.dart';
 import 'package:expedientesodontologicos_app/ModelosFormularios/General.dart';
@@ -16,28 +15,7 @@ class I_II_III_IV extends StatefulWidget {
 }
 
 class I_II_III_IV_State extends State<I_II_III_IV> {
-  TextEditingController nombre = TextEditingController(),
-      estado_civil = TextEditingController(),
-      direccion = TextEditingController(),
-      emergencia = TextEditingController(),
-      procedencia = TextEditingController(),
-      telefono = TextEditingController(),
-      ocupacion = TextEditingController(),
-      referencia = TextEditingController(),
-      edad = TextEditingController();
-
-  TextEditingController motivo = TextEditingController(),
-      historia = TextEditingController(),
-      tratamiento = TextEditingController(),
-      dientes_perdidos = TextEditingController(),
-      causa_dientesperdidos = TextEditingController(),
-      experiencias_exodoncias = TextEditingController(),
-      higiene_oral = TextEditingController(),
-      tipo_cepillo = TextEditingController(),
-      tecnica_cepillado = TextEditingController(),
-      frecuencia_cepillado = TextEditingController(),
-      ayudas_higiene_extras = TextEditingController();
-
+  
   DateTime fecha = DateTime.now();
   DateTime fecha_selec = DateTime.now();
    String fecha_inicio="";
@@ -126,7 +104,7 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
           ),
           Expanded(
             child: Container(
-              margin: EdgeInsets.all(1),
+              margin: EdgeInsets.all(10),
               child: DropdownButton(
                 isExpanded: true,
                 items: _sexolist,
@@ -304,7 +282,6 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
               decoration: InputDecoration(
                   labelText: "Motivo de la consulta",
                   icon: Icon(FontAwesomeIcons.fileAlt)),
-              controller: motivo,
               minLines: 1,
               maxLines: 6,
               keyboardType: TextInputType.multiline,
@@ -322,7 +299,6 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
               decoration: InputDecoration(
                   labelText: "Historia de la enfermedad actual",
                   icon: Icon(FontAwesomeIcons.fileAlt)),
-              controller: historia,
               minLines: 1,
               maxLines: 6,
               keyboardType: TextInputType.multiline,
@@ -362,7 +338,6 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
               decoration: InputDecoration(
                   labelText: "Tratamiento Recibido",
                   icon: Icon(FontAwesomeIcons.bandAid)),
-              controller: tratamiento,
               keyboardType: TextInputType.text,
               onChanged: (value){
             Provider.of<Adulto>(context).tratamiento_recibido = value;
@@ -378,7 +353,6 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
               decoration: InputDecoration(
                   labelText: "Dientes Perdidos",
                   icon: Icon(FontAwesomeIcons.tooth)),
-              controller: dientes_perdidos,
               keyboardType: TextInputType.number,
               onChanged: (value){
             Provider.of<Adulto>(context).dientes_perdidos = value;
@@ -394,7 +368,6 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
               decoration: InputDecoration(
                   labelText: "Causa de Pérdida",
                   icon: Icon(FontAwesomeIcons.tooth)),
-              controller: causa_dientesperdidos,
               keyboardType: TextInputType.text,
               onChanged: (value){
             Provider.of<Adulto>(context).causa_dientesperdidos = value;
@@ -410,7 +383,6 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
               decoration: InputDecoration(
                   labelText: "Experiencias de exodoncias previas",
                   icon: Icon(FontAwesomeIcons.teeth)),
-              controller: experiencias_exodoncias,
               keyboardType: TextInputType.text,
               onChanged: (value){
             Provider.of<Adulto>(context).experiencias_exodoncias = value;
@@ -426,7 +398,6 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
               decoration: InputDecoration(
                   labelText: "Higiene oral",
                   icon: Icon(FontAwesomeIcons.teeth)),
-              controller: higiene_oral,
               keyboardType: TextInputType.text,
               onChanged: (value){
             Provider.of<Adulto>(context).higiene_oral = value;
@@ -442,7 +413,6 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
               decoration: InputDecoration(
                   labelText: "Tipo de Cepillo",
                   icon: Icon(FontAwesomeIcons.tooth)),
-              controller: tipo_cepillo,
               keyboardType: TextInputType.text,
               onChanged: (value){
             Provider.of<Adulto>(context).tipo_cepillo = value;
@@ -458,7 +428,6 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
               decoration: InputDecoration(
                   labelText: "Técnica de cepillado",
                   icon: Icon(FontAwesomeIcons.teeth)),
-              controller: tecnica_cepillado,
               keyboardType: TextInputType.text,
               onChanged: (value){
             Provider.of<Adulto>(context).tecnica_cepillado = value;
@@ -474,7 +443,6 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
               decoration: InputDecoration(
                   labelText: "Frecuencia de cepillado",
                   icon: Icon(FontAwesomeIcons.teeth)),
-              controller: frecuencia_cepillado,
               keyboardType: TextInputType.text,
               onChanged: (value){
             Provider.of<Adulto>(context).frecuencia_cepillado = value;
@@ -490,7 +458,6 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
               decoration: InputDecoration(
                   labelText: "Otras ayuda para la higiene oral",
                   icon: Icon(FontAwesomeIcons.plusCircle)),
-              controller: ayudas_higiene_extras,
               keyboardType: TextInputType.text,
               onChanged: (value){
             Provider.of<Adulto>(context).ayudas_higiene_extras = value;

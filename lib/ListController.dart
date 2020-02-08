@@ -1,3 +1,4 @@
+import 'package:expedientesodontologicos_app/ModelosFormularios/Adulto.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'ListItem.dart';
@@ -22,7 +23,7 @@ class ListController extends StatelessWidget{
   Widget build(BuildContext context) {
     Stream<QuerySnapshot> stream;
     stream=database.collection("Usuarios/"+Provider.of<LoginState>(context).uid+"/Cliente/").snapshots();
-    String pacienteid;
+
     return  StreamBuilder<QuerySnapshot>(
       stream: stream,
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
@@ -38,7 +39,8 @@ class ListController extends StatelessWidget{
                 children: snapshot.data.documents.map((DocumentSnapshot document){
                   General general=General();
                   general.fromJson(document.data);
-                  print(general.nombre);
+
+
                  ListItem item= ListItem(general.foto,
                      general.nombre,general.fecha_inicio);
 
@@ -68,6 +70,18 @@ class ListController extends StatelessWidget{
                         onTap: (){
                           Provider.of<General>(context).fromJson(document.data);
                           Provider.of<General>(context).pacienteid=document.documentID;
+                          Provider.of<General>(context).actualizar=true;
+                          print(document.data["nombre"]);
+                          if (document.data["Expedientes"]!= null) {
+                            print("Hola");
+                            if(document.data["Expedientes"]["Adulto"]!=null){
+                              print(document.data["Expedientes"]["Adulto"]["Userid"]);
+                              Provider.of<Adulto>(context).fromjson(
+                                  document.data["Expedientes"]["Adulto"]);
+                              print("A"+Provider.of<Adulto>(context).Userid);}
+                          }else{
+                            Provider.of<Adulto>(context).clear();
+                          }
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => Baseformularios()),
@@ -106,6 +120,17 @@ class ListController extends StatelessWidget{
                             onTap: (){
                               Provider.of<General>(context).fromJson(document.data);
                               Provider.of<General>(context).pacienteid=document.documentID;
+                              Provider.of<General>(context).actualizar=true;
+                              if (document.data["Expedientes"]!= null) {
+                                print("Hola");
+                                if(document.data["Expedientes"]["Adulto"]!=null){
+                                  print(document.data["Expedientes"]["Adulto"]["Userid"]);
+                                  Provider.of<Adulto>(context).fromjson(
+                                      document.data["Expedientes"]["Adulto"]);
+                                  print("A"+Provider.of<Adulto>(context).Userid);}
+                              }else{
+                                Provider.of<Adulto>(context).clear();
+                              }
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) => Baseformularios()),
@@ -121,7 +146,7 @@ class ListController extends StatelessWidget{
                       ],
                     )
 
-                  :Container(child: Center(child: Text("No hay resultados"),),);
+                  :Container();
                 }).toList()
               );
           }

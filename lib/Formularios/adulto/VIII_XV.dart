@@ -412,7 +412,7 @@ class VIII_XV_State extends State<VIII_XV> {
                   margin: EdgeInsets.all(1),
                   child: DropdownButton(
                     isExpanded: true,
-                    items: _items_higiene,
+                    //items: _items_higiene,
                     value: Provider.of<Adulto>(context).higiene_oral,
                     onChanged: (value) {
                       setState(() {

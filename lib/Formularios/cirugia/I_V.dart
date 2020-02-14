@@ -345,7 +345,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: InputDecoration(
                   labelText: "Abuelo materno",
-                  icon: Icon(FontAwesomeIcons.female)),
+                  icon: Icon(FontAwesomeIcons.male)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -354,7 +354,7 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               decoration: InputDecoration(
-                  labelText: "Padre", icon: Icon(FontAwesomeIcons.female)),
+                  labelText: "Padre", icon: Icon(FontAwesomeIcons.male)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -364,7 +364,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: InputDecoration(
                   labelText: "Abuelo paterno",
-                  icon: Icon(FontAwesomeIcons.female)),
+                  icon: Icon(FontAwesomeIcons.male)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -397,7 +397,7 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: InputDecoration(
                         labelText: "Grupo sanguineo",
-                        icon: Icon(FontAwesomeIcons.female)),
+                        icon: Icon(FontAwesomeIcons.tint)),
                     keyboardType: TextInputType.text,
                     onChanged: (value) {},
                   ),
@@ -409,7 +409,7 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: InputDecoration(
                         labelText: "Factor Rh",
-                        icon: Icon(FontAwesomeIcons.female)),
+                        icon: Icon(FontAwesomeIcons.tint)),
                     keyboardType: TextInputType.text,
                     onChanged: (value) {},
                   ),
@@ -422,7 +422,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: InputDecoration(
                   labelText: "Inmunizaciones infancia",
-                  icon: Icon(FontAwesomeIcons.female)),
+                  icon: Icon(FontAwesomeIcons.baby)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -432,7 +432,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: InputDecoration(
                   labelText: "inmunizaciones adulto",
-                  icon: Icon(FontAwesomeIcons.female)),
+                  icon: Icon(FontAwesomeIcons.male)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -445,7 +445,7 @@ class _I_VState extends State<I_V> {
           Row(
             children: <Widget>[
               Container(
-                child: Icon(FontAwesomeIcons.venusMars),
+                child: Icon(FontAwesomeIcons.wineBottle),
                 margin: EdgeInsets.all(10),
               ),
               Expanded(
@@ -470,7 +470,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: InputDecoration(
                   labelText: "Regimen alimenticio",
-                  icon: Icon(FontAwesomeIcons.female)),
+                  icon: Icon(FontAwesomeIcons.hamburger)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -480,7 +480,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: InputDecoration(
                   labelText: "Condiciones habitacionales",
-                  icon: Icon(FontAwesomeIcons.female)),
+                  icon: Icon(FontAwesomeIcons.houzz)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -495,7 +495,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: InputDecoration(
                   labelText: "Enfermedades propias de la infancias",
-                  icon: Icon(FontAwesomeIcons.female)),
+                  icon: Icon(FontAwesomeIcons.baby)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -505,7 +505,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: InputDecoration(
                   labelText: "Antecedentes traumaticos",
-                  icon: Icon(FontAwesomeIcons.female)),
+                  icon: Icon(FontAwesomeIcons.userInjured)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -515,7 +515,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: InputDecoration(
                   labelText: "Antecedentes quirurgicos",
-                  icon: Icon(FontAwesomeIcons.female)),
+                  icon: Icon(FontAwesomeIcons.userMd)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -532,7 +532,7 @@ class _I_VState extends State<I_V> {
                 Row(
                   children: <Widget>[
                     Container(
-                      child: Icon(FontAwesomeIcons.apple),
+                      child: Icon(FontAwesomeIcons.appleAlt),
                       margin: EdgeInsets.all(10),
                     ),
                     Expanded(
@@ -562,7 +562,7 @@ class _I_VState extends State<I_V> {
                           decoration: InputDecoration(
                               labelText: "otra alergia",
                               icon: Icon(
-                                FontAwesomeIcons.female,
+                                FontAwesomeIcons.appleAlt,
                                 color: Colors.blue,
                               ),
                               labelStyle: TextStyle(color: Colors.blue)),
@@ -595,7 +595,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: InputDecoration(
                   labelText: "transfusiones",
-                  icon: Icon(FontAwesomeIcons.female)),
+                  icon: Icon(FontAwesomeIcons.vials)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -605,7 +605,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: InputDecoration(
                   labelText: "¿Ha recibido radioterapia y/o quimioterapia",
-                  icon: Icon(FontAwesomeIcons.female)),
+                  icon: Icon(FontAwesomeIcons.radiationAlt)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -615,7 +615,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: InputDecoration(
                   labelText: "Experiencia previa con anestesia",
-                  icon: Icon(FontAwesomeIcons.female)),
+                  icon: Icon(FontAwesomeIcons.syringe)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -641,7 +641,7 @@ class _I_VState extends State<I_V> {
                 Row(
                   children: <Widget>[
                     Container(
-                      child: Icon(FontAwesomeIcons.apple),
+                      child: Icon(FontAwesomeIcons.cookieBite),
                       margin: EdgeInsets.all(10),
                     ),
                     Expanded(
@@ -671,7 +671,7 @@ class _I_VState extends State<I_V> {
                           decoration: InputDecoration(
                               labelText: "otra",
                               icon: Icon(
-                                FontAwesomeIcons.female,
+                                FontAwesomeIcons.cookieBite,
                                 color: Colors.blue,
                               ),
                               labelStyle: TextStyle(color: Colors.blue)),
@@ -687,7 +687,7 @@ class _I_VState extends State<I_V> {
                         child: TextFormField(
                           decoration: InputDecoration(
                               labelText: "Tratamiento",
-                              icon: Icon(FontAwesomeIcons.female)),
+                              icon: Icon(FontAwesomeIcons.pills)),
                           keyboardType: TextInputType.text,
                           onChanged: (value) {},
                         ),
@@ -724,7 +724,7 @@ class _I_VState extends State<I_V> {
                 Row(
                   children: <Widget>[
                     Container(
-                      child: Icon(FontAwesomeIcons.apple),
+                      child: Icon(FontAwesomeIcons.running),
                       margin: EdgeInsets.all(10),
                     ),
                     Expanded(
@@ -755,7 +755,7 @@ class _I_VState extends State<I_V> {
                           decoration: InputDecoration(
                               labelText: "otra",
                               icon: Icon(
-                                FontAwesomeIcons.female,
+                                FontAwesomeIcons.running,
                                 color: Colors.blue,
                               ),
                               labelStyle: TextStyle(color: Colors.blue)),
@@ -771,7 +771,7 @@ class _I_VState extends State<I_V> {
                         child: TextFormField(
                           decoration: InputDecoration(
                               labelText: "Tratamiento",
-                              icon: Icon(FontAwesomeIcons.female)),
+                              icon: Icon(FontAwesomeIcons.pills)),
                           keyboardType: TextInputType.text,
                           onChanged: (value) {},
                         ),
@@ -809,7 +809,7 @@ class _I_VState extends State<I_V> {
                 Row(
                   children: <Widget>[
                     Container(
-                      child: Icon(FontAwesomeIcons.apple),
+                      child: Icon(FontAwesomeIcons.heart),
                       margin: EdgeInsets.all(10),
                     ),
                     Expanded(
@@ -841,7 +841,7 @@ class _I_VState extends State<I_V> {
                           decoration: InputDecoration(
                               labelText: "otra",
                               icon: Icon(
-                                FontAwesomeIcons.female,
+                                FontAwesomeIcons.heart,
                                 color: Colors.blue,
                               ),
                               labelStyle: TextStyle(color: Colors.blue)),
@@ -858,7 +858,7 @@ class _I_VState extends State<I_V> {
                         child: TextFormField(
                           decoration: InputDecoration(
                               labelText: "Tratamiento",
-                              icon: Icon(FontAwesomeIcons.female)),
+                              icon: Icon(FontAwesomeIcons.pills)),
                           keyboardType: TextInputType.text,
                           onChanged: (value) {},
                         ),
@@ -896,7 +896,7 @@ class _I_VState extends State<I_V> {
                 Row(
                   children: <Widget>[
                     Container(
-                      child: Icon(FontAwesomeIcons.apple),
+                      child: Icon(FontAwesomeIcons.venusMars),
                       margin: EdgeInsets.all(10),
                     ),
                     Expanded(
@@ -928,7 +928,7 @@ class _I_VState extends State<I_V> {
                           decoration: InputDecoration(
                               labelText: "otra ",
                               icon: Icon(
-                                FontAwesomeIcons.female,
+                                FontAwesomeIcons.venusMars,
                                 color: Colors.blue,
                               ),
                               labelStyle: TextStyle(color: Colors.blue)),
@@ -945,7 +945,7 @@ class _I_VState extends State<I_V> {
                         child: TextFormField(
                           decoration: InputDecoration(
                               labelText: "Tratamiento",
-                              icon: Icon(FontAwesomeIcons.female)),
+                              icon: Icon(FontAwesomeIcons.pills)),
                           keyboardType: TextInputType.text,
                           onChanged: (value) {},
                         ),
@@ -983,7 +983,7 @@ class _I_VState extends State<I_V> {
                 Row(
                   children: <Widget>[
                     Container(
-                      child: Icon(FontAwesomeIcons.apple),
+                      child: Icon(FontAwesomeIcons.drawPolygon),
                       margin: EdgeInsets.all(10),
                     ),
                     Expanded(
@@ -1013,7 +1013,7 @@ class _I_VState extends State<I_V> {
                           decoration: InputDecoration(
                               labelText: "otra ",
                               icon: Icon(
-                                FontAwesomeIcons.female,
+                                FontAwesomeIcons.drawPolygon,
                                 color: Colors.blue,
                               ),
                               labelStyle: TextStyle(color: Colors.blue)),
@@ -1029,7 +1029,7 @@ class _I_VState extends State<I_V> {
                         child: TextFormField(
                           decoration: InputDecoration(
                               labelText: "Tratamiento",
-                              icon: Icon(FontAwesomeIcons.female)),
+                              icon: Icon(FontAwesomeIcons.pills)),
                           keyboardType: TextInputType.text,
                           onChanged: (value) {},
                         ),
@@ -1066,7 +1066,7 @@ class _I_VState extends State<I_V> {
                 Row(
                   children: <Widget>[
                     Container(
-                      child: Icon(FontAwesomeIcons.apple),
+                      child: Icon(FontAwesomeIcons.tint),
                       margin: EdgeInsets.all(10),
                     ),
                     Expanded(
@@ -1097,7 +1097,7 @@ class _I_VState extends State<I_V> {
                           decoration: InputDecoration(
                               labelText: "otra ",
                               icon: Icon(
-                                FontAwesomeIcons.female,
+                                FontAwesomeIcons.tint,
                                 color: Colors.blue,
                               ),
                               labelStyle: TextStyle(color: Colors.blue)),
@@ -1113,7 +1113,7 @@ class _I_VState extends State<I_V> {
                         child: TextFormField(
                           decoration: InputDecoration(
                               labelText: "Tratamiento",
-                              icon: Icon(FontAwesomeIcons.female)),
+                              icon: Icon(FontAwesomeIcons.pills)),
                           keyboardType: TextInputType.text,
                           onChanged: (value) {},
                         ),
@@ -1151,7 +1151,7 @@ class _I_VState extends State<I_V> {
                 Row(
                   children: <Widget>[
                     Container(
-                      child: Icon(FontAwesomeIcons.apple),
+                      child: Icon(FontAwesomeIcons.brain),
                       margin: EdgeInsets.all(10),
                     ),
                     Expanded(
@@ -1182,7 +1182,7 @@ class _I_VState extends State<I_V> {
                           decoration: InputDecoration(
                               labelText: "otra ",
                               icon: Icon(
-                                FontAwesomeIcons.female,
+                                FontAwesomeIcons.brain,
                                 color: Colors.blue,
                               ),
                               labelStyle: TextStyle(color: Colors.blue)),
@@ -1198,7 +1198,7 @@ class _I_VState extends State<I_V> {
                         child: TextFormField(
                           decoration: InputDecoration(
                               labelText: "Tratamiento",
-                              icon: Icon(FontAwesomeIcons.female)),
+                              icon: Icon(FontAwesomeIcons.pills)),
                           keyboardType: TextInputType.text,
                           onChanged: (value) {},
                         ),
@@ -1235,7 +1235,7 @@ class _I_VState extends State<I_V> {
                 Row(
                   children: <Widget>[
                     Container(
-                      child: Icon(FontAwesomeIcons.apple),
+                      child: Icon(FontAwesomeIcons.bone),
                       margin: EdgeInsets.all(10),
                     ),
                     Expanded(
@@ -1268,7 +1268,7 @@ class _I_VState extends State<I_V> {
                           decoration: InputDecoration(
                               labelText: "otra ",
                               icon: Icon(
-                                FontAwesomeIcons.female,
+                                FontAwesomeIcons.bone,
                                 color: Colors.blue,
                               ),
                               labelStyle: TextStyle(color: Colors.blue)),
@@ -1285,7 +1285,7 @@ class _I_VState extends State<I_V> {
                         child: TextFormField(
                           decoration: InputDecoration(
                               labelText: "Tratamiento",
-                              icon: Icon(FontAwesomeIcons.female)),
+                              icon: Icon(FontAwesomeIcons.pills)),
                           keyboardType: TextInputType.text,
                           onChanged: (value) {},
                         ),
@@ -1323,7 +1323,7 @@ class _I_VState extends State<I_V> {
                 Row(
                   children: <Widget>[
                     Container(
-                      child: Icon(FontAwesomeIcons.apple),
+                      child: Icon(FontAwesomeIcons.pastafarianism),
                       margin: EdgeInsets.all(10),
                     ),
                     Expanded(
@@ -1354,7 +1354,7 @@ class _I_VState extends State<I_V> {
                           decoration: InputDecoration(
                               labelText: "otra ",
                               icon: Icon(
-                                FontAwesomeIcons.female,
+                                FontAwesomeIcons.pastafarianism,
                                 color: Colors.blue,
                               ),
                               labelStyle: TextStyle(color: Colors.blue)),
@@ -1370,7 +1370,7 @@ class _I_VState extends State<I_V> {
                         child: TextFormField(
                           decoration: InputDecoration(
                               labelText: "Tratamiento",
-                              icon: Icon(FontAwesomeIcons.female)),
+                              icon: Icon(FontAwesomeIcons.pills)),
                           keyboardType: TextInputType.text,
                           onChanged: (value) {},
                         ),
@@ -1408,7 +1408,7 @@ class _I_VState extends State<I_V> {
                 Row(
                   children: <Widget>[
                     Container(
-                      child: Icon(FontAwesomeIcons.apple),
+                      child: Icon(FontAwesomeIcons.allergies),
                       margin: EdgeInsets.all(10),
                     ),
                     Expanded(
@@ -1439,7 +1439,7 @@ class _I_VState extends State<I_V> {
                           decoration: InputDecoration(
                               labelText: "otra ",
                               icon: Icon(
-                                FontAwesomeIcons.female,
+                                FontAwesomeIcons.allergies,
                                 color: Colors.blue,
                               ),
                               labelStyle: TextStyle(color: Colors.blue)),
@@ -1455,7 +1455,7 @@ class _I_VState extends State<I_V> {
                         child: TextFormField(
                           decoration: InputDecoration(
                               labelText: "Tratamiento",
-                              icon: Icon(FontAwesomeIcons.female)),
+                              icon: Icon(FontAwesomeIcons.pills)),
                           keyboardType: TextInputType.text,
                           onChanged: (value) {},
                         ),
@@ -1489,7 +1489,7 @@ class _I_VState extends State<I_V> {
           Row(
             children: <Widget>[
               Container(
-                child: Icon(FontAwesomeIcons.venusMars),
+                child: Icon(FontAwesomeIcons.male),
                 margin: EdgeInsets.all(10),
               ),
               Expanded(
@@ -1526,7 +1526,7 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Frecuencia cardiaca",
-                      icon: Icon(FontAwesomeIcons.thermometerEmpty),
+                      icon: Icon(FontAwesomeIcons.heartbeat),
                     )),
                     keyboardType: TextInputType.text,
                     onChanged: (value) {},
@@ -1539,7 +1539,7 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Tension arterial",
-                      icon: Icon(FontAwesomeIcons.thermometerFull),
+                      icon: Icon(FontAwesomeIcons.heartbeat),
                     )),
                     keyboardType: TextInputType.text,
                     onChanged: (value) {},
@@ -1556,7 +1556,8 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Frecuencia respiratoria",
-                      icon: Icon(FontAwesomeIcons.thermometerEmpty),
+                      labelStyle: TextStyle(fontSize: 14),
+                      icon: Icon(FontAwesomeIcons.biking),
                     )),
                     keyboardType: TextInputType.text,
                     onChanged: (value) {},
@@ -1569,7 +1570,7 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Temperatura",
-                      icon: Icon(FontAwesomeIcons.thermometerFull),
+                      icon: Icon(FontAwesomeIcons.thermometerHalf),
                     )),
                     keyboardType: TextInputType.text,
                     onChanged: (value) {},
@@ -1591,7 +1592,7 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Peso (kg)",
-                      icon: Icon(FontAwesomeIcons.thermometerEmpty),
+                      icon: Icon(FontAwesomeIcons.weight),
                     )),
                     keyboardType: TextInputType.text,
                     onChanged: (value) {},
@@ -1604,7 +1605,7 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Talla",
-                      icon: Icon(FontAwesomeIcons.thermometerFull),
+                      icon: Icon(FontAwesomeIcons.tshirt),
                     )),
                     keyboardType: TextInputType.text,
                     onChanged: (value) {},
@@ -1618,7 +1619,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: InputDecoration(
                   labelText: "Constitucion fisica",
-                  icon: Icon(FontAwesomeIcons.female)),
+                  icon: Icon(FontAwesomeIcons.running)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -1636,7 +1637,7 @@ class _I_VState extends State<I_V> {
           Row(
             children: <Widget>[
               Container(
-                child: Icon(FontAwesomeIcons.venusMars),
+                child: Icon(FontAwesomeIcons.userAlt),
                 margin: EdgeInsets.all(10),
               ),
               Expanded(
@@ -1664,7 +1665,7 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Exostosis",
-                      icon: Icon(FontAwesomeIcons.thermometerEmpty),
+                      icon: Icon(FontAwesomeIcons.userAlt),
                     )),
                     keyboardType: TextInputType.text,
                     onChanged: (value) {},
@@ -1677,7 +1678,7 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Endostosis",
-                      icon: Icon(FontAwesomeIcons.thermometerFull),
+                      icon: Icon(FontAwesomeIcons.userAlt),
                     )),
                     keyboardType: TextInputType.text,
                     onChanged: (value) {},
@@ -1704,7 +1705,7 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Transversales",
-                      icon: Icon(FontAwesomeIcons.thermometerEmpty),
+                      icon: Icon(FontAwesomeIcons.userAlt),
                     )),
                     keyboardType: TextInputType.text,
                     onChanged: (value) {},
@@ -1717,7 +1718,7 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Longitudinales",
-                      icon: Icon(FontAwesomeIcons.thermometerFull),
+                      icon: Icon(FontAwesomeIcons.userAlt),
                     )),
                     keyboardType: TextInputType.text,
                     onChanged: (value) {},
@@ -1739,7 +1740,7 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Enoftalmo",
-                      icon: Icon(FontAwesomeIcons.thermometerEmpty),
+                      icon: Icon(FontAwesomeIcons.eye),
                     )),
                     keyboardType: TextInputType.text,
                     onChanged: (value) {},
@@ -1752,7 +1753,7 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "exoftalmo",
-                      icon: Icon(FontAwesomeIcons.thermometerFull),
+                      icon: Icon(FontAwesomeIcons.eye),
                     )),
                     keyboardType: TextInputType.text,
                     onChanged: (value) {},
@@ -1766,7 +1767,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: (InputDecoration(
                 labelText: "Movilidad",
-                icon: Icon(FontAwesomeIcons.thermometerFull),
+                icon: Icon(FontAwesomeIcons.eye),
               )),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
@@ -1785,7 +1786,7 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Midriasis",
-                      icon: Icon(FontAwesomeIcons.thermometerEmpty),
+                      icon: Icon(FontAwesomeIcons.eye),
                     )),
                     keyboardType: TextInputType.text,
                     onChanged: (value) {},
@@ -1798,7 +1799,7 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Miosis",
-                      icon: Icon(FontAwesomeIcons.thermometerFull),
+                      icon: Icon(FontAwesomeIcons.eye),
                     )),
                     keyboardType: TextInputType.text,
                     onChanged: (value) {},
@@ -1812,7 +1813,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: (InputDecoration(
                 labelText: "Reflejo pupilar",
-                icon: Icon(FontAwesomeIcons.thermometerFull),
+                icon: Icon(FontAwesomeIcons.eye),
               )),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
@@ -1822,7 +1823,7 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               decoration: InputDecoration(
-                  labelText: "Nariz", icon: Icon(FontAwesomeIcons.female)),
+                  labelText: "Nariz", icon: Icon(FontAwesomeIcons.userAlt)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -1837,7 +1838,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: (InputDecoration(
                 labelText: "Color",
-                icon: Icon(FontAwesomeIcons.thermometerEmpty),
+                icon: Icon(FontAwesomeIcons.diagnoses),
               )),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
@@ -1851,7 +1852,7 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Palida",
-                      icon: Icon(FontAwesomeIcons.thermometerFull),
+                      icon: Icon(FontAwesomeIcons.diagnoses),
                     )),
                     keyboardType: TextInputType.text,
                     onChanged: (value) {},
@@ -1864,7 +1865,7 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Cianotica",
-                      icon: Icon(FontAwesomeIcons.thermometerFull),
+                      icon: Icon(FontAwesomeIcons.diagnoses),
                     )),
                     keyboardType: TextInputType.text,
                     onChanged: (value) {},
@@ -1881,7 +1882,7 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Enrojecida",
-                      icon: Icon(FontAwesomeIcons.thermometerFull),
+                      icon: Icon(FontAwesomeIcons.diagnoses),
                     )),
                     keyboardType: TextInputType.text,
                     onChanged: (value) {},
@@ -1894,7 +1895,7 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Manchas",
-                      icon: Icon(FontAwesomeIcons.thermometerFull),
+                      icon: Icon(FontAwesomeIcons.diagnoses),
                     )),
                     keyboardType: TextInputType.text,
                     onChanged: (value) {},
@@ -1916,7 +1917,7 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Hipotonicos",
-                      icon: Icon(FontAwesomeIcons.thermometerFull),
+                      icon: Icon(FontAwesomeIcons.fistRaised),
                     )),
                     keyboardType: TextInputType.text,
                     onChanged: (value) {},
@@ -1929,7 +1930,7 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Hipertonicos",
-                      icon: Icon(FontAwesomeIcons.thermometerFull),
+                      icon: Icon(FontAwesomeIcons.fistRaised),
                     )),
                     keyboardType: TextInputType.text,
                     onChanged: (value) {},
@@ -1942,7 +1943,7 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Espasticos",
-                      icon: Icon(FontAwesomeIcons.thermometerFull),
+                      icon: Icon(FontAwesomeIcons.fistRaised),
                     )),
                     keyboardType: TextInputType.text,
                     onChanged: (value) {},
@@ -1961,7 +1962,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: InputDecoration(
                   labelText: "Ganglios linfaticos",
-                  icon: Icon(FontAwesomeIcons.female)),
+                  icon: Icon(FontAwesomeIcons.userAlt)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -1978,7 +1979,7 @@ class _I_VState extends State<I_V> {
                 Row(
                   children: <Widget>[
                     Container(
-                      child: Icon(FontAwesomeIcons.apple),
+                      child: Icon(FontAwesomeIcons.teethOpen),
                       margin: EdgeInsets.all(10),
                     ),
                     Expanded(
@@ -2049,7 +2050,7 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               decoration: InputDecoration(
-                  labelText: "Labios", icon: Icon(FontAwesomeIcons.female)),
+                  labelText: "Labios", icon: Icon(FontAwesomeIcons.teethOpen)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -2058,7 +2059,7 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               decoration: InputDecoration(
-                  labelText: "Carrillos", icon: Icon(FontAwesomeIcons.female)),
+                  labelText: "Carrillos", icon: Icon(FontAwesomeIcons.teethOpen)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -2068,7 +2069,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: InputDecoration(
                   labelText: "Paladar duro",
-                  icon: Icon(FontAwesomeIcons.female)),
+                  icon: Icon(FontAwesomeIcons.teethOpen)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -2078,7 +2079,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: InputDecoration(
                   labelText: "Paladar blando",
-                  icon: Icon(FontAwesomeIcons.female)),
+                  icon: Icon(FontAwesomeIcons.teethOpen)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -2087,7 +2088,7 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               decoration: InputDecoration(
-                  labelText: "Orafaringe", icon: Icon(FontAwesomeIcons.female)),
+                  labelText: "Orafaringe", icon: Icon(FontAwesomeIcons.teethOpen)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -2097,7 +2098,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: InputDecoration(
                   labelText: "Piso de la boca",
-                  icon: Icon(FontAwesomeIcons.female)),
+                  icon: Icon(FontAwesomeIcons.teethOpen)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -2106,7 +2107,7 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               decoration: InputDecoration(
-                  labelText: "Lengua", icon: Icon(FontAwesomeIcons.female)),
+                  labelText: "Lengua", icon: Icon(FontAwesomeIcons.teethOpen)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -2115,7 +2116,7 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               decoration: InputDecoration(
-                  labelText: "Encia", icon: Icon(FontAwesomeIcons.female)),
+                  labelText: "Encia", icon: Icon(FontAwesomeIcons.teethOpen)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -2124,7 +2125,7 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               decoration: InputDecoration(
-                  labelText: "Dientes", icon: Icon(FontAwesomeIcons.female)),
+                  labelText: "Dientes", icon: Icon(FontAwesomeIcons.teethOpen)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -2134,7 +2135,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: InputDecoration(
                   labelText: "Padecimiento actual",
-                  icon: Icon(FontAwesomeIcons.female)),
+                  icon: Icon(FontAwesomeIcons.userInjured)),
               keyboardType: TextInputType.text,
               minLines: 1,
               maxLines: 6,
@@ -2162,7 +2163,7 @@ class _I_VState extends State<I_V> {
                 Row(
                   children: <Widget>[
                     Container(
-                      child: Icon(FontAwesomeIcons.apple),
+                      child: Icon(FontAwesomeIcons.vectorSquare),
                       margin: EdgeInsets.all(10),
                     ),
                     Expanded(
@@ -2193,7 +2194,7 @@ class _I_VState extends State<I_V> {
                           decoration: InputDecoration(
                               labelText: "Describa",
                               icon: Icon(
-                                FontAwesomeIcons.female,
+                                FontAwesomeIcons.vectorSquare,
                                 color: Colors.blue,
                               ),
                               labelStyle: TextStyle(color: Colors.blue)),
@@ -2226,7 +2227,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: InputDecoration(
                   labelText: "Interpretacion radiografica",
-                  icon: Icon(FontAwesomeIcons.female)),
+                  icon: Icon(FontAwesomeIcons.vectorSquare)),
               keyboardType: TextInputType.text,
               minLines: 1,
               maxLines: 6,
@@ -2245,7 +2246,7 @@ class _I_VState extends State<I_V> {
                 Row(
                   children: <Widget>[
                     Container(
-                      child: Icon(FontAwesomeIcons.apple),
+                      child: Icon(FontAwesomeIcons.flask),
                       margin: EdgeInsets.all(10),
                     ),
                     Expanded(
@@ -2282,7 +2283,7 @@ class _I_VState extends State<I_V> {
                                   child: TextFormField(
                                     decoration: (InputDecoration(
                                       labelText: "Hemoglobina",
-                                      icon: Icon(FontAwesomeIcons.thermometerEmpty),
+                                      icon: Icon(FontAwesomeIcons.tint),
                                     )),
                                     keyboardType: TextInputType.text,
                                     onChanged: (value) {},
@@ -2295,7 +2296,7 @@ class _I_VState extends State<I_V> {
                                   child: TextFormField(
                                     decoration: (InputDecoration(
                                       labelText: "Hematocrito",
-                                      icon: Icon(FontAwesomeIcons.thermometerFull),
+                                      icon: Icon(FontAwesomeIcons.tint),
                                     )),
                                     keyboardType: TextInputType.text,
                                     onChanged: (value) {},
@@ -2312,7 +2313,7 @@ class _I_VState extends State<I_V> {
                               child: TextFormField(
                                 decoration: (InputDecoration(
                                   labelText: "Neutrofilos",
-                                  icon: Icon(FontAwesomeIcons.thermometerEmpty),
+                                  icon: Icon(FontAwesomeIcons.tint),
                                 )),
                                 keyboardType: TextInputType.text,
                                 onChanged: (value) {},
@@ -2325,7 +2326,7 @@ class _I_VState extends State<I_V> {
                               child: TextFormField(
                                 decoration: (InputDecoration(
                                   labelText: "Linfocitos",
-                                  icon: Icon(FontAwesomeIcons.thermometerFull),
+                                  icon: Icon(FontAwesomeIcons.tint),
                                 )),
                                 keyboardType: TextInputType.text,
                                 onChanged: (value) {},
@@ -2342,7 +2343,7 @@ class _I_VState extends State<I_V> {
                               child: TextFormField(
                                 decoration: (InputDecoration(
                                   labelText: "Eosinofilos",
-                                  icon: Icon(FontAwesomeIcons.thermometerEmpty),
+                                  icon: Icon(FontAwesomeIcons.tint),
                                 )),
                                 keyboardType: TextInputType.text,
                                 onChanged: (value) {},
@@ -2355,7 +2356,7 @@ class _I_VState extends State<I_V> {
                               child: TextFormField(
                                 decoration: (InputDecoration(
                                   labelText: "Basofilos",
-                                  icon: Icon(FontAwesomeIcons.thermometerFull),
+                                  icon: Icon(FontAwesomeIcons.tint),
                                 )),
                                 keyboardType: TextInputType.text,
                                 onChanged: (value) {},
@@ -2372,7 +2373,7 @@ class _I_VState extends State<I_V> {
                               child: TextFormField(
                                 decoration: (InputDecoration(
                                   labelText: "Monocitos",
-                                  icon: Icon(FontAwesomeIcons.thermometerEmpty),
+                                  icon: Icon(FontAwesomeIcons.tint),
                                 )),
                                 keyboardType: TextInputType.text,
                                 onChanged: (value) {},
@@ -2399,7 +2400,7 @@ class _I_VState extends State<I_V> {
                                     decoration: (InputDecoration(
                                       labelText: "Hemoglobina glucosilada",
                                       labelStyle: TextStyle(fontSize: 12),
-                                      icon: Icon(FontAwesomeIcons.thermometerEmpty),
+                                      icon: Icon(FontAwesomeIcons.tint),
                                     )),
                                     keyboardType: TextInputType.text,
                                     onChanged: (value) {},
@@ -2412,7 +2413,7 @@ class _I_VState extends State<I_V> {
                                   child: TextFormField(
                                     decoration: (InputDecoration(
                                       labelText: "Glicemia",
-                                      icon: Icon(FontAwesomeIcons.thermometerFull),
+                                      icon: Icon(FontAwesomeIcons.tint),
                                     )),
                                     keyboardType: TextInputType.text,
                                     onChanged: (value) {},
@@ -2429,7 +2430,7 @@ class _I_VState extends State<I_V> {
                               child: TextFormField(
                                 decoration: (InputDecoration(
                                   labelText: "Otros",
-                                  icon: Icon(FontAwesomeIcons.thermometerEmpty),
+                                  icon: Icon(FontAwesomeIcons.tint),
                                 )),
                                 keyboardType: TextInputType.text,
                                 onChanged: (value) {},
@@ -2455,7 +2456,7 @@ class _I_VState extends State<I_V> {
                                   child: TextFormField(
                                     decoration: (InputDecoration(
                                       labelText: "Tiempo sangrado",
-                                      icon: Icon(FontAwesomeIcons.thermometerEmpty),
+                                      icon: Icon(FontAwesomeIcons.tint),
                                     )),
                                     keyboardType: TextInputType.text,
                                     onChanged: (value) {},
@@ -2468,7 +2469,7 @@ class _I_VState extends State<I_V> {
                                   child: TextFormField(
                                     decoration: (InputDecoration(
                                       labelText: "Tiempo coagulacion",
-                                      icon: Icon(FontAwesomeIcons.thermometerFull),
+                                      icon: Icon(FontAwesomeIcons.tint),
                                     )),
                                     keyboardType: TextInputType.text,
                                     onChanged: (value) {},
@@ -2485,7 +2486,7 @@ class _I_VState extends State<I_V> {
                               child: TextFormField(
                                 decoration: (InputDecoration(
                                   labelText: "Cuenta plaquetas",
-                                  icon: Icon(FontAwesomeIcons.thermometerEmpty),
+                                  icon: Icon(FontAwesomeIcons.tint),
                                 )),
                                 keyboardType: TextInputType.text,
                                 onChanged: (value) {},
@@ -2499,7 +2500,7 @@ class _I_VState extends State<I_V> {
                                 decoration: (InputDecoration(
                                   labelText: "Tiempo protrombina",
                                   labelStyle: TextStyle(fontSize: 13),
-                                  icon: Icon(FontAwesomeIcons.thermometerFull),
+                                  icon: Icon(FontAwesomeIcons.tint),
                                 )),
                                 keyboardType: TextInputType.text,
                                 onChanged: (value) {},
@@ -2517,7 +2518,7 @@ class _I_VState extends State<I_V> {
                                 decoration: (InputDecoration(
                                   labelText: "Tiempo tromboplastina",
                                   labelStyle: TextStyle(fontSize: 13),
-                                  icon: Icon(FontAwesomeIcons.thermometerEmpty),
+                                  icon: Icon(FontAwesomeIcons.tint),
                                 )),
                                 keyboardType: TextInputType.text,
                                 onChanged: (value) {},
@@ -2530,7 +2531,7 @@ class _I_VState extends State<I_V> {
                               child: TextFormField(
                                 decoration: (InputDecoration(
                                   labelText: "INR",
-                                  icon: Icon(FontAwesomeIcons.thermometerFull),
+                                  icon: Icon(FontAwesomeIcons.tint),
                                 )),
                                 keyboardType: TextInputType.text,
                                 onChanged: (value) {},
@@ -2575,7 +2576,7 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Maxilar superior",
-                      icon: Icon(FontAwesomeIcons.thermometerEmpty),
+                      icon: Icon(FontAwesomeIcons.teethOpen),
                     )),
                     keyboardType: TextInputType.text,
                     onChanged: (value) {},
@@ -2588,7 +2589,7 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Maxilar inferior",
-                      icon: Icon(FontAwesomeIcons.thermometerFull),
+                      icon: Icon(FontAwesomeIcons.teethOpen),
                     )),
                     keyboardType: TextInputType.text,
                     onChanged: (value) {},
@@ -2616,7 +2617,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: (InputDecoration(
                 labelText: "Diagnostico",
-                icon: Icon(FontAwesomeIcons.thermometerEmpty),
+                icon: Icon(FontAwesomeIcons.fileMedical),
               )),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
@@ -2627,7 +2628,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: (InputDecoration(
                 labelText: "Pronostico",
-                icon: Icon(FontAwesomeIcons.thermometerFull),
+                icon: Icon(FontAwesomeIcons.fileMedical),
               )),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
@@ -2638,7 +2639,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: InputDecoration(
                   labelText: "Tratamiento",
-                  icon: Icon(FontAwesomeIcons.female)),
+                  icon: Icon(FontAwesomeIcons.pills)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -2653,7 +2654,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: (InputDecoration(
                 labelText: "Antisepsia",
-                icon: Icon(FontAwesomeIcons.thermometerEmpty),
+                icon: Icon(FontAwesomeIcons.pastafarianism),
               )),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
@@ -2664,7 +2665,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: (InputDecoration(
                 labelText: "Anestesia",
-                icon: Icon(FontAwesomeIcons.thermometerFull),
+                icon: Icon(FontAwesomeIcons.syringe),
               )),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
@@ -2675,7 +2676,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: (InputDecoration(
                 labelText: "Incision",
-                icon: Icon(FontAwesomeIcons.thermometerEmpty),
+                icon: Icon(FontAwesomeIcons.highlighter),
               )),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
@@ -2686,7 +2687,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: (InputDecoration(
                 labelText: "Diseccion mucoperiostica",
-                icon: Icon(FontAwesomeIcons.thermometerFull),
+                icon: Icon(FontAwesomeIcons.highlighter),
               )),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
@@ -2697,7 +2698,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: (InputDecoration(
                 labelText: "Osteotomia-Ostectomia",
-                icon: Icon(FontAwesomeIcons.thermometerEmpty),
+                icon: Icon(FontAwesomeIcons.bone),
               )),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
@@ -2708,7 +2709,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: (InputDecoration(
                 labelText: "Operacion",
-                icon: Icon(FontAwesomeIcons.thermometerEmpty),
+                icon: Icon(FontAwesomeIcons.userMd),
               )),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
@@ -2719,7 +2720,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: (InputDecoration(
                 labelText: "Cuidados herida",
-                icon: Icon(FontAwesomeIcons.thermometerFull),
+                icon: Icon(FontAwesomeIcons.bandAid),
               )),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
@@ -2730,7 +2731,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: (InputDecoration(
                 labelText: "Sutura",
-                icon: Icon(FontAwesomeIcons.thermometerFull),
+                icon: Icon(FontAwesomeIcons.bandAid),
               )),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
@@ -2746,7 +2747,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: (InputDecoration(
                 labelText: "Primeras 24h",
-                icon: Icon(FontAwesomeIcons.thermometerEmpty),
+                icon: Icon(FontAwesomeIcons.clock),
               )),
               minLines: 1,
               maxLines: 6,
@@ -2759,7 +2760,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: (InputDecoration(
                 labelText: "despues de 24h",
-                icon: Icon(FontAwesomeIcons.thermometerFull),
+                icon: Icon(FontAwesomeIcons.clock),
               )),
               minLines: 1,
               maxLines: 6,
@@ -2772,7 +2773,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: (InputDecoration(
                 labelText: "Incidentes en el procedimiento",
-                icon: Icon(FontAwesomeIcons.thermometerFull),
+                icon: Icon(FontAwesomeIcons.userInjured),
               )),
               minLines: 1,
               maxLines: 6,
@@ -2789,7 +2790,7 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               decoration: InputDecoration(
-                  labelText: "Analgesicos", icon: Icon(FontAwesomeIcons.female)),
+                  labelText: "Analgesicos", icon: Icon(FontAwesomeIcons.syringe)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -2799,7 +2800,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: (InputDecoration(
                 labelText: "Antibioticos",
-                icon: Icon(FontAwesomeIcons.thermometerEmpty),
+                icon: Icon(FontAwesomeIcons.pastafarianism),
               )),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
@@ -2810,7 +2811,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: (InputDecoration(
                 labelText: "Ansioliticos",
-                icon: Icon(FontAwesomeIcons.thermometerFull),
+                icon: Icon(FontAwesomeIcons.userMinus),
               )),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
@@ -2821,7 +2822,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: (InputDecoration(
                 labelText: "Otros",
-                icon: Icon(FontAwesomeIcons.thermometerFull),
+                icon: Icon(FontAwesomeIcons.pills),
               )),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
@@ -2832,7 +2833,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: (InputDecoration(
                 labelText: "Nombre del cirujano",
-                icon: Icon(FontAwesomeIcons.thermometerFull),
+                icon: Icon(FontAwesomeIcons.userMd),
               )),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
@@ -2843,7 +2844,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: (InputDecoration(
                 labelText: "Nombre del ayudante",
-                icon: Icon(FontAwesomeIcons.thermometerFull),
+                icon: Icon(FontAwesomeIcons.userNurse),
               )),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
@@ -2854,7 +2855,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: (InputDecoration(
                 labelText: "Nombre del instrumentista",
-                icon: Icon(FontAwesomeIcons.thermometerFull),
+                icon: Icon(FontAwesomeIcons.userNurse),
               )),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
@@ -2865,7 +2866,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: (InputDecoration(
                 labelText: "Nombre del asistente circulante",
-                icon: Icon(FontAwesomeIcons.thermometerFull),
+                icon: Icon(FontAwesomeIcons.userNurse),
               )),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
@@ -2879,7 +2880,7 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Hora inicio",
-                      icon: Icon(FontAwesomeIcons.thermometerFull),
+                      icon: Icon(FontAwesomeIcons.clock),
                     )),
                     keyboardType: TextInputType.text,
                     onChanged: (value) {},
@@ -2892,7 +2893,7 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Hora termino",
-                      icon: Icon(FontAwesomeIcons.thermometerFull),
+                      icon: Icon(FontAwesomeIcons.clock),
                     )),
                     keyboardType: TextInputType.text,
                     onChanged: (value) {},
@@ -2906,7 +2907,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: (InputDecoration(
                 labelText: "Valor del tratamiento quirurgico",
-                icon: Icon(FontAwesomeIcons.thermometerFull),
+                icon: Icon(FontAwesomeIcons.dollarSign),
               )),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
@@ -2935,7 +2936,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: InputDecoration(
                   labelText: "Estado postquirurgico del paciente",
-                  icon: Icon(FontAwesomeIcons.female)),
+                  icon: Icon(FontAwesomeIcons.userAlt)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),

@@ -1917,6 +1917,7 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Hipotonicos",
+                      labelStyle: TextStyle(fontSize: 14),
                       icon: Icon(FontAwesomeIcons.fistRaised),
                     )),
                     keyboardType: TextInputType.text,
@@ -1930,6 +1931,7 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Hipertonicos",
+                      labelStyle: TextStyle(fontSize: 13),
                       icon: Icon(FontAwesomeIcons.fistRaised),
                     )),
                     keyboardType: TextInputType.text,
@@ -1943,6 +1945,7 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Espasticos",
+                      labelStyle: TextStyle(fontSize: 14),
                       icon: Icon(FontAwesomeIcons.fistRaised),
                     )),
                     keyboardType: TextInputType.text,
@@ -2600,15 +2603,6 @@ class _I_VState extends State<I_V> {
           ),
           Container(
             margin: EdgeInsets.all(10),
-            child: RaisedButton(
-              child: Text("Firma del paciente"),
-              onPressed: (){
-              
-              },
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.all(10),
             alignment: Alignment.centerLeft,
             child: Text("Datos de la cirugia"),
           ),
@@ -2948,7 +2942,7 @@ class _I_VState extends State<I_V> {
               style: TextStyle(
                   fontSize: 20.0, color: Theme.of(context).accentColor),
             ),
-            subtitle: Text("Retiro de sutura"),
+            subtitle: Text("Dado de alta"),
             onTap: () {
               Util()
                   .selectDate(context, fecha_alta, DateTime.now())
@@ -2958,15 +2952,6 @@ class _I_VState extends State<I_V> {
                 });
               });
             },
-          ),
-          Container(
-            margin: EdgeInsets.all(10),
-            child: RaisedButton(
-              child: Text("Firma del paciente"),
-              onPressed: (){
-              
-              },
-            ),
           ),
         ],
       ),

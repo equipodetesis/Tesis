@@ -21,7 +21,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
 
   DateTime ultimo_examen_medico = DateTime.now();
 
-  List _todasenfermedades = [
+  List _enfermedades = [
     "Ninguna",
     "Alergias",
     "Anemia",
@@ -42,11 +42,11 @@ class _V_VI_VII_State extends State<V_VI_VII> {
     "Hemofilia",
     "Otras enfermedades"
   ];
-  List _enfermedadesdisponible = List();
   List _current_enfermedades = List();
   List<List<DropdownMenuItem>> _items_enfermedades = List();
 
-  List _todasrevision_organos = [
+  List _revision_organos = [
+    "Ninguna",
     "Dificultad para respirar",
     "Fatiga facil",
     "Trastornos digestivos",
@@ -64,7 +64,6 @@ class _V_VI_VII_State extends State<V_VI_VII> {
     "Tendencias a hemorragias",
     "Lesiones de piel",
   ];
-  List _revision_organos_disponible = List();
   List _current_revision_organos = List();
   List<List<DropdownMenuItem>> _items_revision_organos = List();
 
@@ -83,9 +82,12 @@ class _V_VI_VII_State extends State<V_VI_VII> {
   void initState() {
     _itemslocal = Util().getDropdownMenuItem(listlocales);
     _currentlocal = _itemslocal.first.value;
-    aniadirnuevalista(TAGENFERMEDADES);
-    aniadirnuevalista(TAGREVISIONORGANOS);
-    _items_sometido
+    _items_enfermedades
+        .add(Util().ajustarlistas(_enfermedades, _current_enfermedades));
+    _current_enfermedades.add(_items_enfermedades.last.first.value);
+    _items_revision_organos.add(
+        Util().ajustarlistas(_revision_organos, _current_revision_organos));
+    _current_revision_organos.add(_items_revision_organos.last.first.value);    _items_sometido
         .add(Util().ajustarlistas(_sometido, _current_sometido));
     _current_sometido.add(_items_sometido.last.first.value);
     // TODO: implement initState
@@ -97,7 +99,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 4,
+      length: 2,
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -105,12 +107,6 @@ class _V_VI_VII_State extends State<V_VI_VII> {
             tabs: <Widget>[
               Tab(
                 child: Text("Historia medica anterior"),
-              ),
-              Tab(
-                child: Text("Enfermedades padecidas"),
-              ),
-              Tab(
-                child: Text("Historia Familiar personal y social"),
               ),
               Tab(
                 child: Text("Revision organos y sistemas"),
@@ -121,8 +117,6 @@ class _V_VI_VII_State extends State<V_VI_VII> {
         body: TabBarView(
           children: <Widget>[
             historiaMedica(),
-            enfermedades(),
-            historia_fam_per_soc(),
             revision_organos_y_sistemas()
           ],
         ),
@@ -280,7 +274,6 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                             _current_enfermedades.indexOf(value)] = selection;
                             Provider.of<Adulto>(context).enfermedades =
                                 _current_enfermedades;
-                            actualizarlistas(TAGENFERMEDADES);
                           });
                         },
                       ),
@@ -290,15 +283,39 @@ class _V_VI_VII_State extends State<V_VI_VII> {
               );
             }).toList(),
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              _current_enfermedades.last != "Ninguna"?
+              FlatButton(
+                child: Text("Añadir",
+                  style: TextStyle(color: Colors.blue),
+                ),
+                onPressed: () {
+                  setState(() {
+                    _items_enfermedades
+                        .add(Util().ajustarlistas(_enfermedades, _current_enfermedades));
+                    _current_enfermedades.add(_items_enfermedades.last.first.value);
+                  });
+                },
+              ):
+                  Container(),
+              _current_enfermedades.length > 1?
+              FlatButton(
+                child: Text("Eliminar",
+                  style: TextStyle(color: Colors.blue),),
+                onPressed: () {
+                  setState(() {
+                    _current_enfermedades.removeLast();
+                  });
+                },
+              ):
+                  Container(),
+            ],
+          ),
           _current_enfermedades[0] != "Ninguna"?
           Column(
             children: <Widget>[
-              FlatButton(
-                child: Text("Añadir"),
-                onPressed: () {
-                  aniadirnuevalista(TAGENFERMEDADES);
-                },
-              ),
               Container(
                 margin: EdgeInsets.all(10),
                 child: Text(
@@ -451,23 +468,39 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                   ],
                 );
               }).toList()),
-          _current_sometido[0] != "Ninguna"?
-          Container(
-            alignment: Alignment.centerLeft,
-            child: FlatButton(
-              child: Text(
-                "Añadir",
-                style: TextStyle(color: Colors.blue),
-              ),
-              onPressed: () {
-                setState(() {
-                  _items_sometido
-                      .add(Util().ajustarlistas(_sometido, _current_sometido));
-                  _current_sometido.add(_items_sometido.last.first.value);
-                });
-              },
-            ),
-          ): Container(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              _current_sometido.last != "Ninguna"?
+              Container(
+                alignment: Alignment.centerLeft,
+                child: FlatButton(
+                  child: Text(
+                    "Añadir",
+                    style: TextStyle(color: Colors.blue),
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _items_sometido
+                          .add(Util().ajustarlistas(_sometido, _current_sometido));
+                      _current_sometido.add(_items_sometido.last.first.value);
+                    });
+                  },
+                ),
+              ): Container(),
+              _current_sometido.length > 1?
+              FlatButton(
+                child: Text("Eliminar",
+                  style: TextStyle(color: Colors.blue),),
+                onPressed: () {
+                  setState(() {
+                    _current_sometido.removeLast();
+                  });
+                },
+              ):
+              Container(),
+            ],
+          ),
           Container(
             margin: const EdgeInsets.all(10.0),
             child: TextFormField(
@@ -482,22 +515,6 @@ class _V_VI_VII_State extends State<V_VI_VII> {
               },
             ),
           ),
-    ])
-    );
-  }
-
-  Widget enfermedades() {
-    return SingleChildScrollView(
-      child: Column(children: [
-
-      ]),
-    );
-  }
-
-  Widget historia_fam_per_soc() {
-    return SingleChildScrollView(
-      child: Column(
-        children: <Widget>[
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
@@ -523,14 +540,13 @@ class _V_VI_VII_State extends State<V_VI_VII> {
               maxLines: 6,
               keyboardType: TextInputType.multiline,
               initialValue:
-                  Provider.of<Adulto>(context).historia_personal_social,
+              Provider.of<Adulto>(context).historia_personal_social,
               onChanged: (value) {
                 Provider.of<Adulto>(context).historia_personal_social = value;
               },
             ),
           ),
-        ],
-      ),
+    ])
     );
   }
 
@@ -561,7 +577,6 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                               .indexOf(value)] = selection;
                           Provider.of<Adulto>(context).revision_organos =
                               _current_revision_organos;
-                          actualizarlistas(TAGREVISIONORGANOS);
                         });
                       },
                     ),
@@ -571,12 +586,38 @@ class _V_VI_VII_State extends State<V_VI_VII> {
             );
           }).toList(),
         ),
-        FlatButton(
-          child: Text("Añadir"),
-          onPressed: () {
-            aniadirnuevalista(TAGREVISIONORGANOS);
-          },
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            _current_revision_organos.last != "Ninguna"?
+            FlatButton(
+              child: Text("Añadir",
+              style: TextStyle(color: Colors.blue),
+            ),
+              onPressed: () {
+               setState(() {
+                 _items_revision_organos
+                     .add(Util().ajustarlistas(_revision_organos, _current_revision_organos));
+                 _current_revision_organos.add(_items_revision_organos.last.first.value);
+               });
+              },
+            ):
+            Container(),
+            _current_revision_organos.length > 1?
+            FlatButton(
+              child: Text("Eliminar",
+                style: TextStyle(color: Colors.blue),
+              ),
+              onPressed: () {
+                setState(() {
+                  _current_revision_organos.removeLast();
+                });
+              },
+            ):
+            Container(),
+          ],
         ),
+
         Container(
           margin: EdgeInsets.all(10),
           child: TextFormField(
@@ -610,63 +651,5 @@ class _V_VI_VII_State extends State<V_VI_VII> {
         ),
       ]),
     );
-  }
-
-  void aniadirnuevalista(String tag) {
-    if (tag == TAGENFERMEDADES) {
-      setState(() {
-        _items_enfermedades
-            .add(ajustarlistas(_todasenfermedades, _current_enfermedades));
-        _current_enfermedades.add(_items_enfermedades.last.first.value);
-        actualizarlistas(tag);
-      });
-    }
-    if (tag == TAGREVISIONORGANOS) {
-      setState(() {
-        _items_revision_organos.add(
-            ajustarlistas(_todasrevision_organos, _current_revision_organos));
-        _current_revision_organos.add(_items_revision_organos.last.first.value);
-        actualizarlistas(tag);
-      });
-    }
-  }
-
-  void actualizarlistas(String tag) {
-    if (tag == TAGENFERMEDADES) {
-      setState(() {
-        _items_enfermedades.forEach((value) {
-          value = ajustarlistas(_todasenfermedades, _current_enfermedades,
-              exception: _items_enfermedades.indexOf(value));
-        });
-      });
-    }
-    if (tag == TAGREVISIONORGANOS) {
-      setState(() {
-        _items_revision_organos.forEach((value) {
-          value = ajustarlistas(
-              _todasrevision_organos, _current_revision_organos,
-              exception: _items_revision_organos.indexOf(value));
-        });
-      });
-    }
-  }
-
-  List<DropdownMenuItem> ajustarlistas(
-      List listacompleta, List listaseleccionadas,
-      {int exception}) {
-    if (listaseleccionadas.length == 0) {
-      return Util().getDropdownMenuItem(listacompleta);
-    } else {
-      List listtemp = listacompleta;
-      int i = 0;
-      listaseleccionadas.forEach((value) {
-        if (i != exception) {
-          listtemp.remove(value);
-        } else {}
-        i++;
-      });
-
-      return Util().getDropdownMenuItem(listtemp);
-    }
   }
 }

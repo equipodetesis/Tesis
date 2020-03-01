@@ -16,6 +16,8 @@ class Cirugia{
   inmunologico = List(), articulacion_temporomandibular = List(), radiografia = List(), analisis_laboratorio = List(), tratamiento_digestivo = List(), tratamiento_respiratorio = List(),
   tratamiento_cardiovascular = List(), tratamiento_genitourinario = List(), tratamiento_endocrino = List(), tratamiento_hematologicas = List(),tratamiento_neurologico = List(),
   tratamiento_musculo_esqueleto = List(), tratamiento_inmulogico = List(), tratamiento_tegumentario = List();
+  void fromJson(Map<String, dynamic> data) {
 
+  }
 
 }

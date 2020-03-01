@@ -33,35 +33,33 @@ class Historial extends StatelessWidget{
             default:
               return ListView(
                children:snapshot.data.documents.map((DocumentSnapshot documents){
-                 if(documents.documentID=="Adulto")
+                 var tpo;
+                 if(documents.documentID=="Adulto"){
                    Provider.of<Adulto>(context).fromjson(documents.data);
-                 if(documents.documentID=="Cirugia")
-                   Provider.of<Cirugia>(context).fromjson(documents.data);
+                   tpo="Adulto";
+                 }
 
+                 if(documents.documentID=="Cirugia"){
+                   Provider.of<Cirugia>(context).fromJson(documents.data);
+                   tpo="Cirugia";}
+
+                 return Column(
+                   children: <Widget>[
+                     Divider(color: Colors.black,
+                       thickness: 0.12,
+                     ),
+                     Text(tpo,textAlign:TextAlign.start,style: TextStyle(color: Colors.blue),),
+                     ListTile(
+                       title: tpo=="Adulto"?Provider.of<Adulto>(context).motivo:Provider.of<Cirugia>(context).motivo,
+                       subtitle: tpo=="Adulto"?Provider.of<Adulto>(context).motivo:Provider.of<Cirugia>(context).motivo,
+                     )
+                   ],
+                 );
                }).toList());
           }
         }
     ),
     );
   }
-  void obtenerdatos(context){
 
-    StreamBuilder(
-        stream: stream,
-        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
-          if (snapshot.hasError)
-            return new Text('Error: ${snapshot.error}');
-          switch (snapshot.connectionState){
-            case ConnectionState.waiting: return Center(child:CircularProgressIndicator(
-              backgroundColor: Colors.deepOrange,
-            ));
-            break;
-            default:
-              snapshot.data.documents.map((DocumentSnapshot document){
-                if(document.documentID=="Adulto")
-              }) ;
-          }
-        }
-    );
-  }
 }

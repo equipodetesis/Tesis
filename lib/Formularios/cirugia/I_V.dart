@@ -1,6 +1,7 @@
 import 'package:expedientesodontologicos_app/Util/Util.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class I_V extends StatefulWidget {
@@ -173,13 +174,7 @@ class _I_VState extends State<I_V> {
   List<List<DropdownMenuItem>> _items_tegumentario = List();
   List<String> _current_tegumentario = List();
 
-  List<String> clasificacion_asa = [
-    "1",
-    "2",
-    "3",
-    "4",
-    "5"
-  ];
+  List<String> clasificacion_asa = ["1", "2", "3", "4", "5"];
 
   List<DropdownMenuItem> _items_clasificacion_asa = List();
   String _current_clasificacion_asa = "";
@@ -207,13 +202,40 @@ class _I_VState extends State<I_V> {
 
   List<List<DropdownMenuItem>> _items_temporomandibular = List();
   List<String> _current_temporomandibular = List();
+
+  List<String> radiografia = [
+    "Ninguna",
+    "Periapical",
+    "Oclusal",
+    "Ortopantomografia",
+    "Otras"
+  ];
+
+  List<List<DropdownMenuItem>> _items_radiografia = List();
+  List<String> _current_radiografia = List();
+
+  List<String> analisis_laboratorio = [
+    "Ninguna",
+    "Biometria hematica completa",
+    "Quimica sanguinea",
+    "Pruebas basicas de valoracion de la hemostasia"
+  ];
+  List<String>analisis_laboratorio_inm = List();
+  List<List<DropdownMenuItem>> _items_analisis_laboratorio = List();
+  List<String> _current_analisis_laboratorio = List();
+
+  DateTime fecha_retiosutura = DateTime.now();
+  DateTime fecha_alta = DateTime.now();
+
   @override
   void initState() {
+    analisis_laboratorio_inm = analisis_laboratorio;
+
     _items_adicciones = Util().getDropdownMenuItem(adicciones);
     _current_adiccion = _items_adicciones.first.value;
-     _items_clasificacion_asa = Util().getDropdownMenuItem(clasificacion_asa);
+    _items_clasificacion_asa = Util().getDropdownMenuItem(clasificacion_asa);
     _current_clasificacion_asa = _items_clasificacion_asa.first.value;
-     _items_craneoforma = Util().getDropdownMenuItem(craneoforma);
+    _items_craneoforma = Util().getDropdownMenuItem(craneoforma);
     _current_craneoforma = _items_craneoforma.first.value;
     _items_alergias.add(Util().ajustarlistas(alergias, _current_alergias));
     _current_alergias.add(_items_alergias.last.first.value);
@@ -239,16 +261,22 @@ class _I_VState extends State<I_V> {
     _items_musculo_esqueleto.add(
         Util().ajustarlistas(musculo_esqueleto, _current_musculo_esqueleto));
     _current_musculo_esqueleto.add(_items_musculo_esqueleto.last.first.value);
-    _items_inmunologico.add(
-        Util().ajustarlistas(inmunologico, _current_inmunologico));
+    _items_inmunologico
+        .add(Util().ajustarlistas(inmunologico, _current_inmunologico));
     _current_inmunologico.add(_items_inmunologico.last.first.value);
-    _items_tegumentario.add(
-        Util().ajustarlistas(tegumentario, _current_tegumentario));
+    _items_tegumentario
+        .add(Util().ajustarlistas(tegumentario, _current_tegumentario));
     _current_tegumentario.add(_items_tegumentario.last.first.value);
-     _items_temporomandibular.add(
+    _items_temporomandibular.add(
         Util().ajustarlistas(temporomandibular, _current_temporomandibular));
     _current_temporomandibular.add(_items_temporomandibular.last.first.value);
-
+    _items_radiografia
+        .add(Util().ajustarlistas(radiografia, _current_radiografia));
+    _current_radiografia.add(_items_radiografia.last.first.value);
+    _items_analisis_laboratorio.add(Util()
+        .ajustarlistas(analisis_laboratorio, _current_analisis_laboratorio));
+    _current_analisis_laboratorio
+        .add(_items_analisis_laboratorio.last.first.value);
     // TODO: implement initState
     super.initState();
   }
@@ -256,7 +284,7 @@ class _I_VState extends State<I_V> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -270,6 +298,9 @@ class _I_VState extends State<I_V> {
               ),
               Tab(
                 child: Text("Signos Vitales"),
+              ),
+              Tab(
+                child: Text("Estudios de gabinete"),
               )
             ],
           ),
@@ -278,7 +309,8 @@ class _I_VState extends State<I_V> {
           children: <Widget>[
             antecedentes_patologicos_hereditarios(),
             interrogatorio_aparatos_sistemas(),
-            signos_vitales()
+            signos_vitales(),
+            estudios_gabinete()
           ],
         ),
       ),
@@ -313,7 +345,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: InputDecoration(
                   labelText: "Abuelo materno",
-                  icon: Icon(FontAwesomeIcons.female)),
+                  icon: Icon(FontAwesomeIcons.male)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -322,7 +354,7 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               decoration: InputDecoration(
-                  labelText: "Padre", icon: Icon(FontAwesomeIcons.female)),
+                  labelText: "Padre", icon: Icon(FontAwesomeIcons.male)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -332,7 +364,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: InputDecoration(
                   labelText: "Abuelo paterno",
-                  icon: Icon(FontAwesomeIcons.female)),
+                  icon: Icon(FontAwesomeIcons.male)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -365,7 +397,7 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: InputDecoration(
                         labelText: "Grupo sanguineo",
-                        icon: Icon(FontAwesomeIcons.female)),
+                        icon: Icon(FontAwesomeIcons.tint)),
                     keyboardType: TextInputType.text,
                     onChanged: (value) {},
                   ),
@@ -377,7 +409,7 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: InputDecoration(
                         labelText: "Factor Rh",
-                        icon: Icon(FontAwesomeIcons.female)),
+                        icon: Icon(FontAwesomeIcons.tint)),
                     keyboardType: TextInputType.text,
                     onChanged: (value) {},
                   ),
@@ -390,7 +422,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: InputDecoration(
                   labelText: "Inmunizaciones infancia",
-                  icon: Icon(FontAwesomeIcons.female)),
+                  icon: Icon(FontAwesomeIcons.baby)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -400,7 +432,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: InputDecoration(
                   labelText: "inmunizaciones adulto",
-                  icon: Icon(FontAwesomeIcons.female)),
+                  icon: Icon(FontAwesomeIcons.male)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -411,34 +443,34 @@ class _I_VState extends State<I_V> {
             child: Text("Adicciones"),
           ),
           Row(
-        children: <Widget>[
-          Container(
-            child: Icon(FontAwesomeIcons.venusMars),
-            margin: EdgeInsets.all(10),
-          ),
-          Expanded(
-            child: Container(
-              margin: EdgeInsets.all(10),
-              child: DropdownButton(
-                isExpanded: true,
-                items: _items_adicciones,
-                value: _current_adiccion,
-                onChanged: (value) {
-                  setState(() {
-                    _current_adiccion = value;
-                  });
-                },
+            children: <Widget>[
+              Container(
+                child: Icon(FontAwesomeIcons.wineBottle),
+                margin: EdgeInsets.all(10),
               ),
-            ),
+              Expanded(
+                child: Container(
+                  margin: EdgeInsets.all(10),
+                  child: DropdownButton(
+                    isExpanded: true,
+                    items: _items_adicciones,
+                    value: _current_adiccion,
+                    onChanged: (value) {
+                      setState(() {
+                        _current_adiccion = value;
+                      });
+                    },
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
               decoration: InputDecoration(
                   labelText: "Regimen alimenticio",
-                  icon: Icon(FontAwesomeIcons.female)),
+                  icon: Icon(FontAwesomeIcons.hamburger)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -448,7 +480,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: InputDecoration(
                   labelText: "Condiciones habitacionales",
-                  icon: Icon(FontAwesomeIcons.female)),
+                  icon: Icon(FontAwesomeIcons.houzz)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -463,7 +495,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: InputDecoration(
                   labelText: "Enfermedades propias de la infancias",
-                  icon: Icon(FontAwesomeIcons.female)),
+                  icon: Icon(FontAwesomeIcons.baby)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -473,7 +505,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: InputDecoration(
                   labelText: "Antecedentes traumaticos",
-                  icon: Icon(FontAwesomeIcons.female)),
+                  icon: Icon(FontAwesomeIcons.userInjured)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -483,7 +515,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: InputDecoration(
                   labelText: "Antecedentes quirurgicos",
-                  icon: Icon(FontAwesomeIcons.female)),
+                  icon: Icon(FontAwesomeIcons.userMd)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -500,7 +532,7 @@ class _I_VState extends State<I_V> {
                 Row(
                   children: <Widget>[
                     Container(
-                      child: Icon(FontAwesomeIcons.apple),
+                      child: Icon(FontAwesomeIcons.appleAlt),
                       margin: EdgeInsets.all(10),
                     ),
                     Expanded(
@@ -530,7 +562,7 @@ class _I_VState extends State<I_V> {
                           decoration: InputDecoration(
                               labelText: "otra alergia",
                               icon: Icon(
-                                FontAwesomeIcons.female,
+                                FontAwesomeIcons.appleAlt,
                                 color: Colors.blue,
                               ),
                               labelStyle: TextStyle(color: Colors.blue)),
@@ -563,7 +595,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: InputDecoration(
                   labelText: "transfusiones",
-                  icon: Icon(FontAwesomeIcons.female)),
+                  icon: Icon(FontAwesomeIcons.vials)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -573,7 +605,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: InputDecoration(
                   labelText: "¿Ha recibido radioterapia y/o quimioterapia",
-                  icon: Icon(FontAwesomeIcons.female)),
+                  icon: Icon(FontAwesomeIcons.radiationAlt)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -583,7 +615,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: InputDecoration(
                   labelText: "Experiencia previa con anestesia",
-                  icon: Icon(FontAwesomeIcons.female)),
+                  icon: Icon(FontAwesomeIcons.syringe)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -609,7 +641,7 @@ class _I_VState extends State<I_V> {
                 Row(
                   children: <Widget>[
                     Container(
-                      child: Icon(FontAwesomeIcons.apple),
+                      child: Icon(FontAwesomeIcons.cookieBite),
                       margin: EdgeInsets.all(10),
                     ),
                     Expanded(
@@ -639,7 +671,7 @@ class _I_VState extends State<I_V> {
                           decoration: InputDecoration(
                               labelText: "otra",
                               icon: Icon(
-                                FontAwesomeIcons.female,
+                                FontAwesomeIcons.cookieBite,
                                 color: Colors.blue,
                               ),
                               labelStyle: TextStyle(color: Colors.blue)),
@@ -655,7 +687,7 @@ class _I_VState extends State<I_V> {
                         child: TextFormField(
                           decoration: InputDecoration(
                               labelText: "Tratamiento",
-                              icon: Icon(FontAwesomeIcons.female)),
+                              icon: Icon(FontAwesomeIcons.pills)),
                           keyboardType: TextInputType.text,
                           onChanged: (value) {},
                         ),
@@ -692,7 +724,7 @@ class _I_VState extends State<I_V> {
                 Row(
                   children: <Widget>[
                     Container(
-                      child: Icon(FontAwesomeIcons.apple),
+                      child: Icon(FontAwesomeIcons.running),
                       margin: EdgeInsets.all(10),
                     ),
                     Expanded(
@@ -723,7 +755,7 @@ class _I_VState extends State<I_V> {
                           decoration: InputDecoration(
                               labelText: "otra",
                               icon: Icon(
-                                FontAwesomeIcons.female,
+                                FontAwesomeIcons.running,
                                 color: Colors.blue,
                               ),
                               labelStyle: TextStyle(color: Colors.blue)),
@@ -739,7 +771,7 @@ class _I_VState extends State<I_V> {
                         child: TextFormField(
                           decoration: InputDecoration(
                               labelText: "Tratamiento",
-                              icon: Icon(FontAwesomeIcons.female)),
+                              icon: Icon(FontAwesomeIcons.pills)),
                           keyboardType: TextInputType.text,
                           onChanged: (value) {},
                         ),
@@ -777,7 +809,7 @@ class _I_VState extends State<I_V> {
                 Row(
                   children: <Widget>[
                     Container(
-                      child: Icon(FontAwesomeIcons.apple),
+                      child: Icon(FontAwesomeIcons.heart),
                       margin: EdgeInsets.all(10),
                     ),
                     Expanded(
@@ -809,7 +841,7 @@ class _I_VState extends State<I_V> {
                           decoration: InputDecoration(
                               labelText: "otra",
                               icon: Icon(
-                                FontAwesomeIcons.female,
+                                FontAwesomeIcons.heart,
                                 color: Colors.blue,
                               ),
                               labelStyle: TextStyle(color: Colors.blue)),
@@ -826,7 +858,7 @@ class _I_VState extends State<I_V> {
                         child: TextFormField(
                           decoration: InputDecoration(
                               labelText: "Tratamiento",
-                              icon: Icon(FontAwesomeIcons.female)),
+                              icon: Icon(FontAwesomeIcons.pills)),
                           keyboardType: TextInputType.text,
                           onChanged: (value) {},
                         ),
@@ -864,7 +896,7 @@ class _I_VState extends State<I_V> {
                 Row(
                   children: <Widget>[
                     Container(
-                      child: Icon(FontAwesomeIcons.apple),
+                      child: Icon(FontAwesomeIcons.venusMars),
                       margin: EdgeInsets.all(10),
                     ),
                     Expanded(
@@ -896,7 +928,7 @@ class _I_VState extends State<I_V> {
                           decoration: InputDecoration(
                               labelText: "otra ",
                               icon: Icon(
-                                FontAwesomeIcons.female,
+                                FontAwesomeIcons.venusMars,
                                 color: Colors.blue,
                               ),
                               labelStyle: TextStyle(color: Colors.blue)),
@@ -913,7 +945,7 @@ class _I_VState extends State<I_V> {
                         child: TextFormField(
                           decoration: InputDecoration(
                               labelText: "Tratamiento",
-                              icon: Icon(FontAwesomeIcons.female)),
+                              icon: Icon(FontAwesomeIcons.pills)),
                           keyboardType: TextInputType.text,
                           onChanged: (value) {},
                         ),
@@ -951,7 +983,7 @@ class _I_VState extends State<I_V> {
                 Row(
                   children: <Widget>[
                     Container(
-                      child: Icon(FontAwesomeIcons.apple),
+                      child: Icon(FontAwesomeIcons.drawPolygon),
                       margin: EdgeInsets.all(10),
                     ),
                     Expanded(
@@ -981,7 +1013,7 @@ class _I_VState extends State<I_V> {
                           decoration: InputDecoration(
                               labelText: "otra ",
                               icon: Icon(
-                                FontAwesomeIcons.female,
+                                FontAwesomeIcons.drawPolygon,
                                 color: Colors.blue,
                               ),
                               labelStyle: TextStyle(color: Colors.blue)),
@@ -997,7 +1029,7 @@ class _I_VState extends State<I_V> {
                         child: TextFormField(
                           decoration: InputDecoration(
                               labelText: "Tratamiento",
-                              icon: Icon(FontAwesomeIcons.female)),
+                              icon: Icon(FontAwesomeIcons.pills)),
                           keyboardType: TextInputType.text,
                           onChanged: (value) {},
                         ),
@@ -1034,7 +1066,7 @@ class _I_VState extends State<I_V> {
                 Row(
                   children: <Widget>[
                     Container(
-                      child: Icon(FontAwesomeIcons.apple),
+                      child: Icon(FontAwesomeIcons.tint),
                       margin: EdgeInsets.all(10),
                     ),
                     Expanded(
@@ -1065,7 +1097,7 @@ class _I_VState extends State<I_V> {
                           decoration: InputDecoration(
                               labelText: "otra ",
                               icon: Icon(
-                                FontAwesomeIcons.female,
+                                FontAwesomeIcons.tint,
                                 color: Colors.blue,
                               ),
                               labelStyle: TextStyle(color: Colors.blue)),
@@ -1081,7 +1113,7 @@ class _I_VState extends State<I_V> {
                         child: TextFormField(
                           decoration: InputDecoration(
                               labelText: "Tratamiento",
-                              icon: Icon(FontAwesomeIcons.female)),
+                              icon: Icon(FontAwesomeIcons.pills)),
                           keyboardType: TextInputType.text,
                           onChanged: (value) {},
                         ),
@@ -1119,7 +1151,7 @@ class _I_VState extends State<I_V> {
                 Row(
                   children: <Widget>[
                     Container(
-                      child: Icon(FontAwesomeIcons.apple),
+                      child: Icon(FontAwesomeIcons.brain),
                       margin: EdgeInsets.all(10),
                     ),
                     Expanded(
@@ -1150,7 +1182,7 @@ class _I_VState extends State<I_V> {
                           decoration: InputDecoration(
                               labelText: "otra ",
                               icon: Icon(
-                                FontAwesomeIcons.female,
+                                FontAwesomeIcons.brain,
                                 color: Colors.blue,
                               ),
                               labelStyle: TextStyle(color: Colors.blue)),
@@ -1166,7 +1198,7 @@ class _I_VState extends State<I_V> {
                         child: TextFormField(
                           decoration: InputDecoration(
                               labelText: "Tratamiento",
-                              icon: Icon(FontAwesomeIcons.female)),
+                              icon: Icon(FontAwesomeIcons.pills)),
                           keyboardType: TextInputType.text,
                           onChanged: (value) {},
                         ),
@@ -1203,7 +1235,7 @@ class _I_VState extends State<I_V> {
                 Row(
                   children: <Widget>[
                     Container(
-                      child: Icon(FontAwesomeIcons.apple),
+                      child: Icon(FontAwesomeIcons.bone),
                       margin: EdgeInsets.all(10),
                     ),
                     Expanded(
@@ -1236,7 +1268,7 @@ class _I_VState extends State<I_V> {
                           decoration: InputDecoration(
                               labelText: "otra ",
                               icon: Icon(
-                                FontAwesomeIcons.female,
+                                FontAwesomeIcons.bone,
                                 color: Colors.blue,
                               ),
                               labelStyle: TextStyle(color: Colors.blue)),
@@ -1253,7 +1285,7 @@ class _I_VState extends State<I_V> {
                         child: TextFormField(
                           decoration: InputDecoration(
                               labelText: "Tratamiento",
-                              icon: Icon(FontAwesomeIcons.female)),
+                              icon: Icon(FontAwesomeIcons.pills)),
                           keyboardType: TextInputType.text,
                           onChanged: (value) {},
                         ),
@@ -1291,7 +1323,7 @@ class _I_VState extends State<I_V> {
                 Row(
                   children: <Widget>[
                     Container(
-                      child: Icon(FontAwesomeIcons.apple),
+                      child: Icon(FontAwesomeIcons.pastafarianism),
                       margin: EdgeInsets.all(10),
                     ),
                     Expanded(
@@ -1305,9 +1337,8 @@ class _I_VState extends State<I_V> {
                               _current_inmunologico.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
-                              _current_inmunologico[
-                                  _current_inmunologico
-                                      .indexOf(value)] = value2;
+                              _current_inmunologico[_current_inmunologico
+                                  .indexOf(value)] = value2;
                             });
                           },
                         ),
@@ -1315,8 +1346,7 @@ class _I_VState extends State<I_V> {
                     ),
                   ],
                 ),
-                _current_inmunologico[
-                            _current_inmunologico.indexOf(value)] ==
+                _current_inmunologico[_current_inmunologico.indexOf(value)] ==
                         "Otras"
                     ? Container(
                         margin: EdgeInsets.all(10),
@@ -1324,7 +1354,7 @@ class _I_VState extends State<I_V> {
                           decoration: InputDecoration(
                               labelText: "otra ",
                               icon: Icon(
-                                FontAwesomeIcons.female,
+                                FontAwesomeIcons.pastafarianism,
                                 color: Colors.blue,
                               ),
                               labelStyle: TextStyle(color: Colors.blue)),
@@ -1333,15 +1363,14 @@ class _I_VState extends State<I_V> {
                         ),
                       )
                     : Container(),
-                _current_inmunologico[
-                            _current_inmunologico.indexOf(value)] !=
+                _current_inmunologico[_current_inmunologico.indexOf(value)] !=
                         "Ninguna"
                     ? Container(
                         margin: EdgeInsets.all(10),
                         child: TextFormField(
                           decoration: InputDecoration(
                               labelText: "Tratamiento",
-                              icon: Icon(FontAwesomeIcons.female)),
+                              icon: Icon(FontAwesomeIcons.pills)),
                           keyboardType: TextInputType.text,
                           onChanged: (value) {},
                         ),
@@ -1359,8 +1388,8 @@ class _I_VState extends State<I_V> {
               ),
               onPressed: () {
                 setState(() {
-                  _items_inmunologico.add(Util().ajustarlistas(
-                      inmunologico, _current_inmunologico));
+                  _items_inmunologico.add(Util()
+                      .ajustarlistas(inmunologico, _current_inmunologico));
                   _current_inmunologico
                       .add(_items_inmunologico.last.first.value);
                 });
@@ -1379,7 +1408,7 @@ class _I_VState extends State<I_V> {
                 Row(
                   children: <Widget>[
                     Container(
-                      child: Icon(FontAwesomeIcons.apple),
+                      child: Icon(FontAwesomeIcons.allergies),
                       margin: EdgeInsets.all(10),
                     ),
                     Expanded(
@@ -1393,9 +1422,8 @@ class _I_VState extends State<I_V> {
                               _current_tegumentario.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
-                              _current_tegumentario[
-                                  _current_tegumentario
-                                      .indexOf(value)] = value2;
+                              _current_tegumentario[_current_tegumentario
+                                  .indexOf(value)] = value2;
                             });
                           },
                         ),
@@ -1403,8 +1431,7 @@ class _I_VState extends State<I_V> {
                     ),
                   ],
                 ),
-                _current_tegumentario[
-                            _current_tegumentario.indexOf(value)] ==
+                _current_tegumentario[_current_tegumentario.indexOf(value)] ==
                         "Otras"
                     ? Container(
                         margin: EdgeInsets.all(10),
@@ -1412,7 +1439,7 @@ class _I_VState extends State<I_V> {
                           decoration: InputDecoration(
                               labelText: "otra ",
                               icon: Icon(
-                                FontAwesomeIcons.female,
+                                FontAwesomeIcons.allergies,
                                 color: Colors.blue,
                               ),
                               labelStyle: TextStyle(color: Colors.blue)),
@@ -1421,15 +1448,14 @@ class _I_VState extends State<I_V> {
                         ),
                       )
                     : Container(),
-                _current_tegumentario[
-                            _current_tegumentario.indexOf(value)] !=
+                _current_tegumentario[_current_tegumentario.indexOf(value)] !=
                         "Ninguna"
                     ? Container(
                         margin: EdgeInsets.all(10),
                         child: TextFormField(
                           decoration: InputDecoration(
                               labelText: "Tratamiento",
-                              icon: Icon(FontAwesomeIcons.female)),
+                              icon: Icon(FontAwesomeIcons.pills)),
                           keyboardType: TextInputType.text,
                           onChanged: (value) {},
                         ),
@@ -1447,8 +1473,8 @@ class _I_VState extends State<I_V> {
               ),
               onPressed: () {
                 setState(() {
-                  _items_tegumentario.add(Util().ajustarlistas(
-                      tegumentario, _current_tegumentario));
+                  _items_tegumentario.add(Util()
+                      .ajustarlistas(tegumentario, _current_tegumentario));
                   _current_tegumentario
                       .add(_items_tegumentario.last.first.value);
                 });
@@ -1461,34 +1487,34 @@ class _I_VState extends State<I_V> {
             child: Text("Clasificacion A.S.A"),
           ),
           Row(
-        children: <Widget>[
-          Container(
-            child: Icon(FontAwesomeIcons.venusMars),
-            margin: EdgeInsets.all(10),
-          ),
-          Expanded(
-            child: Container(
-              margin: EdgeInsets.all(10),
-              child: DropdownButton(
-                isExpanded: true,
-                items: _items_clasificacion_asa,
-                value: _current_clasificacion_asa,
-                onChanged: (value) {
-                  setState(() {
-                    _current_clasificacion_asa = value;
-                  });
-                },
+            children: <Widget>[
+              Container(
+                child: Icon(FontAwesomeIcons.male),
+                margin: EdgeInsets.all(10),
               ),
-            ),
+              Expanded(
+                child: Container(
+                  margin: EdgeInsets.all(10),
+                  child: DropdownButton(
+                    isExpanded: true,
+                    items: _items_clasificacion_asa,
+                    value: _current_clasificacion_asa,
+                    onChanged: (value) {
+                      setState(() {
+                        _current_clasificacion_asa = value;
+                      });
+                    },
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
         ],
       ),
     );
   }
 
-  Widget signos_vitales(){
+  Widget signos_vitales() {
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
@@ -1500,11 +1526,10 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Frecuencia cardiaca",
-                      icon: Icon(FontAwesomeIcons.thermometerEmpty),
+                      icon: Icon(FontAwesomeIcons.heartbeat),
                     )),
                     keyboardType: TextInputType.text,
-                    onChanged: (value) {
-                    },
+                    onChanged: (value) {},
                   ),
                 ),
               ),
@@ -1514,11 +1539,10 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Tension arterial",
-                      icon: Icon(FontAwesomeIcons.thermometerFull),
+                      icon: Icon(FontAwesomeIcons.heartbeat),
                     )),
                     keyboardType: TextInputType.text,
-                    onChanged: (value) {
-                    },
+                    onChanged: (value) {},
                   ),
                 ),
               ),
@@ -1532,11 +1556,11 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Frecuencia respiratoria",
-                      icon: Icon(FontAwesomeIcons.thermometerEmpty),
+                      labelStyle: TextStyle(fontSize: 14),
+                      icon: Icon(FontAwesomeIcons.biking),
                     )),
                     keyboardType: TextInputType.text,
-                    onChanged: (value) {
-                    },
+                    onChanged: (value) {},
                   ),
                 ),
               ),
@@ -1546,11 +1570,10 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Temperatura",
-                      icon: Icon(FontAwesomeIcons.thermometerFull),
+                      icon: Icon(FontAwesomeIcons.thermometerHalf),
                     )),
                     keyboardType: TextInputType.text,
-                    onChanged: (value) {
-                    },
+                    onChanged: (value) {},
                   ),
                 ),
               ),
@@ -1569,11 +1592,10 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Peso (kg)",
-                      icon: Icon(FontAwesomeIcons.thermometerEmpty),
+                      icon: Icon(FontAwesomeIcons.weight),
                     )),
                     keyboardType: TextInputType.text,
-                    onChanged: (value) {
-                    },
+                    onChanged: (value) {},
                   ),
                 ),
               ),
@@ -1583,11 +1605,10 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Talla",
-                      icon: Icon(FontAwesomeIcons.thermometerFull),
+                      icon: Icon(FontAwesomeIcons.tshirt),
                     )),
                     keyboardType: TextInputType.text,
-                    onChanged: (value) {
-                    },
+                    onChanged: (value) {},
                   ),
                 ),
               ),
@@ -1597,7 +1618,8 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               decoration: InputDecoration(
-                  labelText: "Constitucion fisica", icon: Icon(FontAwesomeIcons.female)),
+                  labelText: "Constitucion fisica",
+                  icon: Icon(FontAwesomeIcons.running)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -1613,29 +1635,29 @@ class _I_VState extends State<I_V> {
             child: Text("Craneo"),
           ),
           Row(
-        children: <Widget>[
-          Container(
-            child: Icon(FontAwesomeIcons.venusMars),
-            margin: EdgeInsets.all(10),
-          ),
-          Expanded(
-            child: Container(
-              margin: EdgeInsets.all(10),
-              child: DropdownButton(
-                isExpanded: true,
-                items: _items_craneoforma,
-                value: _current_craneoforma,
-                onChanged: (value) {
-                  setState(() {
-                    _current_craneoforma = value;
-                  });
-                },
+            children: <Widget>[
+              Container(
+                child: Icon(FontAwesomeIcons.userAlt),
+                margin: EdgeInsets.all(10),
               ),
-            ),
+              Expanded(
+                child: Container(
+                  margin: EdgeInsets.all(10),
+                  child: DropdownButton(
+                    isExpanded: true,
+                    items: _items_craneoforma,
+                    value: _current_craneoforma,
+                    onChanged: (value) {
+                      setState(() {
+                        _current_craneoforma = value;
+                      });
+                    },
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
-      Row(
+          Row(
             children: <Widget>[
               Expanded(
                 child: Container(
@@ -1643,11 +1665,10 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Exostosis",
-                      icon: Icon(FontAwesomeIcons.thermometerEmpty),
+                      icon: Icon(FontAwesomeIcons.userAlt),
                     )),
                     keyboardType: TextInputType.text,
-                    onChanged: (value) {
-                    },
+                    onChanged: (value) {},
                   ),
                 ),
               ),
@@ -1657,11 +1678,10 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Endostosis",
-                      icon: Icon(FontAwesomeIcons.thermometerFull),
+                      icon: Icon(FontAwesomeIcons.userAlt),
                     )),
                     keyboardType: TextInputType.text,
-                    onChanged: (value) {
-                    },
+                    onChanged: (value) {},
                   ),
                 ),
               ),
@@ -1685,11 +1705,10 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Transversales",
-                      icon: Icon(FontAwesomeIcons.thermometerEmpty),
+                      icon: Icon(FontAwesomeIcons.userAlt),
                     )),
                     keyboardType: TextInputType.text,
-                    onChanged: (value) {
-                    },
+                    onChanged: (value) {},
                   ),
                 ),
               ),
@@ -1699,11 +1718,10 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Longitudinales",
-                      icon: Icon(FontAwesomeIcons.thermometerFull),
+                      icon: Icon(FontAwesomeIcons.userAlt),
                     )),
                     keyboardType: TextInputType.text,
-                    onChanged: (value) {
-                    },
+                    onChanged: (value) {},
                   ),
                 ),
               ),
@@ -1722,11 +1740,10 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Enoftalmo",
-                      icon: Icon(FontAwesomeIcons.thermometerEmpty),
+                      icon: Icon(FontAwesomeIcons.eye),
                     )),
                     keyboardType: TextInputType.text,
-                    onChanged: (value) {
-                    },
+                    onChanged: (value) {},
                   ),
                 ),
               ),
@@ -1736,28 +1753,26 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "exoftalmo",
-                      icon: Icon(FontAwesomeIcons.thermometerFull),
+                      icon: Icon(FontAwesomeIcons.eye),
                     )),
                     keyboardType: TextInputType.text,
-                    onChanged: (value) {
-                    },
+                    onChanged: (value) {},
                   ),
                 ),
               ),
             ],
           ),
-           Container(
-             margin: const EdgeInsets.all(10.0),
-             child: TextFormField(
-                  decoration: (InputDecoration(
-                    labelText: "Movilidad",
-                    icon: Icon(FontAwesomeIcons.thermometerFull),
-                  )),
-                  keyboardType: TextInputType.text,
-                  onChanged: (value) {
-                  },
-                ),
-           ),
+          Container(
+            margin: const EdgeInsets.all(10.0),
+            child: TextFormField(
+              decoration: (InputDecoration(
+                labelText: "Movilidad",
+                icon: Icon(FontAwesomeIcons.eye),
+              )),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
+            ),
+          ),
           Container(
             margin: EdgeInsets.all(10),
             alignment: Alignment.centerLeft,
@@ -1771,11 +1786,10 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Midriasis",
-                      icon: Icon(FontAwesomeIcons.thermometerEmpty),
+                      icon: Icon(FontAwesomeIcons.eye),
                     )),
                     keyboardType: TextInputType.text,
-                    onChanged: (value) {
-                    },
+                    onChanged: (value) {},
                   ),
                 ),
               ),
@@ -1785,11 +1799,10 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Miosis",
-                      icon: Icon(FontAwesomeIcons.thermometerFull),
+                      icon: Icon(FontAwesomeIcons.eye),
                     )),
                     keyboardType: TextInputType.text,
-                    onChanged: (value) {
-                    },
+                    onChanged: (value) {},
                   ),
                 ),
               ),
@@ -1800,19 +1813,17 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: (InputDecoration(
                 labelText: "Reflejo pupilar",
-                icon: Icon(FontAwesomeIcons.thermometerFull),
+                icon: Icon(FontAwesomeIcons.eye),
               )),
               keyboardType: TextInputType.text,
-              onChanged: (value) {
-              },
+              onChanged: (value) {},
             ),
           ),
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
               decoration: InputDecoration(
-                  labelText: "Nariz",
-                  icon: Icon(FontAwesomeIcons.female)),
+                  labelText: "Nariz", icon: Icon(FontAwesomeIcons.userAlt)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -1827,11 +1838,10 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: (InputDecoration(
                 labelText: "Color",
-                icon: Icon(FontAwesomeIcons.thermometerEmpty),
+                icon: Icon(FontAwesomeIcons.diagnoses),
               )),
               keyboardType: TextInputType.text,
-              onChanged: (value) {
-              },
+              onChanged: (value) {},
             ),
           ),
           Row(
@@ -1842,11 +1852,10 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Palida",
-                      icon: Icon(FontAwesomeIcons.thermometerFull),
+                      icon: Icon(FontAwesomeIcons.diagnoses),
                     )),
                     keyboardType: TextInputType.text,
-                    onChanged: (value) {
-                    },
+                    onChanged: (value) {},
                   ),
                 ),
               ),
@@ -1856,11 +1865,10 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Cianotica",
-                      icon: Icon(FontAwesomeIcons.thermometerFull),
+                      icon: Icon(FontAwesomeIcons.diagnoses),
                     )),
                     keyboardType: TextInputType.text,
-                    onChanged: (value) {
-                    },
+                    onChanged: (value) {},
                   ),
                 ),
               )
@@ -1874,11 +1882,10 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Enrojecida",
-                      icon: Icon(FontAwesomeIcons.thermometerFull),
+                      icon: Icon(FontAwesomeIcons.diagnoses),
                     )),
                     keyboardType: TextInputType.text,
-                    onChanged: (value) {
-                    },
+                    onChanged: (value) {},
                   ),
                 ),
               ),
@@ -1888,11 +1895,10 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Manchas",
-                      icon: Icon(FontAwesomeIcons.thermometerFull),
+                      icon: Icon(FontAwesomeIcons.diagnoses),
                     )),
                     keyboardType: TextInputType.text,
-                    onChanged: (value) {
-                    },
+                    onChanged: (value) {},
                   ),
                 ),
               )
@@ -1911,11 +1917,11 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Hipotonicos",
-                      icon: Icon(FontAwesomeIcons.thermometerFull),
+                      labelStyle: TextStyle(fontSize: 14),
+                      icon: Icon(FontAwesomeIcons.fistRaised),
                     )),
                     keyboardType: TextInputType.text,
-                    onChanged: (value) {
-                    },
+                    onChanged: (value) {},
                   ),
                 ),
               ),
@@ -1925,11 +1931,11 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Hipertonicos",
-                      icon: Icon(FontAwesomeIcons.thermometerFull),
+                      labelStyle: TextStyle(fontSize: 13),
+                      icon: Icon(FontAwesomeIcons.fistRaised),
                     )),
                     keyboardType: TextInputType.text,
-                    onChanged: (value) {
-                    },
+                    onChanged: (value) {},
                   ),
                 ),
               ),
@@ -1939,11 +1945,11 @@ class _I_VState extends State<I_V> {
                   child: TextFormField(
                     decoration: (InputDecoration(
                       labelText: "Espasticos",
-                      icon: Icon(FontAwesomeIcons.thermometerFull),
+                      labelStyle: TextStyle(fontSize: 14),
+                      icon: Icon(FontAwesomeIcons.fistRaised),
                     )),
                     keyboardType: TextInputType.text,
-                    onChanged: (value) {
-                    },
+                    onChanged: (value) {},
                   ),
                 ),
               )
@@ -1959,7 +1965,7 @@ class _I_VState extends State<I_V> {
             child: TextFormField(
               decoration: InputDecoration(
                   labelText: "Ganglios linfaticos",
-                  icon: Icon(FontAwesomeIcons.female)),
+                  icon: Icon(FontAwesomeIcons.userAlt)),
               keyboardType: TextInputType.text,
               onChanged: (value) {},
             ),
@@ -1976,7 +1982,7 @@ class _I_VState extends State<I_V> {
                 Row(
                   children: <Widget>[
                     Container(
-                      child: Icon(FontAwesomeIcons.apple),
+                      child: Icon(FontAwesomeIcons.teethOpen),
                       margin: EdgeInsets.all(10),
                     ),
                     Expanded(
@@ -1984,14 +1990,15 @@ class _I_VState extends State<I_V> {
                         margin: EdgeInsets.all(1),
                         child: DropdownButton(
                           isExpanded: true,
-                          items:
-                              _items_temporomandibular[_current_temporomandibular.indexOf(value)],
+                          items: _items_temporomandibular[
+                              _current_temporomandibular.indexOf(value)],
                           value: _current_temporomandibular[
                               _current_temporomandibular.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
                               _current_temporomandibular[
-                                  _current_temporomandibular.indexOf(value)] = value2;
+                                  _current_temporomandibular
+                                      .indexOf(value)] = value2;
                             });
                           },
                         ),
@@ -1999,7 +2006,9 @@ class _I_VState extends State<I_V> {
                     ),
                   ],
                 ),
-                _current_temporomandibular[_current_temporomandibular.indexOf(value)] != "Ninguna"
+                _current_temporomandibular[
+                            _current_temporomandibular.indexOf(value)] !=
+                        "Ninguna"
                     ? Container(
                         margin: EdgeInsets.all(10),
                         child: TextFormField(
@@ -2027,14 +2036,923 @@ class _I_VState extends State<I_V> {
               ),
               onPressed: () {
                 setState(() {
-                  _items_temporomandibular
-                      .add(Util().ajustarlistas(temporomandibular, _current_temporomandibular));
-                  _current_temporomandibular.add(_items_temporomandibular.last.first.value);
+                  _items_temporomandibular.add(Util().ajustarlistas(
+                      temporomandibular, _current_temporomandibular));
+                  _current_temporomandibular
+                      .add(_items_temporomandibular.last.first.value);
                 });
               },
             ),
           ),
-          
+          Container(
+            margin: EdgeInsets.all(10),
+            alignment: Alignment.centerLeft,
+            child: Text("Cavidad oral"),
+          ),
+          Container(
+            margin: EdgeInsets.all(10),
+            child: TextFormField(
+              decoration: InputDecoration(
+                  labelText: "Labios", icon: Icon(FontAwesomeIcons.teethOpen)),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.all(10),
+            child: TextFormField(
+              decoration: InputDecoration(
+                  labelText: "Carrillos", icon: Icon(FontAwesomeIcons.teethOpen)),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.all(10),
+            child: TextFormField(
+              decoration: InputDecoration(
+                  labelText: "Paladar duro",
+                  icon: Icon(FontAwesomeIcons.teethOpen)),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.all(10),
+            child: TextFormField(
+              decoration: InputDecoration(
+                  labelText: "Paladar blando",
+                  icon: Icon(FontAwesomeIcons.teethOpen)),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.all(10),
+            child: TextFormField(
+              decoration: InputDecoration(
+                  labelText: "Orafaringe", icon: Icon(FontAwesomeIcons.teethOpen)),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.all(10),
+            child: TextFormField(
+              decoration: InputDecoration(
+                  labelText: "Piso de la boca",
+                  icon: Icon(FontAwesomeIcons.teethOpen)),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.all(10),
+            child: TextFormField(
+              decoration: InputDecoration(
+                  labelText: "Lengua", icon: Icon(FontAwesomeIcons.teethOpen)),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.all(10),
+            child: TextFormField(
+              decoration: InputDecoration(
+                  labelText: "Encia", icon: Icon(FontAwesomeIcons.teethOpen)),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.all(10),
+            child: TextFormField(
+              decoration: InputDecoration(
+                  labelText: "Dientes", icon: Icon(FontAwesomeIcons.teethOpen)),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.all(10),
+            child: TextFormField(
+              decoration: InputDecoration(
+                  labelText: "Padecimiento actual",
+                  icon: Icon(FontAwesomeIcons.userInjured)),
+              keyboardType: TextInputType.text,
+              minLines: 1,
+              maxLines: 6,
+              onChanged: (value) {},
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget estudios_gabinete() {
+    return SingleChildScrollView(
+      child: Column(
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.all(10),
+            alignment: Alignment.centerLeft,
+            child: Text("Radiografia"),
+          ),
+          Column(
+              children: _current_radiografia.map((value) {
+            return Column(
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Container(
+                      child: Icon(FontAwesomeIcons.vectorSquare),
+                      margin: EdgeInsets.all(10),
+                    ),
+                    Expanded(
+                      child: Container(
+                        margin: EdgeInsets.all(1),
+                        child: DropdownButton(
+                          isExpanded: true,
+                          items: _items_radiografia[
+                              _current_radiografia.indexOf(value)],
+                          value: _current_radiografia[
+                              _current_radiografia.indexOf(value)],
+                          onChanged: (value2) {
+                            setState(() {
+                              _current_radiografia[
+                                  _current_radiografia.indexOf(value)] = value2;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                _current_radiografia[_current_radiografia.indexOf(value)] ==
+                        radiografia.last
+                    ? Container(
+                        margin: EdgeInsets.all(10),
+                        child: TextFormField(
+                          decoration: InputDecoration(
+                              labelText: "Describa",
+                              icon: Icon(
+                                FontAwesomeIcons.vectorSquare,
+                                color: Colors.blue,
+                              ),
+                              labelStyle: TextStyle(color: Colors.blue)),
+                          keyboardType: TextInputType.text,
+                          onChanged: (value) {},
+                        ),
+                      )
+                    : Container(),
+              ],
+            );
+          }).toList()),
+          Container(
+            alignment: Alignment.centerLeft,
+            child: FlatButton(
+              child: Text(
+                "Añadir",
+                style: TextStyle(color: Colors.blue),
+              ),
+              onPressed: () {
+                setState(() {
+                  _items_radiografia.add(
+                      Util().ajustarlistas(radiografia, _current_radiografia));
+                  _current_radiografia.add(_items_radiografia.last.first.value);
+                });
+              },
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.all(10),
+            child: TextFormField(
+              decoration: InputDecoration(
+                  labelText: "Interpretacion radiografica",
+                  icon: Icon(FontAwesomeIcons.vectorSquare)),
+              keyboardType: TextInputType.text,
+              minLines: 1,
+              maxLines: 6,
+              onChanged: (value) {},
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.all(10),
+            alignment: Alignment.centerLeft,
+            child: Text("Analisis de laboratorio clinico"),
+          ),
+          Column(
+              children: _current_analisis_laboratorio.map((value) {
+            return Column(
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Container(
+                      child: Icon(FontAwesomeIcons.flask),
+                      margin: EdgeInsets.all(10),
+                    ),
+                    Expanded(
+                      child: Container(
+                        margin: EdgeInsets.all(1),
+                        child: DropdownButton(
+                          isExpanded: true,
+                          items: _items_analisis_laboratorio[
+                              _current_analisis_laboratorio.indexOf(value)],
+                          value: _current_analisis_laboratorio[
+                              _current_analisis_laboratorio.indexOf(value)],
+                          onChanged: (value2) {
+                            setState(() {
+                              _current_analisis_laboratorio[
+                                  _current_analisis_laboratorio
+                                      .indexOf(value)] = value2;
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                _current_analisis_laboratorio[
+                            _current_analisis_laboratorio.indexOf(value)] ==
+                        analisis_laboratorio_inm[1]
+                    ? Column(
+                      children: <Widget>[
+                        Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: Container(
+                                  margin: const EdgeInsets.all(10.0),
+                                  child: TextFormField(
+                                    decoration: (InputDecoration(
+                                      labelText: "Hemoglobina",
+                                      icon: Icon(FontAwesomeIcons.tint),
+                                    )),
+                                    keyboardType: TextInputType.text,
+                                    onChanged: (value) {},
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: Container(
+                                  margin: const EdgeInsets.all(10.0),
+                                  child: TextFormField(
+                                    decoration: (InputDecoration(
+                                      labelText: "Hematocrito",
+                                      icon: Icon(FontAwesomeIcons.tint),
+                                    )),
+                                    keyboardType: TextInputType.text,
+                                    onChanged: (value) {},
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: Container(
+                              margin: const EdgeInsets.all(10.0),
+                              child: TextFormField(
+                                decoration: (InputDecoration(
+                                  labelText: "Neutrofilos",
+                                  icon: Icon(FontAwesomeIcons.tint),
+                                )),
+                                keyboardType: TextInputType.text,
+                                onChanged: (value) {},
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(
+                              margin: const EdgeInsets.all(10.0),
+                              child: TextFormField(
+                                decoration: (InputDecoration(
+                                  labelText: "Linfocitos",
+                                  icon: Icon(FontAwesomeIcons.tint),
+                                )),
+                                keyboardType: TextInputType.text,
+                                onChanged: (value) {},
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: Container(
+                              margin: const EdgeInsets.all(10.0),
+                              child: TextFormField(
+                                decoration: (InputDecoration(
+                                  labelText: "Eosinofilos",
+                                  icon: Icon(FontAwesomeIcons.tint),
+                                )),
+                                keyboardType: TextInputType.text,
+                                onChanged: (value) {},
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(
+                              margin: const EdgeInsets.all(10.0),
+                              child: TextFormField(
+                                decoration: (InputDecoration(
+                                  labelText: "Basofilos",
+                                  icon: Icon(FontAwesomeIcons.tint),
+                                )),
+                                keyboardType: TextInputType.text,
+                                onChanged: (value) {},
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: Container(
+                              margin: const EdgeInsets.all(10.0),
+                              child: TextFormField(
+                                decoration: (InputDecoration(
+                                  labelText: "Monocitos",
+                                  icon: Icon(FontAwesomeIcons.tint),
+                                )),
+                                keyboardType: TextInputType.text,
+                                onChanged: (value) {},
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                      ],
+                    )
+                    : Container(),
+
+                    _current_analisis_laboratorio[
+                            _current_analisis_laboratorio.indexOf(value)] ==
+                        analisis_laboratorio_inm[2]
+                    ? Column(
+                      children: <Widget>[
+                        Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: Container(
+                                  margin: const EdgeInsets.all(10.0),
+                                  child: TextFormField(
+                                    decoration: (InputDecoration(
+                                      labelText: "Hemoglobina glucosilada",
+                                      labelStyle: TextStyle(fontSize: 12),
+                                      icon: Icon(FontAwesomeIcons.tint),
+                                    )),
+                                    keyboardType: TextInputType.text,
+                                    onChanged: (value) {},
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: Container(
+                                  margin: const EdgeInsets.all(10.0),
+                                  child: TextFormField(
+                                    decoration: (InputDecoration(
+                                      labelText: "Glicemia",
+                                      icon: Icon(FontAwesomeIcons.tint),
+                                    )),
+                                    keyboardType: TextInputType.text,
+                                    onChanged: (value) {},
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: Container(
+                              margin: const EdgeInsets.all(10.0),
+                              child: TextFormField(
+                                decoration: (InputDecoration(
+                                  labelText: "Otros",
+                                  icon: Icon(FontAwesomeIcons.tint),
+                                )),
+                                keyboardType: TextInputType.text,
+                                onChanged: (value) {},
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                      ],
+                    )
+                    : Container(),
+
+                    _current_analisis_laboratorio[
+                            _current_analisis_laboratorio.indexOf(value)] ==
+                        analisis_laboratorio_inm[3]
+                    ? Column(
+                      children: <Widget>[
+                        Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: Container(
+                                  margin: const EdgeInsets.all(10.0),
+                                  child: TextFormField(
+                                    decoration: (InputDecoration(
+                                      labelText: "Tiempo sangrado",
+                                      icon: Icon(FontAwesomeIcons.tint),
+                                    )),
+                                    keyboardType: TextInputType.text,
+                                    onChanged: (value) {},
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: Container(
+                                  margin: const EdgeInsets.all(10.0),
+                                  child: TextFormField(
+                                    decoration: (InputDecoration(
+                                      labelText: "Tiempo coagulacion",
+                                      icon: Icon(FontAwesomeIcons.tint),
+                                    )),
+                                    keyboardType: TextInputType.text,
+                                    onChanged: (value) {},
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: Container(
+                              margin: const EdgeInsets.all(10.0),
+                              child: TextFormField(
+                                decoration: (InputDecoration(
+                                  labelText: "Cuenta plaquetas",
+                                  icon: Icon(FontAwesomeIcons.tint),
+                                )),
+                                keyboardType: TextInputType.text,
+                                onChanged: (value) {},
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(
+                              margin: const EdgeInsets.all(10.0),
+                              child: TextFormField(
+                                decoration: (InputDecoration(
+                                  labelText: "Tiempo protrombina",
+                                  labelStyle: TextStyle(fontSize: 13),
+                                  icon: Icon(FontAwesomeIcons.tint),
+                                )),
+                                keyboardType: TextInputType.text,
+                                onChanged: (value) {},
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: Container(
+                              margin: const EdgeInsets.all(10.0),
+                              child: TextFormField(
+                                decoration: (InputDecoration(
+                                  labelText: "Tiempo tromboplastina",
+                                  labelStyle: TextStyle(fontSize: 13),
+                                  icon: Icon(FontAwesomeIcons.tint),
+                                )),
+                                keyboardType: TextInputType.text,
+                                onChanged: (value) {},
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(
+                              margin: const EdgeInsets.all(10.0),
+                              child: TextFormField(
+                                decoration: (InputDecoration(
+                                  labelText: "INR",
+                                  icon: Icon(FontAwesomeIcons.tint),
+                                )),
+                                keyboardType: TextInputType.text,
+                                onChanged: (value) {},
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      ],
+                    )
+                    : Container(),
+              ],
+            );
+          }).toList()),
+          Container(
+            alignment: Alignment.centerLeft,
+            child: FlatButton(
+              child: Text(
+                "Añadir",
+                style: TextStyle(color: Colors.blue),
+              ),
+              onPressed: () {
+                setState(() {
+                  _items_analisis_laboratorio.add(Util().ajustarlistas(
+                      analisis_laboratorio, _current_analisis_laboratorio));
+                  _current_analisis_laboratorio
+                      .add(_items_analisis_laboratorio.last.first.value);
+                });
+              },
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.all(10),
+            alignment: Alignment.centerLeft,
+            child: Text("Modelo de estudio"),
+          ),
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: Container(
+                  margin: const EdgeInsets.all(10.0),
+                  child: TextFormField(
+                    decoration: (InputDecoration(
+                      labelText: "Maxilar superior",
+                      icon: Icon(FontAwesomeIcons.teethOpen),
+                    )),
+                    keyboardType: TextInputType.text,
+                    onChanged: (value) {},
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  margin: const EdgeInsets.all(10.0),
+                  child: TextFormField(
+                    decoration: (InputDecoration(
+                      labelText: "Maxilar inferior",
+                      icon: Icon(FontAwesomeIcons.teethOpen),
+                    )),
+                    keyboardType: TextInputType.text,
+                    onChanged: (value) {},
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Container(
+            margin: EdgeInsets.all(10),
+            alignment: Alignment.centerLeft,
+            child: Text("Datos de la cirugia"),
+          ),
+          Container(
+            margin: const EdgeInsets.all(10.0),
+            child: TextFormField(
+              decoration: (InputDecoration(
+                labelText: "Diagnostico",
+                icon: Icon(FontAwesomeIcons.fileMedical),
+              )),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.all(10.0),
+            child: TextFormField(
+              decoration: (InputDecoration(
+                labelText: "Pronostico",
+                icon: Icon(FontAwesomeIcons.fileMedical),
+              )),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.all(10),
+            child: TextFormField(
+              decoration: InputDecoration(
+                  labelText: "Tratamiento",
+                  icon: Icon(FontAwesomeIcons.pills)),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.all(10),
+            alignment: Alignment.centerLeft,
+            child: Text("Plan de Tratamiento"),
+          ),
+          Container(
+            margin: const EdgeInsets.all(10.0),
+            child: TextFormField(
+              decoration: (InputDecoration(
+                labelText: "Antisepsia",
+                icon: Icon(FontAwesomeIcons.pastafarianism),
+              )),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.all(10.0),
+            child: TextFormField(
+              decoration: (InputDecoration(
+                labelText: "Anestesia",
+                icon: Icon(FontAwesomeIcons.syringe),
+              )),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.all(10.0),
+            child: TextFormField(
+              decoration: (InputDecoration(
+                labelText: "Incision",
+                icon: Icon(FontAwesomeIcons.highlighter),
+              )),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.all(10.0),
+            child: TextFormField(
+              decoration: (InputDecoration(
+                labelText: "Diseccion mucoperiostica",
+                icon: Icon(FontAwesomeIcons.highlighter),
+              )),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.all(10.0),
+            child: TextFormField(
+              decoration: (InputDecoration(
+                labelText: "Osteotomia-Ostectomia",
+                icon: Icon(FontAwesomeIcons.bone),
+              )),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.all(10.0),
+            child: TextFormField(
+              decoration: (InputDecoration(
+                labelText: "Operacion",
+                icon: Icon(FontAwesomeIcons.userMd),
+              )),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.all(10.0),
+            child: TextFormField(
+              decoration: (InputDecoration(
+                labelText: "Cuidados herida",
+                icon: Icon(FontAwesomeIcons.bandAid),
+              )),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.all(10.0),
+            child: TextFormField(
+              decoration: (InputDecoration(
+                labelText: "Sutura",
+                icon: Icon(FontAwesomeIcons.bandAid),
+              )),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.all(10),
+            alignment: Alignment.centerLeft,
+            child: Text("Indicaciones post-operatorias"),
+          ),
+          Container(
+            margin: const EdgeInsets.all(10.0),
+            child: TextFormField(
+              decoration: (InputDecoration(
+                labelText: "Primeras 24h",
+                icon: Icon(FontAwesomeIcons.clock),
+              )),
+              minLines: 1,
+              maxLines: 6,
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.all(10.0),
+            child: TextFormField(
+              decoration: (InputDecoration(
+                labelText: "despues de 24h",
+                icon: Icon(FontAwesomeIcons.clock),
+              )),
+              minLines: 1,
+              maxLines: 6,
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.all(10.0),
+            child: TextFormField(
+              decoration: (InputDecoration(
+                labelText: "Incidentes en el procedimiento",
+                icon: Icon(FontAwesomeIcons.userInjured),
+              )),
+              minLines: 1,
+              maxLines: 6,
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.all(10),
+            alignment: Alignment.centerLeft,
+            child: Text("Receta"),
+          ),
+          Container(
+            margin: EdgeInsets.all(10),
+            child: TextFormField(
+              decoration: InputDecoration(
+                  labelText: "Analgesicos", icon: Icon(FontAwesomeIcons.syringe)),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.all(10.0),
+            child: TextFormField(
+              decoration: (InputDecoration(
+                labelText: "Antibioticos",
+                icon: Icon(FontAwesomeIcons.pastafarianism),
+              )),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.all(10.0),
+            child: TextFormField(
+              decoration: (InputDecoration(
+                labelText: "Ansioliticos",
+                icon: Icon(FontAwesomeIcons.userMinus),
+              )),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.all(10.0),
+            child: TextFormField(
+              decoration: (InputDecoration(
+                labelText: "Otros",
+                icon: Icon(FontAwesomeIcons.pills),
+              )),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.all(10.0),
+            child: TextFormField(
+              decoration: (InputDecoration(
+                labelText: "Nombre del cirujano",
+                icon: Icon(FontAwesomeIcons.userMd),
+              )),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.all(10.0),
+            child: TextFormField(
+              decoration: (InputDecoration(
+                labelText: "Nombre del ayudante",
+                icon: Icon(FontAwesomeIcons.userNurse),
+              )),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.all(10.0),
+            child: TextFormField(
+              decoration: (InputDecoration(
+                labelText: "Nombre del instrumentista",
+                icon: Icon(FontAwesomeIcons.userNurse),
+              )),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.all(10.0),
+            child: TextFormField(
+              decoration: (InputDecoration(
+                labelText: "Nombre del asistente circulante",
+                icon: Icon(FontAwesomeIcons.userNurse),
+              )),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
+            ),
+          ),
+          Row(
+            children: <Widget>[
+              Expanded(
+                child: Container(
+                  margin: const EdgeInsets.all(10.0),
+                  child: TextFormField(
+                    decoration: (InputDecoration(
+                      labelText: "Hora inicio",
+                      icon: Icon(FontAwesomeIcons.clock),
+                    )),
+                    keyboardType: TextInputType.text,
+                    onChanged: (value) {},
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  margin: const EdgeInsets.all(10.0),
+                  child: TextFormField(
+                    decoration: (InputDecoration(
+                      labelText: "Hora termino",
+                      icon: Icon(FontAwesomeIcons.clock),
+                    )),
+                    keyboardType: TextInputType.text,
+                    onChanged: (value) {},
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Container(
+            margin: const EdgeInsets.all(10.0),
+            child: TextFormField(
+              decoration: (InputDecoration(
+                labelText: "Valor del tratamiento quirurgico",
+                icon: Icon(FontAwesomeIcons.dollarSign),
+              )),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
+            ),
+          ),
+          ListTile(
+            leading: Icon(Icons.calendar_today),
+            title: Text(
+              DateFormat("y-M-d").format(fecha_retiosutura),
+              style: TextStyle(
+                  fontSize: 20.0, color: Theme.of(context).accentColor),
+            ),
+            subtitle: Text("Retiro de sutura"),
+            onTap: () {
+              Util()
+                  .selectDate(context, fecha_retiosutura, DateTime.now())
+                  .then((fecha) {
+                setState(() {
+                  fecha_retiosutura = fecha;
+                });
+              });
+            },
+          ),
+          Container(
+            margin: EdgeInsets.all(10),
+            child: TextFormField(
+              decoration: InputDecoration(
+                  labelText: "Estado postquirurgico del paciente",
+                  icon: Icon(FontAwesomeIcons.userAlt)),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
+            ),
+          ),
+          ListTile(
+            leading: Icon(Icons.calendar_today),
+            title: Text(
+              DateFormat("y-M-d").format(fecha_alta),
+              style: TextStyle(
+                  fontSize: 20.0, color: Theme.of(context).accentColor),
+            ),
+            subtitle: Text("Dado de alta"),
+            onTap: () {
+              Util()
+                  .selectDate(context, fecha_alta, DateTime.now())
+                  .then((fecha) {
+                setState(() {
+                  fecha_alta = fecha;
+                });
+              });
+            },
+          ),
         ],
       ),
     );

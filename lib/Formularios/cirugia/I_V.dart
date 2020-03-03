@@ -220,16 +220,18 @@ class _I_VState extends State<I_V> {
     "Quimica sanguinea",
     "Pruebas basicas de valoracion de la hemostasia"
   ];
-  List<String>analisis_laboratorio_inm = List();
   List<List<DropdownMenuItem>> _items_analisis_laboratorio = List();
   List<String> _current_analisis_laboratorio = List();
 
   DateTime fecha_retiosutura = DateTime.now();
   DateTime fecha_alta = DateTime.now();
 
+  bool exostosis = false, endostosis = false, transversales = false, longitudinales = false,
+  enoftalmo  = false, exoftalmo = false, midriasis  = false, miosis = false, palida = false,
+  cianotica = false, enrojecida = false, manchas = false, hipotonico = false, hipertonico = false,
+  espastico = false;
   @override
   void initState() {
-    analisis_laboratorio_inm = analisis_laboratorio;
 
     _items_adicciones = Util().getDropdownMenuItem(adicciones);
     _current_adiccion = _items_adicciones.first.value;
@@ -540,8 +542,10 @@ class _I_VState extends State<I_V> {
                         margin: EdgeInsets.all(1),
                         child: DropdownButton(
                           isExpanded: true,
-                          items:
-                              _items_alergias[_current_alergias.indexOf(value)],
+                          disabledHint: Text(_current_alergias[_current_alergias.indexOf(value)]),
+                          items: _items_alergias[_current_alergias.indexOf(value)] == _items_alergias.last ?
+                          _items_alergias[_current_alergias.indexOf(value)]:
+                          null,
                           value: _current_alergias[
                               _current_alergias.indexOf(value)],
                           onChanged: (value2) {
@@ -555,12 +559,12 @@ class _I_VState extends State<I_V> {
                     ),
                   ],
                 ),
-                _current_alergias[_current_alergias.indexOf(value)] == "Otras"
+                _current_alergias[_current_alergias.indexOf(value)] == alergias.last
                     ? Container(
                         margin: EdgeInsets.all(10),
                         child: TextFormField(
                           decoration: InputDecoration(
-                              labelText: "otra alergia",
+                              labelText: "Otra alergia",
                               icon: Icon(
                                 FontAwesomeIcons.appleAlt,
                                 color: Colors.blue,
@@ -574,21 +578,40 @@ class _I_VState extends State<I_V> {
               ],
             );
           }).toList()),
-          Container(
-            alignment: Alignment.centerLeft,
-            child: FlatButton(
-              child: Text(
-                "Añadir",
-                style: TextStyle(color: Colors.blue),
-              ),
-              onPressed: () {
-                setState(() {
-                  _items_alergias
-                      .add(Util().ajustarlistas(alergias, _current_alergias));
-                  _current_alergias.add(_items_alergias.last.first.value);
-                });
-              },
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              _current_alergias.last != alergias.first
+                  ? FlatButton(
+                child: Text(
+                  "Añadir",
+                  style: TextStyle(color: Colors.blue),
+                ),
+                onPressed: () {
+                  setState(() {
+                    _items_alergias.add(Util()
+                        .ajustarlistas(alergias, _current_alergias));
+                    _current_alergias
+                        .add(_items_alergias.last.first.value);
+                  });
+                },
+              )
+                  : Container(),
+              _current_alergias.length > 1
+                  ? FlatButton(
+                child: Text(
+                  "Eliminar",
+                  style: TextStyle(color: Colors.blue),
+                ),
+                onPressed: () {
+                  setState(() {
+                    _current_alergias.removeLast();
+                    _items_alergias.removeLast();
+                  });
+                },
+              )
+                  : Container(),
+            ],
           ),
           Container(
             margin: EdgeInsets.all(10),
@@ -649,8 +672,10 @@ class _I_VState extends State<I_V> {
                         margin: EdgeInsets.all(10),
                         child: DropdownButton(
                           isExpanded: true,
-                          items: _items_digestivo[
-                              _current_digestivo.indexOf(value)],
+                          disabledHint: Text(_current_digestivo[_current_digestivo.indexOf(value)]),
+                          items: _items_digestivo[_current_digestivo.indexOf(value)] == _items_digestivo.last ?
+                          _items_digestivo[_current_digestivo.indexOf(value)]:
+                          null,
                           value: _current_digestivo[
                               _current_digestivo.indexOf(value)],
                           onChanged: (value2) {
@@ -664,7 +689,7 @@ class _I_VState extends State<I_V> {
                     ),
                   ],
                 ),
-                _current_digestivo[_current_digestivo.indexOf(value)] == "Otras"
+                _current_digestivo[_current_digestivo.indexOf(value)] == digestivo.last
                     ? Container(
                         margin: EdgeInsets.all(10),
                         child: TextFormField(
@@ -680,37 +705,55 @@ class _I_VState extends State<I_V> {
                         ),
                       )
                     : Container(),
-                _current_digestivo[_current_digestivo.indexOf(value)] !=
-                        "Ninguna"
-                    ? Container(
-                        margin: EdgeInsets.all(10),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                              labelText: "Tratamiento",
-                              icon: Icon(FontAwesomeIcons.pills)),
-                          keyboardType: TextInputType.text,
-                          onChanged: (value) {},
-                        ),
-                      )
-                    : Container(),
               ],
             );
           }).toList()),
-          Container(
-            alignment: Alignment.centerLeft,
-            child: FlatButton(
-              child: Text(
-                "Añadir",
-                style: TextStyle(color: Colors.blue),
-              ),
-              onPressed: () {
-                setState(() {
-                  _items_digestivo
-                      .add(Util().ajustarlistas(digestivo, _current_digestivo));
-                  _current_digestivo.add(_items_digestivo.last.first.value);
-                });
-              },
+          _current_digestivo.first != digestivo.first
+              ? Container(
+            margin: EdgeInsets.all(10),
+            child: TextFormField(
+              decoration: InputDecoration(
+                  labelText: "Tratamiento",
+                  icon: Icon(FontAwesomeIcons.pills)),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
             ),
+          )
+              : Container(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              _current_digestivo.last != digestivo.first
+                  ? FlatButton(
+                child: Text(
+                  "Añadir",
+                  style: TextStyle(color: Colors.blue),
+                ),
+                onPressed: () {
+                  setState(() {
+                    _items_digestivo.add(Util()
+                        .ajustarlistas(digestivo, _current_digestivo));
+                    _current_digestivo
+                        .add(_items_digestivo.last.first.value);
+                  });
+                },
+              )
+                  : Container(),
+              _current_digestivo.length > 1
+                  ? FlatButton(
+                child: Text(
+                  "Eliminar",
+                  style: TextStyle(color: Colors.blue),
+                ),
+                onPressed: () {
+                  setState(() {
+                    _current_digestivo.removeLast();
+                    _items_digestivo.removeLast();
+                  });
+                },
+              )
+                  : Container(),
+            ],
           ),
           Container(
             margin: EdgeInsets.all(10),
@@ -732,8 +775,10 @@ class _I_VState extends State<I_V> {
                         margin: EdgeInsets.all(10),
                         child: DropdownButton(
                           isExpanded: true,
-                          items: _items_respiratorio[
-                              _current_respiratorio.indexOf(value)],
+                          disabledHint: Text(_current_respiratorio[_current_respiratorio.indexOf(value)]),
+                          items: _items_respiratorio[_current_respiratorio.indexOf(value)] == _items_respiratorio.last ?
+                          _items_respiratorio[_current_respiratorio.indexOf(value)]:
+                          null,
                           value: _current_respiratorio[
                               _current_respiratorio.indexOf(value)],
                           onChanged: (value2) {
@@ -747,8 +792,7 @@ class _I_VState extends State<I_V> {
                     ),
                   ],
                 ),
-                _current_respiratorio[_current_respiratorio.indexOf(value)] ==
-                        "Otras"
+                _current_respiratorio[_current_respiratorio.indexOf(value)] == respiratorio.last
                     ? Container(
                         margin: EdgeInsets.all(10),
                         child: TextFormField(
@@ -764,38 +808,56 @@ class _I_VState extends State<I_V> {
                         ),
                       )
                     : Container(),
-                _current_respiratorio[_current_respiratorio.indexOf(value)] !=
-                        "Ninguna"
-                    ? Container(
-                        margin: EdgeInsets.all(10),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                              labelText: "Tratamiento",
-                              icon: Icon(FontAwesomeIcons.pills)),
-                          keyboardType: TextInputType.text,
-                          onChanged: (value) {},
-                        ),
-                      )
-                    : Container(),
               ],
             );
-          }).toList()),
-          Container(
-            alignment: Alignment.centerLeft,
-            child: FlatButton(
-              child: Text(
-                "Añadir",
-                style: TextStyle(color: Colors.blue),
-              ),
-              onPressed: () {
-                setState(() {
-                  _items_respiratorio.add(Util()
-                      .ajustarlistas(respiratorio, _current_respiratorio));
-                  _current_respiratorio
-                      .add(_items_respiratorio.last.first.value);
-                });
-              },
+          }).toList()
+          ),
+          _current_respiratorio.first != respiratorio.first
+              ? Container(
+            margin: EdgeInsets.all(10),
+            child: TextFormField(
+              decoration: InputDecoration(
+                  labelText: "Tratamiento",
+                  icon: Icon(FontAwesomeIcons.pills)),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
             ),
+          )
+              : Container(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              _current_respiratorio.last != respiratorio.first
+                  ? FlatButton(
+                child: Text(
+                  "Añadir",
+                  style: TextStyle(color: Colors.blue),
+                ),
+                onPressed: () {
+                  setState(() {
+                    _items_respiratorio.add(Util()
+                        .ajustarlistas(respiratorio, _current_respiratorio));
+                    _current_respiratorio
+                        .add(_items_respiratorio.last.first.value);
+                  });
+                },
+              )
+                  : Container(),
+              _current_respiratorio.length > 1
+                  ? FlatButton(
+                child: Text(
+                  "Eliminar",
+                  style: TextStyle(color: Colors.blue),
+                ),
+                onPressed: () {
+                  setState(() {
+                    _current_respiratorio.removeLast();
+                    _items_respiratorio.removeLast();
+                  });
+                },
+              )
+                  : Container(),
+            ],
           ),
           Container(
             margin: EdgeInsets.all(10),
@@ -817,8 +879,10 @@ class _I_VState extends State<I_V> {
                         margin: EdgeInsets.all(10),
                         child: DropdownButton(
                           isExpanded: true,
-                          items: _items_cardiovascular[
-                              _current_cardiovascular.indexOf(value)],
+                          disabledHint: Text(_current_cardiovascular[_current_cardiovascular.indexOf(value)]),
+                          items: _items_cardiovascular[_current_cardiovascular.indexOf(value)] == _items_cardiovascular.last ?
+                          _items_cardiovascular[_current_cardiovascular.indexOf(value)]:
+                          null,
                           value: _current_cardiovascular[
                               _current_cardiovascular.indexOf(value)],
                           onChanged: (value2) {
@@ -832,9 +896,7 @@ class _I_VState extends State<I_V> {
                     ),
                   ],
                 ),
-                _current_cardiovascular[
-                            _current_cardiovascular.indexOf(value)] ==
-                        "Otras"
+                _current_cardiovascular[_current_cardiovascular.indexOf(value)] == cardiovascular.last
                     ? Container(
                         margin: EdgeInsets.all(10),
                         child: TextFormField(
@@ -850,39 +912,55 @@ class _I_VState extends State<I_V> {
                         ),
                       )
                     : Container(),
-                _current_cardiovascular[
-                            _current_cardiovascular.indexOf(value)] !=
-                        "Ninguna"
-                    ? Container(
-                        margin: EdgeInsets.all(10),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                              labelText: "Tratamiento",
-                              icon: Icon(FontAwesomeIcons.pills)),
-                          keyboardType: TextInputType.text,
-                          onChanged: (value) {},
-                        ),
-                      )
-                    : Container(),
               ],
             );
           }).toList()),
-          Container(
-            alignment: Alignment.centerLeft,
-            child: FlatButton(
-              child: Text(
-                "Añadir",
-                style: TextStyle(color: Colors.blue),
-              ),
-              onPressed: () {
-                setState(() {
-                  _items_cardiovascular.add(Util()
-                      .ajustarlistas(cardiovascular, _current_cardiovascular));
-                  _current_cardiovascular
-                      .add(_items_cardiovascular.last.first.value);
-                });
-              },
+          _current_cardiovascular.first != cardiovascular.first
+              ? Container(
+            margin: EdgeInsets.all(10),
+            child: TextFormField(
+              decoration: InputDecoration(
+                  labelText: "Tratamiento",
+                  icon: Icon(FontAwesomeIcons.pills)),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
             ),
+          )
+              : Container(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              _current_cardiovascular.last != cardiovascular.first
+                  ? FlatButton(
+                child: Text(
+                  "Añadir",
+                  style: TextStyle(color: Colors.blue),
+                ),
+                onPressed: () {
+                  setState(() {
+                    _items_cardiovascular.add(Util()
+                        .ajustarlistas(cardiovascular, _current_cardiovascular));
+                    _current_cardiovascular
+                        .add(_items_cardiovascular.last.first.value);
+                  });
+                },
+              )
+                  : Container(),
+              _current_cardiovascular.length > 1
+                  ? FlatButton(
+                child: Text(
+                  "Eliminar",
+                  style: TextStyle(color: Colors.blue),
+                ),
+                onPressed: () {
+                  setState(() {
+                    _current_cardiovascular.removeLast();
+                    _items_cardiovascular.removeLast();
+                  });
+                },
+              )
+                  : Container(),
+            ],
           ),
           Container(
             margin: EdgeInsets.all(10),
@@ -904,8 +982,10 @@ class _I_VState extends State<I_V> {
                         margin: EdgeInsets.all(10),
                         child: DropdownButton(
                           isExpanded: true,
-                          items: _items_genitourinario[
-                              _current_genitourinario.indexOf(value)],
+                          disabledHint: Text(_current_genitourinario[_current_genitourinario.indexOf(value)]),
+                          items: _items_genitourinario[_current_genitourinario.indexOf(value)] == _items_genitourinario.last ?
+                          _items_genitourinario[_current_genitourinario.indexOf(value)]:
+                          null,
                           value: _current_genitourinario[
                               _current_genitourinario.indexOf(value)],
                           onChanged: (value2) {
@@ -919,9 +999,7 @@ class _I_VState extends State<I_V> {
                     ),
                   ],
                 ),
-                _current_genitourinario[
-                            _current_genitourinario.indexOf(value)] ==
-                        "Otras"
+                _current_genitourinario[_current_genitourinario.indexOf(value)] == genitourinario.last
                     ? Container(
                         margin: EdgeInsets.all(10),
                         child: TextFormField(
@@ -937,39 +1015,55 @@ class _I_VState extends State<I_V> {
                         ),
                       )
                     : Container(),
-                _current_genitourinario[
-                            _current_genitourinario.indexOf(value)] !=
-                        "Ninguna"
-                    ? Container(
-                        margin: EdgeInsets.all(10),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                              labelText: "Tratamiento",
-                              icon: Icon(FontAwesomeIcons.pills)),
-                          keyboardType: TextInputType.text,
-                          onChanged: (value) {},
-                        ),
-                      )
-                    : Container(),
               ],
             );
           }).toList()),
-          Container(
-            alignment: Alignment.centerLeft,
-            child: FlatButton(
-              child: Text(
-                "Añadir",
-                style: TextStyle(color: Colors.blue),
-              ),
-              onPressed: () {
-                setState(() {
-                  _items_genitourinario.add(Util()
-                      .ajustarlistas(genitourinario, _current_genitourinario));
-                  _current_genitourinario
-                      .add(_items_genitourinario.last.first.value);
-                });
-              },
+          _current_genitourinario.first != genitourinario.first
+              ? Container(
+            margin: EdgeInsets.all(10),
+            child: TextFormField(
+              decoration: InputDecoration(
+                  labelText: "Tratamiento",
+                  icon: Icon(FontAwesomeIcons.pills)),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
             ),
+          )
+              : Container(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              _current_genitourinario.last != genitourinario.first
+                  ? FlatButton(
+                child: Text(
+                  "Añadir",
+                  style: TextStyle(color: Colors.blue),
+                ),
+                onPressed: () {
+                  setState(() {
+                    _items_genitourinario.add(Util()
+                        .ajustarlistas(genitourinario, _current_genitourinario));
+                    _current_genitourinario
+                        .add(_items_genitourinario.last.first.value);
+                  });
+                },
+              )
+                  : Container(),
+              _current_genitourinario.length > 1
+                  ? FlatButton(
+                child: Text(
+                  "Eliminar",
+                  style: TextStyle(color: Colors.blue),
+                ),
+                onPressed: () {
+                  setState(() {
+                    _current_genitourinario.removeLast();
+                    _items_genitourinario.removeLast();
+                  });
+                },
+              )
+                  : Container(),
+            ],
           ),
           Container(
             margin: EdgeInsets.all(10),
@@ -991,8 +1085,10 @@ class _I_VState extends State<I_V> {
                         margin: EdgeInsets.all(10),
                         child: DropdownButton(
                           isExpanded: true,
-                          items: _items_endocrino[
-                              _current_endocrino.indexOf(value)],
+                          disabledHint: Text(_current_endocrino[_current_endocrino.indexOf(value)]),
+                          items: _items_endocrino[_current_endocrino.indexOf(value)] == _items_endocrino.last ?
+                          _items_endocrino[_current_endocrino.indexOf(value)]:
+                          null,
                           value: _current_endocrino[
                               _current_endocrino.indexOf(value)],
                           onChanged: (value2) {
@@ -1006,7 +1102,7 @@ class _I_VState extends State<I_V> {
                     ),
                   ],
                 ),
-                _current_endocrino[_current_endocrino.indexOf(value)] == "Otras"
+                _current_endocrino[_current_endocrino.indexOf(value)] == endocrino.last
                     ? Container(
                         margin: EdgeInsets.all(10),
                         child: TextFormField(
@@ -1022,37 +1118,55 @@ class _I_VState extends State<I_V> {
                         ),
                       )
                     : Container(),
-                _current_endocrino[_current_endocrino.indexOf(value)] !=
-                        "Ninguna"
-                    ? Container(
-                        margin: EdgeInsets.all(10),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                              labelText: "Tratamiento",
-                              icon: Icon(FontAwesomeIcons.pills)),
-                          keyboardType: TextInputType.text,
-                          onChanged: (value) {},
-                        ),
-                      )
-                    : Container(),
               ],
             );
           }).toList()),
-          Container(
-            alignment: Alignment.centerLeft,
-            child: FlatButton(
-              child: Text(
-                "Añadir",
-                style: TextStyle(color: Colors.blue),
-              ),
-              onPressed: () {
-                setState(() {
-                  _items_endocrino
-                      .add(Util().ajustarlistas(endocrino, _current_endocrino));
-                  _current_endocrino.add(_items_endocrino.last.first.value);
-                });
-              },
+          _current_endocrino.first != endocrino.first
+              ? Container(
+            margin: EdgeInsets.all(10),
+            child: TextFormField(
+              decoration: InputDecoration(
+                  labelText: "Tratamiento",
+                  icon: Icon(FontAwesomeIcons.pills)),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
             ),
+          )
+              : Container(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              _current_endocrino.last != endocrino.first
+                  ? FlatButton(
+                child: Text(
+                  "Añadir",
+                  style: TextStyle(color: Colors.blue),
+                ),
+                onPressed: () {
+                  setState(() {
+                    _items_endocrino.add(Util()
+                        .ajustarlistas(endocrino, _current_endocrino));
+                    _current_endocrino
+                        .add(_items_endocrino.last.first.value);
+                  });
+                },
+              )
+                  : Container(),
+              _current_endocrino.length > 1
+                  ? FlatButton(
+                child: Text(
+                  "Eliminar",
+                  style: TextStyle(color: Colors.blue),
+                ),
+                onPressed: () {
+                  setState(() {
+                    _current_endocrino.removeLast();
+                    _items_endocrino.removeLast();
+                  });
+                },
+              )
+                  : Container(),
+            ],
           ),
           Container(
             margin: EdgeInsets.all(10),
@@ -1074,8 +1188,10 @@ class _I_VState extends State<I_V> {
                         margin: EdgeInsets.all(10),
                         child: DropdownButton(
                           isExpanded: true,
-                          items: _items_hematologicos[
-                              _current_hematologicos.indexOf(value)],
+                          disabledHint: Text(_current_hematologicos[_current_hematologicos.indexOf(value)]),
+                          items: _items_hematologicos[_current_hematologicos.indexOf(value)] == _items_hematologicos.last ?
+                          _items_hematologicos[_current_hematologicos.indexOf(value)]:
+                          null,
                           value: _current_hematologicos[
                               _current_hematologicos.indexOf(value)],
                           onChanged: (value2) {
@@ -1089,8 +1205,7 @@ class _I_VState extends State<I_V> {
                     ),
                   ],
                 ),
-                _current_hematologicos[_current_hematologicos.indexOf(value)] ==
-                        "Otras"
+                _current_hematologicos[_current_hematologicos.indexOf(value)] == hematologicos.last
                     ? Container(
                         margin: EdgeInsets.all(10),
                         child: TextFormField(
@@ -1106,38 +1221,55 @@ class _I_VState extends State<I_V> {
                         ),
                       )
                     : Container(),
-                _current_hematologicos[_current_hematologicos.indexOf(value)] !=
-                        "Ninguna"
-                    ? Container(
-                        margin: EdgeInsets.all(10),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                              labelText: "Tratamiento",
-                              icon: Icon(FontAwesomeIcons.pills)),
-                          keyboardType: TextInputType.text,
-                          onChanged: (value) {},
-                        ),
-                      )
-                    : Container(),
               ],
             );
           }).toList()),
-          Container(
-            alignment: Alignment.centerLeft,
-            child: FlatButton(
-              child: Text(
-                "Añadir",
-                style: TextStyle(color: Colors.blue),
-              ),
-              onPressed: () {
-                setState(() {
-                  _items_hematologicos.add(Util()
-                      .ajustarlistas(hematologicos, _current_hematologicos));
-                  _current_hematologicos
-                      .add(_items_hematologicos.last.first.value);
-                });
-              },
+          _current_hematologicos.first != hematologicos.first
+              ? Container(
+            margin: EdgeInsets.all(10),
+            child: TextFormField(
+              decoration: InputDecoration(
+                  labelText: "Tratamiento",
+                  icon: Icon(FontAwesomeIcons.pills)),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
             ),
+          )
+              : Container(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              _current_hematologicos.last != hematologicos.first
+                  ? FlatButton(
+                child: Text(
+                  "Añadir",
+                  style: TextStyle(color: Colors.blue),
+                ),
+                onPressed: () {
+                  setState(() {
+                    _items_hematologicos.add(Util()
+                        .ajustarlistas(hematologicos, _current_hematologicos));
+                    _current_hematologicos
+                        .add(_items_hematologicos.last.first.value);
+                  });
+                },
+              )
+                  : Container(),
+              _current_hematologicos.length > 1
+                  ? FlatButton(
+                child: Text(
+                  "Eliminar",
+                  style: TextStyle(color: Colors.blue),
+                ),
+                onPressed: () {
+                  setState(() {
+                    _current_hematologicos.removeLast();
+                    _items_hematologicos.removeLast();
+                  });
+                },
+              )
+                  : Container(),
+            ],
           ),
           Container(
             margin: EdgeInsets.all(10),
@@ -1159,8 +1291,10 @@ class _I_VState extends State<I_V> {
                         margin: EdgeInsets.all(10),
                         child: DropdownButton(
                           isExpanded: true,
-                          items: _items_neurologico[
-                              _current_neurologico.indexOf(value)],
+                          disabledHint: Text(_current_neurologico[_current_neurologico.indexOf(value)]),
+                          items: _items_neurologico[_current_neurologico.indexOf(value)] == _items_neurologico.last ?
+                          _items_neurologico[_current_neurologico.indexOf(value)]:
+                          null,
                           value: _current_neurologico[
                               _current_neurologico.indexOf(value)],
                           onChanged: (value2) {
@@ -1174,8 +1308,7 @@ class _I_VState extends State<I_V> {
                     ),
                   ],
                 ),
-                _current_neurologico[_current_neurologico.indexOf(value)] ==
-                        "Otras"
+                _current_neurologico[_current_neurologico.indexOf(value)] == neurologico.last
                     ? Container(
                         margin: EdgeInsets.all(10),
                         child: TextFormField(
@@ -1191,37 +1324,55 @@ class _I_VState extends State<I_V> {
                         ),
                       )
                     : Container(),
-                _current_neurologico[_current_neurologico.indexOf(value)] !=
-                        "Ninguna"
-                    ? Container(
-                        margin: EdgeInsets.all(10),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                              labelText: "Tratamiento",
-                              icon: Icon(FontAwesomeIcons.pills)),
-                          keyboardType: TextInputType.text,
-                          onChanged: (value) {},
-                        ),
-                      )
-                    : Container(),
               ],
             );
           }).toList()),
-          Container(
-            alignment: Alignment.centerLeft,
-            child: FlatButton(
-              child: Text(
-                "Añadir",
-                style: TextStyle(color: Colors.blue),
-              ),
-              onPressed: () {
-                setState(() {
-                  _items_neurologico.add(
-                      Util().ajustarlistas(neurologico, _current_neurologico));
-                  _current_neurologico.add(_items_neurologico.last.first.value);
-                });
-              },
+          _current_neurologico.first != neurologico.first
+              ? Container(
+            margin: EdgeInsets.all(10),
+            child: TextFormField(
+              decoration: InputDecoration(
+                  labelText: "Tratamiento",
+                  icon: Icon(FontAwesomeIcons.pills)),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
             ),
+          )
+              : Container(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              _current_neurologico.last != neurologico.first
+                  ? FlatButton(
+                child: Text(
+                  "Añadir",
+                  style: TextStyle(color: Colors.blue),
+                ),
+                onPressed: () {
+                  setState(() {
+                    _items_neurologico.add(Util()
+                        .ajustarlistas(neurologico, _current_neurologico));
+                    _current_neurologico
+                        .add(_items_neurologico.last.first.value);
+                  });
+                },
+              )
+                  : Container(),
+              _current_neurologico.length > 1
+                  ? FlatButton(
+                child: Text(
+                  "Eliminar",
+                  style: TextStyle(color: Colors.blue),
+                ),
+                onPressed: () {
+                  setState(() {
+                    _current_neurologico.removeLast();
+                    _items_neurologico.removeLast();
+                  });
+                },
+              )
+                  : Container(),
+            ],
           ),
           Container(
             margin: EdgeInsets.all(10),
@@ -1243,8 +1394,10 @@ class _I_VState extends State<I_V> {
                         margin: EdgeInsets.all(10),
                         child: DropdownButton(
                           isExpanded: true,
-                          items: _items_musculo_esqueleto[
-                              _current_musculo_esqueleto.indexOf(value)],
+                          disabledHint: Text(_current_musculo_esqueleto[_current_musculo_esqueleto.indexOf(value)]),
+                          items: _items_musculo_esqueleto[_current_musculo_esqueleto.indexOf(value)] == _items_musculo_esqueleto.last ?
+                          _items_musculo_esqueleto[_current_musculo_esqueleto.indexOf(value)]:
+                          null,
                           value: _current_musculo_esqueleto[
                               _current_musculo_esqueleto.indexOf(value)],
                           onChanged: (value2) {
@@ -1260,8 +1413,7 @@ class _I_VState extends State<I_V> {
                   ],
                 ),
                 _current_musculo_esqueleto[
-                            _current_musculo_esqueleto.indexOf(value)] ==
-                        "Otras"
+                            _current_musculo_esqueleto.indexOf(value)] == musculo_esqueleto.last
                     ? Container(
                         margin: EdgeInsets.all(10),
                         child: TextFormField(
@@ -1277,39 +1429,55 @@ class _I_VState extends State<I_V> {
                         ),
                       )
                     : Container(),
-                _current_musculo_esqueleto[
-                            _current_musculo_esqueleto.indexOf(value)] !=
-                        "Ninguna"
-                    ? Container(
-                        margin: EdgeInsets.all(10),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                              labelText: "Tratamiento",
-                              icon: Icon(FontAwesomeIcons.pills)),
-                          keyboardType: TextInputType.text,
-                          onChanged: (value) {},
-                        ),
-                      )
-                    : Container(),
               ],
             );
           }).toList()),
-          Container(
-            alignment: Alignment.centerLeft,
-            child: FlatButton(
-              child: Text(
-                "Añadir",
-                style: TextStyle(color: Colors.blue),
-              ),
-              onPressed: () {
-                setState(() {
-                  _items_musculo_esqueleto.add(Util().ajustarlistas(
-                      musculo_esqueleto, _current_musculo_esqueleto));
-                  _current_musculo_esqueleto
-                      .add(_items_musculo_esqueleto.last.first.value);
-                });
-              },
+          _current_musculo_esqueleto.first != musculo_esqueleto.first
+              ? Container(
+            margin: EdgeInsets.all(10),
+            child: TextFormField(
+              decoration: InputDecoration(
+                  labelText: "Tratamiento",
+                  icon: Icon(FontAwesomeIcons.pills)),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
             ),
+          )
+              : Container(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              _current_musculo_esqueleto.last != musculo_esqueleto.first
+                  ? FlatButton(
+                child: Text(
+                  "Añadir",
+                  style: TextStyle(color: Colors.blue),
+                ),
+                onPressed: () {
+                  setState(() {
+                    _items_musculo_esqueleto.add(Util()
+                        .ajustarlistas(musculo_esqueleto, _current_musculo_esqueleto));
+                    _current_musculo_esqueleto
+                        .add(_items_musculo_esqueleto.last.first.value);
+                  });
+                },
+              )
+                  : Container(),
+              _current_musculo_esqueleto.length > 1
+                  ? FlatButton(
+                child: Text(
+                  "Eliminar",
+                  style: TextStyle(color: Colors.blue),
+                ),
+                onPressed: () {
+                  setState(() {
+                    _current_musculo_esqueleto.removeLast();
+                    _items_musculo_esqueleto.removeLast();
+                  });
+                },
+              )
+                  : Container(),
+            ],
           ),
           Container(
             margin: EdgeInsets.all(10),
@@ -1331,8 +1499,10 @@ class _I_VState extends State<I_V> {
                         margin: EdgeInsets.all(10),
                         child: DropdownButton(
                           isExpanded: true,
-                          items: _items_inmunologico[
-                              _current_inmunologico.indexOf(value)],
+                          disabledHint: Text(_current_inmunologico[_current_inmunologico.indexOf(value)]),
+                          items: _items_inmunologico[_current_inmunologico.indexOf(value)] == _items_inmunologico.last ?
+                          _items_inmunologico[_current_inmunologico.indexOf(value)]:
+                          null,
                           value: _current_inmunologico[
                               _current_inmunologico.indexOf(value)],
                           onChanged: (value2) {
@@ -1346,8 +1516,7 @@ class _I_VState extends State<I_V> {
                     ),
                   ],
                 ),
-                _current_inmunologico[_current_inmunologico.indexOf(value)] ==
-                        "Otras"
+                _current_inmunologico[_current_inmunologico.indexOf(value)] == inmunologico.last
                     ? Container(
                         margin: EdgeInsets.all(10),
                         child: TextFormField(
@@ -1363,38 +1532,55 @@ class _I_VState extends State<I_V> {
                         ),
                       )
                     : Container(),
-                _current_inmunologico[_current_inmunologico.indexOf(value)] !=
-                        "Ninguna"
-                    ? Container(
-                        margin: EdgeInsets.all(10),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                              labelText: "Tratamiento",
-                              icon: Icon(FontAwesomeIcons.pills)),
-                          keyboardType: TextInputType.text,
-                          onChanged: (value) {},
-                        ),
-                      )
-                    : Container(),
               ],
             );
           }).toList()),
-          Container(
-            alignment: Alignment.centerLeft,
-            child: FlatButton(
-              child: Text(
-                "Añadir",
-                style: TextStyle(color: Colors.blue),
-              ),
-              onPressed: () {
-                setState(() {
-                  _items_inmunologico.add(Util()
-                      .ajustarlistas(inmunologico, _current_inmunologico));
-                  _current_inmunologico
-                      .add(_items_inmunologico.last.first.value);
-                });
-              },
+          _current_inmunologico.first != inmunologico.first
+              ? Container(
+            margin: EdgeInsets.all(10),
+            child: TextFormField(
+              decoration: InputDecoration(
+                  labelText: "Tratamiento",
+                  icon: Icon(FontAwesomeIcons.pills)),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
             ),
+          )
+              : Container(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              _current_inmunologico.last != inmunologico.first
+                  ? FlatButton(
+                child: Text(
+                  "Añadir",
+                  style: TextStyle(color: Colors.blue),
+                ),
+                onPressed: () {
+                  setState(() {
+                    _items_inmunologico.add(Util()
+                        .ajustarlistas(inmunologico, _current_inmunologico));
+                    _current_inmunologico
+                        .add(_items_inmunologico.last.first.value);
+                  });
+                },
+              )
+                  : Container(),
+              _current_inmunologico.length > 1
+                  ? FlatButton(
+                child: Text(
+                  "Eliminar",
+                  style: TextStyle(color: Colors.blue),
+                ),
+                onPressed: () {
+                  setState(() {
+                    _current_inmunologico.removeLast();
+                    _items_inmunologico.removeLast();
+                  });
+                },
+              )
+                  : Container(),
+            ],
           ),
           Container(
             margin: EdgeInsets.all(10),
@@ -1416,8 +1602,10 @@ class _I_VState extends State<I_V> {
                         margin: EdgeInsets.all(10),
                         child: DropdownButton(
                           isExpanded: true,
-                          items: _items_tegumentario[
-                              _current_tegumentario.indexOf(value)],
+                          disabledHint: Text(_current_tegumentario[_current_tegumentario.indexOf(value)]),
+                          items: _items_tegumentario[_current_tegumentario.indexOf(value)] == _items_tegumentario.last ?
+                          _items_tegumentario[_current_tegumentario.indexOf(value)]:
+                          null,
                           value: _current_tegumentario[
                               _current_tegumentario.indexOf(value)],
                           onChanged: (value2) {
@@ -1431,8 +1619,7 @@ class _I_VState extends State<I_V> {
                     ),
                   ],
                 ),
-                _current_tegumentario[_current_tegumentario.indexOf(value)] ==
-                        "Otras"
+                _current_tegumentario[_current_tegumentario.indexOf(value)] == tegumentario.last
                     ? Container(
                         margin: EdgeInsets.all(10),
                         child: TextFormField(
@@ -1448,38 +1635,55 @@ class _I_VState extends State<I_V> {
                         ),
                       )
                     : Container(),
-                _current_tegumentario[_current_tegumentario.indexOf(value)] !=
-                        "Ninguna"
-                    ? Container(
-                        margin: EdgeInsets.all(10),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                              labelText: "Tratamiento",
-                              icon: Icon(FontAwesomeIcons.pills)),
-                          keyboardType: TextInputType.text,
-                          onChanged: (value) {},
-                        ),
-                      )
-                    : Container(),
               ],
             );
           }).toList()),
-          Container(
-            alignment: Alignment.centerLeft,
-            child: FlatButton(
-              child: Text(
-                "Añadir",
-                style: TextStyle(color: Colors.blue),
-              ),
-              onPressed: () {
-                setState(() {
-                  _items_tegumentario.add(Util()
-                      .ajustarlistas(tegumentario, _current_tegumentario));
-                  _current_tegumentario
-                      .add(_items_tegumentario.last.first.value);
-                });
-              },
+          _current_tegumentario.first != tegumentario.first
+              ? Container(
+            margin: EdgeInsets.all(10),
+            child: TextFormField(
+              decoration: InputDecoration(
+                  labelText: "Tratamiento",
+                  icon: Icon(FontAwesomeIcons.pills)),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
             ),
+          )
+              : Container(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              _current_tegumentario.last != tegumentario.first
+                  ? FlatButton(
+                child: Text(
+                  "Añadir",
+                  style: TextStyle(color: Colors.blue),
+                ),
+                onPressed: () {
+                  setState(() {
+                    _items_tegumentario.add(Util()
+                        .ajustarlistas(tegumentario, _current_tegumentario));
+                    _current_tegumentario
+                        .add(_items_tegumentario.last.first.value);
+                  });
+                },
+              )
+                  : Container(),
+              _current_tegumentario.length > 1
+                  ? FlatButton(
+                child: Text(
+                  "Eliminar",
+                  style: TextStyle(color: Colors.blue),
+                ),
+                onPressed: () {
+                  setState(() {
+                    _current_tegumentario.removeLast();
+                    _items_tegumentario.removeLast();
+                  });
+                },
+              )
+                  : Container(),
+            ],
           ),
           Container(
             margin: EdgeInsets.all(10),
@@ -1659,31 +1863,29 @@ class _I_VState extends State<I_V> {
           ),
           Row(
             children: <Widget>[
-              Expanded(
-                child: Container(
-                  margin: const EdgeInsets.all(10.0),
-                  child: TextFormField(
-                    decoration: (InputDecoration(
-                      labelText: "Exostosis",
-                      icon: Icon(FontAwesomeIcons.userAlt),
-                    )),
-                    keyboardType: TextInputType.text,
-                    onChanged: (value) {},
-                  ),
-                ),
+              Container(
+                  margin: EdgeInsets.only(right: 10, left: 10),
+                  child: Icon(FontAwesomeIcons.briefcaseMedical)),
+              Expanded(child: Text("Exostosis")),
+              Checkbox(
+                value: exostosis,
+                onChanged: (value) {
+                  setState(() {
+                    exostosis = value;
+                  });
+                },
               ),
-              Expanded(
-                child: Container(
-                  margin: const EdgeInsets.all(10.0),
-                  child: TextFormField(
-                    decoration: (InputDecoration(
-                      labelText: "Endostosis",
-                      icon: Icon(FontAwesomeIcons.userAlt),
-                    )),
-                    keyboardType: TextInputType.text,
-                    onChanged: (value) {},
-                  ),
-                ),
+              Container(
+                  margin: EdgeInsets.only(right: 10, left: 10),
+                  child: Icon(FontAwesomeIcons.briefcaseMedical)),
+              Expanded(child: Text("Endostosis")),
+              Checkbox(
+                value: endostosis,
+                onChanged: (value) {
+                  setState(() {
+                    endostosis = value;
+                  });
+                },
               ),
             ],
           ),
@@ -1699,31 +1901,29 @@ class _I_VState extends State<I_V> {
           ),
           Row(
             children: <Widget>[
-              Expanded(
-                child: Container(
-                  margin: const EdgeInsets.all(10.0),
-                  child: TextFormField(
-                    decoration: (InputDecoration(
-                      labelText: "Transversales",
-                      icon: Icon(FontAwesomeIcons.userAlt),
-                    )),
-                    keyboardType: TextInputType.text,
-                    onChanged: (value) {},
-                  ),
-                ),
+              Container(
+                  margin: EdgeInsets.only(right: 10, left: 10),
+                  child: Icon(FontAwesomeIcons.briefcaseMedical)),
+              Expanded(child: Text("Transversal")),
+              Checkbox(
+                value: transversales,
+                onChanged: (value) {
+                  setState(() {
+                    transversales = value;
+                  });
+                },
               ),
-              Expanded(
-                child: Container(
-                  margin: const EdgeInsets.all(10.0),
-                  child: TextFormField(
-                    decoration: (InputDecoration(
-                      labelText: "Longitudinales",
-                      icon: Icon(FontAwesomeIcons.userAlt),
-                    )),
-                    keyboardType: TextInputType.text,
-                    onChanged: (value) {},
-                  ),
-                ),
+              Container(
+                  margin: EdgeInsets.only(right: 10, left: 10),
+                  child: Icon(FontAwesomeIcons.briefcaseMedical)),
+              Expanded(child: Text("Longitudinal")),
+              Checkbox(
+                value: longitudinales,
+                onChanged: (value) {
+                  setState(() {
+                    longitudinales = value;
+                  });
+                },
               ),
             ],
           ),
@@ -1734,31 +1934,29 @@ class _I_VState extends State<I_V> {
           ),
           Row(
             children: <Widget>[
-              Expanded(
-                child: Container(
-                  margin: const EdgeInsets.all(10.0),
-                  child: TextFormField(
-                    decoration: (InputDecoration(
-                      labelText: "Enoftalmo",
-                      icon: Icon(FontAwesomeIcons.eye),
-                    )),
-                    keyboardType: TextInputType.text,
-                    onChanged: (value) {},
-                  ),
-                ),
+              Container(
+                  margin: EdgeInsets.only(right: 10, left: 10),
+                  child: Icon(FontAwesomeIcons.briefcaseMedical)),
+              Expanded(child: Text("Enoftalmo")),
+              Checkbox(
+                value: enoftalmo,
+                onChanged: (value) {
+                  setState(() {
+                    enoftalmo = value;
+                  });
+                },
               ),
-              Expanded(
-                child: Container(
-                  margin: const EdgeInsets.all(10.0),
-                  child: TextFormField(
-                    decoration: (InputDecoration(
-                      labelText: "exoftalmo",
-                      icon: Icon(FontAwesomeIcons.eye),
-                    )),
-                    keyboardType: TextInputType.text,
-                    onChanged: (value) {},
-                  ),
-                ),
+              Container(
+                  margin: EdgeInsets.only(right: 10, left: 10),
+                  child: Icon(FontAwesomeIcons.briefcaseMedical)),
+              Expanded(child: Text("Exoftalmo")),
+              Checkbox(
+                value: exoftalmo,
+                onChanged: (value) {
+                  setState(() {
+                    exoftalmo = value;
+                  });
+                },
               ),
             ],
           ),
@@ -1780,31 +1978,29 @@ class _I_VState extends State<I_V> {
           ),
           Row(
             children: <Widget>[
-              Expanded(
-                child: Container(
-                  margin: const EdgeInsets.all(10.0),
-                  child: TextFormField(
-                    decoration: (InputDecoration(
-                      labelText: "Midriasis",
-                      icon: Icon(FontAwesomeIcons.eye),
-                    )),
-                    keyboardType: TextInputType.text,
-                    onChanged: (value) {},
-                  ),
-                ),
+              Container(
+                  margin: EdgeInsets.only(right: 10, left: 10),
+                  child: Icon(FontAwesomeIcons.briefcaseMedical)),
+              Expanded(child: Text("Midriasis")),
+              Checkbox(
+                value: midriasis,
+                onChanged: (value) {
+                  setState(() {
+                    midriasis = value;
+                  });
+                },
               ),
-              Expanded(
-                child: Container(
-                  margin: const EdgeInsets.all(10.0),
-                  child: TextFormField(
-                    decoration: (InputDecoration(
-                      labelText: "Miosis",
-                      icon: Icon(FontAwesomeIcons.eye),
-                    )),
-                    keyboardType: TextInputType.text,
-                    onChanged: (value) {},
-                  ),
-                ),
+              Container(
+                  margin: EdgeInsets.only(right: 10, left: 10),
+                  child: Icon(FontAwesomeIcons.briefcaseMedical)),
+              Expanded(child: Text("Miosis")),
+              Checkbox(
+                value: miosis,
+                onChanged: (value) {
+                  setState(() {
+                    miosis = value;
+                  });
+                },
               ),
             ],
           ),
@@ -1846,61 +2042,57 @@ class _I_VState extends State<I_V> {
           ),
           Row(
             children: <Widget>[
-              Expanded(
-                child: Container(
-                  margin: const EdgeInsets.all(10.0),
-                  child: TextFormField(
-                    decoration: (InputDecoration(
-                      labelText: "Palida",
-                      icon: Icon(FontAwesomeIcons.diagnoses),
-                    )),
-                    keyboardType: TextInputType.text,
-                    onChanged: (value) {},
-                  ),
-                ),
+              Container(
+                  margin: EdgeInsets.only(right: 10, left: 10),
+                  child: Icon(FontAwesomeIcons.briefcaseMedical)),
+              Expanded(child: Text("Palida")),
+              Checkbox(
+                value: palida,
+                onChanged: (value) {
+                  setState(() {
+                    palida = value;
+                  });
+                },
               ),
-              Expanded(
-                child: Container(
-                  margin: const EdgeInsets.all(10.0),
-                  child: TextFormField(
-                    decoration: (InputDecoration(
-                      labelText: "Cianotica",
-                      icon: Icon(FontAwesomeIcons.diagnoses),
-                    )),
-                    keyboardType: TextInputType.text,
-                    onChanged: (value) {},
-                  ),
-                ),
+              Container(
+                  margin: EdgeInsets.only(right: 10, left: 10),
+                  child: Icon(FontAwesomeIcons.briefcaseMedical)),
+              Expanded(child: Text("Cianotica")),
+              Checkbox(
+                value: cianotica,
+                onChanged: (value) {
+                  setState(() {
+                    cianotica = value;
+                  });
+                },
               )
             ],
           ),
           Row(
             children: <Widget>[
-              Expanded(
-                child: Container(
-                  margin: const EdgeInsets.all(10.0),
-                  child: TextFormField(
-                    decoration: (InputDecoration(
-                      labelText: "Enrojecida",
-                      icon: Icon(FontAwesomeIcons.diagnoses),
-                    )),
-                    keyboardType: TextInputType.text,
-                    onChanged: (value) {},
-                  ),
-                ),
+              Container(
+                  margin: EdgeInsets.only(right: 10, left: 10),
+                  child: Icon(FontAwesomeIcons.briefcaseMedical)),
+              Expanded(child: Text("Enrojecida")),
+              Checkbox(
+                value: enrojecida,
+                onChanged: (value) {
+                  setState(() {
+                    enrojecida = value;
+                  });
+                },
               ),
-              Expanded(
-                child: Container(
-                  margin: const EdgeInsets.all(10.0),
-                  child: TextFormField(
-                    decoration: (InputDecoration(
-                      labelText: "Manchas",
-                      icon: Icon(FontAwesomeIcons.diagnoses),
-                    )),
-                    keyboardType: TextInputType.text,
-                    onChanged: (value) {},
-                  ),
-                ),
+              Container(
+                  margin: EdgeInsets.only(right: 10, left: 10),
+                  child: Icon(FontAwesomeIcons.briefcaseMedical)),
+              Expanded(child: Text("Manchas")),
+              Checkbox(
+                value: manchas,
+                onChanged: (value) {
+                  setState(() {
+                    manchas = value;
+                  });
+                },
               )
             ],
           ),
@@ -1911,47 +2103,45 @@ class _I_VState extends State<I_V> {
           ),
           Row(
             children: <Widget>[
-              Expanded(
-                child: Container(
-                  margin: const EdgeInsets.all(10.0),
-                  child: TextFormField(
-                    decoration: (InputDecoration(
-                      labelText: "Hipotonicos",
-                      labelStyle: TextStyle(fontSize: 14),
-                      icon: Icon(FontAwesomeIcons.fistRaised),
-                    )),
-                    keyboardType: TextInputType.text,
-                    onChanged: (value) {},
-                  ),
-                ),
+              Container(
+                  margin: EdgeInsets.only(right: 10, left: 10),
+                  child: Icon(FontAwesomeIcons.briefcaseMedical)),
+              Expanded(child: Text("Hipotonico")),
+              Checkbox(
+                value: hipotonico,
+                onChanged: (value) {
+                  setState(() {
+                    hipotonico = value;
+                  });
+                },
               ),
-              Expanded(
-                child: Container(
-                  margin: const EdgeInsets.all(10.0),
-                  child: TextFormField(
-                    decoration: (InputDecoration(
-                      labelText: "Hipertonicos",
-                      labelStyle: TextStyle(fontSize: 13),
-                      icon: Icon(FontAwesomeIcons.fistRaised),
-                    )),
-                    keyboardType: TextInputType.text,
-                    onChanged: (value) {},
-                  ),
-                ),
+              Container(
+                  margin: EdgeInsets.only(right: 10, left: 10),
+                  child: Icon(FontAwesomeIcons.briefcaseMedical)),
+              Expanded(child: Text("Hipertonido")),
+              Checkbox(
+                value: hipertonico,
+                onChanged: (value) {
+                  setState(() {
+                    hipertonico = value;
+                  });
+                },
               ),
-              Expanded(
-                child: Container(
-                  margin: const EdgeInsets.all(10.0),
-                  child: TextFormField(
-                    decoration: (InputDecoration(
-                      labelText: "Espasticos",
-                      labelStyle: TextStyle(fontSize: 14),
-                      icon: Icon(FontAwesomeIcons.fistRaised),
-                    )),
-                    keyboardType: TextInputType.text,
-                    onChanged: (value) {},
-                  ),
-                ),
+            ],
+          ),
+          Row(
+            children: <Widget>[
+              Container(
+                  margin: EdgeInsets.only(right: 10, left: 10),
+                  child: Icon(FontAwesomeIcons.briefcaseMedical)),
+              Text("Espastico"),
+              Checkbox(
+                value: espastico,
+                onChanged: (value) {
+                  setState(() {
+                    espastico = value;
+                  });
+                },
               )
             ],
           ),
@@ -1990,8 +2180,10 @@ class _I_VState extends State<I_V> {
                         margin: EdgeInsets.all(1),
                         child: DropdownButton(
                           isExpanded: true,
-                          items: _items_temporomandibular[
-                              _current_temporomandibular.indexOf(value)],
+                          disabledHint: Text(_current_temporomandibular[_current_temporomandibular.indexOf(value)]),
+                          items: _items_temporomandibular[_current_temporomandibular.indexOf(value)] == _items_temporomandibular.last ?
+                          _items_temporomandibular[_current_temporomandibular.indexOf(value)]:
+                          null,
                           value: _current_temporomandibular[
                               _current_temporomandibular.indexOf(value)],
                           onChanged: (value2) {
@@ -2006,43 +2198,59 @@ class _I_VState extends State<I_V> {
                     ),
                   ],
                 ),
-                _current_temporomandibular[
-                            _current_temporomandibular.indexOf(value)] !=
-                        "Ninguna"
-                    ? Container(
-                        margin: EdgeInsets.all(10),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                              labelText: "Describa",
-                              icon: Icon(
-                                FontAwesomeIcons.female,
-                                color: Colors.blue,
-                              ),
-                              labelStyle: TextStyle(color: Colors.blue)),
-                          keyboardType: TextInputType.text,
-                          onChanged: (value) {},
-                        ),
-                      )
-                    : Container(),
               ],
             );
           }).toList()),
-          Container(
-            alignment: Alignment.centerLeft,
-            child: FlatButton(
-              child: Text(
-                "Añadir",
-                style: TextStyle(color: Colors.blue),
-              ),
-              onPressed: () {
-                setState(() {
-                  _items_temporomandibular.add(Util().ajustarlistas(
-                      temporomandibular, _current_temporomandibular));
-                  _current_temporomandibular
-                      .add(_items_temporomandibular.last.first.value);
-                });
-              },
+          _current_temporomandibular.first != temporomandibular.first
+              ? Container(
+            margin: EdgeInsets.all(10),
+            child: TextFormField(
+              decoration: InputDecoration(
+                  labelText: "Describa",
+                  icon: Icon(
+                    FontAwesomeIcons.female,
+                    color: Colors.blue,
+                  ),
+                  labelStyle: TextStyle(color: Colors.blue)),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
             ),
+          )
+              : Container(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              _current_temporomandibular.last != temporomandibular.first
+                  ? FlatButton(
+                child: Text(
+                  "Añadir",
+                  style: TextStyle(color: Colors.blue),
+                ),
+                onPressed: () {
+                  setState(() {
+                    _items_temporomandibular.add(Util()
+                        .ajustarlistas(temporomandibular, _current_temporomandibular));
+                    _current_temporomandibular
+                        .add(_items_temporomandibular.last.first.value);
+                  });
+                },
+              )
+                  : Container(),
+              _current_temporomandibular.length > 1
+                  ? FlatButton(
+                child: Text(
+                  "Eliminar",
+                  style: TextStyle(color: Colors.blue),
+                ),
+                onPressed: () {
+                  setState(() {
+                    _current_temporomandibular.removeLast();
+                    _items_temporomandibular.removeLast();
+                  });
+                },
+              )
+                  : Container(),
+            ],
           ),
           Container(
             margin: EdgeInsets.all(10),
@@ -2174,8 +2382,10 @@ class _I_VState extends State<I_V> {
                         margin: EdgeInsets.all(1),
                         child: DropdownButton(
                           isExpanded: true,
-                          items: _items_radiografia[
-                              _current_radiografia.indexOf(value)],
+                          disabledHint: Text(_current_radiografia[_current_radiografia.indexOf(value)]),
+                          items: _items_radiografia[_current_radiografia.indexOf(value)] == _items_radiografia.last ?
+                          _items_radiografia[_current_radiografia.indexOf(value)]:
+                          null,
                           value: _current_radiografia[
                               _current_radiografia.indexOf(value)],
                           onChanged: (value2) {
@@ -2189,41 +2399,60 @@ class _I_VState extends State<I_V> {
                     ),
                   ],
                 ),
-                _current_radiografia[_current_radiografia.indexOf(value)] ==
-                        radiografia.last
-                    ? Container(
-                        margin: EdgeInsets.all(10),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                              labelText: "Describa",
-                              icon: Icon(
-                                FontAwesomeIcons.vectorSquare,
-                                color: Colors.blue,
-                              ),
-                              labelStyle: TextStyle(color: Colors.blue)),
-                          keyboardType: TextInputType.text,
-                          onChanged: (value) {},
-                        ),
-                      )
-                    : Container(),
+
               ],
             );
           }).toList()),
-          Container(
-            alignment: Alignment.centerLeft,
-            child: FlatButton(
-              child: Text(
-                "Añadir",
-                style: TextStyle(color: Colors.blue),
-              ),
-              onPressed: () {
-                setState(() {
-                  _items_radiografia.add(
-                      Util().ajustarlistas(radiografia, _current_radiografia));
-                  _current_radiografia.add(_items_radiografia.last.first.value);
-                });
-              },
+          _current_radiografia.first == radiografia.last
+              ? Container(
+            margin: EdgeInsets.all(10),
+            child: TextFormField(
+              decoration: InputDecoration(
+                  labelText: "Describa",
+                  icon: Icon(
+                    FontAwesomeIcons.vectorSquare,
+                    color: Colors.blue,
+                  ),
+                  labelStyle: TextStyle(color: Colors.blue)),
+              keyboardType: TextInputType.text,
+              onChanged: (value) {},
             ),
+          )
+              : Container(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              _current_radiografia.last != radiografia.first
+                  ? FlatButton(
+                child: Text(
+                  "Añadir",
+                  style: TextStyle(color: Colors.blue),
+                ),
+                onPressed: () {
+                  setState(() {
+                    _items_radiografia.add(Util()
+                        .ajustarlistas(radiografia, _current_radiografia));
+                    _current_radiografia
+                        .add(_items_radiografia.last.first.value);
+                  });
+                },
+              )
+                  : Container(),
+              _current_radiografia.length > 1
+                  ? FlatButton(
+                child: Text(
+                  "Eliminar",
+                  style: TextStyle(color: Colors.blue),
+                ),
+                onPressed: () {
+                  setState(() {
+                    _current_radiografia.removeLast();
+                    _items_radiografia.removeLast();
+                  });
+                },
+              )
+                  : Container(),
+            ],
           ),
           Container(
             margin: EdgeInsets.all(10),
@@ -2257,8 +2486,10 @@ class _I_VState extends State<I_V> {
                         margin: EdgeInsets.all(1),
                         child: DropdownButton(
                           isExpanded: true,
-                          items: _items_analisis_laboratorio[
-                              _current_analisis_laboratorio.indexOf(value)],
+                          disabledHint: Text(_current_analisis_laboratorio[_current_analisis_laboratorio.indexOf(value)]),
+                          items: _items_analisis_laboratorio[_current_analisis_laboratorio.indexOf(value)] == _items_analisis_laboratorio.last ?
+                          _items_analisis_laboratorio[_current_analisis_laboratorio.indexOf(value)]:
+                          null,
                           value: _current_analisis_laboratorio[
                               _current_analisis_laboratorio.indexOf(value)],
                           onChanged: (value2) {
@@ -2275,7 +2506,7 @@ class _I_VState extends State<I_V> {
                 ),
                 _current_analisis_laboratorio[
                             _current_analisis_laboratorio.indexOf(value)] ==
-                        analisis_laboratorio_inm[1]
+                        analisis_laboratorio[1]
                     ? Column(
                       children: <Widget>[
                         Row(
@@ -2391,7 +2622,7 @@ class _I_VState extends State<I_V> {
 
                     _current_analisis_laboratorio[
                             _current_analisis_laboratorio.indexOf(value)] ==
-                        analisis_laboratorio_inm[2]
+                        analisis_laboratorio[2]
                     ? Column(
                       children: <Widget>[
                         Row(
@@ -2448,7 +2679,7 @@ class _I_VState extends State<I_V> {
 
                     _current_analisis_laboratorio[
                             _current_analisis_laboratorio.indexOf(value)] ==
-                        analisis_laboratorio_inm[3]
+                        analisis_laboratorio[3]
                     ? Column(
                       children: <Widget>[
                         Row(
@@ -2549,22 +2780,40 @@ class _I_VState extends State<I_V> {
               ],
             );
           }).toList()),
-          Container(
-            alignment: Alignment.centerLeft,
-            child: FlatButton(
-              child: Text(
-                "Añadir",
-                style: TextStyle(color: Colors.blue),
-              ),
-              onPressed: () {
-                setState(() {
-                  _items_analisis_laboratorio.add(Util().ajustarlistas(
-                      analisis_laboratorio, _current_analisis_laboratorio));
-                  _current_analisis_laboratorio
-                      .add(_items_analisis_laboratorio.last.first.value);
-                });
-              },
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              _current_analisis_laboratorio.last != analisis_laboratorio.first
+                  ? FlatButton(
+                child: Text(
+                  "Añadir",
+                  style: TextStyle(color: Colors.blue),
+                ),
+                onPressed: () {
+                  setState(() {
+                    _items_analisis_laboratorio.add(Util()
+                        .ajustarlistas(analisis_laboratorio, _current_analisis_laboratorio));
+                    _current_analisis_laboratorio
+                        .add(_items_analisis_laboratorio.last.first.value);
+                  });
+                },
+              )
+                  : Container(),
+              _current_analisis_laboratorio.length > 1
+                  ? FlatButton(
+                child: Text(
+                  "Eliminar",
+                  style: TextStyle(color: Colors.blue),
+                ),
+                onPressed: () {
+                  setState(() {
+                    _current_analisis_laboratorio.removeLast();
+                    _items_analisis_laboratorio.removeLast();
+                  });
+                },
+              )
+                  : Container(),
+            ],
           ),
           Container(
             margin: EdgeInsets.all(10),

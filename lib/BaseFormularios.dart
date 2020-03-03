@@ -1,4 +1,3 @@
-import 'package:expedientesodontologicos_app/Formularios/adulto/VIII_XV.dart';
 import 'package:expedientesodontologicos_app/Formularios/cirugia/I_V.dart';
 import 'package:expedientesodontologicos_app/Imagenes/SubirFoto.dart';
 import 'package:expedientesodontologicos_app/ModelosFormularios/General.dart';
@@ -150,15 +149,6 @@ class _BaseformulariosState extends State<Baseformularios> {
               onTap: () {
                 setState(() {
                   bodycontent = V_VI_VII();
-                });
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text("Expediente Adulto2"),
-              onTap: () {
-                setState(() {
-                  bodycontent = VIII_XV();
                 });
                 Navigator.pop(context);
               },

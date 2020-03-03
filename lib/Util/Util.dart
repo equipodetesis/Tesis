@@ -17,7 +17,8 @@ class Util {
     if (listaseleccionadas.length == 0) {
       return getDropdownMenuItem(listacompleta);
     } else {
-      List listtemp = listacompleta;
+      List listtemp = List();
+      listtemp.addAll(listacompleta);
       int i = 0;
       listaseleccionadas.forEach((value) {
         if (i != exception) {

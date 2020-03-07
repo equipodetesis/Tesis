@@ -4,7 +4,7 @@ import 'package:expedientesodontologicos_app/model/model.dart';
 import 'package:flutter/foundation.dart';
 
 class Adulto{
-  String motivo , historia, fecha_ultima_visita, tratamiento_recibido , dientes_perdidos , causa_dientesperdidos , experiencias_exodoncias , higiene_oral , tipo_cepillo , tecnica_cepillado ,
+  String  historia, fecha_ultima_visita, tratamiento_recibido , dientes_perdidos , causa_dientesperdidos , experiencias_exodoncias , higiene_oral , tipo_cepillo , tecnica_cepillado ,
       frecuencia_cepillado , ayudas_higiene_extras ,cuidadoMedico,hospital,expediente,fecha_ultimo_examen_medico, medicamentos, nombredelmedico;
   List enfermedades=List<String>();
 
@@ -17,11 +17,11 @@ class Adulto{
   //examen clinico bucal, se pregunta 2 veces por higiene oral...
   region_vestibular,paladar_duro,paladar_blando,orofaringe,piso_boca,lengua,cara_dorsal,cara_ventral,bordes,encia,dientes,prescencia_calculo,salivacion
   ;
- List revision_organos=List<String>();
+ List revision_organos=List<String>(),motivo=List<String>() ;
   String Userid;
  Adulto();
 void clear(){
-  motivo = "";
+  motivo = List<String>();
   historia="";fecha_ultima_visita=""; tratamiento_recibido="" ;
   dientes_perdidos=""; causa_dientesperdidos="" ;experiencias_exodoncias="" ;
   higiene_oral="";tipo_cepillo ="";tecnica_cepillado="" ;

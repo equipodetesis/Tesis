@@ -42,18 +42,24 @@ class Historial extends StatelessWidget{
                  if(documents.documentID=="Cirugia"){
                    Provider.of<Cirugia>(context).fromJson(documents.data);
                    tpo="Cirugia";}
-
+                  List hitorial=List<Widget>();
+                 Provider.of<Adulto>(context).motivo.forEach((element){
+                   var h=Column(
+                     children: <Widget>[
+                       Divider(color: Colors.black,
+                         thickness: 0.12,
+                       ),
+                       Text(tpo,textAlign:TextAlign.start,style: TextStyle(color: Colors.blue,fontSize: 20.0),),
+                       ListTile(
+                         title: Text(element),
+                         subtitle: Text(element),
+                       )
+                     ],
+                   );
+                   hitorial.add(h);
+                 });
                  return Column(
-                   children: <Widget>[
-                     Divider(color: Colors.black,
-                       thickness: 0.12,
-                     ),
-                     Text(tpo,textAlign:TextAlign.start,style: TextStyle(color: Colors.blue),),
-                     ListTile(
-                       title: tpo=="Adulto"?Provider.of<Adulto>(context).motivo:Provider.of<Cirugia>(context).motivo,
-                       subtitle: tpo=="Adulto"?Provider.of<Adulto>(context).motivo:Provider.of<Cirugia>(context).motivo,
-                     )
-                   ],
+                   children:hitorial,
                  );
                }).toList());
           }

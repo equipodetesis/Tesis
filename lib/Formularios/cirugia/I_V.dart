@@ -1,3 +1,4 @@
+import 'package:expedientesodontologicos_app/ModelosFormularios/Cirugia.dart';
 import 'package:expedientesodontologicos_app/Util/Util.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -10,10 +11,10 @@ class I_V extends StatefulWidget {
 }
 
 class _I_VState extends State<I_V> {
-  List<String> adicciones = ["Ninguna", "Tabaco", "Otras drogas", "Alcohol"];
+  List<String> adicciones = ["Ninguna", "Tabaco", "Alcohol", "Otras"];
 
-  List<DropdownMenuItem> _items_adicciones = List();
-  String _current_adiccion = "";
+  List<List<DropdownMenuItem>> _items_adicciones = List();
+  List<String> _current_adicciones = List();
 
   List<String> alergias = [
     "Ninguna",
@@ -230,15 +231,19 @@ class _I_VState extends State<I_V> {
   enoftalmo  = false, exoftalmo = false, midriasis  = false, miosis = false, palida = false,
   cianotica = false, enrojecida = false, manchas = false, hipotonico = false, hipertonico = false,
   espastico = false;
+
+  FocusNode madreNode;
+
   @override
   void initState() {
+    madreNode = FocusNode();
 
-    _items_adicciones = Util().getDropdownMenuItem(adicciones);
-    _current_adiccion = _items_adicciones.first.value;
     _items_clasificacion_asa = Util().getDropdownMenuItem(clasificacion_asa);
     _current_clasificacion_asa = _items_clasificacion_asa.first.value;
     _items_craneoforma = Util().getDropdownMenuItem(craneoforma);
     _current_craneoforma = _items_craneoforma.first.value;
+    _items_adicciones.add(Util().getDropdownMenuItem(adicciones));
+    _current_adicciones.add(_items_adicciones.last.first.value);
     _items_alergias.add(Util().ajustarlistas(alergias, _current_alergias));
     _current_alergias.add(_items_alergias.last.first.value);
     _items_digestivo.add(Util().ajustarlistas(digestivo, _current_digestivo));
@@ -329,7 +334,10 @@ class _I_VState extends State<I_V> {
               decoration: InputDecoration(
                   labelText: "Madre", icon: Icon(FontAwesomeIcons.female)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).antec_pato_madre = value;
+              },
+              focusNode: madreNode,
             ),
           ),
           Container(
@@ -339,7 +347,10 @@ class _I_VState extends State<I_V> {
                   labelText: "Abuela materna",
                   icon: Icon(FontAwesomeIcons.female)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).antec_pato_abuelama = value;
+
+              },
             ),
           ),
           Container(
@@ -349,7 +360,9 @@ class _I_VState extends State<I_V> {
                   labelText: "Abuelo materno",
                   icon: Icon(FontAwesomeIcons.male)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).antec_pato_abueloma = value;
+              },
             ),
           ),
           Container(
@@ -358,7 +371,9 @@ class _I_VState extends State<I_V> {
               decoration: InputDecoration(
                   labelText: "Padre", icon: Icon(FontAwesomeIcons.male)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).antec_pato_padre = value;
+              },
             ),
           ),
           Container(
@@ -368,7 +383,9 @@ class _I_VState extends State<I_V> {
                   labelText: "Abuelo paterno",
                   icon: Icon(FontAwesomeIcons.male)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).antec_pato_abuelopa = value;
+              },
             ),
           ),
           Container(
@@ -378,7 +395,10 @@ class _I_VState extends State<I_V> {
                   labelText: "abuela paterna",
                   icon: Icon(FontAwesomeIcons.female)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).antec_pato_abuelapa = value;
+
+              },
             ),
           ),
           Container(
@@ -401,7 +421,9 @@ class _I_VState extends State<I_V> {
                         labelText: "Grupo sanguineo",
                         icon: Icon(FontAwesomeIcons.tint)),
                     keyboardType: TextInputType.text,
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      Provider.of<Cirugia>(context).grupo_sanguineo = value;
+                    },
                   ),
                 ),
               ),
@@ -413,7 +435,9 @@ class _I_VState extends State<I_V> {
                         labelText: "Factor Rh",
                         icon: Icon(FontAwesomeIcons.tint)),
                     keyboardType: TextInputType.text,
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      Provider.of<Cirugia>(context).factor_rh = value;
+                    },
                   ),
                 ),
               ),
@@ -426,7 +450,9 @@ class _I_VState extends State<I_V> {
                   labelText: "Inmunizaciones infancia",
                   icon: Icon(FontAwesomeIcons.baby)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).inmunizaciones_infancia = value;
+              },
             ),
           ),
           Container(
@@ -436,7 +462,7 @@ class _I_VState extends State<I_V> {
                   labelText: "inmunizaciones adulto",
                   icon: Icon(FontAwesomeIcons.male)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {Provider.of<Cirugia>(context).inmunizaciones_adulto = value;},
             ),
           ),
           Container(
@@ -444,27 +470,90 @@ class _I_VState extends State<I_V> {
             alignment: Alignment.centerLeft,
             child: Text("Adicciones"),
           ),
+          Column(
+              children: _current_adicciones.map((value) {
+                return Column(
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        Container(
+                          child: Icon(FontAwesomeIcons.appleAlt),
+                          margin: EdgeInsets.all(10),
+                        ),
+                        Expanded(
+                          child: Container(
+                            margin: EdgeInsets.all(1),
+                            child: DropdownButton(
+                              isExpanded: true,
+                              disabledHint: Text(_current_adicciones[_current_adicciones.indexOf(value)]),
+                              items: _items_adicciones[_current_adicciones.indexOf(value)] == _items_adicciones.last ?
+                              _items_adicciones[_current_adicciones.indexOf(value)]:
+                              null,
+                              value: _current_adicciones[
+                              _current_adicciones.indexOf(value)],
+                              onChanged: (value2) {
+                                setState(() {
+                                  _current_adicciones[
+                                  _current_adicciones.indexOf(value)] = value2;
+                                });
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    _current_adicciones[_current_adicciones.indexOf(value)] == adicciones.last
+                        ? Container(
+                      margin: EdgeInsets.all(10),
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                            labelText: "Otra Adiccion",
+                            icon: Icon(
+                              FontAwesomeIcons.appleAlt,
+                              color: Colors.blue,
+                            ),
+                            labelStyle: TextStyle(color: Colors.blue)),
+                        keyboardType: TextInputType.text,
+                        onChanged: (value) {},
+                      ),
+                    )
+                        : Container(),
+                  ],
+                );
+              }).toList()),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Container(
-                child: Icon(FontAwesomeIcons.wineBottle),
-                margin: EdgeInsets.all(10),
-              ),
-              Expanded(
-                child: Container(
-                  margin: EdgeInsets.all(10),
-                  child: DropdownButton(
-                    isExpanded: true,
-                    items: _items_adicciones,
-                    value: _current_adiccion,
-                    onChanged: (value) {
-                      setState(() {
-                        _current_adiccion = value;
-                      });
-                    },
-                  ),
+              _current_adicciones.last != adicciones.first
+                  ? FlatButton(
+                child: Text(
+                  "Añadir",
+                  style: TextStyle(color: Colors.blue),
                 ),
-              ),
+                onPressed: () {
+                  setState(() {
+                    _items_adicciones.add(Util()
+                        .ajustarlistas(adicciones, _current_adicciones));
+                    _current_adicciones
+                        .add(_items_adicciones.last.first.value);
+                  });
+                },
+              )
+                  : Container(),
+              _current_adicciones.length > 1
+                  ? FlatButton(
+                child: Text(
+                  "Eliminar",
+                  style: TextStyle(color: Colors.blue),
+                ),
+                onPressed: () {
+                  setState(() {
+                    _current_adicciones.removeLast();
+                    _items_adicciones.removeLast();
+                  });
+                },
+              )
+                  : Container(),
             ],
           ),
           Container(
@@ -1729,7 +1818,7 @@ class _I_VState extends State<I_V> {
                   margin: const EdgeInsets.all(10.0),
                   child: TextFormField(
                     decoration: (InputDecoration(
-                      labelText: "Frecuencia cardiaca",
+                      labelText: "Frec cardiaca",
                       icon: Icon(FontAwesomeIcons.heartbeat),
                     )),
                     keyboardType: TextInputType.text,
@@ -1759,7 +1848,7 @@ class _I_VState extends State<I_V> {
                   margin: const EdgeInsets.all(10.0),
                   child: TextFormField(
                     decoration: (InputDecoration(
-                      labelText: "Frecuencia respiratoria",
+                      labelText: "Frec respiratoria",
                       labelStyle: TextStyle(fontSize: 14),
                       icon: Icon(FontAwesomeIcons.biking),
                     )),

@@ -1,9 +1,10 @@
-import 'dart:js';
+
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:expedientesodontologicos_app/Loggin/LoginState.dart';
 import 'package:expedientesodontologicos_app/ModelosFormularios/Adulto.dart';
 import 'package:expedientesodontologicos_app/ModelosFormularios/Cirugia.dart';
+import 'package:expedientesodontologicos_app/ModelosFormularios/General.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,7 +15,7 @@ class Historial extends StatelessWidget{
   Widget build(BuildContext context) {
     Firestore db= Firestore.instance;
     Stream<QuerySnapshot> stream;
-    stream=db.collection("Usuarios/"+Provider.of<LoginState>(context).uid+"/Cliente/Expedientes").snapshots();
+    stream=db.collection("Usuarios/"+Provider.of<LoginState>(context).uid+"/Cliente/"+Provider.of<General>(context).pacienteid+"/Expedientes").snapshots();
     return Scaffold(
       appBar: AppBar(
         title: Text("Historial de visitas"),
@@ -36,6 +37,7 @@ class Historial extends StatelessWidget{
                  var tpo;
                  if(documents.documentID=="Adulto"){
                    Provider.of<Adulto>(context).fromjson(documents.data);
+                   print(Provider.of<Adulto>(context).dientes_perdidos);
                    tpo="Adulto";
                  }
 

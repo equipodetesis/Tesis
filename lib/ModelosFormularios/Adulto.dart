@@ -53,7 +53,7 @@ void clear(){
     "medicamentos":medicamentos, "nombre_medico":nombredelmedico,"enfermedades":enfermedades, "enfermedad_persiste":enfermedad_persiste, 
         "iniciacion_enf":iniciacion_enf, "curso":curso, "tratamiento":tratamiento, "estadoactual":estadoactual, 
         "otros_enfermedades_padecidas":otros_enfermedades_padecidas, "operaciones":operaciones, "trans_sanguine_somet":trans_sanguine_somet, 
-        "radioterapia":radioterapia, "vacunas_recibidas":vacunas_recibidas
+        "radioterapia":radioterapia, "vacunas_recibidas":vacunas_recibidas,"ClienteID":clienteid,"UserID":Userid
   };
   Future<void> addAdult() async {
     final HttpsCallable callable = CloudFunctions.instance.getHttpsCallable(

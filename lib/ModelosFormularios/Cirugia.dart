@@ -1,3 +1,5 @@
+import 'package:cloud_functions/cloud_functions.dart';
+
 class Cirugia{
   String antec_pato_madre, antec_pato_abuelama, antec_pato_abueloma, antec_pato_padre, antec_pato_abuelapa, antec_pato_abuelopa, grupo_sanguineo,
   factor_rh, inmunizaciones_infancia, inmunizaciones_adulto, regimen_alimenticio, condiciones_habitacionales, enfermedades_infancia,
@@ -44,4 +46,10 @@ class Cirugia{
   despues_24h:"despues_24h", incidentes:"incidentes", analgesicos:"analgesicos", antibioticos:"antibioticos", ansioliticos:"ansioliticos", otros_medicamentos:"otros_medicamentos", nombre_cirujano:"nombre_cirujano", nombre_ayudante:"nombre_ayudante", nombre_instrumentista:"nombre_instrumentista",
   nombre_asistente:"nombre_asistente", hora_inicio:"hora_inicio", hora_termino:"hora_termino", valor_tratamiento:"valor_tratamiento", retiro_sutura:"retiro_sutura", estado_postquirurgico:"estado_postquirurgico", dado_alta:"dado_alta";
   };
+Future<void> addCirugia() async {
+  final HttpsCallable callable = CloudFunctions.instance.getHttpsCallable(
+    functionName: 'addExpAdulto',
+  );
+  dynamic resp = await callable.call(this.toMap()).whenComplete((){print("Expediente adulto añadido con exito");});
+}
 }

@@ -22,7 +22,7 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
   List sexos = ["Masculino", "Femenino"];
   List<DropdownMenuItem> _sexolist;
   String _currentsexo;
- bool actualizar = false;
+  bool actualizar = false;
   Widget general;
   Widget motivohistoria;
   @override

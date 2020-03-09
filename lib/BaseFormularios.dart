@@ -1,6 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:expedientesodontologicos_app/Formularios/Historial.dart';
-import 'package:expedientesodontologicos_app/Formularios/adulto/VIII_XV.dart';
 import 'package:expedientesodontologicos_app/Formularios/cirugia/I_V.dart';
 import 'package:expedientesodontologicos_app/Imagenes/SubirFoto.dart';
 import 'package:expedientesodontologicos_app/ModelosFormularios/General.dart';
@@ -8,8 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'Formularios/adulto/I_II_III_IV.dart';
 import 'Formularios/adulto/V_VI_VII.dart';
-import 'Loggin/LoginState.dart';
-import 'ModelosFormularios/Adulto.dart';
 
 class Baseformularios extends StatefulWidget {
   Baseformularios();
@@ -51,19 +47,21 @@ class _BaseformulariosState extends State<Baseformularios> {
           IconButton(
             icon: Icon(Icons.check),
             onPressed: () {
+              if (actualizacion) {
                 //updates
                 if (Provider.of<General>(context).cambiado) {
                   print(Provider.of<General>(context).pacienteid + "!!!!!!");
                   Provider.of<General>(context).UpdateCLiente();
                 }
+              } else {
                 //adds
                 if (Provider.of<General>(context).cambiado) {
                   Provider.of<General>(context).addCLiente();
+                  // print("Hola?");
                 }
-                if(Provider.of<Adulto>(context).cambiado)
-                  Provider.of<Adulto>(context).addAdult();
                 Navigator.pop(context);
-              },
+              }
+            },
           )
         ],
       ),
@@ -166,15 +164,6 @@ class _BaseformulariosState extends State<Baseformularios> {
               },
             ),
             ListTile(
-              title: Text("Expediente Adulto2"),
-              onTap: () {
-                setState(() {
-                  bodycontent = VIII_XV();
-                });
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
               title: Text("Peridograma"),
               onTap: () {
                 Navigator.pop(context);
@@ -212,5 +201,4 @@ class _BaseformulariosState extends State<Baseformularios> {
       ),
     );
   }
-
 }

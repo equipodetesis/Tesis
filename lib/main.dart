@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'ModelosFormularios/Adulto.dart';
 import 'ModelosFormularios/Endodoncia.dart';
 import 'principal.dart';
+
 void main(){
   runApp(MultiProvider(
     providers: [
@@ -28,20 +29,28 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Provider.of<LoginState>(context).isok();
-        return MaterialApp(
-            title: 'Historias Clinicas',
-            theme: ThemeData(
-              primarySwatch: Colors.blue,
-            ),
-            home:  FutureBuilder<bool>(
-              future:Provider.of<LoginState>(context).isok() ,
-              initialData: false,
-            builder: (context,log){
-              return log.data?principal():Loggin()??Center(child:CircularProgressIndicator(
-                backgroundColor: Colors.deepOrange,
-              ));
-            },
-            )
+        return GestureDetector(
+          onTap: (){
+            FocusScopeNode currentFocus = FocusScope.of(context);
+            if (!currentFocus.hasPrimaryFocus) {
+              currentFocus.unfocus();
+            }
+          },
+          child: MaterialApp(
+              title: 'Historias Clinicas',
+              theme: ThemeData(
+                primarySwatch: Colors.blue,
+              ),
+              home:  FutureBuilder<bool>(
+                future:Provider.of<LoginState>(context).isok() ,
+                initialData: false,
+              builder: (context,log){
+                return log.data?principal():Loggin()??Center(child:CircularProgressIndicator(
+                  backgroundColor: Colors.deepOrange,
+                ));
+              },
+              )
+          ),
         );
   }
 

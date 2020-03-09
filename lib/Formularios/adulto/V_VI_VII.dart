@@ -76,17 +76,39 @@ class _V_VI_VII_State extends State<V_VI_VII> {
   List _current_sometido = List();
   List<List<DropdownMenuItem>> _items_sometido = List();
 
-  bool eliminableI = false;
+  List<String> opciones1 = [
+    "Buena",
+    "Regular",
+    "Deficiente"
+  ];
+  List<String> opciones2 = [
+    "poco",
+    "Regular",
+    "Abundante"
+  ];
+
+  String _current_higiene ;
+  List<DropdownMenuItem> _items_higiene = List();
+
+  String _current_calculo ;
+  List<DropdownMenuItem> _items_calculo = List();
+
+  String _current_salivacion ;
+  List<DropdownMenuItem> _items_salivacion = List();
 
   @override
   void initState() {
+    _items_higiene = Util().getDropdownMenuItem(opciones1);
+    _current_higiene = _items_higiene.first.value;
+    _items_calculo = Util().getDropdownMenuItem(opciones2);
+    _current_calculo = _items_calculo.first.value;
+    _items_salivacion = Util().getDropdownMenuItem(opciones2);
+    _current_salivacion = _items_salivacion.first.value;
     _itemslocal = Util().getDropdownMenuItem(listlocales);
     _currentlocal = _itemslocal.first.value;
-    _items_enfermedades
-        .add(Util().ajustarlistas(_enfermedades, _current_enfermedades));
+    _items_enfermedades.add(Util().ajustarlistas(_enfermedades, _current_enfermedades));
     _current_enfermedades.add(_items_enfermedades.last.first.value);
-    _items_revision_organos.add(
-        Util().ajustarlistas(_revision_organos, _current_revision_organos));
+    _items_revision_organos.add(Util().ajustarlistas(_revision_organos, _current_revision_organos));
     _current_revision_organos.add(_items_revision_organos.last.first.value);
     _items_sometido.add(Util().ajustarlistas(_sometido, _current_sometido));
     _current_sometido.add(_items_sometido.last.first.value);
@@ -129,9 +151,9 @@ class _V_VI_VII_State extends State<V_VI_VII> {
         child: Row(
           children: <Widget>[
             Container(
-                margin: EdgeInsets.only(right: 10),
+                margin: EdgeInsets.only(right: 10, left: 10),
                 child: Icon(FontAwesomeIcons.briefcaseMedical)),
-            Text("¿Ha estado el paciente bajo cuidado medico?"),
+            Expanded(child: Text("¿Ha estado el paciente bajo cuidado medico?")),
             Checkbox(
               value: cuidado_medico,
               onChanged: (value) {
@@ -287,7 +309,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          _current_enfermedades.last != "Ninguna"
+          _current_enfermedades.last != _enfermedades.first
               ? FlatButton(
                   child: Text(
                     "Añadir",
@@ -312,13 +334,14 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                   onPressed: () {
                     setState(() {
                       _current_enfermedades.removeLast();
+                      _items_enfermedades.removeLast();
                     });
                   },
                 )
               : Container(),
         ],
       ),
-      _current_enfermedades[0] != "Ninguna"
+      _current_enfermedades.first != _enfermedades.first
           ? Column(
               children: <Widget>[
                 Container(
@@ -460,7 +483,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                 ),
               ],
             ),
-            _current_sometido[_current_sometido.indexOf(value)] == "Operaciones"
+            _current_sometido[_current_sometido.indexOf(value)] == _sometido[1]
                 ? Container(
                     margin: EdgeInsets.all(10),
                     child: TextFormField(
@@ -478,7 +501,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          _current_sometido.last != "Ninguna"
+          _current_sometido.last != _sometido.first && _items_sometido.last.length > 2
               ? Container(
                   alignment: Alignment.centerLeft,
                   child: FlatButton(
@@ -505,6 +528,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                   onPressed: () {
                     setState(() {
                       _current_sometido.removeLast();
+                      _items_sometido.removeLast();
                     });
                   },
                 )
@@ -555,124 +579,540 @@ class _V_VI_VII_State extends State<V_VI_VII> {
           },
         ),
       ),
+          Container(
+            margin: EdgeInsets.all(10),
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'Revision de organos y sistemas',
+              style: TextStyle(fontSize: 15),
+            ),
+          ),
+          Column(
+            children: _current_revision_organos.map((value) {
+              return Row(
+                children: <Widget>[
+                  Container(
+                    child: Icon(FontAwesomeIcons.hospital),
+                    margin: EdgeInsets.all(10),
+                  ),
+                  Expanded(
+                    child: Container(
+                      margin: EdgeInsets.all(10),
+                      child: DropdownButton(
+                        isExpanded: true,
+                        disabledHint: Text(_current_revision_organos[
+                        _current_revision_organos.indexOf(value)]),
+                        items: _items_revision_organos[
+                        _current_revision_organos.indexOf(value)] ==
+                            _items_revision_organos.last
+                            ? _items_revision_organos[
+                        _current_revision_organos.indexOf(value)]
+                            : null,
+                        value: _current_revision_organos[
+                        _current_revision_organos.indexOf(value)],
+                        itemHeight: 48,
+                        onChanged: (selection) {
+                          setState(() {
+                            _current_revision_organos[_current_revision_organos
+                                .indexOf(value)] = selection;
+                            Provider.of<Adulto>(context).revision_organos =
+                                _current_revision_organos;
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            }).toList(),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              _current_revision_organos.last != _revision_organos.first && _items_revision_organos.last.length > 2
+                  ? FlatButton(
+                child: Text(
+                  "Añadir",
+                  style: TextStyle(color: Colors.blue),
+                ),
+                onPressed: () {
+                  setState(() {
+                    _items_revision_organos.add(Util().ajustarlistas(
+                        _revision_organos, _current_revision_organos));
+                    _current_revision_organos
+                        .add(_items_revision_organos.last.first.value);
+                  });
+                },
+              )
+                  : Container(),
+              _current_revision_organos.length > 1
+                  ? FlatButton(
+                child: Text(
+                  "Eliminar",
+                  style: TextStyle(color: Colors.blue),
+                ),
+                onPressed: () {
+                  setState(() {
+                    _items_revision_organos.removeLast();
+                    _current_revision_organos.removeLast();
+                  });
+                },
+              )
+                  : Container(),
+            ],
+          ),
+          Container(
+            margin: EdgeInsets.all(10),
+            child: TextFormField(
+              decoration: InputDecoration(
+                  labelText: "Describa si es necesario",
+                  icon: Icon(FontAwesomeIcons.fileAlt)),
+              minLines: 1,
+              maxLines: 6,
+              keyboardType: TextInputType.multiline,
+              initialValue: Provider.of<Adulto>(context).describa_revision,
+              onChanged: (value) {
+                Provider.of<Adulto>(context).describa_revision = value;
+              },
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.all(10),
+            child: TextFormField(
+              decoration: InputDecoration(
+                  labelText:
+                  "otros signos o sintomas que ha tenido recientemente",
+                  icon: Icon(FontAwesomeIcons.fileAlt)),
+              minLines: 1,
+              maxLines: 6,
+              keyboardType: TextInputType.multiline,
+              initialValue: Provider.of<Adulto>(context).otros_sintomas,
+              onChanged: (value) {
+                Provider.of<Adulto>(context).otros_sintomas = value;
+              },
+            ),
+          ),
     ]));
   }
 
   Widget revision_organos_y_sistemas() {
     return SingleChildScrollView(
       child: Column(children: [
+
         Container(
-          margin: EdgeInsets.all(10),
           alignment: Alignment.centerLeft,
+          margin: EdgeInsets.all(10),
           child: Text(
-            'Revision de organos y sistemas',
+            "Presion sanguinea (tomela en varias citas, si es necesario)",
             style: TextStyle(fontSize: 15),
           ),
         ),
-        Column(
-          children: _current_revision_organos.map((value) {
-            return Row(
-              children: <Widget>[
-                Container(
-                  child: Icon(FontAwesomeIcons.hospital),
-                  margin: EdgeInsets.all(10),
-                ),
-                Expanded(
-                  child: Container(
-                    margin: EdgeInsets.all(10),
-                    child: DropdownButton(
-                      isExpanded: true,
-                      disabledHint: Text(_current_revision_organos[
-                          _current_revision_organos.indexOf(value)]),
-                      items: _items_revision_organos[
-                                  _current_revision_organos.indexOf(value)] ==
-                              _items_revision_organos.last
-                          ? _items_revision_organos[
-                              _current_revision_organos.indexOf(value)]
-                          : null,
-                      value: _current_revision_organos[
-                          _current_revision_organos.indexOf(value)],
-                      itemHeight: 48,
-                      onChanged: (selection) {
-                        setState(() {
-                          _current_revision_organos[_current_revision_organos
-                              .indexOf(value)] = selection;
-                          Provider.of<Adulto>(context).revision_organos =
-                              _current_revision_organos;
-                        });
-                      },
-                    ),
-                  ),
-                ),
-              ],
-            );
-          }).toList(),
-        ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            _current_revision_organos.last != "Ninguna"
-                ? FlatButton(
-                    child: Text(
-                      "Añadir",
-                      style: TextStyle(color: Colors.blue),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _items_revision_organos.add(Util().ajustarlistas(
-                            _revision_organos, _current_revision_organos));
-                        _current_revision_organos
-                            .add(_items_revision_organos.last.first.value);
-                      });
-                    },
-                  )
-                : Container(),
-            _current_revision_organos.length > 1
-                ? FlatButton(
-                    child: Text(
-                      "Eliminar",
-                      style: TextStyle(color: Colors.blue),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _items_revision_organos.removeLast();
-                        _current_revision_organos.removeLast();
-                      });
-                    },
-                  )
-                : Container(),
+            Expanded(
+              child: Container(
+                margin: const EdgeInsets.all(10.0),
+                child: TextFormField(
+                  decoration: (InputDecoration(
+                    labelText: "Minima",
+                    icon: Icon(FontAwesomeIcons.thermometerEmpty),
+                  )),
+                  keyboardType: TextInputType.text,
+                  initialValue: Provider.of<Adulto>(context).presionsan_min,
+                  onChanged: (value) {
+                    Provider.of<Adulto>(context).presionsan_min = value;
+                  },
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                margin: const EdgeInsets.all(10.0),
+                child: TextFormField(
+                  decoration: (InputDecoration(
+                    labelText: "Maxima",
+                    icon: Icon(FontAwesomeIcons.thermometerFull),
+                  )),
+                  keyboardType: TextInputType.text,
+                  initialValue: Provider.of<Adulto>(context).presionsan_max,
+                  onChanged: (value) {
+                    Provider.of<Adulto>(context).presionsan_max = value;
+                  },
+                ),
+              ),
+            ),
           ],
         ),
         Container(
+          alignment: Alignment.centerLeft,
           margin: EdgeInsets.all(10),
+          child: Text(
+            "Pulso",
+            style: TextStyle(fontSize: 15),
+          ),
+        ),
+        Row(
+          children: <Widget>[
+            Expanded(
+              child: Container(
+                margin: const EdgeInsets.all(10.0),
+                child: TextFormField(
+                  decoration: (InputDecoration(
+                    labelText: "Pulsaciones",
+                    icon: Icon(FontAwesomeIcons.heartbeat),
+                  )),
+                  keyboardType: TextInputType.text,
+                  initialValue: Provider.of<Adulto>(context).pulsaciones,
+                  onChanged: (value) {
+                    Provider.of<Adulto>(context).pulsaciones = value;
+                  },
+                ),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                margin: const EdgeInsets.all(10.0),
+                child: TextFormField(
+                  decoration: (InputDecoration(
+                    labelText: "Ritmo",
+                    icon: Icon(FontAwesomeIcons.heartbeat),
+                  )),
+                  keyboardType: TextInputType.text,
+                  initialValue: Provider.of<Adulto>(context).ritmo,
+                  onChanged: (value) {
+                    Provider.of<Adulto>(context).ritmo = value;
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
+        Container(
+          margin: const EdgeInsets.all(10.0),
           child: TextFormField(
-            decoration: InputDecoration(
-                labelText: "Describa si es necesario",
-                icon: Icon(FontAwesomeIcons.fileAlt)),
-            minLines: 1,
-            maxLines: 6,
-            keyboardType: TextInputType.multiline,
-            initialValue: Provider.of<Adulto>(context).describa_revision,
+            decoration: (InputDecoration(
+              labelText: "Temperatura, (Tomela de ser necesario)",
+              icon: Icon(FontAwesomeIcons.fire),
+            )),
+            keyboardType: TextInputType.text,
+            initialValue: Provider.of<Adulto>(context).temperatura,
             onChanged: (value) {
-              Provider.of<Adulto>(context).describa_revision = value;
+              Provider.of<Adulto>(context).temperatura = value;
             },
           ),
         ),
         Container(
-          margin: EdgeInsets.all(10),
+          margin: const EdgeInsets.all(10.0),
           child: TextFormField(
-            decoration: InputDecoration(
-                labelText:
-                    "otros signos o sintomas que ha tenido recientemente",
-                icon: Icon(FontAwesomeIcons.fileAlt)),
+            decoration: (InputDecoration(
+              labelText: "Examenes de laboratorio, describa",
+              icon: Icon(FontAwesomeIcons.fileAlt),
+            )),
             minLines: 1,
             maxLines: 6,
-            keyboardType: TextInputType.multiline,
-            initialValue: Provider.of<Adulto>(context).otros_sintomas,
+            keyboardType: TextInputType.text,
+            initialValue: Provider.of<Adulto>(context).descripcion_examenes,
             onChanged: (value) {
-              Provider.of<Adulto>(context).otros_sintomas = value;
+              Provider.of<Adulto>(context).descripcion_examenes = value;
             },
           ),
+        ),
+        Container(
+          margin: const EdgeInsets.all(10.0),
+          child: TextFormField(
+            decoration: (InputDecoration(
+              labelText: "Revision Medica, describa",
+              icon: Icon(FontAwesomeIcons.fileAlt),
+            )),
+            minLines: 1,
+            maxLines: 6,
+            keyboardType: TextInputType.text,
+            initialValue: Provider.of<Adulto>(context).revision_medica,
+            onChanged: (value) {
+              Provider.of<Adulto>(context).revision_medica = value;
+            },
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.all(10.0),
+          child: TextFormField(
+            decoration: (InputDecoration(
+              labelText: "Examen fisico de cara y cuello",
+              icon: Icon(FontAwesomeIcons.fileAlt),
+            )),
+            minLines: 1,
+            maxLines: 6,
+            keyboardType: TextInputType.text,
+            initialValue:
+            Provider.of<Adulto>(context).examenfisico_caracuello,
+            onChanged: (value) {
+              Provider.of<Adulto>(context).examenfisico_caracuello = value;
+            },
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.all(10.0),
+          child: TextFormField(
+            decoration: (InputDecoration(
+              labelText: "Region vestibular",
+              icon: Icon(FontAwesomeIcons.fileAlt),
+            )),
+            keyboardType: TextInputType.text,
+            initialValue: Provider.of<Adulto>(context).region_vestibular,
+            onChanged: (value) {
+              Provider.of<Adulto>(context).region_vestibular = value;
+            },
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.all(10.0),
+          child: TextFormField(
+            decoration: (InputDecoration(
+              labelText: "paladar duro",
+              icon: Icon(FontAwesomeIcons.fileAlt),
+            )),
+            minLines: 1,
+            maxLines: 6,
+            keyboardType: TextInputType.text,
+            initialValue: Provider.of<Adulto>(context).paladar_duro,
+            onChanged: (value) {
+              Provider.of<Adulto>(context).paladar_duro = value;
+            },
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.all(10.0),
+          child: TextFormField(
+            decoration: (InputDecoration(
+              labelText: "Paladar blando",
+              icon: Icon(FontAwesomeIcons.fileAlt),
+            )),
+            minLines: 1,
+            maxLines: 6,
+            keyboardType: TextInputType.text,
+            initialValue: Provider.of<Adulto>(context).paladar_blando,
+            onChanged: (value) {
+              Provider.of<Adulto>(context).paladar_blando = value;
+            },
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.all(10.0),
+          child: TextFormField(
+            decoration: (InputDecoration(
+              labelText: "Orofaringe",
+              icon: Icon(FontAwesomeIcons.fileAlt),
+            )),
+            minLines: 1,
+            maxLines: 6,
+            keyboardType: TextInputType.text,
+            initialValue: Provider.of<Adulto>(context).orofaringe,
+            onChanged: (value) {
+              Provider.of<Adulto>(context).orofaringe = value;
+            },
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.all(10.0),
+          child: TextFormField(
+            decoration: (InputDecoration(
+              labelText: "Piso de la boca",
+              icon: Icon(FontAwesomeIcons.fileAlt),
+            )),
+            minLines: 1,
+            maxLines: 6,
+            keyboardType: TextInputType.text,
+            initialValue: Provider.of<Adulto>(context).piso_boca,
+            onChanged: (value) {
+              Provider.of<Adulto>(context).piso_boca = value;
+            },
+          ),
+        ),
+        Container(
+          alignment: Alignment.centerLeft,
+          margin: EdgeInsets.all(10),
+          child: Text(
+            "Lengua:",
+            style: TextStyle(fontSize: 15),
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.all(10.0),
+          child: TextFormField(
+            decoration: (InputDecoration(
+              labelText: "Cara dorsal",
+              icon: Icon(FontAwesomeIcons.fileAlt),
+            )),
+            minLines: 1,
+            maxLines: 6,
+            keyboardType: TextInputType.text,
+            initialValue: Provider.of<Adulto>(context).cara_dorsal,
+            onChanged: (value) {
+              Provider.of<Adulto>(context).cara_dorsal = value;
+            },
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.all(10.0),
+          child: TextFormField(
+            decoration: (InputDecoration(
+              labelText: "Cara ventral",
+              icon: Icon(FontAwesomeIcons.fileAlt),
+            )),
+            minLines: 1,
+            maxLines: 6,
+            keyboardType: TextInputType.text,
+            initialValue: Provider.of<Adulto>(context).cara_ventral,
+            onChanged: (value) {
+              Provider.of<Adulto>(context).cara_ventral = value;
+            },
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.all(10.0),
+          child: TextFormField(
+            decoration: (InputDecoration(
+              labelText: "Bordes",
+              icon: Icon(FontAwesomeIcons.fileAlt),
+            )),
+            minLines: 1,
+            maxLines: 6,
+            keyboardType: TextInputType.text,
+            initialValue: Provider.of<Adulto>(context).bordes,
+            onChanged: (value) {
+              Provider.of<Adulto>(context).bordes = value;
+            },
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.all(10.0),
+          child: TextFormField(
+            decoration: (InputDecoration(
+              labelText: "Encia",
+              icon: Icon(FontAwesomeIcons.fileAlt),
+            )),
+            minLines: 1,
+            maxLines: 6,
+            keyboardType: TextInputType.text,
+            initialValue: Provider.of<Adulto>(context).encia,
+            onChanged: (value) {
+              Provider.of<Adulto>(context).encia = value;
+            },
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.all(10.0),
+          child: TextFormField(
+            decoration: (InputDecoration(
+              labelText: "Dientes",
+              icon: Icon(FontAwesomeIcons.fileAlt),
+            )),
+            minLines: 1,
+            maxLines: 6,
+            keyboardType: TextInputType.text,
+            initialValue: Provider.of<Adulto>(context).dientes,
+            onChanged: (value) {
+              Provider.of<Adulto>(context).dientes = value;
+            },
+          ),
+        ),
+        Container(
+          alignment: Alignment.centerLeft,
+          margin: EdgeInsets.all(10),
+          child: Text(
+            "Higiene oral:",
+            style: TextStyle(fontSize: 15),
+          ),
+        ),
+        Row(
+          children: <Widget>[
+            Container(
+              child: Icon(FontAwesomeIcons.teethOpen),
+              margin: EdgeInsets.all(10),
+            ),
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.all(1),
+                child: DropdownButton(
+                  isExpanded: true,
+                  items: _items_higiene,
+                  value: _current_higiene,
+                  onChanged: (value) {
+                    setState(() {
+                      _current_higiene = value;
+                      Provider.of<Adulto>(context).higiene_oral = value;
+                    });
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
+        Container(
+          alignment: Alignment.centerLeft,
+          margin: EdgeInsets.all(10),
+          child: Text(
+            "Presencia de calculos:",
+            style: TextStyle(fontSize: 15),
+          ),
+        ),
+        Row(
+          children: <Widget>[
+            Container(
+              child: Icon(FontAwesomeIcons.circle),
+              margin: EdgeInsets.all(10),
+            ),
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.all(1),
+                child: DropdownButton(
+                  isExpanded: true,
+                  items: _items_calculo,
+                  value: _current_calculo,
+                  onChanged: (value) {
+                    setState(() {
+                      _current_calculo = value;
+                      Provider.of<Adulto>(context).prescencia_calculo = value;
+
+                    });
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
+        Container(
+          alignment: Alignment.centerLeft,
+          margin: EdgeInsets.all(10),
+          child: Text(
+            "salivacion:",
+            style: TextStyle(fontSize: 15),
+          ),
+        ),
+        Row(
+          children: <Widget>[
+            Container(
+              child: Icon(FontAwesomeIcons.tint),
+              margin: EdgeInsets.all(10),
+            ),
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.all(1),
+                child: DropdownButton(
+                  isExpanded: true,
+                  items: _items_salivacion,
+                  value: _current_salivacion,
+                  onChanged: (value) {
+                    setState(() {
+                      _current_salivacion = value;
+                      Provider.of<Adulto>(context).salivacion = value;
+
+                    });
+                  },
+                ),
+              ),
+            ),
+          ],
         ),
       ]),
     );

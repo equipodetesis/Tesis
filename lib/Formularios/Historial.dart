@@ -42,7 +42,7 @@ class Historial extends StatelessWidget{
                  }
 
                  if(documents.documentID=="Cirugia"){
-                   Provider.of<Cirugia>(context).fromJson(documents.data);
+                   Provider.of<Cirugia>(context).fromjson(documents.data);
                    tpo="Cirugia";}
                   List hitorial=List<Widget>();
                  Provider.of<Adulto>(context).motivo.forEach((element){

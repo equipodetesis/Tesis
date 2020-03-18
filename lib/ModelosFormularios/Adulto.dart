@@ -5,19 +5,20 @@ import 'package:flutter/foundation.dart';
 
 class Adulto{
   String  historia, fecha_ultima_visita, tratamiento_recibido , dientes_perdidos , causa_dientesperdidos , experiencias_exodoncias , higiene_oral , tipo_cepillo , tecnica_cepillado ,
-      frecuencia_cepillado , ayudas_higiene_extras ,cuidadoMedico,hospital,expediente,fecha_ultimo_examen_medico, medicamentos, nombredelmedico;
+      frecuencia_cepillado , ayudas_higiene_extras ,hospital,expediente,fecha_ultimo_examen_medico, medicamentos, nombredelmedico;
   List enfermedades=List<String>();
 
-  String enfermedad_persiste="", iniciacion_enf="", curso="", tratamiento="", estadoactual="", otros_enfermedades_padecidas="", operaciones="", trans_sanguine_somet="",
-  radioterapia="", vacunas_recibidas="",clienteid;
-  bool cambiado;
+  String enfermedad_persiste="", iniciacion_enf="", curso="", tratamiento="", estadoactual="", otros_enfermedades_padecidas="", vacunas_recibidas="",clienteid,desc_operacion;
+  bool cambiado,cuidadoMedico;
   //aun no en los formularios , revision_medica a punto de considerarse inecesaria, de aqui hacia abajo no estan contemplados a subirse por ahora
   String historia_familiar,historia_personal_social,otros_sintomas,describa_revision,presionsan_max,presionsan_min,temperatura,pulsaciones,ritmo,descripcion_examenes,
   revision_medica,actitudemocional,examenfisico_caracuello,
   //examen clinico bucal, se pregunta 2 veces por higiene oral...
   region_vestibular,paladar_duro,paladar_blando,orofaringe,piso_boca,lengua,cara_dorsal,cara_ventral,bordes,encia,dientes,prescencia_calculo,salivacion
   ;
- List revision_organos=List<String>(),motivo=List<String>() ;
+ List revision_organos=List<String>(),motivo=List<String>(),sometido=List<String>() ;
+// operaciones=data["operaciones"]; trans_sanguine_somet=data["trans_sanguine_somet"];
+//    radioterapia=data["radioterapia"]  estas variables fueron eliminadas y esto queda como recordatorio por si las moscas
   String Userid;
  Adulto();
 void clear(){
@@ -29,8 +30,12 @@ void clear(){
   cuidadoMedico="";hospital="";expediente="";fecha_ultimo_examen_medico="";
   medicamentos="";nombredelmedico="";enfermedades=List<String>(); enfermedad_persiste="";
   iniciacion_enf=""; curso=""; tratamiento=""; estadoactual="";
-  otros_enfermedades_padecidas=""; operaciones=""; trans_sanguine_somet="";
-  radioterapia=""; vacunas_recibidas="";clienteid="";cambiado=false;
+  otros_enfermedades_padecidas=""; sometido=List<String>(); vacunas_recibidas="";clienteid="";cambiado=false;
+  historia_familiar="";historia_personal_social="";otros_sintomas:"";describa_revision="";presionsan_max="";presionsan_min="";
+  temperatura="";pulsaciones="";ritmo="";descripcion_examenes="";
+  revision_medica="";actitudemocional="";examenfisico_caracuello="";
+  region_vestibular="";paladar_duro="";paladar_blando="";orofaringe="";piso_boca="";lengua="";cara_dorsal="";
+  cara_ventral="";bordes="";encia="";dientes="";prescencia_calculo="";salivacion="";
 }
   void fromjson(Map<String, dynamic> data) {
     motivo = data["motivo_consulta"];
@@ -41,8 +46,14 @@ void clear(){
     cuidadoMedico=data["cuidado_medico"];hospital=data["hospital"];expediente=data["expediente_medico"];fecha_ultimo_examen_medico=data["ult_exam_medico"];
     medicamentos=data["medicamentos"];nombredelmedico=data["nombre_medico"];enfermedades=data["enfermedades"]; enfermedad_persiste=data["enfermedad_persiste"];
     iniciacion_enf=data["iniciacion_enf"]; curso=data["curso"]; tratamiento=data["tratamiento"]; estadoactual=data["estadoactual"];
-    otros_enfermedades_padecidas=data["otros_enfermedades_padecidas"]; operaciones=data["operaciones"]; trans_sanguine_somet=data["trans_sanguine_somet"];
-    radioterapia=data["radioterapia"]; vacunas_recibidas=data["vacunas_recibidas"];clienteid=data["ClienteID"];
+    otros_enfermedades_padecidas=data["otros_enfermedades_padecidas"]; sometido=data["sometido_a"]; vacunas_recibidas=data["vacunas_recibidas"];clienteid=data["ClienteID"];
+    historia_familiar=data["historia_familiar"];historia_personal_social=data["historia_personal_social"];otros_sintomas=data["otros_sintomas"];
+    describa_revision=data["describa_revision"];presionsan_max=data["presionsan_max"];presionsan_min=data["presionsan_min"];
+    temperatura=data["temperatura"];pulsaciones=data["pulsaciones"];ritmo=data["ritmo"];descripcion_examenes=data["descripcion_examenes"];
+    revision_medica=data["revision_medica"];actitudemocional=data["actitudemocional"];examenfisico_caracuello=data["examenfisico_caracuello"];
+    region_vestibular=data["region_vestibular"];paladar_duro=data["paladar_duro"];paladar_blando=data["paladar_blando"];orofaringe=data["orofaringe"];
+    piso_boca=data["piso_boca"];lengua=data["lengua"];cara_dorsal=data["cara_dorsal"];
+    cara_ventral=data["cara_ventral"];bordes=data["bordes"];encia=data["encia"];dientes=data["dientes"];prescencia_calculo=data["prescencia_calculo"];salivacion=data["salivacion"];
   }
   Map<String,dynamic> toMap()=>{
     "motivo_consulta":motivo , "historia_enfermedad_actual":historia, "fecha_ultima_visita":fecha_ultima_visita, "tratamiento":tratamiento_recibido , "dientes_perdidos":dientes_perdidos ,
@@ -51,9 +62,15 @@ void clear(){
     "frec_cepillado":frecuencia_cepillado , "ayudas_higiene_extra":ayudas_higiene_extras ,
     "cuidado_medico":cuidadoMedico,"hospital":hospital,"expediente_medico":expediente,"ult_exam_medico":fecha_ultimo_examen_medico,
     "medicamentos":medicamentos, "nombre_medico":nombredelmedico,"enfermedades":enfermedades, "enfermedad_persiste":enfermedad_persiste, 
-        "iniciacion_enf":iniciacion_enf, "curso":curso, "tratamiento":tratamiento, "estadoactual":estadoactual, 
-        "otros_enfermedades_padecidas":otros_enfermedades_padecidas, "operaciones":operaciones, "trans_sanguine_somet":trans_sanguine_somet, 
-        "radioterapia":radioterapia, "vacunas_recibidas":vacunas_recibidas,"ClienteID":clienteid,"UserID":Userid
+    "iniciacion_enf":iniciacion_enf, "curso":curso, "tratamiento":tratamiento, "estadoactual":estadoactual,
+    "otros_enfermedades_padecidas":otros_enfermedades_padecidas, "vacunas_recibidas":vacunas_recibidas,"ClienteID":clienteid,"UserID":Userid,
+    "historia_familiar":historia_familiar,"historia_personal_social":historia_personal_social,"otros_sintomas":otros_sintomas,
+  "describa_revision":describa_revision,"presionsan_max":presionsan_max,"presionsan_min":presionsan_min,
+  "temperatura":temperatura,"pulsaciones":pulsaciones,"sometido_a":sometido,"ritmo":ritmo,"descripcion_examenes":descripcion_examenes,
+  "revision_medica":revision_medica,"actitudemocional":actitudemocional,"examenfisico_caracuello":examenfisico_caracuello,
+  "region_vestibular":region_vestibular,"paladar_duro":paladar_duro,"paladar_blando":paladar_blando,"orofaringe":orofaringe,
+  "piso_boca":piso_boca,"lengua":lengua,"cara_dorsal":cara_dorsal,
+  "cara_ventral":cara_ventral,"bordes":bordes,"encia":encia,"dientes":dientes,"prescencia_calculo":prescencia_calculo,"salivacion":salivacion
   };
   Future<void> addAdult() async {
     final HttpsCallable callable = CloudFunctions.instance.getHttpsCallable(

@@ -48,7 +48,7 @@ class Cirugia{
   };
 Future<void> addCirugia() async {
   final HttpsCallable callable = CloudFunctions.instance.getHttpsCallable(
-    functionName: 'addExpAdulto',
+    functionName: 'addExpCirugia',
   );
   dynamic resp = await callable.call(this.toMap()).whenComplete((){print("Expediente adulto añadido con exito");});
 }

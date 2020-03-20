@@ -15,7 +15,7 @@ class V_VI_VII extends StatefulWidget {
 
 class _V_VI_VII_State extends State<V_VI_VII> {
   String _currentlocal;
-  bool cuidado_medico = false;
+  bool cuidado_medico =false;
   List<DropdownMenuItem> _itemslocal;
   List<String> listlocales = ["Ninguna", "Hospital", "Clínica"];
 
@@ -98,6 +98,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
 
   @override
   void initState() {
+    cuidado_medico = Provider.of<Adulto>(context).cuidadoMedico;
     _items_higiene = Util().getDropdownMenuItem(opciones1);
     _current_higiene = _items_higiene.first.value;
     _items_calculo = Util().getDropdownMenuItem(opciones2);
@@ -159,6 +160,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
               onChanged: (value) {
                 setState(() {
                   cuidado_medico = value;
+                  Provider.of<Adulto>(context).cuidadoMedico=cuidado_medico ;
                 });
               },
             )
@@ -476,6 +478,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                         setState(() {
                           _current_sometido[_current_sometido.indexOf(value)] =
                               value2;
+                          Provider.of<Adulto>(context).sometido=_current_sometido;
                         });
                       },
                     ),
@@ -491,7 +494,9 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                           labelText: "Describa operacion",
                           icon: Icon(FontAwesomeIcons.pills)),
                       keyboardType: TextInputType.text,
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        Provider.of<Adulto>(context).desc_operacion=value;
+                      },
                     ),
                   )
                 : Container(),
@@ -514,6 +519,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                         _items_sometido.add(
                             Util().ajustarlistas(_sometido, _current_sometido));
                         _current_sometido.add(_items_sometido.last.first.value);
+                        Provider.of<Adulto>(context).sometido=_current_sometido;
                       });
                     },
                   ),
@@ -529,6 +535,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                     setState(() {
                       _current_sometido.removeLast();
                       _items_sometido.removeLast();
+                      Provider.of<Adulto>(context).sometido=_current_sometido;
                     });
                   },
                 )
@@ -617,6 +624,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                                 .indexOf(value)] = selection;
                             Provider.of<Adulto>(context).revision_organos =
                                 _current_revision_organos;
+                            //DUDAS
                           });
                         },
                       ),
@@ -641,6 +649,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                         _revision_organos, _current_revision_organos));
                     _current_revision_organos
                         .add(_items_revision_organos.last.first.value);
+                    Provider.of<Adulto>(context).revision_organos =
+                        _current_revision_organos;
                   });
                 },
               )
@@ -655,6 +665,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                   setState(() {
                     _items_revision_organos.removeLast();
                     _current_revision_organos.removeLast();
+                    Provider.of<Adulto>(context).revision_organos =
+                        _current_revision_organos;
                   });
                 },
               )

@@ -1,3 +1,5 @@
+import 'package:cloud_functions/cloud_functions.dart';
+
 class Cirugia{
   String antec_pato_madre, antec_pato_abuelama, antec_pato_abueloma, antec_pato_padre, antec_pato_abuelapa, antec_pato_abuelopa, grupo_sanguineo,
   factor_rh, inmunizaciones_infancia, inmunizaciones_adulto, regimen_alimenticio, condiciones_habitacionales, enfermedades_infancia,
@@ -32,18 +34,23 @@ class Cirugia{
   }
 
   Map<String,dynamic> toMap()=>{
-    antec_pato_madre:"antec_pato_madre", antec_pato_abuelama:"antec_pato_abuelama", antec_pato_abueloma:"antec_pato_abueloma", antec_pato_padre:"antec_pato_padre", antec_pato_abuelapa:"antec_pato_abuelapa", antec_pato_abuelopa:"antec_pato_abuelopa", grupo_sanguineo:"grupo_sanguineo",
-    factor_rh:"factor_rh", inmunizaciones_infancia:"inmunizaciones_infancia", inmunizaciones_adulto:"inmunizaciones_adulto", regimen_alimenticio:"regimen_alimenticio", condiciones_habitacionales:"condiciones_habitacionales", enfermedades_infancia:"enfermedades_infancia",
-    antecedentes_traumaticos:"antecedentes_traumaticos", antecedentes_quirurgicos:"antecedentes_quirurgicos", transfuciones:"transfuciones", radio_quimioterapia:"radio_quimioterapia", experiencia_anestesia:"experiencia_anestesia", clasificacion_asa:"clasificacion_asa", frecuencia_cardiaca:"frecuencia_cardiaca",
-    tension_arterial:"tension_arterial", frecuencia_resipiratoria:"frecuencia_resipiratoria", temperatura:"temperatura", peso:"peso", talla:"talla", constitucion_fisica:"constitucion_fisica", craneo_tipo:"craneo_tipo", exostosis:"exostosis", endostosis:"endostosis",
-    asimetrias_transversales:"asimetrias_transversales", asimetrias_longitudinales:"asimetrias_longitudinales", enoftalmo:"enoftalmo", exoftalmo:"exoftalmo", movilidad:"movilidad", midriasis:"midriasis", miosis:"miosis", reflejo_pupilar:"reflejo_pupilar", nariz:"nariz",
-    color_piel:"color_piel", palida:"palida", cianotica:"cianotica", enrojecida:"enrojecida", manchas:"manchas", hipotonico:"hipotonico", hipertonico:"hipertonico", espasticos:"espasticos", ganglios_linfaticos:"ganglios_linfaticos", labios:"labios", carrillos:"carrillos", paladar_duro:"paladar_duro",
-    paladar_blando:"paladar_blando", orafaringe:"orafaringe", piso_boca:"piso_boca", lengua:"lengua", encia:"encia", dientes:"dientes", padecimiento_actual:"padecimiento_actual", interpretacion_radiografica:"interpretacion_radiografica", hemoglobina:"hemoglobina", hematocrito:"hematocrito",
-    neutrofilos:"neutrofilos", linfocitos:"linfocitos", eosinofilos:"eosinofilos", basofilos:"basofilos", monocitos:"monocitos", hemoglobina_glucolisada:"hemoglobina_glucolisada", glicemia:"glicemia", otros_sangre:"otros_sangre", tiempo_sangrado:"tiempo_sangrado", tiempo_coagulacion:"tiempo_coagulacion",
-    cuenta_plaquetas:"cuenta_plaquetas", tiempo_protombina:"tiempo_protombina", tiempo_tromboplastina:"tiempo_tromboplastina", inr:"inr", maxilar_superior:"maxilar_superior", maxilar_inferior:"maxilar_inferior", diagnostico:"diagnostico", pronostico:"pronostico", tratamiento:"tratamiento",
-    antisepsia:"antisepsia", anestesia:"anestesia", incision:"incision", diseccion_mucoperiostica:"diseccion_mucoperiostica", osteotomia_ostectomia:"osteotomia_ostectomia", operacion:"operacion", cuidados_herida:"cuidados_herida", sutura:"sutura", primeras_24h:"primeras_24h",
-    despues_24h:"despues_24h", incidentes:"incidentes", analgesicos:"analgesicos", antibioticos:"antibioticos", ansioliticos:"ansioliticos", otros_medicamentos:"otros_medicamentos", nombre_cirujano:"nombre_cirujano", nombre_ayudante:"nombre_ayudante", nombre_instrumentista:"nombre_instrumentista",
-    nombre_asistente:"nombre_asistente", hora_inicio:"hora_inicio", hora_termino:"hora_termino", valor_tratamiento:"valor_tratamiento", retiro_sutura:"retiro_sutura", estado_postquirurgico:"estado_postquirurgico", dado_alta:"dado_alta", otra_adiccion:"otra_adiccion",
-    otra_alergia:"otra_alergia"
+  antec_pato_madre:"antec_pato_madre", antec_pato_abuelama:"antec_pato_abuelama", antec_pato_abueloma:"antec_pato_abueloma", antec_pato_padre:"antec_pato_padre", antec_pato_abuelapa:"antec_pato_abuelapa", antec_pato_abuelopa:"antec_pato_abuelopa", grupo_sanguineo:"grupo_sanguineo",
+  factor_rh:"factor_rh", inmunizaciones_infancia:"inmunizaciones_infancia", inmunizaciones_adulto:"inmunizaciones_adulto", regimen_alimenticio:"regimen_alimenticio", condiciones_habitacionales:"condiciones_habitacionales", enfermedades_infancia:"enfermedades_infancia",
+  antecedentes_traumaticos:"antecedentes_traumaticos", antecedentes_quirurgicos:"antecedentes_quirurgicos", transfuciones:"transfuciones", radio_quimioterapia:"radio_quimioterapia", experiencia_anestesia:"experiencia_anestesia", clasificacion_asa:"clasificacion_asa", frecuencia_cardiaca:"frecuencia_cardiaca",
+  tension_arterial:"tension_arterial", frecuencia_resipiratoria:"frecuencia_resipiratoria", temperatura:"temperatura", peso:"peso", talla:"talla", constitucion_fisica:"constitucion_fisica", craneo_tipo:"craneo_tipo", exostosis:"exostosis", endostosis:"endostosis",
+  asimetrias_transversales:"asimetrias_transversales", asimetrias_longitudinales:"asimetrias_longitudinales", enoftalmo:"enoftalmo", exoftalmo:"exoftalmo", movilidad:"movilidad", midriasis:"midriasis", miosis:"miosis", reflejo_pupilar:"reflejo_pupilar", nariz:"nariz",
+  color_piel:"color_piel", palida:"palida", cianotica:"cianotica", enrojecida:"enrojecida", manchas:"manchas", hipotonico:"hipotonico", hipertonico:"hipertonico", espasticos:"espasticos", ganglios_linfaticos:"ganglios_linfaticos", labios:"labios", carrillos:"carrillos", paladar_duro:"paladar_duro",
+  paladar_blando:"paladar_blando", orafaringe:"orafaringe", piso_boca:"piso_boca", lengua:"lengua", encia:"encia", dientes:"dientes", padecimiento_actual:"padecimiento_actual", interpretacion_radiografica:"interpretacion_radiografica", hemoglobina:"hemoglobina", hematocrito:"hematocrito",
+  neutrofilos:"neutrofilos", linfocitos:"linfocitos", eosinofilos:"eosinofilos", basofilos:"basofilos", monocitos:"monocitos", hemoglobina_glucolisada:"hemoglobina_glucolisada", glicemia:"glicemia", otros_sangre:"otros_sangre", tiempo_sangrado:"tiempo_sangrado", tiempo_coagulacion:"tiempo_coagulacion",
+  cuenta_plaquetas:"cuenta_plaquetas", tiempo_protombina:"tiempo_protombina", tiempo_tromboplastina:"tiempo_tromboplastina", inr:"inr", maxilar_superior:"maxilar_superior", maxilar_inferior:"maxilar_inferior", diagnostico:"diagnostico", pronostico:"pronostico", tratamiento:"tratamiento",
+  antisepsia:"antisepsia", anestesia:"anestesia", incision:"incision", diseccion_mucoperiostica:"diseccion_mucoperiostica", osteotomia_ostectomia:"osteotomia_ostectomia", operacion:"operacion", cuidados_herida:"cuidados_herida", sutura:"sutura", primeras_24h:"primeras_24h",
+  despues_24h:"despues_24h", incidentes:"incidentes", analgesicos:"analgesicos", antibioticos:"antibioticos", ansioliticos:"ansioliticos", otros_medicamentos:"otros_medicamentos", nombre_cirujano:"nombre_cirujano", nombre_ayudante:"nombre_ayudante", nombre_instrumentista:"nombre_instrumentista",
+  nombre_asistente:"nombre_asistente", hora_inicio:"hora_inicio", hora_termino:"hora_termino", valor_tratamiento:"valor_tratamiento", retiro_sutura:"retiro_sutura", estado_postquirurgico:"estado_postquirurgico", dado_alta:"dado_alta"
   };
+Future<void> addCirugia() async {
+  final HttpsCallable callable = CloudFunctions.instance.getHttpsCallable(
+    functionName: 'addExpCirugia',
+  );
+  dynamic resp = await callable.call(this.toMap()).whenComplete((){print("Expediente adulto añadido con exito");});
+}
 }

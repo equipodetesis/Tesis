@@ -72,16 +72,7 @@ class ListController extends StatelessWidget{
                           Provider.of<General>(context).pacienteid=document.documentID;
                           Provider.of<General>(context).actualizar=true;
                           print(document.data["nombre"]);
-                          if (document.data["Expedientes"]!= null) {
-                            print("Hola");
-                            if(document.data["Expedientes"]["Adulto"]!=null){
-                              print(document.data["Expedientes"]["Adulto"]["Userid"]);
-                              Provider.of<Adulto>(context).fromjson(
-                                  document.data["Expedientes"]["Adulto"]);
-                              print("A"+Provider.of<Adulto>(context).Userid);}
-                          }else{
                             Provider.of<Adulto>(context).clear();
-                          }
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => Baseformularios()),

@@ -1,3 +1,4 @@
+import 'package:expedientesodontologicos_app/Formularios/Historial.dart';
 import 'package:expedientesodontologicos_app/Formularios/cirugia/I_V.dart';
 import 'package:expedientesodontologicos_app/Imagenes/SubirFoto.dart';
 import 'package:expedientesodontologicos_app/ModelosFormularios/General.dart';
@@ -21,7 +22,7 @@ class _BaseformulariosState extends State<Baseformularios> {
   String foto;
   @override
   void initState() {
-    bodycontent = formI;
+    bodycontent = Historial();
     super.initState();
   }
 
@@ -134,6 +135,15 @@ class _BaseformulariosState extends State<Baseformularios> {
                       )
                     ],
                   )),
+            ),
+            ListTile(
+              title: Text("Historial"),
+              onTap: () {
+                setState(() {
+                  bodycontent = Historial();
+                });
+                Navigator.pop(context);
+              },
             ),
             ListTile(
               title: Text("General"),

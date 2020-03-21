@@ -311,7 +311,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          _current_enfermedades.last != _enfermedades.first
+          _current_enfermedades.last != _enfermedades.first && _enfermedades.last.length > 2
               ? FlatButton(
                   child: Text(
                     "Añadir",

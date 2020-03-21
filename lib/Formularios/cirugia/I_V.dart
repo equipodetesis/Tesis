@@ -462,7 +462,9 @@ class _I_VState extends State<I_V> {
                   labelText: "inmunizaciones adulto",
                   icon: Icon(FontAwesomeIcons.male)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {Provider.of<Cirugia>(context).inmunizaciones_adulto = value;},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).inmunizaciones_adulto = value;
+                },
             ),
           ),
           Container(
@@ -514,7 +516,9 @@ class _I_VState extends State<I_V> {
                             ),
                             labelStyle: TextStyle(color: Colors.blue)),
                         keyboardType: TextInputType.text,
-                        onChanged: (value) {},
+                        onChanged: (value) {
+                          Provider.of<Cirugia>(context).otra_adiccion = value;
+                        },
                       ),
                     )
                         : Container(),
@@ -524,7 +528,7 @@ class _I_VState extends State<I_V> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              _current_adicciones.last != adicciones.first
+              _current_adicciones.last != adicciones.first && adicciones.last.length > 2
                   ? FlatButton(
                 child: Text(
                   "Añadir",
@@ -563,7 +567,9 @@ class _I_VState extends State<I_V> {
                   labelText: "Regimen alimenticio",
                   icon: Icon(FontAwesomeIcons.hamburger)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).regimen_alimenticio = value;
+              },
             ),
           ),
           Container(
@@ -573,7 +579,9 @@ class _I_VState extends State<I_V> {
                   labelText: "Condiciones habitacionales",
                   icon: Icon(FontAwesomeIcons.houzz)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).condiciones_habitacionales = value;
+              },
             ),
           ),
           Container(
@@ -588,7 +596,9 @@ class _I_VState extends State<I_V> {
                   labelText: "Enfermedades propias de la infancias",
                   icon: Icon(FontAwesomeIcons.baby)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).enfermedades_infancia = value;
+              },
             ),
           ),
           Container(
@@ -598,7 +608,9 @@ class _I_VState extends State<I_V> {
                   labelText: "Antecedentes traumaticos",
                   icon: Icon(FontAwesomeIcons.userInjured)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).antecedentes_traumaticos = value;
+              },
             ),
           ),
           Container(
@@ -608,7 +620,9 @@ class _I_VState extends State<I_V> {
                   labelText: "Antecedentes quirurgicos",
                   icon: Icon(FontAwesomeIcons.userMd)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).antecedentes_quirurgicos = value;
+              },
             ),
           ),
           Container(
@@ -660,7 +674,9 @@ class _I_VState extends State<I_V> {
                               ),
                               labelStyle: TextStyle(color: Colors.blue)),
                           keyboardType: TextInputType.text,
-                          onChanged: (value) {},
+                          onChanged: (value) {
+                            Provider.of<Cirugia>(context).otra_alergia = value;
+                          },
                         ),
                       )
                     : Container(),
@@ -670,7 +686,7 @@ class _I_VState extends State<I_V> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              _current_alergias.last != alergias.first
+              _current_alergias.last != alergias.first && alergias.last.length > 2
                   ? FlatButton(
                 child: Text(
                   "Añadir",
@@ -812,7 +828,7 @@ class _I_VState extends State<I_V> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              _current_digestivo.last != digestivo.first
+              _current_digestivo.last != digestivo.first && digestivo.last.length > 2
                   ? FlatButton(
                 child: Text(
                   "Añadir",
@@ -916,7 +932,7 @@ class _I_VState extends State<I_V> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              _current_respiratorio.last != respiratorio.first
+              _current_respiratorio.last != respiratorio.first && respiratorio.last.length > 2
                   ? FlatButton(
                 child: Text(
                   "Añadir",
@@ -1019,7 +1035,7 @@ class _I_VState extends State<I_V> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              _current_cardiovascular.last != cardiovascular.first
+              _current_cardiovascular.last != cardiovascular.first && cardiovascular.last.length > 2
                   ? FlatButton(
                 child: Text(
                   "Añadir",
@@ -1122,7 +1138,7 @@ class _I_VState extends State<I_V> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              _current_genitourinario.last != genitourinario.first
+              _current_genitourinario.last != genitourinario.first && genitourinario.last.length > 2
                   ? FlatButton(
                 child: Text(
                   "Añadir",
@@ -1225,7 +1241,7 @@ class _I_VState extends State<I_V> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              _current_endocrino.last != endocrino.first
+              _current_endocrino.last != endocrino.first && endocrino.last.length > 2
                   ? FlatButton(
                 child: Text(
                   "Añadir",
@@ -1328,7 +1344,7 @@ class _I_VState extends State<I_V> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              _current_hematologicos.last != hematologicos.first
+              _current_hematologicos.last != hematologicos.first && hematologicos.last.length > 2
                   ? FlatButton(
                 child: Text(
                   "Añadir",
@@ -1431,7 +1447,7 @@ class _I_VState extends State<I_V> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              _current_neurologico.last != neurologico.first
+              _current_neurologico.last != neurologico.first && neurologico.last.length > 2
                   ? FlatButton(
                 child: Text(
                   "Añadir",
@@ -1536,7 +1552,7 @@ class _I_VState extends State<I_V> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              _current_musculo_esqueleto.last != musculo_esqueleto.first
+              _current_musculo_esqueleto.last != musculo_esqueleto.first && musculo_esqueleto.last.length > 2
                   ? FlatButton(
                 child: Text(
                   "Añadir",
@@ -1639,7 +1655,7 @@ class _I_VState extends State<I_V> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              _current_inmunologico.last != inmunologico.first
+              _current_inmunologico.last != inmunologico.first && inmunologico.last.length > 2
                   ? FlatButton(
                 child: Text(
                   "Añadir",
@@ -1742,7 +1758,7 @@ class _I_VState extends State<I_V> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              _current_tegumentario.last != tegumentario.first
+              _current_tegumentario.last != tegumentario.first && tegumentario.last.length > 2
                   ? FlatButton(
                 child: Text(
                   "Añadir",
@@ -2309,7 +2325,7 @@ class _I_VState extends State<I_V> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              _current_temporomandibular.last != temporomandibular.first
+              _current_temporomandibular.last != temporomandibular.first && temporomandibular.last.length > 2
                   ? FlatButton(
                 child: Text(
                   "Añadir",
@@ -2511,7 +2527,7 @@ class _I_VState extends State<I_V> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              _current_radiografia.last != radiografia.first
+              _current_radiografia.last != radiografia.first && radiografia.last.length > 2
                   ? FlatButton(
                 child: Text(
                   "Añadir",
@@ -2872,7 +2888,7 @@ class _I_VState extends State<I_V> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              _current_analisis_laboratorio.last != analisis_laboratorio.first
+              _current_analisis_laboratorio.last != analisis_laboratorio.first && analisis_laboratorio.last.length > 2
                   ? FlatButton(
                 child: Text(
                   "Añadir",

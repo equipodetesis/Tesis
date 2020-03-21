@@ -12,7 +12,7 @@ class Cirugia{
   cuenta_plaquetas, tiempo_protombina, tiempo_tromboplastina, inr, maxilar_superior, maxilar_inferior, diagnostico, pronostico, tratamiento,
   antisepsia, anestesia, incision, diseccion_mucoperiostica, osteotomia_ostectomia, operacion, cuidados_herida, sutura, primeras_24h,
   despues_24h, incidentes, analgesicos, antibioticos, ansioliticos, otros_medicamentos, nombre_cirujano, nombre_ayudante, nombre_instrumentista,
-  nombre_asistente, hora_inicio, hora_termino, valor_tratamiento, retiro_sutura, estado_postquirurgico, dado_alta;
+  nombre_asistente, hora_inicio, hora_termino, valor_tratamiento, retiro_sutura, estado_postquirurgico, dado_alta, otra_adiccion, otra_alergia;
 
   List adicciones = List(), alergias = List(), digestivo = List(), respiratorio = List(), cardiovascular = List(), genitourinario = List(), endocrino = List(), hematologico = List(), neurologico = List(), musculo_esqueleto = List(),
   inmunologico = List(), articulacion_temporomandibular = List(), radiografia = List(), analisis_laboratorio = List();
@@ -29,7 +29,8 @@ class Cirugia{
     cuenta_plaquetas = data["cuenta_plaquetas"]; tiempo_protombina = data["tiempo_protombina"]; tiempo_tromboplastina = data["tiempo_tromboplastina"]; inr = data["inr"]; maxilar_superior = data["maxilar_superior"]; maxilar_inferior = data["maxilar_inferior"]; diagnostico = data["diagnostico"]; pronostico = data["pronostico"]; tratamiento = data["tratamiento"];
     antisepsia = data["antisepsia"]; anestesia = data["anestesia"]; incision = data["incision"]; diseccion_mucoperiostica = data["diseccion_mucoperiostica"]; osteotomia_ostectomia = data["osteotomia_ostectomia"]; operacion = data["operacion"]; cuidados_herida = data["cuidados_herida"]; sutura = data["sutura"]; primeras_24h = data["primeras_24h"];
     despues_24h = data["despues_24h"]; incidentes = data["incidentes"]; analgesicos = data["analgesicos"]; antibioticos = data["antibioticos"]; ansioliticos = data["ansioliticos"]; otros_medicamentos = data["otros_medicamentos"]; nombre_cirujano = data["nombre_cirujano"]; nombre_ayudante = data["nombre_ayudante"]; nombre_instrumentista = data["nombre_instrumentista"];
-    nombre_asistente = data["nombre_asistente"]; hora_inicio = data["hora_inicio"]; hora_termino = data["hora_termino"]; valor_tratamiento = data["valor_tratamiento"]; retiro_sutura = data["retiro_sutura"]; estado_postquirurgico = data["estado_postquirurgico"]; dado_alta = data["dado_alta"];
+    nombre_asistente = data["nombre_asistente"]; hora_inicio = data["hora_inicio"]; hora_termino = data["hora_termino"]; valor_tratamiento = data["valor_tratamiento"]; retiro_sutura = data["retiro_sutura"]; estado_postquirurgico = data["estado_postquirurgico"]; dado_alta = data["dado_alta"]; otra_adiccion = data["otra_adiccion"];
+    otra_alergia = data["otra_alergia"];
   }
 
   Map<String,dynamic> toMap()=>{

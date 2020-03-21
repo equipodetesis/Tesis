@@ -27,7 +27,7 @@ void clear(){
   dientes_perdidos=""; causa_dientesperdidos="" ;experiencias_exodoncias="" ;
   higiene_oral="";tipo_cepillo ="";tecnica_cepillado="" ;
   frecuencia_cepillado="" ; ayudas_higiene_extras="" ;
-  cuidadoMedico="";hospital="";expediente="";fecha_ultimo_examen_medico="";
+  cuidadoMedico=false;hospital="";expediente="";fecha_ultimo_examen_medico="";
   medicamentos="";nombredelmedico="";enfermedades=List<String>(); enfermedad_persiste="";
   iniciacion_enf=""; curso=""; tratamiento=""; estadoactual="";
   otros_enfermedades_padecidas=""; sometido=List<String>(); vacunas_recibidas="";clienteid="";cambiado=false;
@@ -35,7 +35,7 @@ void clear(){
   temperatura="";pulsaciones="";ritmo="";descripcion_examenes="";
   revision_medica="";actitudemocional="";examenfisico_caracuello="";
   region_vestibular="";paladar_duro="";paladar_blando="";orofaringe="";piso_boca="";lengua="";cara_dorsal="";
-  cara_ventral="";bordes="";encia="";dientes="";prescencia_calculo="";salivacion="";
+  cara_ventral="";bordes="";encia="";dientes="";prescencia_calculo="";salivacion="";revision_organos=List<String>();
 }
   void fromjson(Map<String, dynamic> data) {
     motivo = data["motivo_consulta"];
@@ -54,6 +54,7 @@ void clear(){
     region_vestibular=data["region_vestibular"];paladar_duro=data["paladar_duro"];paladar_blando=data["paladar_blando"];orofaringe=data["orofaringe"];
     piso_boca=data["piso_boca"];lengua=data["lengua"];cara_dorsal=data["cara_dorsal"];
     cara_ventral=data["cara_ventral"];bordes=data["bordes"];encia=data["encia"];dientes=data["dientes"];prescencia_calculo=data["prescencia_calculo"];salivacion=data["salivacion"];
+    revision_organos= data["motivo_consulta"];
   }
   Map<String,dynamic> toMap()=>{
     "motivo_consulta":motivo , "historia_enfermedad_actual":historia, "fecha_ultima_visita":fecha_ultima_visita, "tratamiento":tratamiento_recibido , "dientes_perdidos":dientes_perdidos ,
@@ -70,7 +71,7 @@ void clear(){
   "revision_medica":revision_medica,"actitudemocional":actitudemocional,"examenfisico_caracuello":examenfisico_caracuello,
   "region_vestibular":region_vestibular,"paladar_duro":paladar_duro,"paladar_blando":paladar_blando,"orofaringe":orofaringe,
   "piso_boca":piso_boca,"lengua":lengua,"cara_dorsal":cara_dorsal,
-  "cara_ventral":cara_ventral,"bordes":bordes,"encia":encia,"dientes":dientes,"prescencia_calculo":prescencia_calculo,"salivacion":salivacion
+  "cara_ventral":cara_ventral,"bordes":bordes,"encia":encia,"dientes":dientes,"prescencia_calculo":prescencia_calculo,"salivacion":salivacion,"motivo_consulta":revision_organos
   };
   Future<void> addAdult() async {
     final HttpsCallable callable = CloudFunctions.instance.getHttpsCallable(

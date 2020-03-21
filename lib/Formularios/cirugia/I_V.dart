@@ -237,6 +237,21 @@ class _I_VState extends State<I_V> {
   @override
   void initState() {
     madreNode = FocusNode();
+    Provider.of<Cirugia>(context, listen: false).adicciones = _current_adicciones;
+    Provider.of<Cirugia>(context, listen: false).alergias = _current_alergias;
+    Provider.of<Cirugia>(context, listen: false).digestivo = _current_digestivo;
+    Provider.of<Cirugia>(context, listen: false).respiratorio = _current_respiratorio;
+    Provider.of<Cirugia>(context, listen: false).cardiovascular = _current_cardiovascular;
+    Provider.of<Cirugia>(context, listen: false).genitourinario = _current_genitourinario;
+    Provider.of<Cirugia>(context, listen: false).endocrino = _current_endocrino;
+    Provider.of<Cirugia>(context, listen: false).hematologico = _current_hematologicos;
+    Provider.of<Cirugia>(context, listen: false).neurologico = _current_neurologico;
+    Provider.of<Cirugia>(context, listen: false).musculo_esqueleto = _current_musculo_esqueleto;
+    Provider.of<Cirugia>(context, listen: false).inmunologico = _current_inmunologico;
+    Provider.of<Cirugia>(context, listen: false).tegumentario = _current_tegumentario;
+    Provider.of<Cirugia>(context, listen: false).temporomandibular = _current_temporomandibular;
+    Provider.of<Cirugia>(context, listen: false).radiografia = _current_radiografia;
+    Provider.of<Cirugia>(context, listen: false).analisis_laboratorio = _current_analisis_laboratorio;
 
     _items_clasificacion_asa = Util().getDropdownMenuItem(clasificacion_asa);
     _current_clasificacion_asa = _items_clasificacion_asa.first.value;
@@ -725,7 +740,9 @@ class _I_VState extends State<I_V> {
                   labelText: "transfusiones",
                   icon: Icon(FontAwesomeIcons.vials)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).transfuciones = value;
+              },
             ),
           ),
           Container(
@@ -735,7 +752,9 @@ class _I_VState extends State<I_V> {
                   labelText: "¿Ha recibido radioterapia y/o quimioterapia",
                   icon: Icon(FontAwesomeIcons.radiationAlt)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).radio_quimioterapia = value;
+              },
             ),
           ),
           Container(
@@ -745,7 +764,9 @@ class _I_VState extends State<I_V> {
                   labelText: "Experiencia previa con anestesia",
                   icon: Icon(FontAwesomeIcons.syringe)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).experiencia_anestesia = value;
+              },
             ),
           ),
         ],
@@ -785,8 +806,7 @@ class _I_VState extends State<I_V> {
                               _current_digestivo.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
-                              _current_digestivo[
-                                  _current_digestivo.indexOf(value)] = value2;
+                              _current_digestivo[_current_digestivo.indexOf(value)] = value2;
                             });
                           },
                         ),

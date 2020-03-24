@@ -160,7 +160,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
               onChanged: (value) {
                 setState(() {
                   cuidado_medico = value;
-                  Provider.of<Adulto>(context).cuidadoMedico=cuidado_medico ;
+                  Provider.of<Adulto>(context,listen: false).cuidadoMedico=cuidado_medico ;
                 });
               },
             )

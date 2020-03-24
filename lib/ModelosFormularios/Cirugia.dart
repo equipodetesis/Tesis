@@ -7,14 +7,14 @@ class Cirugia{
   tension_arterial, frecuencia_resipiratoria, temperatura, peso, talla, constitucion_fisica, craneo_tipo, exostosis, endostosis,
   asimetrias_transversales, asimetrias_longitudinales, enoftalmo, exoftalmo, movilidad, midriasis, miosis, reflejo_pupilar, nariz,
   color_piel, palida, cianotica, enrojecida, manchas, hipotonico, hipertonico, espasticos, ganglios_linfaticos, labios, carrillos, paladar_duro,
-  paladar_blando, orafaringe, piso_boca, lengua, encia, dientes, padecimiento_actual, interpretacion_radiografica, hemoglobina, hematocrito,
+  paladar_blando, orafaringe, piso_boca, lengua, encia, dientes, padecimiento_actual_temp, interpretacion_radiografica, hemoglobina, hematocrito,
   neutrofilos, linfocitos, eosinofilos, basofilos, monocitos, hemoglobina_glucolisada, glicemia, otros_sangre, tiempo_sangrado, tiempo_coagulacion,
   cuenta_plaquetas, tiempo_protombina, tiempo_tromboplastina, inr, maxilar_superior, maxilar_inferior, diagnostico, pronostico, tratamiento,
   antisepsia, anestesia, incision, diseccion_mucoperiostica, osteotomia_ostectomia, operacion, cuidados_herida, sutura, primeras_24h,
   despues_24h, incidentes, analgesicos, antibioticos, ansioliticos, otros_medicamentos, nombre_cirujano, nombre_ayudante, nombre_instrumentista,
   nombre_asistente, hora_inicio, hora_termino, valor_tratamiento, retiro_sutura, estado_postquirurgico, dado_alta, otra_adiccion, otra_alergia;
-
-  List adicciones = List(), alergias = List(), digestivo = List(), respiratorio = List(), cardiovascular = List(), genitourinario = List(), endocrino = List(), hematologico = List(), neurologico = List(), musculo_esqueleto = List(),
+ bool cambiado=false;
+  List adicciones = List(), padecimiento_actual= List(), alergias = List(), digestivo = List(), respiratorio = List(), cardiovascular = List(), genitourinario = List(), endocrino = List(), hematologico = List(), neurologico = List(), musculo_esqueleto = List(),
   inmunologico = List(), articulacion_temporomandibular = List(), radiografia = List(), analisis_laboratorio = List();
 
   void fromjson(Map<String, dynamic> data) {
@@ -40,7 +40,7 @@ class Cirugia{
   tension_arterial:"tension_arterial", frecuencia_resipiratoria:"frecuencia_resipiratoria", temperatura:"temperatura", peso:"peso", talla:"talla", constitucion_fisica:"constitucion_fisica", craneo_tipo:"craneo_tipo", exostosis:"exostosis", endostosis:"endostosis",
   asimetrias_transversales:"asimetrias_transversales", asimetrias_longitudinales:"asimetrias_longitudinales", enoftalmo:"enoftalmo", exoftalmo:"exoftalmo", movilidad:"movilidad", midriasis:"midriasis", miosis:"miosis", reflejo_pupilar:"reflejo_pupilar", nariz:"nariz",
   color_piel:"color_piel", palida:"palida", cianotica:"cianotica", enrojecida:"enrojecida", manchas:"manchas", hipotonico:"hipotonico", hipertonico:"hipertonico", espasticos:"espasticos", ganglios_linfaticos:"ganglios_linfaticos", labios:"labios", carrillos:"carrillos", paladar_duro:"paladar_duro",
-  paladar_blando:"paladar_blando", orafaringe:"orafaringe", piso_boca:"piso_boca", lengua:"lengua", encia:"encia", dientes:"dientes", padecimiento_actual:"padecimiento_actual", interpretacion_radiografica:"interpretacion_radiografica", hemoglobina:"hemoglobina", hematocrito:"hematocrito",
+  paladar_blando:"paladar_blando", orafaringe:"orafaringe", piso_boca:"piso_boca", lengua:"lengua", encia:"encia", dientes:"dientes", "padecimiento_actual":padecimiento_actual, interpretacion_radiografica:"interpretacion_radiografica", hemoglobina:"hemoglobina", hematocrito:"hematocrito",
   neutrofilos:"neutrofilos", linfocitos:"linfocitos", eosinofilos:"eosinofilos", basofilos:"basofilos", monocitos:"monocitos", hemoglobina_glucolisada:"hemoglobina_glucolisada", glicemia:"glicemia", otros_sangre:"otros_sangre", tiempo_sangrado:"tiempo_sangrado", tiempo_coagulacion:"tiempo_coagulacion",
   cuenta_plaquetas:"cuenta_plaquetas", tiempo_protombina:"tiempo_protombina", tiempo_tromboplastina:"tiempo_tromboplastina", inr:"inr", maxilar_superior:"maxilar_superior", maxilar_inferior:"maxilar_inferior", diagnostico:"diagnostico", pronostico:"pronostico", tratamiento:"tratamiento",
   antisepsia:"antisepsia", anestesia:"anestesia", incision:"incision", diseccion_mucoperiostica:"diseccion_mucoperiostica", osteotomia_ostectomia:"osteotomia_ostectomia", operacion:"operacion", cuidados_herida:"cuidados_herida", sutura:"sutura", primeras_24h:"primeras_24h",

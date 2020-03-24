@@ -19,12 +19,16 @@ class _RegistroState extends State<Registro> {
     //TextEditingController usuario, pasword;
     BaseAuth fireuser=Auth();
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Registrarse"),
+        backgroundColor:Colors.white30 ,
+      ),
       body: Center(
         child: Container(
             alignment: Alignment.center,
             decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Colors.white,Colors.blueAccent],
+                  colors: [Colors.white,Colors.black12],
 
                 )
             ),
@@ -35,9 +39,6 @@ class _RegistroState extends State<Registro> {
               child: ListView(
                 shrinkWrap: true,
                 children: <Widget>[
-                  CircleAvatar(
-                    backgroundColor: Colors.black,
-                  ),
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0.0, 100.0, 0.0, 0.0),
                     child: new TextFormField(
@@ -79,6 +80,26 @@ class _RegistroState extends State<Registro> {
                       },
                     ),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
+                    child: new TextFormField(
+                      maxLines: 1,
+                      obscureText: true,
+                      autofocus: false,
+                      decoration: new InputDecoration(
+                          hintText: 'Repetir contraseña',
+                          icon: new Icon(
+                            Icons.lock,
+                            color: Colors.grey,
+                          )),
+                      validator: (value) => value!=_password? 'Las contraseñas no coinciden' : null,
+                      onSaved: (value){
+                        setState(() {
+                          _password = value.trim();
+                        });
+                      },
+                    ),
+                  ),
                   Container(
                     height: 60.0,
                     padding: EdgeInsets.fromLTRB(0.0,20, 0.0, 0.0),
@@ -88,12 +109,14 @@ class _RegistroState extends State<Registro> {
                       color: Colors.amberAccent,
                       splashColor: Colors.deepOrange,
                       onPressed: () async {
-                        _formKey.currentState.save();
+                        if(_formKey.currentState.validate()){
+                          _formKey.currentState.save();
                         print(_password);
                         FirebaseUser uid=await fireuser.signUp(_email,_password);
                         if (uid != null)
                           fireuser.sendEmailVerification();
                           Navigator.pop(context);
+                        }
                       },
                       materialTapTargetSize: MaterialTapTargetSize.padded,
                     ),

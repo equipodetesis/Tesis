@@ -35,31 +35,49 @@ class Historial extends StatelessWidget{
               return ListView(
                children:snapshot.data.documents.map((DocumentSnapshot documents){
                  var tpo;
+                 List hitorial=List<Widget>();
                  if(documents.documentID=="Adulto"){
                    Provider.of<Adulto>(context).fromjson(documents.data);
                    print(Provider.of<Adulto>(context).dientes_perdidos);
                    tpo="Adulto";
+                   Provider.of<Adulto>(context).motivo.forEach((element){
+                     var h=Column(
+                       children: <Widget>[
+                         Divider(color: Colors.black,
+                           thickness: 0.12,
+                         ),
+                         Text(tpo,textAlign:TextAlign.start,style: TextStyle(color: Colors.blue,fontSize: 20.0),),
+                         ListTile(
+                           title: Text(element),
+                           subtitle: Text(element),
+                         )
+                       ],
+                     );
+                     hitorial.add(h);
+                   });
                  }
 
                  if(documents.documentID=="Cirugia"){
                    Provider.of<Cirugia>(context).fromjson(documents.data);
-                   tpo="Cirugia";}
-                  List hitorial=List<Widget>();
-                 Provider.of<Adulto>(context).motivo.forEach((element){
-                   var h=Column(
-                     children: <Widget>[
-                       Divider(color: Colors.black,
-                         thickness: 0.12,
-                       ),
-                       Text(tpo,textAlign:TextAlign.start,style: TextStyle(color: Colors.blue,fontSize: 20.0),),
-                       ListTile(
-                         title: Text(element),
-                         subtitle: Text(element),
-                       )
-                     ],
-                   );
-                   hitorial.add(h);
-                 });
+                   tpo="Cirugia";
+                   Provider.of<Cirugia>(context).padecimiento_actual.forEach((element){
+                     var h=Column(
+                       children: <Widget>[
+                         Divider(color: Colors.black,
+                           thickness: 0.12,
+                         ),
+                         Text(tpo,textAlign:TextAlign.start,style: TextStyle(color: Colors.blue,fontSize: 20.0),),
+                         ListTile(
+                           title: Text(element),
+                           subtitle: Text(element),
+                         )
+                       ],
+                     );
+                     hitorial.add(h);
+                   });
+                 }
+
+
                  return Column(
                    children:hitorial,
                  );

@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'Formularios/adulto/I_II_III_IV.dart';
 import 'Formularios/adulto/V_VI_VII.dart';
+import 'ModelosFormularios/Adulto.dart';
+import 'ModelosFormularios/Cirugia.dart';
 
 class Baseformularios extends StatefulWidget {
   Baseformularios();
@@ -28,16 +30,10 @@ class _BaseformulariosState extends State<Baseformularios> {
 
   @override
   Widget build(BuildContext context) {
-    if (Provider.of<General>(context).foto.isEmpty) {
-      Provider.of<General>(context).foto =
-          "https://firebasestorage.googleapis.com/v0/b/expedientes-odontologicos.appspot.com/o/54462699_10214142660262421_7801861136030105600_n.jpg?alt=media&token=5060a01b-917e-42e5-ac5c-6cd8bff61f3b";
-      foto = Provider.of<General>(context).foto;
-    } else {
-      actualizacion = true;
 
+      actualizacion = true;
       foto = Provider.of<General>(context).foto;
       nombre = Provider.of<General>(context).nombre;
-    }
 
     return Scaffold(
       appBar: AppBar(
@@ -47,20 +43,24 @@ class _BaseformulariosState extends State<Baseformularios> {
           IconButton(
             icon: Icon(Icons.check),
             onPressed: () {
-              if (actualizacion) {
-                //updates
-                if (Provider.of<General>(context).cambiado) {
-                  print(Provider.of<General>(context).pacienteid + "!!!!!!");
-                  Provider.of<General>(context).UpdateCLiente();
-                }
-              } else {
                 //adds
                 if (Provider.of<General>(context).cambiado) {
                   Provider.of<General>(context).addCLiente();
+                  Provider.of<General>(context).cambiado=false;
+                  // print("Hola?");
+                }
+                if (Provider.of<Adulto>(context).cambiado) {
+                  Provider.of<Adulto>(context).addAdult();
+                  Provider.of<Adulto>(context).cambiado=false;
+                  // print("Hola?");
+                }
+                if (Provider.of<Cirugia>(context).cambiado) {
+                  Provider.of<Cirugia>(context).addCirugia();
+                  Provider.of<Cirugia>(context).cambiado=false;
                   // print("Hola?");
                 }
                 Navigator.pop(context);
-              }
+
             },
           )
         ],

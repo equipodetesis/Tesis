@@ -50,10 +50,11 @@ class _BaseformulariosState extends State<Baseformularios> {
                   // print("Hola?");
                 }
                 if (Provider.of<Adulto>(context).cambiado) {
-                  Provider.of<Adulto>(context).addAdult();
-                  Provider.of<Adulto>(context).cambiado=false;
                   Provider.of<Adulto>(context).motivo.add(Provider.of<Adulto>(context).motivotemp);
                   Provider.of<Adulto>(context).fecha_ultima_visita.add(Provider.of<Adulto>(context).fecha_ultima_visitatemp);
+                  Provider.of<Adulto>(context).addAdult();
+                  Provider.of<Adulto>(context).cambiado=false;
+
                   // print("Hola?");
                 }
                 if (Provider.of<Cirugia>(context).cambiado) {

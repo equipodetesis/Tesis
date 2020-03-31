@@ -4,7 +4,7 @@ import 'package:expedientesodontologicos_app/model/model.dart';
 import 'package:flutter/foundation.dart';
 
 class Adulto{
-  String  historia, fecha_ultima_visita, tratamiento_recibido , dientes_perdidos , causa_dientesperdidos , experiencias_exodoncias , higiene_oral , tipo_cepillo , tecnica_cepillado ,
+  String  historia, fecha_ultima_visitatemp, tratamiento_recibido , dientes_perdidos , causa_dientesperdidos , experiencias_exodoncias , higiene_oral , tipo_cepillo , tecnica_cepillado ,
       frecuencia_cepillado , ayudas_higiene_extras ,hospital,expediente,fecha_ultimo_examen_medico, medicamentos, nombredelmedico;
   List enfermedades=List<String>();
 
@@ -12,18 +12,18 @@ class Adulto{
   bool cambiado,cuidadoMedico;
   //aun no en los formularios , revision_medica a punto de considerarse inecesaria, de aqui hacia abajo no estan contemplados a subirse por ahora
   String historia_familiar,historia_personal_social,otros_sintomas,describa_revision,presionsan_max,presionsan_min,temperatura,pulsaciones,ritmo,descripcion_examenes,
-  revision_medica,actitudemocional,examenfisico_caracuello,
+  revision_medica,actitudemocional,examenfisico_caracuello,motivotemp,
   //examen clinico bucal, se pregunta 2 veces por higiene oral...
   region_vestibular,paladar_duro,paladar_blando,orofaringe,piso_boca,lengua,cara_dorsal,cara_ventral,bordes,encia,dientes,prescencia_calculo,salivacion
   ;
- List revision_organos=List<String>(),motivo=List<String>(),sometido=List<String>() ;
+ List revision_organos=List<String>(),motivo=List<String>(),sometido=List<String>(),fecha_ultima_visita= List<String>();
 // operaciones=data["operaciones"]; trans_sanguine_somet=data["trans_sanguine_somet"];
 //    radioterapia=data["radioterapia"]  estas variables fueron eliminadas y esto queda como recordatorio por si las moscas
   String Userid;
  Adulto();
 void clear(){
   motivo = List<String>();
-  historia="";fecha_ultima_visita=""; tratamiento_recibido="" ;
+  historia="";fecha_ultima_visita== List<String>(); tratamiento_recibido="" ;
   dientes_perdidos=""; causa_dientesperdidos="" ;experiencias_exodoncias="" ;
   higiene_oral="";tipo_cepillo ="";tecnica_cepillado="" ;
   frecuencia_cepillado="" ; ayudas_higiene_extras="" ;

@@ -826,7 +826,9 @@ class _I_VState extends State<I_V> {
                               ),
                               labelStyle: TextStyle(color: Colors.blue)),
                           keyboardType: TextInputType.text,
-                          onChanged: (value) {},
+                          onChanged: (value) {
+                            Provider.of<Cirugia>(context).otra_digestivo = value;
+                          },
                         ),
                       )
                     : Container(),
@@ -841,7 +843,9 @@ class _I_VState extends State<I_V> {
                   labelText: "Tratamiento",
                   icon: Icon(FontAwesomeIcons.pills)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).tratamiento_digestivo = value;
+              },
             ),
           )
               : Container(),
@@ -929,7 +933,9 @@ class _I_VState extends State<I_V> {
                               ),
                               labelStyle: TextStyle(color: Colors.blue)),
                           keyboardType: TextInputType.text,
-                          onChanged: (value) {},
+                          onChanged: (value) {
+                            Provider.of<Cirugia>(context).otra_respiratorio = value;
+                          },
                         ),
                       )
                     : Container(),
@@ -945,7 +951,9 @@ class _I_VState extends State<I_V> {
                   labelText: "Tratamiento",
                   icon: Icon(FontAwesomeIcons.pills)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).tratamiento_respiratorio = value;
+              },
             ),
           )
               : Container(),
@@ -1033,7 +1041,9 @@ class _I_VState extends State<I_V> {
                               ),
                               labelStyle: TextStyle(color: Colors.blue)),
                           keyboardType: TextInputType.text,
-                          onChanged: (value) {},
+                          onChanged: (value) {
+                            Provider.of<Cirugia>(context).otra_cardiovascular = value;
+                          },
                         ),
                       )
                     : Container(),
@@ -1048,7 +1058,9 @@ class _I_VState extends State<I_V> {
                   labelText: "Tratamiento",
                   icon: Icon(FontAwesomeIcons.pills)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).tratamiento_cardiovascular = value;
+              },
             ),
           )
               : Container(),
@@ -1136,7 +1148,9 @@ class _I_VState extends State<I_V> {
                               ),
                               labelStyle: TextStyle(color: Colors.blue)),
                           keyboardType: TextInputType.text,
-                          onChanged: (value) {},
+                          onChanged: (value) {
+                            Provider.of<Cirugia>(context).otra_genitourinario = value;
+                          },
                         ),
                       )
                     : Container(),
@@ -1151,7 +1165,9 @@ class _I_VState extends State<I_V> {
                   labelText: "Tratamiento",
                   icon: Icon(FontAwesomeIcons.pills)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).tratamiento_genitourinario = value;
+              },
             ),
           )
               : Container(),
@@ -1239,7 +1255,9 @@ class _I_VState extends State<I_V> {
                               ),
                               labelStyle: TextStyle(color: Colors.blue)),
                           keyboardType: TextInputType.text,
-                          onChanged: (value) {},
+                          onChanged: (value) {
+                            Provider.of<Cirugia>(context).otra_endocrino = value;
+                          },
                         ),
                       )
                     : Container(),
@@ -1254,7 +1272,9 @@ class _I_VState extends State<I_V> {
                   labelText: "Tratamiento",
                   icon: Icon(FontAwesomeIcons.pills)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).tratamiento_endocrino = value;
+              },
             ),
           )
               : Container(),
@@ -1342,7 +1362,9 @@ class _I_VState extends State<I_V> {
                               ),
                               labelStyle: TextStyle(color: Colors.blue)),
                           keyboardType: TextInputType.text,
-                          onChanged: (value) {},
+                          onChanged: (value) {
+                            Provider.of<Cirugia>(context).otra_hematologico = value;
+                          },
                         ),
                       )
                     : Container(),
@@ -1357,7 +1379,9 @@ class _I_VState extends State<I_V> {
                   labelText: "Tratamiento",
                   icon: Icon(FontAwesomeIcons.pills)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).tratamiento_hematologico = value;
+              },
             ),
           )
               : Container(),
@@ -1445,7 +1469,9 @@ class _I_VState extends State<I_V> {
                               ),
                               labelStyle: TextStyle(color: Colors.blue)),
                           keyboardType: TextInputType.text,
-                          onChanged: (value) {},
+                          onChanged: (value) {
+                            Provider.of<Cirugia>(context).otra_neurologico = value;
+                          },
                         ),
                       )
                     : Container(),
@@ -1460,7 +1486,9 @@ class _I_VState extends State<I_V> {
                   labelText: "Tratamiento",
                   icon: Icon(FontAwesomeIcons.pills)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).tratamiento_neurologico = value;
+              },
             ),
           )
               : Container(),
@@ -1550,7 +1578,9 @@ class _I_VState extends State<I_V> {
                               ),
                               labelStyle: TextStyle(color: Colors.blue)),
                           keyboardType: TextInputType.text,
-                          onChanged: (value) {},
+                          onChanged: (value) {
+                            Provider.of<Cirugia>(context).otra_musculo_esqueleto = value;
+                          },
                         ),
                       )
                     : Container(),
@@ -1565,7 +1595,9 @@ class _I_VState extends State<I_V> {
                   labelText: "Tratamiento",
                   icon: Icon(FontAwesomeIcons.pills)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).tratamiento_musculo_esqueleto = value;
+              },
             ),
           )
               : Container(),
@@ -1653,7 +1685,9 @@ class _I_VState extends State<I_V> {
                               ),
                               labelStyle: TextStyle(color: Colors.blue)),
                           keyboardType: TextInputType.text,
-                          onChanged: (value) {},
+                          onChanged: (value) {
+                            Provider.of<Cirugia>(context).otra_inmunologico = value;
+                          },
                         ),
                       )
                     : Container(),
@@ -1668,7 +1702,9 @@ class _I_VState extends State<I_V> {
                   labelText: "Tratamiento",
                   icon: Icon(FontAwesomeIcons.pills)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).tratamiento_inmunologico = value;
+              },
             ),
           )
               : Container(),
@@ -1756,7 +1792,9 @@ class _I_VState extends State<I_V> {
                               ),
                               labelStyle: TextStyle(color: Colors.blue)),
                           keyboardType: TextInputType.text,
-                          onChanged: (value) {},
+                          onChanged: (value) {
+                            Provider.of<Cirugia>(context).otra_tegumentario = value;
+                            },
                         ),
                       )
                     : Container(),
@@ -1771,7 +1809,9 @@ class _I_VState extends State<I_V> {
                   labelText: "Tratamiento",
                   icon: Icon(FontAwesomeIcons.pills)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).tratamiento_tegumentario = value;
+              },
             ),
           )
               : Container(),
@@ -1831,6 +1871,7 @@ class _I_VState extends State<I_V> {
                     onChanged: (value) {
                       setState(() {
                         _current_clasificacion_asa = value;
+                        Provider.of<Cirugia>(context).clasificacion_asa = value;
                       });
                     },
                   ),
@@ -1858,7 +1899,9 @@ class _I_VState extends State<I_V> {
                       icon: Icon(FontAwesomeIcons.heartbeat),
                     )),
                     keyboardType: TextInputType.text,
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      Provider.of<Cirugia>(context).frecuencia_cardiaca = value;
+                    },
                   ),
                 ),
               ),
@@ -1871,7 +1914,9 @@ class _I_VState extends State<I_V> {
                       icon: Icon(FontAwesomeIcons.heartbeat),
                     )),
                     keyboardType: TextInputType.text,
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      Provider.of<Cirugia>(context).tension_arterial = value;
+                    },
                   ),
                 ),
               ),
@@ -1889,7 +1934,9 @@ class _I_VState extends State<I_V> {
                       icon: Icon(FontAwesomeIcons.biking),
                     )),
                     keyboardType: TextInputType.text,
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      Provider.of<Cirugia>(context).frecuencia_resipiratoria = value;
+                    },
                   ),
                 ),
               ),
@@ -1902,7 +1949,9 @@ class _I_VState extends State<I_V> {
                       icon: Icon(FontAwesomeIcons.thermometerHalf),
                     )),
                     keyboardType: TextInputType.text,
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      Provider.of<Cirugia>(context).temperatura = value;
+                    },
                   ),
                 ),
               ),
@@ -1924,7 +1973,9 @@ class _I_VState extends State<I_V> {
                       icon: Icon(FontAwesomeIcons.weight),
                     )),
                     keyboardType: TextInputType.text,
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      Provider.of<Cirugia>(context).peso = value;
+                    },
                   ),
                 ),
               ),
@@ -1937,7 +1988,9 @@ class _I_VState extends State<I_V> {
                       icon: Icon(FontAwesomeIcons.tshirt),
                     )),
                     keyboardType: TextInputType.text,
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      Provider.of<Cirugia>(context).talla = value;
+                    },
                   ),
                 ),
               ),
@@ -1950,7 +2003,9 @@ class _I_VState extends State<I_V> {
                   labelText: "Constitucion fisica",
                   icon: Icon(FontAwesomeIcons.running)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).constitucion_fisica = value;
+              },
             ),
           ),
           Container(
@@ -1979,6 +2034,7 @@ class _I_VState extends State<I_V> {
                     onChanged: (value) {
                       setState(() {
                         _current_craneoforma = value;
+                        Provider.of<Cirugia>(context).craneo_tipo = value;
                       });
                     },
                   ),
@@ -1997,6 +2053,7 @@ class _I_VState extends State<I_V> {
                 onChanged: (value) {
                   setState(() {
                     exostosis = value;
+                    Provider.of<Cirugia>(context).exostosis = value;
                   });
                 },
               ),
@@ -2009,6 +2066,7 @@ class _I_VState extends State<I_V> {
                 onChanged: (value) {
                   setState(() {
                     endostosis = value;
+                    Provider.of<Cirugia>(context).endostosis = value;
                   });
                 },
               ),
@@ -2035,6 +2093,7 @@ class _I_VState extends State<I_V> {
                 onChanged: (value) {
                   setState(() {
                     transversales = value;
+                    Provider.of<Cirugia>(context).asimetrias_transversales = value;
                   });
                 },
               ),
@@ -2047,6 +2106,7 @@ class _I_VState extends State<I_V> {
                 onChanged: (value) {
                   setState(() {
                     longitudinales = value;
+                    Provider.of<Cirugia>(context).asimetrias_longitudinales = value;
                   });
                 },
               ),
@@ -2068,6 +2128,7 @@ class _I_VState extends State<I_V> {
                 onChanged: (value) {
                   setState(() {
                     enoftalmo = value;
+                    Provider.of<Cirugia>(context).enoftalmo = value;
                   });
                 },
               ),
@@ -2080,6 +2141,7 @@ class _I_VState extends State<I_V> {
                 onChanged: (value) {
                   setState(() {
                     exoftalmo = value;
+                    Provider.of<Cirugia>(context).exoftalmo = value;
                   });
                 },
               ),
@@ -2093,7 +2155,9 @@ class _I_VState extends State<I_V> {
                 icon: Icon(FontAwesomeIcons.eye),
               )),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).movilidad = value;
+              },
             ),
           ),
           Container(
@@ -2112,6 +2176,7 @@ class _I_VState extends State<I_V> {
                 onChanged: (value) {
                   setState(() {
                     midriasis = value;
+                    Provider.of<Cirugia>(context).midriasis = value;
                   });
                 },
               ),
@@ -2124,6 +2189,7 @@ class _I_VState extends State<I_V> {
                 onChanged: (value) {
                   setState(() {
                     miosis = value;
+                    Provider.of<Cirugia>(context).miosis = value;
                   });
                 },
               ),
@@ -2137,7 +2203,9 @@ class _I_VState extends State<I_V> {
                 icon: Icon(FontAwesomeIcons.eye),
               )),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).reflejo_pupilar = value;
+              },
             ),
           ),
           Container(
@@ -2146,7 +2214,9 @@ class _I_VState extends State<I_V> {
               decoration: InputDecoration(
                   labelText: "Nariz", icon: Icon(FontAwesomeIcons.userAlt)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).nariz = value;
+              },
             ),
           ),
           Container(
@@ -2162,7 +2232,9 @@ class _I_VState extends State<I_V> {
                 icon: Icon(FontAwesomeIcons.diagnoses),
               )),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).color_piel = value;
+              },
             ),
           ),
           Row(
@@ -2176,6 +2248,7 @@ class _I_VState extends State<I_V> {
                 onChanged: (value) {
                   setState(() {
                     palida = value;
+                    Provider.of<Cirugia>(context).palida = value;
                   });
                 },
               ),
@@ -2188,6 +2261,7 @@ class _I_VState extends State<I_V> {
                 onChanged: (value) {
                   setState(() {
                     cianotica = value;
+                    Provider.of<Cirugia>(context).cianotica = value;
                   });
                 },
               )
@@ -2204,6 +2278,7 @@ class _I_VState extends State<I_V> {
                 onChanged: (value) {
                   setState(() {
                     enrojecida = value;
+                    Provider.of<Cirugia>(context).enrojecida = value;
                   });
                 },
               ),
@@ -2216,6 +2291,7 @@ class _I_VState extends State<I_V> {
                 onChanged: (value) {
                   setState(() {
                     manchas = value;
+                    Provider.of<Cirugia>(context).manchas = value;
                   });
                 },
               )
@@ -2237,6 +2313,7 @@ class _I_VState extends State<I_V> {
                 onChanged: (value) {
                   setState(() {
                     hipotonico = value;
+                    Provider.of<Cirugia>(context).hipotonico = value;
                   });
                 },
               ),
@@ -2249,6 +2326,7 @@ class _I_VState extends State<I_V> {
                 onChanged: (value) {
                   setState(() {
                     hipertonico = value;
+                    Provider.of<Cirugia>(context).hipertonico = value;
                   });
                 },
               ),
@@ -2265,6 +2343,7 @@ class _I_VState extends State<I_V> {
                 onChanged: (value) {
                   setState(() {
                     espastico = value;
+                    Provider.of<Cirugia>(context).espasticos = value;
                   });
                 },
               )
@@ -2282,7 +2361,9 @@ class _I_VState extends State<I_V> {
                   labelText: "Ganglios linfaticos",
                   icon: Icon(FontAwesomeIcons.userAlt)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).ganglios_linfaticos = value;
+              },
             ),
           ),
           Container(
@@ -2338,7 +2419,9 @@ class _I_VState extends State<I_V> {
                   ),
                   labelStyle: TextStyle(color: Colors.blue)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).tratamiento_temporomandibular = value;
+              },
             ),
           )
               : Container(),
@@ -2388,7 +2471,9 @@ class _I_VState extends State<I_V> {
               decoration: InputDecoration(
                   labelText: "Labios", icon: Icon(FontAwesomeIcons.teethOpen)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).labios = value;
+              },
             ),
           ),
           Container(
@@ -2397,7 +2482,9 @@ class _I_VState extends State<I_V> {
               decoration: InputDecoration(
                   labelText: "Carrillos", icon: Icon(FontAwesomeIcons.teethOpen)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).carrillos = value;
+              },
             ),
           ),
           Container(
@@ -2407,7 +2494,9 @@ class _I_VState extends State<I_V> {
                   labelText: "Paladar duro",
                   icon: Icon(FontAwesomeIcons.teethOpen)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).paladar_duro = value;
+              },
             ),
           ),
           Container(
@@ -2417,7 +2506,9 @@ class _I_VState extends State<I_V> {
                   labelText: "Paladar blando",
                   icon: Icon(FontAwesomeIcons.teethOpen)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).paladar_blando = value;
+              },
             ),
           ),
           Container(
@@ -2426,7 +2517,9 @@ class _I_VState extends State<I_V> {
               decoration: InputDecoration(
                   labelText: "Orafaringe", icon: Icon(FontAwesomeIcons.teethOpen)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).orafaringe = value;
+              },
             ),
           ),
           Container(
@@ -2436,7 +2529,9 @@ class _I_VState extends State<I_V> {
                   labelText: "Piso de la boca",
                   icon: Icon(FontAwesomeIcons.teethOpen)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).piso_boca = value;
+              },
             ),
           ),
           Container(
@@ -2445,7 +2540,9 @@ class _I_VState extends State<I_V> {
               decoration: InputDecoration(
                   labelText: "Lengua", icon: Icon(FontAwesomeIcons.teethOpen)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).lengua = value;
+              },
             ),
           ),
           Container(
@@ -2454,7 +2551,9 @@ class _I_VState extends State<I_V> {
               decoration: InputDecoration(
                   labelText: "Encia", icon: Icon(FontAwesomeIcons.teethOpen)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).encia = value;
+              },
             ),
           ),
           Container(
@@ -2463,7 +2562,9 @@ class _I_VState extends State<I_V> {
               decoration: InputDecoration(
                   labelText: "Dientes", icon: Icon(FontAwesomeIcons.teethOpen)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).dientes = value;
+              },
             ),
           ),
           Container(
@@ -2475,7 +2576,9 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               minLines: 1,
               maxLines: 6,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).padecimiento_actual = value;
+              },
             ),
           ),
         ],
@@ -2540,7 +2643,9 @@ class _I_VState extends State<I_V> {
                   ),
                   labelStyle: TextStyle(color: Colors.blue)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).otra_radiografia = value;
+              },
             ),
           )
               : Container(),
@@ -2588,7 +2693,9 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               minLines: 1,
               maxLines: 6,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).interpretacion_radiografica = value;
+              },
             ),
           ),
           Container(
@@ -2645,7 +2752,9 @@ class _I_VState extends State<I_V> {
                                       icon: Icon(FontAwesomeIcons.tint),
                                     )),
                                     keyboardType: TextInputType.text,
-                                    onChanged: (value) {},
+                                    onChanged: (value) {
+                                      Provider.of<Cirugia>(context).hemoglobina = value;
+                                    },
                                   ),
                                 ),
                               ),
@@ -2658,7 +2767,9 @@ class _I_VState extends State<I_V> {
                                       icon: Icon(FontAwesomeIcons.tint),
                                     )),
                                     keyboardType: TextInputType.text,
-                                    onChanged: (value) {},
+                                    onChanged: (value) {
+                                      Provider.of<Cirugia>(context).hematocrito = value;
+                                    },
                                   ),
                                 ),
                               ),
@@ -2675,7 +2786,9 @@ class _I_VState extends State<I_V> {
                                   icon: Icon(FontAwesomeIcons.tint),
                                 )),
                                 keyboardType: TextInputType.text,
-                                onChanged: (value) {},
+                                onChanged: (value) {
+                                  Provider.of<Cirugia>(context).neutrofilos = value;
+                                },
                               ),
                             ),
                           ),
@@ -2688,7 +2801,9 @@ class _I_VState extends State<I_V> {
                                   icon: Icon(FontAwesomeIcons.tint),
                                 )),
                                 keyboardType: TextInputType.text,
-                                onChanged: (value) {},
+                                onChanged: (value) {
+                                  Provider.of<Cirugia>(context).linfocitos = value;
+                                },
                               ),
                             ),
                           ),
@@ -2705,7 +2820,9 @@ class _I_VState extends State<I_V> {
                                   icon: Icon(FontAwesomeIcons.tint),
                                 )),
                                 keyboardType: TextInputType.text,
-                                onChanged: (value) {},
+                                onChanged: (value) {
+                                  Provider.of<Cirugia>(context).eosinofilos = value;
+                                },
                               ),
                             ),
                           ),
@@ -2718,7 +2835,9 @@ class _I_VState extends State<I_V> {
                                   icon: Icon(FontAwesomeIcons.tint),
                                 )),
                                 keyboardType: TextInputType.text,
-                                onChanged: (value) {},
+                                onChanged: (value) {
+                                  Provider.of<Cirugia>(context).basofilos = value;
+                                },
                               ),
                             ),
                           ),
@@ -2735,7 +2854,9 @@ class _I_VState extends State<I_V> {
                                   icon: Icon(FontAwesomeIcons.tint),
                                 )),
                                 keyboardType: TextInputType.text,
-                                onChanged: (value) {},
+                                onChanged: (value) {
+                                  Provider.of<Cirugia>(context).monocitos = value;
+                                },
                               ),
                             ),
                           ),
@@ -2762,7 +2883,9 @@ class _I_VState extends State<I_V> {
                                       icon: Icon(FontAwesomeIcons.tint),
                                     )),
                                     keyboardType: TextInputType.text,
-                                    onChanged: (value) {},
+                                    onChanged: (value) {
+                                      Provider.of<Cirugia>(context).hemoglobina_glucolisada = value;
+                                    },
                                   ),
                                 ),
                               ),
@@ -2775,7 +2898,9 @@ class _I_VState extends State<I_V> {
                                       icon: Icon(FontAwesomeIcons.tint),
                                     )),
                                     keyboardType: TextInputType.text,
-                                    onChanged: (value) {},
+                                    onChanged: (value) {
+                                      Provider.of<Cirugia>(context).glicemia = value;
+                                    },
                                   ),
                                 ),
                               ),
@@ -2792,7 +2917,9 @@ class _I_VState extends State<I_V> {
                                   icon: Icon(FontAwesomeIcons.tint),
                                 )),
                                 keyboardType: TextInputType.text,
-                                onChanged: (value) {},
+                                onChanged: (value) {
+                                  Provider.of<Cirugia>(context).otros_sangre = value;
+                                },
                               ),
                             ),
                           ),
@@ -2818,7 +2945,9 @@ class _I_VState extends State<I_V> {
                                       icon: Icon(FontAwesomeIcons.tint),
                                     )),
                                     keyboardType: TextInputType.text,
-                                    onChanged: (value) {},
+                                    onChanged: (value) {
+                                      Provider.of<Cirugia>(context).tiempo_sangrado = value;
+                                    },
                                   ),
                                 ),
                               ),
@@ -2831,7 +2960,9 @@ class _I_VState extends State<I_V> {
                                       icon: Icon(FontAwesomeIcons.tint),
                                     )),
                                     keyboardType: TextInputType.text,
-                                    onChanged: (value) {},
+                                    onChanged: (value) {
+                                      Provider.of<Cirugia>(context).tiempo_coagulacion = value;
+                                    },
                                   ),
                                 ),
                               ),
@@ -2848,7 +2979,9 @@ class _I_VState extends State<I_V> {
                                   icon: Icon(FontAwesomeIcons.tint),
                                 )),
                                 keyboardType: TextInputType.text,
-                                onChanged: (value) {},
+                                onChanged: (value) {
+                                  Provider.of<Cirugia>(context).cuenta_plaquetas = value;
+                                },
                               ),
                             ),
                           ),
@@ -2862,7 +2995,9 @@ class _I_VState extends State<I_V> {
                                   icon: Icon(FontAwesomeIcons.tint),
                                 )),
                                 keyboardType: TextInputType.text,
-                                onChanged: (value) {},
+                                onChanged: (value) {
+                                  Provider.of<Cirugia>(context).tiempo_protombina = value;
+                                },
                               ),
                             ),
                           ),
@@ -2880,7 +3015,9 @@ class _I_VState extends State<I_V> {
                                   icon: Icon(FontAwesomeIcons.tint),
                                 )),
                                 keyboardType: TextInputType.text,
-                                onChanged: (value) {},
+                                onChanged: (value) {
+                                  Provider.of<Cirugia>(context).tiempo_tromboplastina = value;
+                                },
                               ),
                             ),
                           ),
@@ -2893,7 +3030,9 @@ class _I_VState extends State<I_V> {
                                   icon: Icon(FontAwesomeIcons.tint),
                                 )),
                                 keyboardType: TextInputType.text,
-                                onChanged: (value) {},
+                                onChanged: (value) {
+                                  Provider.of<Cirugia>(context).inr = value;
+                                },
                               ),
                             ),
                           ),
@@ -2956,7 +3095,9 @@ class _I_VState extends State<I_V> {
                       icon: Icon(FontAwesomeIcons.teethOpen),
                     )),
                     keyboardType: TextInputType.text,
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      Provider.of<Cirugia>(context).maxilar_superior = value;
+                    },
                   ),
                 ),
               ),
@@ -2969,7 +3110,9 @@ class _I_VState extends State<I_V> {
                       icon: Icon(FontAwesomeIcons.teethOpen),
                     )),
                     keyboardType: TextInputType.text,
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      Provider.of<Cirugia>(context).maxilar_inferior = value;
+                    },
                   ),
                 ),
               ),
@@ -2988,7 +3131,9 @@ class _I_VState extends State<I_V> {
                 icon: Icon(FontAwesomeIcons.fileMedical),
               )),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).diagnostico = value;
+              },
             ),
           ),
           Container(
@@ -2999,7 +3144,9 @@ class _I_VState extends State<I_V> {
                 icon: Icon(FontAwesomeIcons.fileMedical),
               )),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).pronostico = value;
+              },
             ),
           ),
           Container(
@@ -3009,7 +3156,9 @@ class _I_VState extends State<I_V> {
                   labelText: "Tratamiento",
                   icon: Icon(FontAwesomeIcons.pills)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).tratamiento = value;
+              },
             ),
           ),
           Container(
@@ -3025,7 +3174,9 @@ class _I_VState extends State<I_V> {
                 icon: Icon(FontAwesomeIcons.pastafarianism),
               )),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).antisepsia = value;
+              },
             ),
           ),
           Container(
@@ -3036,7 +3187,9 @@ class _I_VState extends State<I_V> {
                 icon: Icon(FontAwesomeIcons.syringe),
               )),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).anestesia = value;
+              },
             ),
           ),
           Container(
@@ -3047,7 +3200,9 @@ class _I_VState extends State<I_V> {
                 icon: Icon(FontAwesomeIcons.highlighter),
               )),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).incision = value;
+              },
             ),
           ),
           Container(
@@ -3058,7 +3213,9 @@ class _I_VState extends State<I_V> {
                 icon: Icon(FontAwesomeIcons.highlighter),
               )),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).diseccion_mucoperiostica = value;
+              },
             ),
           ),
           Container(
@@ -3069,7 +3226,9 @@ class _I_VState extends State<I_V> {
                 icon: Icon(FontAwesomeIcons.bone),
               )),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).osteotomia_ostectomia = value;
+              },
             ),
           ),
           Container(
@@ -3080,7 +3239,9 @@ class _I_VState extends State<I_V> {
                 icon: Icon(FontAwesomeIcons.userMd),
               )),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).operacion = value;
+              },
             ),
           ),
           Container(
@@ -3091,7 +3252,9 @@ class _I_VState extends State<I_V> {
                 icon: Icon(FontAwesomeIcons.bandAid),
               )),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).cuidados_herida = value;
+              },
             ),
           ),
           Container(
@@ -3102,7 +3265,9 @@ class _I_VState extends State<I_V> {
                 icon: Icon(FontAwesomeIcons.bandAid),
               )),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).sutura = value;
+              },
             ),
           ),
           Container(
@@ -3120,7 +3285,9 @@ class _I_VState extends State<I_V> {
               minLines: 1,
               maxLines: 6,
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).primeras_24h = value;
+              },
             ),
           ),
           Container(
@@ -3133,7 +3300,9 @@ class _I_VState extends State<I_V> {
               minLines: 1,
               maxLines: 6,
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).despues_24h = value;
+              },
             ),
           ),
           Container(
@@ -3146,7 +3315,9 @@ class _I_VState extends State<I_V> {
               minLines: 1,
               maxLines: 6,
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).incidentes = value;
+              },
             ),
           ),
           Container(
@@ -3160,7 +3331,9 @@ class _I_VState extends State<I_V> {
               decoration: InputDecoration(
                   labelText: "Analgesicos", icon: Icon(FontAwesomeIcons.syringe)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).analgesicos = value;
+              },
             ),
           ),
           Container(
@@ -3171,7 +3344,9 @@ class _I_VState extends State<I_V> {
                 icon: Icon(FontAwesomeIcons.pastafarianism),
               )),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).antibioticos = value;
+              },
             ),
           ),
           Container(
@@ -3182,7 +3357,9 @@ class _I_VState extends State<I_V> {
                 icon: Icon(FontAwesomeIcons.userMinus),
               )),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).ansioliticos = value;
+              },
             ),
           ),
           Container(
@@ -3193,7 +3370,9 @@ class _I_VState extends State<I_V> {
                 icon: Icon(FontAwesomeIcons.pills),
               )),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).otros_medicamentos = value;
+              },
             ),
           ),
           Container(
@@ -3204,7 +3383,9 @@ class _I_VState extends State<I_V> {
                 icon: Icon(FontAwesomeIcons.userMd),
               )),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).nombre_cirujano = value;
+              },
             ),
           ),
           Container(
@@ -3215,7 +3396,9 @@ class _I_VState extends State<I_V> {
                 icon: Icon(FontAwesomeIcons.userNurse),
               )),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).nombre_ayudante = value;
+              },
             ),
           ),
           Container(
@@ -3226,7 +3409,9 @@ class _I_VState extends State<I_V> {
                 icon: Icon(FontAwesomeIcons.userNurse),
               )),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).nombre_instrumentista = value;
+              },
             ),
           ),
           Container(
@@ -3237,7 +3422,9 @@ class _I_VState extends State<I_V> {
                 icon: Icon(FontAwesomeIcons.userNurse),
               )),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).nombre_asistente = value;
+              },
             ),
           ),
           Row(
@@ -3251,7 +3438,9 @@ class _I_VState extends State<I_V> {
                       icon: Icon(FontAwesomeIcons.clock),
                     )),
                     keyboardType: TextInputType.text,
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      Provider.of<Cirugia>(context).hora_inicio = value;
+                    },
                   ),
                 ),
               ),
@@ -3264,7 +3453,9 @@ class _I_VState extends State<I_V> {
                       icon: Icon(FontAwesomeIcons.clock),
                     )),
                     keyboardType: TextInputType.text,
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      Provider.of<Cirugia>(context).hora_termino = value;
+                    },
                   ),
                 ),
               ),
@@ -3278,7 +3469,9 @@ class _I_VState extends State<I_V> {
                 icon: Icon(FontAwesomeIcons.dollarSign),
               )),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).valor_tratamiento = value;
+              },
             ),
           ),
           ListTile(
@@ -3295,6 +3488,7 @@ class _I_VState extends State<I_V> {
                   .then((fecha) {
                 setState(() {
                   fecha_retiosutura = fecha;
+                  Provider.of<Cirugia>(context).retiro_sutura =  DateFormat("y-M-d").format(fecha);
                 });
               });
             },
@@ -3306,7 +3500,9 @@ class _I_VState extends State<I_V> {
                   labelText: "Estado postquirurgico del paciente",
                   icon: Icon(FontAwesomeIcons.userAlt)),
               keyboardType: TextInputType.text,
-              onChanged: (value) {},
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).estado_postquirurgico = value;
+              },
             ),
           ),
           ListTile(
@@ -3323,6 +3519,7 @@ class _I_VState extends State<I_V> {
                   .then((fecha) {
                 setState(() {
                   fecha_alta = fecha;
+                  Provider.of<Cirugia>(context).dado_alta =  DateFormat("y-M-d").format(fecha);
                 });
               });
             },

@@ -4,17 +4,22 @@ class Cirugia{
   String antec_pato_madre, antec_pato_abuelama, antec_pato_abueloma, antec_pato_padre, antec_pato_abuelapa, antec_pato_abuelopa, grupo_sanguineo,
   factor_rh, inmunizaciones_infancia, inmunizaciones_adulto, regimen_alimenticio, condiciones_habitacionales, enfermedades_infancia,
   antecedentes_traumaticos, antecedentes_quirurgicos, transfuciones, radio_quimioterapia, experiencia_anestesia, clasificacion_asa, frecuencia_cardiaca,
-  tension_arterial, frecuencia_resipiratoria, temperatura, peso, talla, constitucion_fisica, craneo_tipo, exostosis, endostosis,
-  asimetrias_transversales, asimetrias_longitudinales, enoftalmo, exoftalmo, movilidad, midriasis, miosis, reflejo_pupilar, nariz,
-  color_piel, palida, cianotica, enrojecida, manchas, hipotonico, hipertonico, espasticos, ganglios_linfaticos, labios, carrillos, paladar_duro,
+  tension_arterial, frecuencia_resipiratoria, temperatura, peso, talla, constitucion_fisica, craneo_tipo,   movilidad, reflejo_pupilar, nariz,
+  color_piel, ganglios_linfaticos, labios, carrillos, paladar_duro,
   paladar_blando, orafaringe, piso_boca, lengua, encia, dientes, padecimiento_actual, interpretacion_radiografica, hemoglobina, hematocrito,
   neutrofilos, linfocitos, eosinofilos, basofilos, monocitos, hemoglobina_glucolisada, glicemia, otros_sangre, tiempo_sangrado, tiempo_coagulacion,
   cuenta_plaquetas, tiempo_protombina, tiempo_tromboplastina, inr, maxilar_superior, maxilar_inferior, diagnostico, pronostico, tratamiento,
   antisepsia, anestesia, incision, diseccion_mucoperiostica, osteotomia_ostectomia, operacion, cuidados_herida, sutura, primeras_24h,
   despues_24h, incidentes, analgesicos, antibioticos, ansioliticos, otros_medicamentos, nombre_cirujano, nombre_ayudante, nombre_instrumentista,
-  nombre_asistente, hora_inicio, hora_termino, valor_tratamiento, retiro_sutura, estado_postquirurgico, dado_alta, otra_adiccion, otra_alergia;
+  nombre_asistente, hora_inicio, hora_termino, valor_tratamiento, retiro_sutura, estado_postquirurgico, dado_alta, otra_adiccion, otra_alergia,
+  tratamiento_digestivo, tratamiento_respiratorio, tratamiento_cardiovascular, tratamiento_genitourinario, tratamiento_endocrino, tratamiento_hematologico, tratamiento_neurologico, tratamiento_musculo_esqueleto,
+  tratamiento_inmunologico, tratamiento_tegumentario, tratamiento_temporomandibular, otra_digestivo, otra_respiratorio, otra_cardiovascular, otra_genitourinario, otra_endocrino, otra_hematologico, otra_neurologico, otra_musculo_esqueleto,
+      otra_inmunologico, otra_tegumentario, otra_radiografia;
 
-  List adicciones = List(), alergias = List(), digestivo = List(), respiratorio = List(), cardiovascular = List(), genitourinario = List(), endocrino = List(), hematologico = List(), neurologico = List(), musculo_esqueleto = List(),
+  bool exostosis, endostosis, asimetrias_transversales, asimetrias_longitudinales, enoftalmo, exoftalmo, midriasis, miosis, palida, cianotica, enrojecida, manchas, hipotonico,
+      hipertonico, espasticos;
+
+      List adicciones = List(), alergias = List(), digestivo = List(), respiratorio = List(), cardiovascular = List(), genitourinario = List(), endocrino = List(), hematologico = List(), neurologico = List(), musculo_esqueleto = List(),
   inmunologico = List(), tegumentario = List(), temporomandibular = List(), radiografia = List(), analisis_laboratorio = List();
 
   void fromjson(Map<String, dynamic> data) {
@@ -32,6 +37,11 @@ class Cirugia{
     nombre_asistente = data["nombre_asistente"]; hora_inicio = data["hora_inicio"]; hora_termino = data["hora_termino"]; valor_tratamiento = data["valor_tratamiento"]; retiro_sutura = data["retiro_sutura"]; estado_postquirurgico = data["estado_postquirurgico"]; dado_alta = data["dado_alta"]; otra_adiccion = data["otra_adiccion"];
     otra_alergia = data["otra_alergia"]; adicciones = data["adicciones"]; alergias = data["alergias"]; digestivo = data["digestivo"]; respiratorio = data["respiratorio"]; cardiovascular = data["cardiovascular"]; genitourinario = data["genitourinario"]; endocrino = data["endocrino"]; hematologico = data["hematologico"]; neurologico = data["neurologico"]; musculo_esqueleto = data["musculo_esqueleto"];
     inmunologico = data["inmunologico"]; tegumentario = data["tegumentario"]; temporomandibular = data["temporomandibular"]; radiografia = data["radiografia"]; analisis_laboratorio = data["analisis_laboratorio"];
+    tratamiento_digestivo = data["tratamiento_digestivo"]; tratamiento_respiratorio = data["tratamiento_respiratorio"]; tratamiento_cardiovascular = data["tratamiento_cardiovascular"]; tratamiento_genitourinario = data["tratamiento_genitourinario"]; tratamiento_endocrino = data["tratamiento_endocrino"]; tratamiento_hematologico = data["tratamiento_hematologico"];
+    tratamiento_neurologico = data["tratamiento_neurologico"]; tratamiento_musculo_esqueleto = data["tratamiento_musculo_esqueleto"]; tratamiento_inmunologico = data["tratamiento_inmunologico"]; tratamiento_tegumentario = data["tratamiento_tegumentario"]; tratamiento_temporomandibular = data["tratamiento_temporomandibular"];
+    otra_digestivo = data["otra_digestivo"]; otra_respiratorio = data["otra_respiratorio"]; otra_cardiovascular = data["otra_cardiovascular"]; otra_genitourinario = data["otra_genitourinario"]; otra_endocrino = data["otra_endocrino"]; otra_hematologico = data["otra_hematologico"];
+    otra_neurologico = data["otra_neurologico"]; otra_musculo_esqueleto = data["otra_musculo_esqueleto"]; otra_inmunologico = data["otra_inmunologico"]; otra_tegumentario = data["otra_tegumentario"];
+    otra_radiografia = data["otra_radiografia"];
   }
 
   Map<String,dynamic> toMap()=>{
@@ -48,7 +58,11 @@ class Cirugia{
   "despues_24h":despues_24h, "incidentes":incidentes, "analgesicos":analgesicos, "antibioticos":antibioticos, "ansioliticos":ansioliticos, "otros_medicamentos":otros_medicamentos, "nombre_cirujano":nombre_cirujano, "nombre_ayudante":nombre_ayudante, "nombre_instrumentista":nombre_instrumentista,
   "nombre_asistente":nombre_asistente, "hora_inicio":hora_inicio, "hora_termino":hora_termino, "valor_tratamiento":valor_tratamiento, "retiro_sutura":retiro_sutura, "estado_postquirurgico":estado_postquirurgico, "dado_alta":dado_alta,
     "adicciones":adicciones, "alergias":alergias, "digestivo":digestivo, "respiratorio":respiratorio, "cardiovascular":cardiovascular, "genitourinario":genitourinario, "endocrino":endocrino, "hematologico":hematologico, "neurologico":neurologico, "musculo_esqueleto":musculo_esqueleto,
-    "inmunologico":inmunologico, "tegumentario":tegumentario, "temporomandibular":temporomandibular, "radiografia":radiografia, "analisis_laboratorio":analisis_laboratorio
+    "inmunologico":inmunologico, "tegumentario":tegumentario, "temporomandibular":temporomandibular, "radiografia":radiografia, "analisis_laboratorio":analisis_laboratorio,
+    "tratamiento_digestivo":tratamiento_digestivo, "tratamiento_respiratorio":tratamiento_respiratorio, "tratamiento_cardiovascular":tratamiento_cardiovascular, "tratamiento_genitourinario":tratamiento_genitourinario, "tratamiento_endocrino":tratamiento_endocrino, "tratamiento_hematologico":tratamiento_hematologico,
+    "tratamiento_neurologico":tratamiento_neurologico, "tratamiento_musculo_esqueleto":tratamiento_musculo_esqueleto, "tratamiento_inmunologico":tratamiento_inmunologico, "tratamiento_tegumentario":tratamiento_tegumentario, "tratamiento_temporomandibular":tratamiento_temporomandibular,"otra_digestivo":otra_digestivo,
+    "otra_respiratorio":otra_respiratorio, "otra_cardiovascular":otra_cardiovascular, "otra_genitourinario":otra_genitourinario, "otra_endocrino":otra_endocrino, "otra_hematologico":otra_hematologico, "otra_neurologico":otra_neurologico, "otra_musculo_esqueleto":otra_musculo_esqueleto, "otra_inmunologico":otra_inmunologico,
+    "otra_tegumentario":otra_tegumentario, "otra_radiografia":otra_radiografia
   };
 Future<void> addCirugia() async {
   final HttpsCallable callable = CloudFunctions.instance.getHttpsCallable(

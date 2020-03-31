@@ -98,7 +98,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
 
   @override
   void initState() {
-    cuidado_medico = Provider.of<Adulto>(context).cuidadoMedico;
+    cuidado_medico = Provider.of<Adulto>(context, listen: false).cuidadoMedico;
     _items_higiene = Util().getDropdownMenuItem(opciones1);
     _current_higiene = _items_higiene.first.value;
     _items_calculo = Util().getDropdownMenuItem(opciones2);

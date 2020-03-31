@@ -41,7 +41,7 @@ class _LogginState extends State<Loggin> {
                   child: AspectRatio(
                     child: CircleAvatar(
                       backgroundColor: Colors.black,
-                      backgroundImage: AssetImage("Imagenes/zelda.jpg"),
+                      backgroundImage:NetworkImage("https://firebasestorage.googleapis.com/v0/b/expedientes-odontologicos.appspot.com/o/dentist2.png?alt=media&token=bc68720a-3fbb-42f9-be16-4d1f415d03bd"),
                     ),
                     aspectRatio: 2/2,
                   ),

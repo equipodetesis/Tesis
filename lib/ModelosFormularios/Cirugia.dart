@@ -7,6 +7,7 @@ class Cirugia{
   tension_arterial, frecuencia_resipiratoria, temperatura, peso, talla, constitucion_fisica, craneo_tipo,   movilidad, reflejo_pupilar, nariz,
   color_piel, ganglios_linfaticos, labios, carrillos, paladar_duro,
   paladar_blando, orafaringe, piso_boca, lengua, encia, dientes, padecimiento_actual, interpretacion_radiografica, hemoglobina, hematocrito,
+
   neutrofilos, linfocitos, eosinofilos, basofilos, monocitos, hemoglobina_glucolisada, glicemia, otros_sangre, tiempo_sangrado, tiempo_coagulacion,
   cuenta_plaquetas, tiempo_protombina, tiempo_tromboplastina, inr, maxilar_superior, maxilar_inferior, diagnostico, pronostico, tratamiento,
   antisepsia, anestesia, incision, diseccion_mucoperiostica, osteotomia_ostectomia, operacion, cuidados_herida, sutura, primeras_24h,
@@ -16,8 +17,8 @@ class Cirugia{
   tratamiento_inmunologico, tratamiento_tegumentario, tratamiento_temporomandibular, otra_digestivo, otra_respiratorio, otra_cardiovascular, otra_genitourinario, otra_endocrino, otra_hematologico, otra_neurologico, otra_musculo_esqueleto,
       otra_inmunologico, otra_tegumentario, otra_radiografia;
 
-  bool exostosis, endostosis, asimetrias_transversales, asimetrias_longitudinales, enoftalmo, exoftalmo, midriasis, miosis, palida, cianotica, enrojecida, manchas, hipotonico,
-      hipertonico, espasticos;
+  bool cambiado = false , exostosis = false, endostosis = false, asimetrias_transversales = false, asimetrias_longitudinales = false, enoftalmo = false, exoftalmo = false, midriasis = false, miosis = false, palida = false, cianotica = false, enrojecida = false, manchas = false, hipotonico = false,
+      hipertonico = false, espasticos = false;
 
       List adicciones = List(), alergias = List(), digestivo = List(), respiratorio = List(), cardiovascular = List(), genitourinario = List(), endocrino = List(), hematologico = List(), neurologico = List(), musculo_esqueleto = List(),
   inmunologico = List(), tegumentario = List(), temporomandibular = List(), radiografia = List(), analisis_laboratorio = List();

@@ -17,13 +17,13 @@ class NewCliente extends StatelessWidget{
   Widget build(BuildContext context) {
     _sexolist = Util().getDropdownMenuItem(sexos);
     _currentsexo = sexos[0];
-    Provider.of<General>(context).foto="https://firebasestorage.googleapis.com/v0/b/expedientes-odontologicos.appspot.com/o/54462699_10214142660262421_7801861136030105600_n.jpg?alt=media&token=5060a01b-917e-42e5-ac5c-6cd8bff61f3b";
-    if(Provider.of<General>(context).fecha_inicio.isEmpty){
+    Provider.of<General>(context).foto="https://firebasestorage.googleapis.com/v0/b/expedientes-odontologicos.appspot.com/o/doctor-symbol-physician-medicine-health-care-clinic-doctor-of-medicine-doctors-visit-logo-png-clip-art.png?alt=media&token=71369a9b-7e9d-42f1-bc0e-17a81d517093";
+
       Provider.of<General>(context).sexo = _currentsexo;
       print("hola");
       Provider.of<General>(context).fecha_inicio=DateFormat("y-M-d").format(fecha);
       fecha_inicio=Provider.of<General>(context).fecha_inicio;
-    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Historias clinicas"),
@@ -37,6 +37,7 @@ class NewCliente extends StatelessWidget{
                   print(Provider.of<General>(context).pacienteid+"!!!!!!");
                   Provider.of<General>(context).addCLiente();
                   Navigator.pop(context);
+                  Provider.of<General>(context).cambiado=false;
               }
             },
           )

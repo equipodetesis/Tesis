@@ -289,7 +289,7 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
                 Provider.of<Adulto>(context).Userid=Provider.of<LoginState>(context).uid;
                 Provider.of<Adulto>(context).clienteid=Provider.of<General>(context).pacienteid;
                 Provider.of<Adulto>(context).cambiado=true;
-                Provider.of<Adulto>(context).motivo.add(value);
+                Provider.of<Adulto>(context).motivotemp=value;
                 print(Provider.of<Adulto>(context).Userid+"/"+Provider.of<Adulto>(context).clienteid);
           },
             ),
@@ -325,7 +325,7 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
                   .then((fecha) {
                 setState(() {
                   fecha_selec = fecha;
-                  Provider.of<Adulto>(context).fecha_ultima_visita = DateFormat("y-M-d").format(fecha);
+                  Provider.of<Adulto>(context).fecha_ultima_visitatemp = DateFormat("y-M-d").format(fecha);
                   Provider.of<Adulto>(context).Userid=Provider.of<LoginState>(context).uid;
                   Provider.of<Adulto>(context).clienteid=Provider.of<General>(context).pacienteid;
                   Provider.of<Adulto>(context).cambiado=true;

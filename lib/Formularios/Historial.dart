@@ -60,7 +60,7 @@ class Historial extends StatelessWidget{
                  if(documents.documentID=="Cirugia"){
                    Provider.of<Cirugia>(context).fromjson(documents.data);
                    tpo="Cirugia";
-                   Provider.of<Cirugia>(context).padecimiento_actual.forEach((element){
+                   /*Provider.of<Cirugia>(context).padecimiento_actual.forEach((element){
                      var h=Column(
                        children: <Widget>[
                          Divider(color: Colors.black,
@@ -74,7 +74,7 @@ class Historial extends StatelessWidget{
                        ],
                      );
                      hitorial.add(h);
-                   });
+                   });*/
                  }
 
 

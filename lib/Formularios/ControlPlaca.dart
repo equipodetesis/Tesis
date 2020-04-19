@@ -1,3 +1,4 @@
+import 'package:expedientesodontologicos_app/ModelosFormularios/ControldePlaca.dart';
 import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
 import 'package:flutter/widgets.dart';
@@ -10,7 +11,23 @@ class ControlPlaca extends StatefulWidget{
 class _ControlPlacaState extends State<ControlPlaca>{
   final _placakey = GlobalKey<FormState>();
   String _totalplaca,_presesntemult,_porcentaje,_fecha=DateTime.now().toString();
-  int s=1,d=9;
+  int s=1,d=9,i=0;
+
+  List<ControldePlaca> dientes = List(16);
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    while(i < dientes.length){
+      if(i>=8&&s<2)s++;
+      if(d>1)d--;
+      else d=8;
+      dientes[i] = ControldePlaca();
+      dientes[i].codigo = s.toString() + d.toString();
+      i++;
+    }
+  }
   @override
   Widget build(BuildContext context) {
 
@@ -65,6 +82,61 @@ class _ControlPlacaState extends State<ControlPlaca>{
       ),
     );
 
+    var abajo2 = SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: dientes.map((value) {
+          return Column(
+            children: <Widget>[
+              Text(value.codigo),
+              Container(
+                height: 62.0,
+                width: 52.0,
+                child: Stack(
+                  children: <Widget>[
+                    Positioned(
+                      top: 0.0,
+                      right: 9.0,
+                      child: GestureDetector(
+                        onTap: (){
+                          setState(() {
+                            value.cara_arriba = true;
+                            print(value.cara_arriba);
+                          });
+                        },
+                        child: Image.asset("Imagenes/dientearr.png",color: value.cara_arriba ? Colors.red : null,scale: 1.5,),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 7.0,
+                      left: 0.0,
+                      child: GestureDetector(
+                        child:  Image.asset("Imagenes/dienteizq.png",scale: 1.5,),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 7.0,
+                      right: 0.0,
+                      child: GestureDetector(
+                        child:Image.asset("Imagenes/dienteder.png",scale: 1.5,),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 0.0,
+                      right: 12.0,
+                      child: GestureDetector(
+                        child:Image.asset("Imagenes/dienteabajo.png",scale: 1.5,),
+                      ),
+                    )
+
+                  ],
+                ),
+                decoration: BoxDecoration(color: Colors.black26),
+              )
+            ],
+          );
+        }).toList()),
+      );
 
   var abajo=Container(
     height: 120,
@@ -186,7 +258,7 @@ class _ControlPlacaState extends State<ControlPlaca>{
             Text("Control de placa",style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.bold,fontStyle: FontStyle.italic),),
             arriba,
             Divider(thickness: 10.0),
-            abajo,
+            abajo2,
             Divider(thickness: 10.0),
             calculo,
             Container(
@@ -203,7 +275,6 @@ class _ControlPlacaState extends State<ControlPlaca>{
                 },
                 ),
             ),
-
           ],
         )
       ],

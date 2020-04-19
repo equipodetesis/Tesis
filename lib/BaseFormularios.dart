@@ -1,6 +1,7 @@
+import 'package:expedientesodontologicos_app/Formularios/ControlPlaca.dart';
 import 'package:expedientesodontologicos_app/Formularios/Historial.dart';
 import 'package:expedientesodontologicos_app/Formularios/cirugia/I_V.dart';
-import 'package:expedientesodontologicos_app/Imagenes/SubirFoto.dart';
+import 'package:expedientesodontologicos_app/img/SubirFoto.dart';
 import 'package:expedientesodontologicos_app/ModelosFormularios/General.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,6 +23,7 @@ class _BaseformulariosState extends State<Baseformularios> {
   bool actualizacion = false;
   Widget bodycontent;
   String foto;
+  List motivo=List<String>(),fecha=List<String>();
   @override
   void initState() {
     bodycontent = Historial();
@@ -50,18 +52,22 @@ class _BaseformulariosState extends State<Baseformularios> {
                   // print("Hola?");
                 }
                 if (Provider.of<Adulto>(context).cambiado) {
-                  Provider.of<Adulto>(context).motivo.add(Provider.of<Adulto>(context).motivotemp);
-                  Provider.of<Adulto>(context).fecha_ultima_visita.add(Provider.of<Adulto>(context).fecha_ultima_visitatemp);
+                  if(Provider.of<Adulto>(context).motivo.isNotEmpty){motivo.addAll(Provider.of<Adulto>(context).motivo);}
+                  if(Provider.of<Adulto>(context).fecha_ultima_visita.isNotEmpty){fecha=Provider.of<Adulto>(context).fecha_ultima_visita;}
+                  motivo.add(Provider.of<Adulto>(context).motivotemp);
+                  fecha.add(Provider.of<Adulto>(context).fecha_ultima_visitatemp);
+                  Provider.of<Adulto>(context).addmotivosyfecha(motivo,fecha);
+                  print(Provider.of<Adulto>(context).fecha_ultima_visita.last.toString());
                   Provider.of<Adulto>(context).addAdult();
                   Provider.of<Adulto>(context).cambiado=false;
 
                   // print("Hola?");
                 }
-                if (Provider.of<Cirugia>(context).cambiado) {
+              /*  if (Provider.of<Cirugia>(context).cambiado) {
                   Provider.of<Cirugia>(context).addCirugia();
                   Provider.of<Cirugia>(context).cambiado=false;
                   // print("Hola?");
-                }
+                }*/
                 Navigator.pop(context);
 
             },
@@ -166,24 +172,7 @@ class _BaseformulariosState extends State<Baseformularios> {
                 Navigator.pop(context);
               },
             ),
-            ListTile(
-              title: Text("Peridograma"),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text("Restaurativa"),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text("Control de placa"),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
+
             ListTile(
               title: Text("Cirugia"),
               onTap: () {
@@ -194,11 +183,15 @@ class _BaseformulariosState extends State<Baseformularios> {
               },
             ),
             ListTile(
-              title: Text("Endodoncia"),
+              title: Text("Control de placa"),
               onTap: () {
+                setState(() {
+                  bodycontent = ControlPlaca();
+                });
                 Navigator.pop(context);
               },
-            )
+            ),
+
           ],
         ),
       ),

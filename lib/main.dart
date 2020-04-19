@@ -4,6 +4,7 @@ import 'package:expedientesodontologicos_app/Loggin/LoginState.dart';
 import 'package:expedientesodontologicos_app/ModelosFormularios/Cirugia.dart';
 import 'package:expedientesodontologicos_app/ModelosFormularios/General.dart';
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
 import 'package:provider/provider.dart';
 import 'ModelosFormularios/Adulto.dart';
 import 'ModelosFormularios/Endodoncia.dart';
@@ -20,6 +21,8 @@ void main(){
         create: (context) => Cirugia(),),
       Provider<Adulto>(
         create: (context) => Adulto(),),
+      Provider<Cirugia>(
+        create: (context) => Cirugia(),)
     ],
     child: MyApp()
     )

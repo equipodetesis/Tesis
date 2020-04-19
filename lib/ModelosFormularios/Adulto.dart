@@ -16,14 +16,15 @@ class Adulto{
   //examen clinico bucal, se pregunta 2 veces por higiene oral...
   region_vestibular,paladar_duro,paladar_blando,orofaringe,piso_boca,lengua,cara_dorsal,cara_ventral,bordes,encia,dientes,prescencia_calculo,salivacion
   ;
- List revision_organos=List<String>(),motivo=List<String>(),sometido=List<String>(),fecha_ultima_visita= List<String>();
+ List revision_organos=List<String>(),sometido=List<String>(),fecha_ultima_visita= List<String>();
+ List motivo=List<String>();
 // operaciones=data["operaciones"]; trans_sanguine_somet=data["trans_sanguine_somet"];
 //    radioterapia=data["radioterapia"]  estas variables fueron eliminadas y esto queda como recordatorio por si las moscas
   String Userid;
  Adulto();
 void clear(){
   motivo = List<String>();
-  historia="";fecha_ultima_visita== List<String>(); tratamiento_recibido="" ;
+  historia="";fecha_ultima_visita= List<String>(); tratamiento_recibido="" ;
   dientes_perdidos=""; causa_dientesperdidos="" ;experiencias_exodoncias="" ;
   higiene_oral="";tipo_cepillo ="";tecnica_cepillado="" ;
   frecuencia_cepillado="" ; ayudas_higiene_extras="" ;
@@ -37,6 +38,9 @@ void clear(){
   region_vestibular="";paladar_duro="";paladar_blando="";orofaringe="";piso_boca="";lengua="";cara_dorsal="";
   cara_ventral="";bordes="";encia="";dientes="";prescencia_calculo="";salivacion="";revision_organos=List<String>();
 }
+ void addmotivosyfecha(mot,fecha){
+  motivo=mot;fecha_ultima_visita=fecha;
+ }
   void fromjson(Map<String, dynamic> data) {
     motivo = data["motivo_consulta"];
     historia=data["historia_enfermedad_actual"];fecha_ultima_visita=data["fecha_ultima_visita"]; tratamiento_recibido=data["tratamiento"] ;

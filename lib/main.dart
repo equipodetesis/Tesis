@@ -1,6 +1,7 @@
 
 import 'package:expedientesodontologicos_app/Loggin/Loggin.dart';
 import 'package:expedientesodontologicos_app/Loggin/LoginState.dart';
+import 'package:expedientesodontologicos_app/ModelosFormularios/Cirugia.dart';
 import 'package:expedientesodontologicos_app/ModelosFormularios/General.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,8 +16,8 @@ void main(){
         create: (context) => LoginState(),),
       Provider<General>(
         create: (context) => General(),),
-      Provider<Endodoncia>(
-        create: (context) => Endodoncia(),),
+      Provider<Cirugia>(
+        create: (context) => Cirugia(),),
       Provider<Adulto>(
         create: (context) => Adulto(),),
     ],

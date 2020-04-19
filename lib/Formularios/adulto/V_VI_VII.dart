@@ -115,8 +115,6 @@ class _V_VI_VII_State extends State<V_VI_VII> {
     _current_sometido.add(_items_sometido.last.first.value);
     // TODO: implement initState
     super.initState();
-
-    Provider.of<Adulto>(context, listen: false).enfermedades.add(_currentlocal);
   }
 
   @override

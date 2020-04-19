@@ -1874,7 +1874,6 @@ class _I_VState extends State<I_V> {
                     onChanged: (value) {
                       setState(() {
                         Provider.of<Cirugia>(context).clasificacion_asa = value;
-                        Provider.of<Cirugia>(context).clasificacion_asa = value;
                       });
                     },
                   ),

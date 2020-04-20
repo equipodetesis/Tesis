@@ -17,8 +17,6 @@ void main(){
         create: (context) => LoginState(),),
       Provider<General>(
         create: (context) => General(),),
-      Provider<Cirugia>(
-        create: (context) => Cirugia(),),
       Provider<Adulto>(
         create: (context) => Adulto(),),
       Provider<Cirugia>(

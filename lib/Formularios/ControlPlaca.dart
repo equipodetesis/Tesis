@@ -11,20 +11,32 @@ class ControlPlaca extends StatefulWidget{
 class _ControlPlacaState extends State<ControlPlaca>{
   final _placakey = GlobalKey<FormState>();
   String _totalplaca,_presesntemult,_porcentaje,_fecha=DateTime.now().toString();
-  int s=1,d=9,i=0;
+  int s=1,d=8,i=0,s2=3,d2=1;
+  bool cambioas2=false;
 
-  List<ControldePlaca> dientes = List(16);
+  List<ControldePlaca> dientesarriba = List(14),dientesabajo=List(14);
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    while(i < dientes.length){
-      if(i>=8&&s<2)s++;
+    while(i < dientesarriba.length){
+      if(i>=7&&s<2)s++;
       if(d>1)d--;
-      else d=8;
-      dientes[i] = ControldePlaca();
-      dientes[i].codigo = s.toString() + d.toString();
+      else {d=8;cambioas2=true;}
+      if(i>=7&&s2<=4)s2++;
+      if(d2<7)d2++;
+      else d2=1;
+      dientesarriba[i] = ControldePlaca();
+      dientesabajo[i]=ControldePlaca();
+      if(cambioas2){
+      dientesarriba[i].codigo = s.toString() + d2.toString();
+      dientesabajo[i].codigo=s2.toString()+d2.toString();
+      print(dientesarriba[i].codigo);
+      }else{
+        dientesarriba[i].codigo = s.toString() + d.toString();
+        dientesabajo[i].codigo=s2.toString()+d.toString();
+      }
       i++;
     }
   }
@@ -32,35 +44,36 @@ class _ControlPlacaState extends State<ControlPlaca>{
   Widget build(BuildContext context) {
 
    Widget diente=Container(
-     height: 62.0,
-     width: 52.0,
+     height: 103.0,
+     width: 93.0,
      child: Stack(
        children: <Widget>[
          Positioned(
            top: 0.0,
-           right: 9.0,
-           child: Image.asset("Imagenes/dientearr.png",scale: 1.5,),
+           right: 16.0,
+           child: Image.asset("Imagenes/dientearr.png",scale: 0.9,),
          ),
           Positioned(
-            bottom: 7.0,
-            left: 0.0,
-         child:  Image.asset("Imagenes/dienteizq.png",scale: 1.5,),
+            bottom: 12.0,
+            left: 6.0,
+         child:  Image.asset("Imagenes/dienteizq.png",scale: 1.0,),
        ),
          Positioned(
            bottom: 7.0,
           right: 0.0,
-        child:Image.asset("Imagenes/dienteder.png",scale: 1.5,) ,
+        child:Image.asset("Imagenes/dienteder.png",scale: 0.9,) ,
       ),
         Positioned(
          bottom: 0.0,
-         right: 12.0,
-         child:Image.asset("Imagenes/dienteabajo.png",scale: 1.5,),
+         right: 21.0,
+         child:Image.asset("Imagenes/dienteabajo.png",scale: 0.9,),
        )
 
        ],
      ),
      decoration: BoxDecoration(color: Colors.black26),
    );
+
     var arriba=Container(
       height: 120.0,
       decoration: BoxDecoration(color: Colors.amber),
@@ -81,51 +94,144 @@ class _ControlPlacaState extends State<ControlPlaca>{
         },
       ),
     );
+    var arriba2=SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+          children: dientesarriba.map((value) {
+            return Column(
+              children: <Widget>[
+                Text(value.codigo),
+                Container(
+                  height: 103.0,
+                  width: 93.0,
+                  child: Stack(
+                    children: <Widget>[
+                      Positioned(
+                        top: 0.0,
+                        right: 16.0,
+                        child: GestureDetector(
+                          onTap: (){
+                            setState(() {
+                              value.cara_arriba = true;
 
+                            });
+                          },
+                          child: Image.asset("Imagenes/dientearr.png",color: value.cara_arriba ? Colors.red : null,scale: 0.9,),
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 12.0,
+                        left: 6.0,
+                        child: GestureDetector(
+                          child:  Image.asset("Imagenes/dienteizq.png",scale: 1.0,color: value.cara_izquierda ? Colors.red : null),
+                          onTap: (){
+                            setState(() {
+                              value.cara_izquierda = true;
+
+                            });
+                          },
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 7.0,
+                        right: 0.0,
+                        child: GestureDetector(
+                          child:Image.asset("Imagenes/dienteder.png",scale: 0.9,color: value.cara_derecha ? Colors.red : null),
+                          onTap: (){
+                            setState(() {
+                              value.cara_derecha = true;
+
+                            });
+                          },
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 0.0,
+                        right: 22.0,
+                        child: GestureDetector(
+                          child:Image.asset("Imagenes/dienteabajo.png",scale: 0.9,color: value.cara_abajo ? Colors.red : null),
+                          onTap: (){
+                            setState(() {
+                              value.cara_abajo = true;
+
+                            });
+                          },
+                        ),
+                      )
+
+                    ],
+                  ),
+                  decoration: BoxDecoration(color: Colors.black26),
+                )
+              ],
+            );
+          }).toList(),
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      ),
+
+    );
     var abajo2 = SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
-        children: dientes.map((value) {
+        children: dientesabajo.map((value) {
           return Column(
             children: <Widget>[
               Text(value.codigo),
               Container(
-                height: 62.0,
-                width: 52.0,
+                height: 103.0,
+                width: 93.0,
                 child: Stack(
                   children: <Widget>[
                     Positioned(
                       top: 0.0,
-                      right: 9.0,
+                      right: 16.0,
                       child: GestureDetector(
                         onTap: (){
                           setState(() {
                             value.cara_arriba = true;
-                            print(value.cara_arriba);
+
                           });
                         },
-                        child: Image.asset("Imagenes/dientearr.png",color: value.cara_arriba ? Colors.red : null,scale: 1.5,),
+                        child: Image.asset("Imagenes/dientearr.png",color: value.cara_arriba ? Colors.red : null,scale: 0.9,),
                       ),
                     ),
                     Positioned(
-                      bottom: 7.0,
-                      left: 0.0,
+                      bottom: 12.0,
+                      left: 6.0,
                       child: GestureDetector(
-                        child:  Image.asset("Imagenes/dienteizq.png",scale: 1.5,),
+                        child:  Image.asset("Imagenes/dienteizq.png",scale: 1.0,color: value.cara_izquierda ? Colors.red : null),
+                        onTap: (){
+                          setState(() {
+                            value.cara_izquierda = true;
+
+                          });
+                        },
                       ),
                     ),
                     Positioned(
                       bottom: 7.0,
                       right: 0.0,
                       child: GestureDetector(
-                        child:Image.asset("Imagenes/dienteder.png",scale: 1.5,),
+                        child:Image.asset("Imagenes/dienteder.png",scale: 0.9,color: value.cara_derecha ? Colors.red : null),
+                        onTap: (){
+                          setState(() {
+                            value.cara_derecha = true;
+
+                          });
+                        },
                       ),
                     ),
                     Positioned(
                       bottom: 0.0,
-                      right: 12.0,
+                      right: 22.0,
                       child: GestureDetector(
-                        child:Image.asset("Imagenes/dienteabajo.png",scale: 1.5,),
+                        child:Image.asset("Imagenes/dienteabajo.png",scale: 0.9,color: value.cara_abajo ? Colors.red : null),
+                        onTap: (){
+                          setState(() {
+                            value.cara_abajo = true;
+
+                          });
+                        },
                       ),
                     )
 
@@ -255,8 +361,11 @@ class _ControlPlacaState extends State<ControlPlaca>{
         Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Text("Control de placa",style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.bold,fontStyle: FontStyle.italic),),
-            arriba,
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0.0, 50.0, 0.0, 20.0),
+              child: Text("Control de placa",style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.bold,fontStyle: FontStyle.italic),),
+            ),
+            arriba2,
             Divider(thickness: 10.0),
             abajo2,
             Divider(thickness: 10.0),

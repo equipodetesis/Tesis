@@ -279,6 +279,11 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              /*************************************************************************
+               * ************************************************************************
+               * ***************************************************************************
+               * ***/
+              //initialValue: Provider.of<Adulto>(context).motivo.last,
               decoration: InputDecoration(
                   labelText: "Motivo de la consulta",
                   icon: Icon(FontAwesomeIcons.fileAlt)),
@@ -297,6 +302,7 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              initialValue: Provider.of<Adulto>(context).historia,
               decoration: InputDecoration(
                   labelText: "Historia de la enfermedad actual",
                   icon: Icon(FontAwesomeIcons.fileAlt)),
@@ -336,6 +342,7 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              initialValue: Provider.of<Adulto>(context).tratamiento_recibido,
               decoration: InputDecoration(
                   labelText: "Tratamiento Recibido",
                   icon: Icon(FontAwesomeIcons.bandAid)),
@@ -351,6 +358,7 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              initialValue: Provider.of<Adulto>(context).dientes_perdidos,
               decoration: InputDecoration(
                   labelText: "Dientes Perdidos",
                   icon: Icon(FontAwesomeIcons.tooth)),
@@ -366,6 +374,7 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              initialValue: Provider.of<Adulto>(context).causa_dientesperdidos,
               decoration: InputDecoration(
                   labelText: "Causa de Pérdida",
                   icon: Icon(FontAwesomeIcons.tooth)),
@@ -381,6 +390,7 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              initialValue: Provider.of<Adulto>(context).experiencias_exodoncias,
               decoration: InputDecoration(
                   labelText: "Experiencias de exodoncias previas",
                   icon: Icon(FontAwesomeIcons.teeth)),
@@ -396,6 +406,7 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              initialValue: Provider.of<Adulto>(context).higiene_oral,
               decoration: InputDecoration(
                   labelText: "Higiene oral",
                   icon: Icon(FontAwesomeIcons.teeth)),
@@ -411,6 +422,7 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              initialValue: Provider.of<Adulto>(context).tipo_cepillo,
               decoration: InputDecoration(
                   labelText: "Tipo de Cepillo",
                   icon: Icon(FontAwesomeIcons.tooth)),
@@ -426,6 +438,7 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              initialValue: Provider.of<Adulto>(context).tecnica_cepillado,
               decoration: InputDecoration(
                   labelText: "Técnica de cepillado",
                   icon: Icon(FontAwesomeIcons.teeth)),
@@ -441,6 +454,7 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              initialValue: Provider.of<Adulto>(context).frecuencia_cepillado,
               decoration: InputDecoration(
                   labelText: "Frecuencia de cepillado",
                   icon: Icon(FontAwesomeIcons.teeth)),
@@ -456,6 +470,7 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              initialValue: Provider.of<Adulto>(context).ayudas_higiene_extras,
               decoration: InputDecoration(
                   labelText: "Otras ayuda para la higiene oral",
                   icon: Icon(FontAwesomeIcons.plusCircle)),

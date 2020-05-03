@@ -1,4 +1,6 @@
+import 'package:expedientesodontologicos_app/Loggin/LoginState.dart';
 import 'package:expedientesodontologicos_app/ModelosFormularios/Cirugia.dart';
+import 'package:expedientesodontologicos_app/ModelosFormularios/General.dart';
 import 'package:expedientesodontologicos_app/Util/Util.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -215,57 +217,58 @@ class _I_VState extends State<I_V> {
   @override
   void initState() {
     madreNode = FocusNode();
-
+    Provider.of<Cirugia>(context, listen: false).checklist();
+    Provider.of<Cirugia>(context, listen: false).Userid = Provider.of<LoginState>(context, listen: false).uid;
+    Provider.of<Cirugia>(context, listen: false).clienteid = Provider.of<General>(context, listen: false).pacienteid;
+    print(Provider.of<Cirugia>(context, listen: false).adicciones);
     _items_clasificacion_asa = Util().getDropdownMenuItem(clasificacion_asa);
     Provider.of<Cirugia>(context, listen: false).clasificacion_asa == null ? Provider.of<Cirugia>(context, listen: false).clasificacion_asa = _items_clasificacion_asa.first.value : Provider.of<Cirugia>(context, listen: false).clasificacion_asa;
     _items_craneoforma = Util().getDropdownMenuItem(craneoforma);
     Provider.of<Cirugia>(context, listen: false).craneo_tipo == null ? Provider.of<Cirugia>(context, listen: false).craneo_tipo = _items_craneoforma.first.value : Provider.of<Cirugia>(context, listen: false).craneo_tipo = _items_craneoforma.first.value;
-    _items_adicciones.add(Util().getDropdownMenuItem(adicciones));
+    _items_adicciones.addAll(setitemlist(adicciones, Provider.of<Cirugia>(context, listen: false).adicciones));
     Provider.of<Cirugia>(context, listen: false).adicciones.add(_items_adicciones.last.first.value);
-    _items_alergias.add(Util().ajustarlistas(alergias, Provider.of<Cirugia>(context, listen: false).alergias));
+    _items_alergias.addAll(setitemlist(alergias, Provider.of<Cirugia>(context, listen: false).alergias));
     Provider.of<Cirugia>(context, listen: false).alergias.add(_items_alergias.last.first.value);
-    _items_digestivo.add(Util().ajustarlistas(digestivo, Provider.of<Cirugia>(context, listen: false).digestivo));
+    _items_digestivo.addAll(setitemlist(digestivo, Provider.of<Cirugia>(context, listen: false).digestivo));
     Provider.of<Cirugia>(context, listen: false).digestivo.add(_items_digestivo.last.first.value);
-    _items_respiratorio
-        .add(Util().ajustarlistas(respiratorio, Provider.of<Cirugia>(context, listen: false).respiratorio));
+    _items_respiratorio.addAll(setitemlist(respiratorio, Provider.of<Cirugia>(context, listen: false).respiratorio));
     Provider.of<Cirugia>(context, listen: false).respiratorio.add(_items_respiratorio.last.first.value);
-    _items_cardiovascular
-        .add(Util().ajustarlistas(cardiovascular, Provider.of<Cirugia>(context, listen: false).cardiovascular));
+    _items_cardiovascular.addAll(setitemlist(cardiovascular, Provider.of<Cirugia>(context, listen: false).cardiovascular));
     Provider.of<Cirugia>(context, listen: false).cardiovascular.add(_items_cardiovascular.last.first.value);
-    _items_genitourinario
-        .add(Util().ajustarlistas(genitourinario, Provider.of<Cirugia>(context, listen: false).genitourinario));
+    _items_genitourinario.addAll(setitemlist(genitourinario, Provider.of<Cirugia>(context, listen: false).genitourinario));
     Provider.of<Cirugia>(context, listen: false).genitourinario.add(_items_genitourinario.last.first.value);
-    _items_endocrino.add(Util().ajustarlistas(endocrino, Provider.of<Cirugia>(context, listen: false).endocrino));
+    _items_endocrino.addAll(setitemlist(endocrino, Provider.of<Cirugia>(context, listen: false).endocrino));
     Provider.of<Cirugia>(context, listen: false).endocrino.add(_items_endocrino.last.first.value);
-    _items_hematologicos
-        .add(Util().ajustarlistas(hematologicos, Provider.of<Cirugia>(context, listen: false).hematologico));
+    _items_hematologicos.addAll(setitemlist(hematologicos, Provider.of<Cirugia>(context, listen: false).hematologico));
     Provider.of<Cirugia>(context, listen: false).hematologico.add(_items_hematologicos.last.first.value);
-    _items_neurologico
-        .add(Util().ajustarlistas(neurologico, Provider.of<Cirugia>(context, listen: false).neurologico));
+    _items_neurologico.addAll(setitemlist(neurologico, Provider.of<Cirugia>(context, listen: false).neurologico));
     Provider.of<Cirugia>(context, listen: false).neurologico.add(_items_neurologico.last.first.value);
-    _items_musculo_esqueleto.add(
-        Util().ajustarlistas(musculo_esqueleto, Provider.of<Cirugia>(context, listen: false).musculo_esqueleto));
+    _items_musculo_esqueleto.addAll(setitemlist(musculo_esqueleto, Provider.of<Cirugia>(context, listen: false).musculo_esqueleto));
     Provider.of<Cirugia>(context, listen: false).musculo_esqueleto.add(_items_musculo_esqueleto.last.first.value);
-    _items_inmunologico
-        .add(Util().ajustarlistas(inmunologico, Provider.of<Cirugia>(context, listen: false).inmunologico));
+    _items_inmunologico.addAll(setitemlist(inmunologico, Provider.of<Cirugia>(context, listen: false).inmunologico));
     Provider.of<Cirugia>(context, listen: false).inmunologico.add(_items_inmunologico.last.first.value);
-    _items_tegumentario
-        .add(Util().ajustarlistas(tegumentario, Provider.of<Cirugia>(context, listen: false).tegumentario));
+    _items_tegumentario.addAll(setitemlist(tegumentario, Provider.of<Cirugia>(context, listen: false).tegumentario));
     Provider.of<Cirugia>(context, listen: false).tegumentario.add(_items_tegumentario.last.first.value);
-    _items_temporomandibular.add(
-        Util().ajustarlistas(temporomandibular, Provider.of<Cirugia>(context, listen: false).temporomandibular));
+    _items_temporomandibular.addAll(setitemlist(temporomandibular, Provider.of<Cirugia>(context, listen: false).temporomandibular));
     Provider.of<Cirugia>(context, listen: false).temporomandibular.add(_items_temporomandibular.last.first.value);
-    _items_radiografia
-        .add(Util().ajustarlistas(radiografia, Provider.of<Cirugia>(context, listen: false).radiografia));
+    _items_radiografia.addAll(setitemlist(radiografia, Provider.of<Cirugia>(context, listen: false).radiografia));
     Provider.of<Cirugia>(context, listen: false).radiografia.add(_items_radiografia.last.first.value);
-    _items_analisis_laboratorio.add(Util()
-        .ajustarlistas(analisis_laboratorio, Provider.of<Cirugia>(context, listen: false).analisis_laboratorio));
-    Provider.of<Cirugia>(context, listen: false).analisis_laboratorio
-        .add(_items_analisis_laboratorio.last.first.value);
+    _items_analisis_laboratorio.addAll(setitemlist(analisis_laboratorio, Provider.of<Cirugia>(context, listen: false).analisis_laboratorio));
+    Provider.of<Cirugia>(context, listen: false).analisis_laboratorio.add(_items_analisis_laboratorio.last.first.value);
     // TODO: implement initState
     super.initState();
   }
 
+  List<List<DropdownMenuItem>> setitemlist(List listacompleta, List listaseleccionadas){
+    List<List<DropdownMenuItem>> listaprocesada = List();
+    List<String> list_temp = List();
+    listaprocesada.add(Util().ajustarlistas(listacompleta, List()));
+    listaseleccionadas.forEach((element) {
+      list_temp.add(element);
+      listaprocesada.add(Util().ajustarlistas(listacompleta, list_temp));
+    });
+    return listaprocesada;
+  }
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -315,6 +318,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).antec_pato_madre = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
               focusNode: madreNode,
             ),
@@ -329,6 +333,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).antec_pato_abuelama = value;
+                Provider.of<Cirugia>(context).cambiado = true;
 
               },
             ),
@@ -343,6 +348,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).antec_pato_abueloma = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -355,6 +361,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).antec_pato_padre = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -368,6 +375,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).antec_pato_abuelopa = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -381,6 +389,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).antec_pato_abuelapa = value;
+                Provider.of<Cirugia>(context).cambiado = true;
 
               },
             ),
@@ -408,6 +417,7 @@ class _I_VState extends State<I_V> {
                     keyboardType: TextInputType.text,
                     onChanged: (value) {
                       Provider.of<Cirugia>(context).grupo_sanguineo = value;
+                      Provider.of<Cirugia>(context).cambiado = true;
                     },
                   ),
                 ),
@@ -423,6 +433,7 @@ class _I_VState extends State<I_V> {
                     keyboardType: TextInputType.text,
                     onChanged: (value) {
                       Provider.of<Cirugia>(context).factor_rh = value;
+                      Provider.of<Cirugia>(context).cambiado = true;
                     },
                   ),
                 ),
@@ -439,6 +450,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).inmunizaciones_infancia = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -452,6 +464,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).inmunizaciones_adulto = value;
+                Provider.of<Cirugia>(context).cambiado = true;
                 },
             ),
           ),
@@ -485,6 +498,7 @@ class _I_VState extends State<I_V> {
                                 setState(() {
                                   Provider.of<Cirugia>(context).adicciones[
                                   Provider.of<Cirugia>(context).adicciones.indexOf(value)] = value2;
+                                  Provider.of<Cirugia>(context).cambiado = true;
                                 });
                               },
                             ),
@@ -507,6 +521,7 @@ class _I_VState extends State<I_V> {
                         keyboardType: TextInputType.text,
                         onChanged: (value) {
                           Provider.of<Cirugia>(context).otra_adiccion = value;
+                          Provider.of<Cirugia>(context).cambiado = true;
                         },
                       ),
                     )
@@ -559,6 +574,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).regimen_alimenticio = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -572,6 +588,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).condiciones_habitacionales = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -590,6 +607,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).enfermedades_infancia = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -603,6 +621,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).antecedentes_traumaticos = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -616,6 +635,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).antecedentes_quirurgicos = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -649,6 +669,7 @@ class _I_VState extends State<I_V> {
                             setState(() {
                               Provider.of<Cirugia>(context).alergias[
                                   Provider.of<Cirugia>(context).alergias.indexOf(value)] = value2;
+                              Provider.of<Cirugia>(context).cambiado = true;
                             });
                           },
                         ),
@@ -671,6 +692,7 @@ class _I_VState extends State<I_V> {
                           keyboardType: TextInputType.text,
                           onChanged: (value) {
                             Provider.of<Cirugia>(context).otra_alergia = value;
+                            Provider.of<Cirugia>(context).cambiado = true;
                           },
                         ),
                       )
@@ -723,6 +745,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).transfuciones = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -736,6 +759,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).radio_quimioterapia = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -749,6 +773,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).experiencia_anestesia = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -790,6 +815,7 @@ class _I_VState extends State<I_V> {
                           onChanged: (value2) {
                             setState(() {
                               Provider.of<Cirugia>(context).digestivo[Provider.of<Cirugia>(context).digestivo.indexOf(value)] = value2;
+                              Provider.of<Cirugia>(context).cambiado = true;
                             });
                           },
                         ),
@@ -812,6 +838,7 @@ class _I_VState extends State<I_V> {
                           keyboardType: TextInputType.text,
                           onChanged: (value) {
                             Provider.of<Cirugia>(context).otra_digestivo = value;
+                            Provider.of<Cirugia>(context).cambiado = true;
                           },
                         ),
                       )
@@ -830,6 +857,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).tratamiento_digestivo = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           )
@@ -899,6 +927,7 @@ class _I_VState extends State<I_V> {
                             setState(() {
                               Provider.of<Cirugia>(context).respiratorio[Provider.of<Cirugia>(context).respiratorio
                                   .indexOf(value)] = value2;
+                              Provider.of<Cirugia>(context).cambiado = true;
                             });
                           },
                         ),
@@ -921,6 +950,7 @@ class _I_VState extends State<I_V> {
                           keyboardType: TextInputType.text,
                           onChanged: (value) {
                             Provider.of<Cirugia>(context).otra_respiratorio = value;
+                            Provider.of<Cirugia>(context).cambiado = true;
                           },
                         ),
                       )
@@ -940,6 +970,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).tratamiento_respiratorio = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           )
@@ -1009,6 +1040,7 @@ class _I_VState extends State<I_V> {
                             setState(() {
                               Provider.of<Cirugia>(context).cardiovascular[Provider.of<Cirugia>(context).cardiovascular
                                   .indexOf(value)] = value2;
+                              Provider.of<Cirugia>(context).cambiado = true;
                             });
                           },
                         ),
@@ -1031,6 +1063,7 @@ class _I_VState extends State<I_V> {
                           keyboardType: TextInputType.text,
                           onChanged: (value) {
                             Provider.of<Cirugia>(context).otra_cardiovascular = value;
+                            Provider.of<Cirugia>(context).cambiado = true;
                           },
                         ),
                       )
@@ -1049,6 +1082,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).tratamiento_cardiovascular = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           )
@@ -1118,6 +1152,7 @@ class _I_VState extends State<I_V> {
                             setState(() {
                               Provider.of<Cirugia>(context).genitourinario[Provider.of<Cirugia>(context).genitourinario
                                   .indexOf(value)] = value2;
+                              Provider.of<Cirugia>(context).cambiado = true;
                             });
                           },
                         ),
@@ -1140,6 +1175,7 @@ class _I_VState extends State<I_V> {
                           keyboardType: TextInputType.text,
                           onChanged: (value) {
                             Provider.of<Cirugia>(context).otra_genitourinario = value;
+                            Provider.of<Cirugia>(context).cambiado = true;
                           },
                         ),
                       )
@@ -1158,6 +1194,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).tratamiento_genitourinario = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           )
@@ -1227,6 +1264,7 @@ class _I_VState extends State<I_V> {
                             setState(() {
                               Provider.of<Cirugia>(context).endocrino[
                                   Provider.of<Cirugia>(context).endocrino.indexOf(value)] = value2;
+                              Provider.of<Cirugia>(context).cambiado = true;
                             });
                           },
                         ),
@@ -1249,6 +1287,7 @@ class _I_VState extends State<I_V> {
                           keyboardType: TextInputType.text,
                           onChanged: (value) {
                             Provider.of<Cirugia>(context).otra_endocrino = value;
+                            Provider.of<Cirugia>(context).cambiado = true;
                           },
                         ),
                       )
@@ -1267,6 +1306,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).tratamiento_endocrino = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           )
@@ -1336,6 +1376,7 @@ class _I_VState extends State<I_V> {
                             setState(() {
                               Provider.of<Cirugia>(context).hematologico[Provider.of<Cirugia>(context).hematologico
                                   .indexOf(value)] = value2;
+                              Provider.of<Cirugia>(context).cambiado = true;
                             });
                           },
                         ),
@@ -1358,6 +1399,7 @@ class _I_VState extends State<I_V> {
                           keyboardType: TextInputType.text,
                           onChanged: (value) {
                             Provider.of<Cirugia>(context).otra_hematologico = value;
+                            Provider.of<Cirugia>(context).cambiado = true;
                           },
                         ),
                       )
@@ -1376,6 +1418,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).tratamiento_hematologico = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           )
@@ -1445,6 +1488,7 @@ class _I_VState extends State<I_V> {
                             setState(() {
                               Provider.of<Cirugia>(context).neurologico[
                                   Provider.of<Cirugia>(context).neurologico.indexOf(value)] = value2;
+                              Provider.of<Cirugia>(context).cambiado = true;
                             });
                           },
                         ),
@@ -1467,6 +1511,7 @@ class _I_VState extends State<I_V> {
                           keyboardType: TextInputType.text,
                           onChanged: (value) {
                             Provider.of<Cirugia>(context).otra_neurologico = value;
+                            Provider.of<Cirugia>(context).cambiado = true;
                           },
                         ),
                       )
@@ -1485,6 +1530,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).tratamiento_neurologico = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           )
@@ -1555,6 +1601,7 @@ class _I_VState extends State<I_V> {
                               Provider.of<Cirugia>(context).musculo_esqueleto[
                                   Provider.of<Cirugia>(context).musculo_esqueleto
                                       .indexOf(value)] = value2;
+                              Provider.of<Cirugia>(context).cambiado = true;
                             });
                           },
                         ),
@@ -1578,6 +1625,7 @@ class _I_VState extends State<I_V> {
                           keyboardType: TextInputType.text,
                           onChanged: (value) {
                             Provider.of<Cirugia>(context).otra_musculo_esqueleto = value;
+                            Provider.of<Cirugia>(context).cambiado = true;
                           },
                         ),
                       )
@@ -1596,6 +1644,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).tratamiento_musculo_esqueleto = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           )
@@ -1665,6 +1714,7 @@ class _I_VState extends State<I_V> {
                             setState(() {
                               Provider.of<Cirugia>(context).inmunologico[Provider.of<Cirugia>(context).inmunologico
                                   .indexOf(value)] = value2;
+                              Provider.of<Cirugia>(context).cambiado = true;
                             });
                           },
                         ),
@@ -1687,6 +1737,7 @@ class _I_VState extends State<I_V> {
                           keyboardType: TextInputType.text,
                           onChanged: (value) {
                             Provider.of<Cirugia>(context).otra_inmunologico = value;
+                            Provider.of<Cirugia>(context).cambiado = true;
                           },
                         ),
                       )
@@ -1705,6 +1756,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).tratamiento_inmunologico = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           )
@@ -1774,6 +1826,7 @@ class _I_VState extends State<I_V> {
                             setState(() {
                               Provider.of<Cirugia>(context).tegumentario[Provider.of<Cirugia>(context).tegumentario
                                   .indexOf(value)] = value2;
+                              Provider.of<Cirugia>(context).cambiado = true;
                             });
                           },
                         ),
@@ -1796,6 +1849,7 @@ class _I_VState extends State<I_V> {
                           keyboardType: TextInputType.text,
                           onChanged: (value) {
                             Provider.of<Cirugia>(context).otra_tegumentario = value;
+                            Provider.of<Cirugia>(context).cambiado = true;
                             },
                         ),
                       )
@@ -1814,6 +1868,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).tratamiento_tegumentario = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           )
@@ -1874,6 +1929,7 @@ class _I_VState extends State<I_V> {
                     onChanged: (value) {
                       setState(() {
                         Provider.of<Cirugia>(context).clasificacion_asa = value;
+                        Provider.of<Cirugia>(context).cambiado = true;
                       });
                     },
                   ),
@@ -1904,6 +1960,7 @@ class _I_VState extends State<I_V> {
                     keyboardType: TextInputType.text,
                     onChanged: (value) {
                       Provider.of<Cirugia>(context).frecuencia_cardiaca = value;
+                      Provider.of<Cirugia>(context).cambiado = true;
                     },
                   ),
                 ),
@@ -1920,6 +1977,7 @@ class _I_VState extends State<I_V> {
                     keyboardType: TextInputType.text,
                     onChanged: (value) {
                       Provider.of<Cirugia>(context).tension_arterial = value;
+                      Provider.of<Cirugia>(context).cambiado = true;
                     },
                   ),
                 ),
@@ -1941,6 +1999,7 @@ class _I_VState extends State<I_V> {
                     keyboardType: TextInputType.text,
                     onChanged: (value) {
                       Provider.of<Cirugia>(context).frecuencia_respiratoria = value;
+                      Provider.of<Cirugia>(context).cambiado = true;
                     },
                   ),
                 ),
@@ -1957,6 +2016,7 @@ class _I_VState extends State<I_V> {
                     keyboardType: TextInputType.text,
                     onChanged: (value) {
                       Provider.of<Cirugia>(context).temperatura = value;
+                      Provider.of<Cirugia>(context).cambiado = true;
                     },
                   ),
                 ),
@@ -1982,6 +2042,7 @@ class _I_VState extends State<I_V> {
                     keyboardType: TextInputType.text,
                     onChanged: (value) {
                       Provider.of<Cirugia>(context).peso = value;
+                      Provider.of<Cirugia>(context).cambiado = true;
                     },
                   ),
                 ),
@@ -1998,6 +2059,7 @@ class _I_VState extends State<I_V> {
                     keyboardType: TextInputType.text,
                     onChanged: (value) {
                       Provider.of<Cirugia>(context).talla = value;
+                      Provider.of<Cirugia>(context).cambiado = true;
                     },
                   ),
                 ),
@@ -2014,6 +2076,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).constitucion_fisica = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -2043,6 +2106,7 @@ class _I_VState extends State<I_V> {
                     onChanged: (value) {
                       setState(() {
                         Provider.of<Cirugia>(context).craneo_tipo = value;
+                        Provider.of<Cirugia>(context).cambiado = true;
                       });
                     },
                   ),
@@ -2061,6 +2125,7 @@ class _I_VState extends State<I_V> {
                 onChanged: (value) {
                   setState(() {
                     Provider.of<Cirugia>(context).exostosis = value;
+                    Provider.of<Cirugia>(context).cambiado = true;
                   });
                 },
               ),
@@ -2073,6 +2138,7 @@ class _I_VState extends State<I_V> {
                 onChanged: (value) {
                   setState(() {
                     Provider.of<Cirugia>(context).endostosis = value;
+                    Provider.of<Cirugia>(context).cambiado = true;
                   });
                 },
               ),
@@ -2099,6 +2165,7 @@ class _I_VState extends State<I_V> {
                 onChanged: (value) {
                   setState(() {
                     Provider.of<Cirugia>(context).asimetrias_transversales = value;
+                    Provider.of<Cirugia>(context).cambiado = true;
                   });
                 },
               ),
@@ -2111,6 +2178,7 @@ class _I_VState extends State<I_V> {
                 onChanged: (value) {
                   setState(() {
                     Provider.of<Cirugia>(context).asimetrias_longitudinales = value;
+                    Provider.of<Cirugia>(context).cambiado = true;
                   });
                 },
               ),
@@ -2132,6 +2200,7 @@ class _I_VState extends State<I_V> {
                 onChanged: (value) {
                   setState(() {
                     Provider.of<Cirugia>(context).enoftalmo = value;
+                    Provider.of<Cirugia>(context).cambiado = true;
                   });
                 },
               ),
@@ -2144,6 +2213,7 @@ class _I_VState extends State<I_V> {
                 onChanged: (value) {
                   setState(() {
                     Provider.of<Cirugia>(context).exoftalmo = value;
+                    Provider.of<Cirugia>(context).cambiado = true;
                   });
                 },
               ),
@@ -2160,6 +2230,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).movilidad = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -2179,6 +2250,7 @@ class _I_VState extends State<I_V> {
                 onChanged: (value) {
                   setState(() {
                     Provider.of<Cirugia>(context).midriasis = value;
+                    Provider.of<Cirugia>(context).cambiado = true;
                   });
                 },
               ),
@@ -2191,6 +2263,7 @@ class _I_VState extends State<I_V> {
                 onChanged: (value) {
                   setState(() {
                     Provider.of<Cirugia>(context).miosis = value;
+                    Provider.of<Cirugia>(context).cambiado = true;
                   });
                 },
               ),
@@ -2207,6 +2280,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).reflejo_pupilar = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -2219,6 +2293,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).nariz = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -2238,6 +2313,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).color_piel = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -2252,6 +2328,7 @@ class _I_VState extends State<I_V> {
                 onChanged: (value) {
                   setState(() {
                     Provider.of<Cirugia>(context).palida = value;
+                    Provider.of<Cirugia>(context).cambiado = true;
                   });
                 },
               ),
@@ -2264,6 +2341,7 @@ class _I_VState extends State<I_V> {
                 onChanged: (value) {
                   setState(() {
                     Provider.of<Cirugia>(context).cianotica = value;
+                    Provider.of<Cirugia>(context).cambiado = true;
                   });
                 },
               )
@@ -2280,6 +2358,7 @@ class _I_VState extends State<I_V> {
                 onChanged: (value) {
                   setState(() {
                     Provider.of<Cirugia>(context).enrojecida = value;
+                    Provider.of<Cirugia>(context).cambiado = true;
                   });
                 },
               ),
@@ -2292,6 +2371,7 @@ class _I_VState extends State<I_V> {
                 onChanged: (value) {
                   setState(() {
                     Provider.of<Cirugia>(context).manchas = value;
+                    Provider.of<Cirugia>(context).cambiado = true;
                   });
                 },
               )
@@ -2313,6 +2393,7 @@ class _I_VState extends State<I_V> {
                 onChanged: (value) {
                   setState(() {
                     Provider.of<Cirugia>(context).hipotonico = value;
+                    Provider.of<Cirugia>(context).cambiado = true;
                   });
                 },
               ),
@@ -2325,6 +2406,7 @@ class _I_VState extends State<I_V> {
                 onChanged: (value) {
                   setState(() {
                     Provider.of<Cirugia>(context).hipertonico = value;
+                    Provider.of<Cirugia>(context).cambiado = true;
                   });
                 },
               ),
@@ -2341,6 +2423,7 @@ class _I_VState extends State<I_V> {
                 onChanged: (value) {
                   setState(() {
                     Provider.of<Cirugia>(context).espasticos = value;
+                    Provider.of<Cirugia>(context).cambiado = true;
                   });
                 },
               )
@@ -2361,6 +2444,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).ganglios_linfaticos = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -2395,6 +2479,7 @@ class _I_VState extends State<I_V> {
                               Provider.of<Cirugia>(context).temporomandibular[
                                   Provider.of<Cirugia>(context).temporomandibular
                                       .indexOf(value)] = value2;
+                              Provider.of<Cirugia>(context).cambiado = true;
                             });
                           },
                         ),
@@ -2420,6 +2505,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).tratamiento_temporomandibular = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           )
@@ -2473,6 +2559,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).labios = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -2485,6 +2572,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).carrillos = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -2498,6 +2586,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).paladar_duro = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -2511,6 +2600,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).paladar_blando = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -2523,6 +2613,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).orafaringe = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -2536,6 +2627,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).piso_boca = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -2548,6 +2640,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).lengua = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -2560,6 +2653,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).encia = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -2572,6 +2666,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).dientes = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -2587,6 +2682,7 @@ class _I_VState extends State<I_V> {
               maxLines: 6,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).padecimiento_actual = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -2629,6 +2725,7 @@ class _I_VState extends State<I_V> {
                             setState(() {
                               Provider.of<Cirugia>(context).radiografia[
                                   Provider.of<Cirugia>(context).radiografia.indexOf(value)] = value2;
+                              Provider.of<Cirugia>(context).cambiado = true;
                             });
                           },
                         ),
@@ -2655,6 +2752,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).otra_radiografia = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           )
@@ -2706,6 +2804,7 @@ class _I_VState extends State<I_V> {
               maxLines: 6,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).interpretacion_radiografica = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -2740,6 +2839,7 @@ class _I_VState extends State<I_V> {
                               Provider.of<Cirugia>(context).analisis_laboratorio[
                                   Provider.of<Cirugia>(context).analisis_laboratorio
                                       .indexOf(value)] = value2;
+                              Provider.of<Cirugia>(context).cambiado = true;
                             });
                           },
                         ),
@@ -2766,6 +2866,7 @@ class _I_VState extends State<I_V> {
                                     keyboardType: TextInputType.text,
                                     onChanged: (value) {
                                       Provider.of<Cirugia>(context).hemoglobina = value;
+                                      Provider.of<Cirugia>(context).cambiado = true;
                                     },
                                   ),
                                 ),
@@ -2782,6 +2883,7 @@ class _I_VState extends State<I_V> {
                                     keyboardType: TextInputType.text,
                                     onChanged: (value) {
                                       Provider.of<Cirugia>(context).hematocrito = value;
+                                      Provider.of<Cirugia>(context).cambiado = true;
                                     },
                                   ),
                                 ),
@@ -2802,6 +2904,7 @@ class _I_VState extends State<I_V> {
                                 keyboardType: TextInputType.text,
                                 onChanged: (value) {
                                   Provider.of<Cirugia>(context).neutrofilos = value;
+                                  Provider.of<Cirugia>(context).cambiado = true;
                                 },
                               ),
                             ),
@@ -2818,6 +2921,7 @@ class _I_VState extends State<I_V> {
                                 keyboardType: TextInputType.text,
                                 onChanged: (value) {
                                   Provider.of<Cirugia>(context).linfocitos = value;
+                                  Provider.of<Cirugia>(context).cambiado = true;
                                 },
                               ),
                             ),
@@ -2838,6 +2942,7 @@ class _I_VState extends State<I_V> {
                                 keyboardType: TextInputType.text,
                                 onChanged: (value) {
                                   Provider.of<Cirugia>(context).eosinofilos = value;
+                                  Provider.of<Cirugia>(context).cambiado = true;
                                 },
                               ),
                             ),
@@ -2854,6 +2959,7 @@ class _I_VState extends State<I_V> {
                                 keyboardType: TextInputType.text,
                                 onChanged: (value) {
                                   Provider.of<Cirugia>(context).basofilos = value;
+                                  Provider.of<Cirugia>(context).cambiado = true;
                                 },
                               ),
                             ),
@@ -2874,6 +2980,7 @@ class _I_VState extends State<I_V> {
                                 keyboardType: TextInputType.text,
                                 onChanged: (value) {
                                   Provider.of<Cirugia>(context).monocitos = value;
+                                  Provider.of<Cirugia>(context).cambiado = true;
                                 },
                               ),
                             ),
@@ -2903,6 +3010,7 @@ class _I_VState extends State<I_V> {
                                     keyboardType: TextInputType.text,
                                     onChanged: (value) {
                                       Provider.of<Cirugia>(context).hemoglobina_glucolisada = value;
+                                      Provider.of<Cirugia>(context).cambiado = true;
                                     },
                                   ),
                                 ),
@@ -2919,6 +3027,7 @@ class _I_VState extends State<I_V> {
                                     keyboardType: TextInputType.text,
                                     onChanged: (value) {
                                       Provider.of<Cirugia>(context).glicemia = value;
+                                      Provider.of<Cirugia>(context).cambiado = true;
                                     },
                                   ),
                                 ),
@@ -2939,6 +3048,7 @@ class _I_VState extends State<I_V> {
                                 keyboardType: TextInputType.text,
                                 onChanged: (value) {
                                   Provider.of<Cirugia>(context).otros_sangre = value;
+                                  Provider.of<Cirugia>(context).cambiado = true;
                                 },
                               ),
                             ),
@@ -2968,6 +3078,7 @@ class _I_VState extends State<I_V> {
                                     keyboardType: TextInputType.text,
                                     onChanged: (value) {
                                       Provider.of<Cirugia>(context).tiempo_sangrado = value;
+                                      Provider.of<Cirugia>(context).cambiado = true;
                                     },
                                   ),
                                 ),
@@ -2984,6 +3095,7 @@ class _I_VState extends State<I_V> {
                                     keyboardType: TextInputType.text,
                                     onChanged: (value) {
                                       Provider.of<Cirugia>(context).tiempo_coagulacion = value;
+                                      Provider.of<Cirugia>(context).cambiado = true;
                                     },
                                   ),
                                 ),
@@ -3004,6 +3116,7 @@ class _I_VState extends State<I_V> {
                                 keyboardType: TextInputType.text,
                                 onChanged: (value) {
                                   Provider.of<Cirugia>(context).cuenta_plaquetas = value;
+                                  Provider.of<Cirugia>(context).cambiado = true;
                                 },
                               ),
                             ),
@@ -3021,6 +3134,7 @@ class _I_VState extends State<I_V> {
                                 keyboardType: TextInputType.text,
                                 onChanged: (value) {
                                   Provider.of<Cirugia>(context).tiempo_protombina = value;
+                                  Provider.of<Cirugia>(context).cambiado = true;
                                 },
                               ),
                             ),
@@ -3042,6 +3156,7 @@ class _I_VState extends State<I_V> {
                                 keyboardType: TextInputType.text,
                                 onChanged: (value) {
                                   Provider.of<Cirugia>(context).tiempo_tromboplastina = value;
+                                  Provider.of<Cirugia>(context).cambiado = true;
                                 },
                               ),
                             ),
@@ -3058,6 +3173,7 @@ class _I_VState extends State<I_V> {
                                 keyboardType: TextInputType.text,
                                 onChanged: (value) {
                                   Provider.of<Cirugia>(context).inr = value;
+                                  Provider.of<Cirugia>(context).cambiado = true;
                                 },
                               ),
                             ),
@@ -3124,6 +3240,7 @@ class _I_VState extends State<I_V> {
                     keyboardType: TextInputType.text,
                     onChanged: (value) {
                       Provider.of<Cirugia>(context).maxilar_superior = value;
+                      Provider.of<Cirugia>(context).cambiado = true;
                     },
                   ),
                 ),
@@ -3140,6 +3257,7 @@ class _I_VState extends State<I_V> {
                     keyboardType: TextInputType.text,
                     onChanged: (value) {
                       Provider.of<Cirugia>(context).maxilar_inferior = value;
+                      Provider.of<Cirugia>(context).cambiado = true;
                     },
                   ),
                 ),
@@ -3162,6 +3280,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).diagnostico = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -3176,6 +3295,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).pronostico = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -3189,6 +3309,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).tratamiento = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -3208,6 +3329,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).antisepsia = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -3222,6 +3344,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).anestesia = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -3236,6 +3359,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).incision = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -3250,6 +3374,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).diseccion_mucoperiostica = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -3264,6 +3389,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).osteotomia_ostectomia = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -3278,6 +3404,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).operacion = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -3292,6 +3419,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).cuidados_herida = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -3306,6 +3434,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).sutura = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -3327,6 +3456,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).primeras_24h = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -3343,6 +3473,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).despues_24h = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -3359,6 +3490,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).incidentes = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -3376,6 +3508,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).analgesicos = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -3390,6 +3523,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).antibioticos = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -3404,6 +3538,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).ansioliticos = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -3418,6 +3553,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).otros_medicamentos = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -3432,6 +3568,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).nombre_cirujano = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -3446,6 +3583,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).nombre_ayudante = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -3460,6 +3598,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).nombre_instrumentista = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -3474,6 +3613,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).nombre_asistente = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -3490,6 +3630,7 @@ class _I_VState extends State<I_V> {
                     keyboardType: TextInputType.text,
                     onChanged: (value) {
                       Provider.of<Cirugia>(context).hora_inicio = value;
+                      Provider.of<Cirugia>(context).cambiado = true;
                     },
                   ),
                 ),
@@ -3506,6 +3647,7 @@ class _I_VState extends State<I_V> {
                     keyboardType: TextInputType.text,
                     onChanged: (value) {
                       Provider.of<Cirugia>(context).hora_termino = value;
+                      Provider.of<Cirugia>(context).cambiado = true;
                     },
                   ),
                 ),
@@ -3523,6 +3665,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).valor_tratamiento = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),
@@ -3555,6 +3698,7 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).estado_postquirurgico = value;
+                Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
           ),

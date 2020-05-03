@@ -63,11 +63,12 @@ class _BaseformulariosState extends State<Baseformularios> {
 
                   // print("Hola?");
                 }
-              /*  if (Provider.of<Cirugia>(context).cambiado) {
+               if (Provider.of<Cirugia>(context).cambiado) {
+                  Provider.of<Cirugia>(context).checklist();
                   Provider.of<Cirugia>(context).addCirugia();
                   Provider.of<Cirugia>(context).cambiado=false;
                   // print("Hola?");
-                }*/
+                }
                 Navigator.pop(context);
 
             },

@@ -52,12 +52,15 @@ class _BaseformulariosState extends State<Baseformularios> {
                   // print("Hola?");
                 }
                 if (Provider.of<Adulto>(context).cambiado) {
-                  if(Provider.of<Adulto>(context).motivo.isNotEmpty){motivo.addAll(Provider.of<Adulto>(context).motivo);}
-                  if(Provider.of<Adulto>(context).fecha_ultima_visita.isNotEmpty){fecha=Provider.of<Adulto>(context).fecha_ultima_visita;}
+                  if(Provider.of<Adulto>(context).motivo.isNotEmpty){
+                    motivo=[Provider.of<Adulto>(context).motivo];}
+                  if(Provider.of<Adulto>(context).fecha_ultima_visita.isNotEmpty){
+                    fecha=[Provider.of<Adulto>(context).fecha_ultima_visita];}
                   motivo.add(Provider.of<Adulto>(context).motivotemp);
                   fecha.add(Provider.of<Adulto>(context).fecha_ultima_visitatemp);
-                  Provider.of<Adulto>(context).addmotivosyfecha(motivo,fecha);
-                  print(Provider.of<Adulto>(context).fecha_ultima_visita.last.toString());
+                  Provider.of<Adulto>(context).motivo=motivo;
+                  Provider.of<Adulto>(context).fecha_ultima_visita=fecha;
+                  print(Provider.of<Adulto>(context).motivo.last);
                   Provider.of<Adulto>(context).addAdult();
                   Provider.of<Adulto>(context).cambiado=false;
 

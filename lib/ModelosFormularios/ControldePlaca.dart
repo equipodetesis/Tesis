@@ -1,6 +1,74 @@
-import 'package:flutter/material.dart';
+import 'package:cloud_functions/cloud_functions.dart';
+import 'package:expedientesodontologicos_app/ModelosFormularios/Diente.dart';
 
 class ControldePlaca{
-  String codigo = '';
-  bool cara_arriba =  false, cara_izquierda =  false, cara_derecha =  false, cara_abajo =  false;
+  double porcentaje=0.0;
+  int totaldientes=0;
+  String Fecha="",userid="",clienteid="";
+  List<Diente> arriba=List(),abajo=List();
+  List cara_arriba=[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
+      cara_inferior=[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
+      cara_izquierda=[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
+      cara_derecha=[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false];
+
+  Map<String,dynamic> toMap()=>{
+    "UserID":userid,
+    "ClienteID":clienteid,
+    "Fecha":Fecha,
+    "Dientes totales":totaldientes,
+    "Porcentaje de superficies afectadas":porcentaje,
+    "Caras_superior":cara_arriba,
+    "Caras_inferior":cara_inferior,
+    "Caras_derechas":cara_derecha,
+    "Caras_izquier":cara_izquierda
+};
+  Map<String,dynamic> DientestoMap(){
+    Map<String,dynamic> dientes=toMap();
+    arriba.map((Diente diente){
+      dientes["CodigoDiente"]=diente.codigo;
+      dientes["Cara_superior"]=diente.cara_arriba;
+      dientes["Cara_inferior"]=diente.cara_abajo;
+      dientes["Cara_derecha"]=diente.cara_derecha;
+      dientes["Cara_izquierda"]=diente.cara_izquierda;
+    });
+    abajo.map((Diente diente){
+      dientes["CodigoDiente"]=diente.codigo;
+      dientes["Cara_superior"]=diente.cara_arriba;
+      dientes["Cara_inferior"]=diente.cara_abajo;
+      dientes["Cara_derecha"]=diente.cara_derecha;
+      dientes["Cara_izquierda"]=diente.cara_izquierda;
+    });
+    return dientes;
+  }
+  void fromjson(Map<String, dynamic> data){
+    userid=data["UserID"];
+    clienteid=data["ClienteID"];
+    Fecha=data["Fecha"];
+    totaldientes=data[ "Dientes totales"];
+    porcentaje=data["Porcentaje de superficies afectadas"];
+  }
+  Future<void> addControldeplaca() async {
+
+
+    final HttpsCallable callable = CloudFunctions.instance.getHttpsCallable(
+      functionName: 'addControlPlacas',
+    );
+    dynamic resp = await callable.call(this.toMap()).whenComplete((){print("Listo con exito");});
+  }
+  void addAll(){
+    print(arriba.length.toString());
+    arriba.map((Diente value){
+      print(arriba.length.toString());
+      value.userid=userid;
+      value.pacienteid=clienteid;
+      value.fecha=Fecha;
+      value.addDiente();
+    }).toList();
+    abajo.map((Diente value){
+      value.userid=userid;
+      value.pacienteid=clienteid;
+      value.fecha=Fecha;
+      value.addDiente();
+    }).toList();
+  }
 }

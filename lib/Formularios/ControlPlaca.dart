@@ -1,7 +1,11 @@
+import 'package:expedientesodontologicos_app/Loggin/LoginState.dart';
 import 'package:expedientesodontologicos_app/ModelosFormularios/ControldePlaca.dart';
+import 'package:expedientesodontologicos_app/ModelosFormularios/Diente.dart';
+import 'package:expedientesodontologicos_app/ModelosFormularios/General.dart';
 import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 
 class ControlPlaca extends StatefulWidget{
   @override
@@ -10,11 +14,15 @@ class ControlPlaca extends StatefulWidget{
 
 class _ControlPlacaState extends State<ControlPlaca>{
   final _placakey = GlobalKey<FormState>();
-  String _totalplaca,_presesntemult,_porcentaje,_fecha=DateTime.now().toString();
+  String _fecha=DateTime.now().toString();
+  double porcentaje=0.0;
+  int totaldientes=0,supafectadas=0;
   int s=1,d=8,i=0,s2=3,d2=1;
   bool cambioas2=false;
 
-  List<ControldePlaca> dientesarriba = List(14),dientesabajo=List(14);
+  List<Diente> dientesarriba = List(14),dientesabajo=List(14);
+  ControldePlaca controldePlaca=ControldePlaca();
+
 
   @override
   void initState() {
@@ -27,8 +35,8 @@ class _ControlPlacaState extends State<ControlPlaca>{
       if(i>=7&&s2<=4)s2++;
       if(d2<7)d2++;
       else d2=1;
-      dientesarriba[i] = ControldePlaca();
-      dientesabajo[i]=ControldePlaca();
+      dientesarriba[i] = Diente();
+      dientesabajo[i]=Diente();
       if(cambioas2){
       dientesarriba[i].codigo = s.toString() + d2.toString();
       dientesabajo[i].codigo=s2.toString()+d2.toString();
@@ -74,26 +82,6 @@ class _ControlPlacaState extends State<ControlPlaca>{
      decoration: BoxDecoration(color: Colors.black26),
    );
 
-    var arriba=Container(
-      height: 120.0,
-      decoration: BoxDecoration(color: Colors.amber),
-      child: ListView.builder(
-        itemCount: 16,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context,index){
-          if(index>=8&&s<2)s++;
-          if(d>1)d--;
-          else d=8;
-          return Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Text("$s$d"),
-              diente
-            ],
-          );
-        },
-      ),
-    );
     var arriba2=SingleChildScrollView(
       scrollDirection: Axis.horizontal,
       child: Row(
@@ -111,10 +99,23 @@ class _ControlPlacaState extends State<ControlPlaca>{
                         right: 16.0,
                         child: GestureDetector(
                           onTap: (){
+                            if(value.cara_arriba){
+                              setState(() {
+                                value.cara_arriba = false;
+                              });
+                            supafectadas--;
+                            }
+                            else{
                             setState(() {
                               value.cara_arriba = true;
-
-                            });
+                              supafectadas++;
+                            });}
+                            if(totaldientes>0)
+                            { setState(() {
+                               porcentaje=(supafectadas/(totaldientes*4))*100;
+                             }); }
+                            controldePlaca.cara_arriba[dientesarriba.indexOf(value)]=value.cara_arriba;
+                            print(controldePlaca.cara_arriba[0].toString());
                           },
                           child: Image.asset("Imagenes/dientearr.png",color: value.cara_arriba ? Colors.red : null,scale: 0.9,),
                         ),
@@ -125,10 +126,24 @@ class _ControlPlacaState extends State<ControlPlaca>{
                         child: GestureDetector(
                           child:  Image.asset("Imagenes/dienteizq.png",scale: 1.0,color: value.cara_izquierda ? Colors.red : null),
                           onTap: (){
-                            setState(() {
-                              value.cara_izquierda = true;
-
+                            if(value.cara_izquierda){
+                              setState(() {
+                                value.cara_izquierda = false;
+                              });
+                              supafectadas--;
+                            }
+                            else{
+                              setState(() {
+                                value.cara_izquierda = true;
+                                supafectadas++;
+                              });}
+                            if(totaldientes>0)
+                            { setState(() {
+                              porcentaje=(supafectadas/(totaldientes*4))*100;
                             });
+                            controldePlaca.cara_izquierda[dientesarriba.indexOf(value)]=value.cara_izquierda;
+                            print(controldePlaca.cara_izquierda[dientesarriba.indexOf(value)].toString());
+                            }
                           },
                         ),
                       ),
@@ -138,10 +153,26 @@ class _ControlPlacaState extends State<ControlPlaca>{
                         child: GestureDetector(
                           child:Image.asset("Imagenes/dienteder.png",scale: 0.9,color: value.cara_derecha ? Colors.red : null),
                           onTap: (){
-                            setState(() {
-                              value.cara_derecha = true;
+                            if(value.cara_derecha){
+                              setState(() {
+                                value.cara_derecha = false;
+                              });
+                              supafectadas--;
+                            }
+                            else{
+                              setState(() {
+                                value.cara_derecha = true;
+                                supafectadas++;
+                              });}
 
+                            if(totaldientes>0)
+                            {
+                              setState(() {
+                              porcentaje=(supafectadas/(totaldientes*4))*100;
                             });
+                            }
+                            controldePlaca.cara_derecha[dientesarriba.indexOf(value)]=value.cara_derecha;
+
                           },
                         ),
                       ),
@@ -151,10 +182,23 @@ class _ControlPlacaState extends State<ControlPlaca>{
                         child: GestureDetector(
                           child:Image.asset("Imagenes/dienteabajo.png",scale: 0.9,color: value.cara_abajo ? Colors.red : null),
                           onTap: (){
-                            setState(() {
-                              value.cara_abajo = true;
-
+                            if(value.cara_abajo){
+                              setState(() {
+                                value.cara_abajo = false;
+                              });
+                              supafectadas--;
+                            }
+                            else{
+                              setState(() {
+                                value.cara_abajo = true;
+                                supafectadas++;
+                              });}
+                            if(totaldientes>0)
+                            { setState(() {
+                              porcentaje=(supafectadas/(totaldientes*4))*100;
                             });
+                            controldePlaca.cara_inferior[dientesarriba.indexOf(value)]=value.cara_abajo;
+                            }
                           },
                         ),
                       )
@@ -187,10 +231,23 @@ class _ControlPlacaState extends State<ControlPlaca>{
                       right: 16.0,
                       child: GestureDetector(
                         onTap: (){
-                          setState(() {
-                            value.cara_arriba = true;
-
+                          if(value.cara_arriba){
+                            setState(() {
+                              value.cara_arriba = false;
+                            });
+                            supafectadas--;
+                          }
+                          else{
+                            setState(() {
+                              value.cara_arriba = true;
+                              supafectadas++;
+                            });}
+                          if(totaldientes>0)
+                          { setState(() {
+                            porcentaje=(supafectadas/(totaldientes*4))*100;
                           });
+                          controldePlaca.cara_arriba[dientesabajo.indexOf(value)+14]=value.cara_arriba;
+                          }
                         },
                         child: Image.asset("Imagenes/dientearr.png",color: value.cara_arriba ? Colors.red : null,scale: 0.9,),
                       ),
@@ -201,10 +258,22 @@ class _ControlPlacaState extends State<ControlPlaca>{
                       child: GestureDetector(
                         child:  Image.asset("Imagenes/dienteizq.png",scale: 1.0,color: value.cara_izquierda ? Colors.red : null),
                         onTap: (){
-                          setState(() {
-                            value.cara_izquierda = true;
-
+                          if(value.cara_izquierda){
+                            setState(() {
+                              value.cara_izquierda = false;
+                            });
+                            supafectadas--;
+                          }
+                          else{
+                            setState(() {
+                              value.cara_izquierda = true;
+                              supafectadas++;
+                            });}
+                          if(totaldientes>0)
+                          { setState(() {
+                            porcentaje=(supafectadas/(totaldientes*4))*100;
                           });
+                          controldePlaca.cara_izquierda[dientesabajo.indexOf(value)+14]=value.cara_izquierda;}
                         },
                       ),
                     ),
@@ -214,10 +283,26 @@ class _ControlPlacaState extends State<ControlPlaca>{
                       child: GestureDetector(
                         child:Image.asset("Imagenes/dienteder.png",scale: 0.9,color: value.cara_derecha ? Colors.red : null),
                         onTap: (){
-                          setState(() {
-                            value.cara_derecha = true;
+                          if(value.cara_derecha){
+                            setState(() {
+                              value.cara_derecha = false;
+                            });
+                            supafectadas--;
+                          }
+                          else{
+                            setState(() {
+                              value.cara_derecha = true;
+                              supafectadas++;
+                            });
+                          }
 
-                          });
+                          if(totaldientes>0)
+                          {
+                            setState(() {
+                              porcentaje=(supafectadas/(totaldientes*4))*100;
+                            });
+                            controldePlaca.cara_derecha[dientesabajo.indexOf(value)+14]=value.cara_derecha;
+                          }
                         },
                       ),
                     ),
@@ -227,10 +312,23 @@ class _ControlPlacaState extends State<ControlPlaca>{
                       child: GestureDetector(
                         child:Image.asset("Imagenes/dienteabajo.png",scale: 0.9,color: value.cara_abajo ? Colors.red : null),
                         onTap: (){
-                          setState(() {
-                            value.cara_abajo = true;
-
+                          if(value.cara_abajo){
+                            setState(() {
+                              value.cara_abajo = false;
+                            });
+                            supafectadas--;
+                          }
+                          else{
+                            setState(() {
+                              value.cara_abajo = true;
+                              supafectadas++;
+                            });}
+                          if(totaldientes>0)
+                          { setState(() {
+                            porcentaje=(supafectadas/(totaldientes*4))*100;
                           });
+                          controldePlaca.cara_inferior[dientesabajo.indexOf(value)+14]=value.cara_abajo;
+                          }
                         },
                       ),
                     )
@@ -244,116 +342,73 @@ class _ControlPlacaState extends State<ControlPlaca>{
         }).toList()),
       );
 
-  var abajo=Container(
-    height: 120,
-    decoration: BoxDecoration(color: Colors.amber),
-    child:ListView.builder(
-  itemCount: 16,
-  scrollDirection: Axis.horizontal,
-  itemBuilder: (context,index){
-     if(index>=8&&s<4)s++;
-     if(d>1)d--;
-     else d=8;
-     return Column(
-       mainAxisSize: MainAxisSize.min,
-       children: <Widget>[
-         Text("$s$d"),
-         diente
-       ],
-     );
-   },
+  var calculo= Row(
+    children: <Widget>[
+      Tooltip(
+        message: "Dientes que posee el paciente",
+        showDuration: Duration(seconds: 2),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+          child: Container(
+            width: 120.0,
+            child: TextFormField(
+              maxLines: 1,
+              keyboardType: TextInputType.number,
+              autofocus: false,
+              autovalidate: true,
+              validator: (value)=>value.isEmpty&&value.contains(".")?"Valor no valido":null,
+              decoration: new InputDecoration(
+                  hintText: 'Cantidad de dientes',
+                  icon: new Icon(
+                    Icons.bookmark_border,
+                    color: Colors.grey,
+                  )),
+              onChanged:  (value){
+                print("el value:"+value);
+                if(value.contains(".")||value.contains(","))
+                  showDialog(context: context,
+                    builder:(BuildContext context){
+                    return AlertDialog(
+                      content: Text("Solo se permiten enteros"),
+                      actions: <Widget>[
+                        // usually buttons at the bottom of the dialog
+                        new FlatButton(
+                          child: new Text("Ok"),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    );
+                    });
+                else{
+                setState(() {
+                   totaldientes=int.parse(value);
+                });}
 
-    ) ,);
-  var calculo= Form(
-    child: Row(
-      children: <Widget>[
-        Tooltip(
-          message: "Total de superficies con placa",
-          showDuration: Duration(seconds: 2),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-            child: Container(
-              width: 120.0,
-              child: TextFormField(
-                maxLines: 1,
-                keyboardType: TextInputType.number,
-                autofocus: false,
-                decoration: new InputDecoration(
-                    hintText: 'Total placa',
-                    icon: new Icon(
-                      Icons.bookmark_border,
-                      color: Colors.grey,
-                    )),
-                validator: (value) => value.isEmpty ? 'no puede estar vacio' : null,
-                onSaved:  (value){
-                  setState(() {
-                     _totalplaca= value.trim();
-                    print("el value:"+value);
-                  });
-                },
-              ),
+
+
+              },
             ),
           ),
         ),
-        Tooltip(
-          message: "Dientes presentes",
-          showDuration: Duration(seconds: 2),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-            child: Container(
-              width: 120.0,
-              child: TextFormField(
-                maxLines: 1,
-                keyboardType: TextInputType.number,
-                autofocus: false,
-                decoration: new InputDecoration(
-                    hintText: 'Prensete en',
-                    icon: new Icon(
-                      Icons.bookmark_border,
-                      color: Colors.grey,
-                    )),
-                validator: (value) => value.isEmpty ? 'No puede estar vacio' : null,
-                onSaved:  (value){
-                  setState(() {
-                    _presesntemult = value.trim();
-                    print("el value:"+value);
-                  });
-                },
-              ),
-            ),
+      ),
+      Tooltip(
+        message: "Porcentaje de afectación",
+        showDuration: Duration(seconds: 2),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
+          child: Container(
+            width: 200.0,
+            child: Column(
+           children: <Widget>[
+              Text("Porcentaje de afectacion=",style: TextStyle(fontSize: 12.0,fontWeight: FontWeight.bold,fontStyle: FontStyle.italic),),
+    Text(porcentaje.toStringAsFixed(2)+"%",style: TextStyle(fontSize: 19.0,fontWeight: FontWeight.bold,fontStyle: FontStyle.italic),)
+    ],
           ),
         ),
-        Tooltip(
-          message: "Porcentaje",
-          showDuration: Duration(seconds: 2),
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-            child: Container(
-              width: 120.0,
-              child: TextFormField(
-                maxLines: 1,
-                keyboardType: TextInputType.number,
-                autofocus: false,
-                decoration: new InputDecoration(
-                    hintText: '%',
-                    icon: new Icon(
-                      Icons.bookmark_border,
-                      color: Colors.grey,
-                    )),
-                validator: (value) => value.isEmpty ? 'no puede estar vacio' : null,
-                onSaved:  (value){
-                  setState(() {
-                    _porcentaje= value.trim();
-                    print("el value:"+value);
-                  });
-                },
-              ),
-            ),
-          ),
-        ),
-      ],
-    ),
-    key:_placakey,
+      ),)
+    ],
   );
 
     return ListView(
@@ -380,7 +435,13 @@ class _ControlPlacaState extends State<ControlPlaca>{
                 splashColor: Colors.deepOrange,
                 padding:const EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 10.0) ,
                 onPressed: (){
-
+                 controldePlaca.porcentaje=porcentaje;
+                 controldePlaca.totaldientes=totaldientes;
+                 controldePlaca.userid=Provider.of<LoginState>(context).uid;
+                 controldePlaca.clienteid=Provider.of<General>(context).pacienteid;
+                 controldePlaca.Fecha=_fecha;
+                 controldePlaca.addControldeplaca();
+                 //controldePlaca.addAll();
                 },
                 ),
             ),

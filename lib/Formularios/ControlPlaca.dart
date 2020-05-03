@@ -17,7 +17,7 @@ class _ControlPlacaState extends State<ControlPlaca>{
   String _fecha=DateTime.now().toString();
   double porcentaje=0.0;
   int totaldientes=0,supafectadas=0;
-  int s=1,d=8,i=0,s2=3,d2=1;
+  int s=1,d=7,i=0,s2=3,d2=1;
   bool cambioas2=false;
 
   List<Diente> dientesarriba = List(14),dientesabajo=List(14);
@@ -29,21 +29,23 @@ class _ControlPlacaState extends State<ControlPlaca>{
     // TODO: implement initState
     super.initState();
     while(i < dientesarriba.length){
-      if(i>=7&&s<2)s++;
-      if(d>1)d--;
-      else {d=8;cambioas2=true;}
-      if(i>=7&&s2<=4)s2++;
-      if(d2<7)d2++;
-      else d2=1;
       dientesarriba[i] = Diente();
       dientesabajo[i]=Diente();
       if(cambioas2){
       dientesarriba[i].codigo = s.toString() + d2.toString();
       dientesabajo[i].codigo=s2.toString()+d2.toString();
+      d2++;
       print(dientesarriba[i].codigo);
       }else{
         dientesarriba[i].codigo = s.toString() + d.toString();
         dientesabajo[i].codigo=s2.toString()+d.toString();
+        d--;
+      }
+      if(d<1){
+        cambioas2=true;
+        s++;
+        s2++;
+        d=7;
       }
       i++;
     }

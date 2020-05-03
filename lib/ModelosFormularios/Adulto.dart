@@ -42,15 +42,15 @@ void clear(){
   motivo=mot;fecha_ultima_visita=fecha;
  }
   void fromjson(Map<String, dynamic> data) {
-    motivo.addAll(data["motivo_consulta"]);
-    historia=data["historia_enfermedad_actual"];fecha_ultima_visita.addAll(data["fecha_ultima_visita"]); tratamiento_recibido=data["tratamiento"] ;
+    motivo=List.from(data["motivo_consulta"]);
+    historia=data["historia_enfermedad_actual"];fecha_ultima_visita=List.from(data["fecha_ultima_visita"]); tratamiento_recibido=data["tratamiento"] ;
     dientes_perdidos=data["dientes_perdidos"]; causa_dientesperdidos=data["causa_dientes_perdidos"] ;experiencias_exodoncias=data["exper_exodocias"] ;
     higiene_oral=data["higiene_oral"] ;tipo_cepillo =data["tipo_cepillo"];tecnica_cepillado=data["tipo_cepillado"] ;
     frecuencia_cepillado=data["frec_cepillado"] ; ayudas_higiene_extras=data["ayudas_higiene_extra"] ;
     cuidadoMedico=data["cuidado_medico"];hospital=data["hospital"];expediente=data["expediente_medico"];fecha_ultimo_examen_medico=data["ult_exam_medico"];
-    medicamentos=data["medicamentos"];nombredelmedico=data["nombre_medico"];enfermedades.addAll(data["enfermedades"]); enfermedad_persiste=data["enfermedad_persiste"];
+    medicamentos=data["medicamentos"];nombredelmedico=data["nombre_medico"];enfermedades=List.from(data["enfermedades"]); enfermedad_persiste=data["enfermedad_persiste"];
     iniciacion_enf=data["iniciacion_enf"]; curso=data["curso"]; tratamiento=data["tratamiento"]; estadoactual=data["estadoactual"];
-    otros_enfermedades_padecidas=data["otros_enfermedades_padecidas"]; sometido.addAll(data["sometido_a"]); vacunas_recibidas=data["vacunas_recibidas"];clienteid=data["ClienteID"];
+    otros_enfermedades_padecidas=data["otros_enfermedades_padecidas"]; sometido=List.from(data["sometido_a"]); vacunas_recibidas=data["vacunas_recibidas"];clienteid=data["ClienteID"];
     historia_familiar=data["historia_familiar"];historia_personal_social=data["historia_personal_social"];otros_sintomas=data["otros_sintomas"];
     describa_revision=data["describa_revision"];presionsan_max=data["presionsan_max"];presionsan_min=data["presionsan_min"];
     temperatura=data["temperatura"];pulsaciones=data["pulsaciones"];ritmo=data["ritmo"];descripcion_examenes=data["descripcion_examenes"];
@@ -58,7 +58,7 @@ void clear(){
     region_vestibular=data["region_vestibular"];paladar_duro=data["paladar_duro"];paladar_blando=data["paladar_blando"];orofaringe=data["orofaringe"];
     piso_boca=data["piso_boca"];lengua=data["lengua"];cara_dorsal=data["cara_dorsal"];
     cara_ventral=data["cara_ventral"];bordes=data["bordes"];encia=data["encia"];dientes=data["dientes"];prescencia_calculo=data["prescencia_calculo"];salivacion=data["salivacion"];
-    revision_organos.addAll(data["motivo_consulta"]);
+    revision_organos=List.from(data["RevisiondeOrganos"]);
   }
   Map<String,dynamic> toMap()=>{
      "historia_enfermedad_actual":historia, "fecha_ultima_visita":fecha_ultima_visita, "tratamiento":tratamiento_recibido , "dientes_perdidos":dientes_perdidos ,
@@ -75,8 +75,7 @@ void clear(){
   "revision_medica":revision_medica,"actitudemocional":actitudemocional,"examenfisico_caracuello":examenfisico_caracuello,
   "region_vestibular":region_vestibular,"paladar_duro":paladar_duro,"paladar_blando":paladar_blando,"orofaringe":orofaringe,
   "piso_boca":piso_boca,"lengua":lengua,"cara_dorsal":cara_dorsal,
-  "cara_ventral":cara_ventral,"bordes":bordes,"encia":encia,"dientes":dientes,"prescencia_calculo":prescencia_calculo,"salivacion":salivacion,
-    "RevisiondeOrganos":revision_organos,"motivo_consulta":motivo,"sometido_a":sometido
+  "cara_ventral":cara_ventral,"bordes":bordes,"encia":encia,"dientes":dientes,"prescencia_calculo":prescencia_calculo,"salivacion":salivacion, "RevisiondeOrganos":revision_organos,"motivo_consulta":motivo,"sometido_a":sometido
   };
   Future<void> addAdult() async {
     final HttpsCallable callable = CloudFunctions.instance.getHttpsCallable(

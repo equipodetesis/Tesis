@@ -5,6 +5,7 @@ import 'package:expedientesodontologicos_app/img/SubirFoto.dart';
 import 'package:expedientesodontologicos_app/ModelosFormularios/General.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'Formularios/ListaControldeplacas.dart';
 import 'Formularios/adulto/I_II_III_IV.dart';
 import 'Formularios/adulto/V_VI_VII.dart';
 import 'ModelosFormularios/Adulto.dart';
@@ -189,7 +190,7 @@ class _BaseformulariosState extends State<Baseformularios> {
               onTap: () {
                 setState(() {
                   Titulo="Control de placa";
-                  bodycontent = ControlPlaca();
+                  bodycontent = ListaControldeplacas();
                 });
                 Navigator.pop(context);
               },

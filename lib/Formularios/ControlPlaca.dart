@@ -374,7 +374,7 @@ class _ControlPlacaState extends State<ControlPlaca>{
                       content: Text("Solo se permiten enteros"),
                       actions: <Widget>[
                         // usually buttons at the bottom of the dialog
-                        new FlatButton(
+                         FlatButton(
                           child: new Text("Ok"),
                           onPressed: () {
                             Navigator.of(context).pop();
@@ -386,6 +386,7 @@ class _ControlPlacaState extends State<ControlPlaca>{
                 else{
                 setState(() {
                    totaldientes=int.parse(value);
+                   porcentaje=(supafectadas/(totaldientes*4))*100;
                 });}
 
 
@@ -413,43 +414,67 @@ class _ControlPlacaState extends State<ControlPlaca>{
     ],
   );
 
-    return ListView(
-      children: <Widget>[
-        Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0.0, 50.0, 0.0, 20.0),
-              child: Text("Control de placa",style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.bold,fontStyle: FontStyle.italic),),
-            ),
-            arriba2,
-            Divider(thickness: 10.0),
-            abajo2,
-            Divider(thickness: 10.0),
-            calculo,
-            Container(
-              padding:const EdgeInsets.fromLTRB(0.0, 50.0, 0.0, 0.0) ,
-              child: RaisedButton(
-                elevation: 10.0,
-                hoverElevation: 20.0,
-                child:  Text("Guardar",style: TextStyle(fontSize: 19.0),),
-                color: Colors.cyan,
-                splashColor: Colors.deepOrange,
-                padding:const EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 10.0) ,
-                onPressed: (){
-                 controldePlaca.porcentaje=porcentaje;
-                 controldePlaca.totaldientes=totaldientes;
-                 controldePlaca.userid=Provider.of<LoginState>(context).uid;
-                 controldePlaca.clienteid=Provider.of<General>(context).pacienteid;
-                 controldePlaca.Fecha=_fecha;
-                 controldePlaca.addControldeplaca();
-                 //controldePlaca.addAll();
-                },
+    return Scaffold(
+      body: ListView(
+        children: <Widget>[
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0.0, 50.0, 0.0, 20.0),
+                child: Text("Control de placa",style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.bold,fontStyle: FontStyle.italic),),
+              ),
+              arriba2,
+              Divider(thickness: 10.0),
+              abajo2,
+              Divider(thickness: 10.0),
+              calculo,
+              Padding(
+                padding: const EdgeInsets.all(70.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children:<Widget>[
+                    Container(
+                    padding:const EdgeInsets.fromLTRB(0.0, 50.0, 0.0, 0.0) ,
+                    child: RaisedButton(
+                      elevation: 10.0,
+                      hoverElevation: 20.0,
+                      child:  Text("Guardar",style: TextStyle(fontSize: 19.0),),
+                      color: Colors.cyan,
+                      splashColor: Colors.deepOrange,
+                      padding:const EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 10.0) ,
+                      onPressed: (){
+                       controldePlaca.porcentaje=porcentaje;
+                       controldePlaca.totaldientes=totaldientes;
+                       controldePlaca.userid=Provider.of<LoginState>(context).uid;
+                       controldePlaca.clienteid=Provider.of<General>(context).pacienteid;
+                       controldePlaca.Fecha=_fecha;
+                       controldePlaca.addControldeplaca();
+                       Navigator.pop(context);
+                      },
+                      ),
+                  ),
+                    Container(
+                      padding:const EdgeInsets.fromLTRB(0.0, 50.0, 0.0, 0.0) ,
+                      child: RaisedButton(
+                        elevation: 10.0,
+                        hoverElevation: 20.0,
+                        child:  Text("Cancelar",style: TextStyle(fontSize: 19.0),),
+                        color: Colors.cyan,
+                        splashColor: Colors.deepOrange,
+                        padding:const EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 10.0) ,
+                        onPressed: (){
+                          Navigator.pop(context);
+                        },
+                      ),
+                    )
+                  ]
                 ),
-            ),
-          ],
-        )
-      ],
+              ),
+            ],
+          )
+        ],
+      ),
     );
   }
 

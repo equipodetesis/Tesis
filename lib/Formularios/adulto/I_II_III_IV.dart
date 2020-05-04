@@ -41,7 +41,7 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
   Widget build(BuildContext context) {
     general = generalI();
     motivohistoria = motivoHistoria();
-
+    Provider.of<Adulto>(context).fecha_ultima_visitatemp = DateFormat("y-M-d").format(fecha_selec);
     if(Provider.of<General>(context).fecha_inicio.isEmpty){
       Provider.of<General>(context).sexo = _currentsexo;
       print("hola");

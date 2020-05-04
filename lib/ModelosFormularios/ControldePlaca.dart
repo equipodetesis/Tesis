@@ -22,30 +22,17 @@ class ControldePlaca{
     "Caras_derechas":cara_derecha,
     "Caras_izquier":cara_izquierda
 };
-  Map<String,dynamic> DientestoMap(){
-    Map<String,dynamic> dientes=toMap();
-    arriba.map((Diente diente){
-      dientes["CodigoDiente"]=diente.codigo;
-      dientes["Cara_superior"]=diente.cara_arriba;
-      dientes["Cara_inferior"]=diente.cara_abajo;
-      dientes["Cara_derecha"]=diente.cara_derecha;
-      dientes["Cara_izquierda"]=diente.cara_izquierda;
-    });
-    abajo.map((Diente diente){
-      dientes["CodigoDiente"]=diente.codigo;
-      dientes["Cara_superior"]=diente.cara_arriba;
-      dientes["Cara_inferior"]=diente.cara_abajo;
-      dientes["Cara_derecha"]=diente.cara_derecha;
-      dientes["Cara_izquierda"]=diente.cara_izquierda;
-    });
-    return dientes;
-  }
+
   void fromjson(Map<String, dynamic> data){
     userid=data["UserID"];
     clienteid=data["ClienteID"];
     Fecha=data["Fecha"];
     totaldientes=data[ "Dientes totales"];
     porcentaje=data["Porcentaje de superficies afectadas"];
+    cara_arriba=data["Caras_superior"];
+    cara_inferior=data["Caras_inferior"];
+    cara_derecha=data["Caras_derechas"];
+    cara_izquierda=data["Caras_izquier"];
   }
   Future<void> addControldeplaca() async {
 

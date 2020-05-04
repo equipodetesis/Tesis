@@ -5,6 +5,7 @@ import 'package:expedientesodontologicos_app/img/SubirFoto.dart';
 import 'package:expedientesodontologicos_app/ModelosFormularios/General.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'Formularios/ListaControldeplacas.dart';
 import 'Formularios/adulto/I_II_III_IV.dart';
 import 'Formularios/adulto/V_VI_VII.dart';
 import 'ModelosFormularios/Adulto.dart';
@@ -19,7 +20,7 @@ class Baseformularios extends StatefulWidget {
 class _BaseformulariosState extends State<Baseformularios> {
   _BaseformulariosState();
   I_II_III_IV formI = I_II_III_IV();
-  String nombre = "Nuevo registro";
+  String nombre = "Nuevo registro",Titulo="Historias clinicas";
   bool actualizacion = false;
   Widget bodycontent;
   String foto;
@@ -39,7 +40,7 @@ class _BaseformulariosState extends State<Baseformularios> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Historias clinicas"),
+        title: Text(Titulo),
         centerTitle: true,
         actions: <Widget>[
           IconButton(
@@ -52,12 +53,9 @@ class _BaseformulariosState extends State<Baseformularios> {
                   // print("Hola?");
                 }
                 if (Provider.of<Adulto>(context).cambiado) {
-                  if(Provider.of<Adulto>(context).motivo.isNotEmpty){motivo.addAll(Provider.of<Adulto>(context).motivo);}
-                  if(Provider.of<Adulto>(context).fecha_ultima_visita.isNotEmpty){fecha=Provider.of<Adulto>(context).fecha_ultima_visita;}
-                  motivo.add(Provider.of<Adulto>(context).motivotemp);
-                  fecha.add(Provider.of<Adulto>(context).fecha_ultima_visitatemp);
-                  Provider.of<Adulto>(context).addmotivosyfecha(motivo,fecha);
-                  print(Provider.of<Adulto>(context).fecha_ultima_visita.last.toString());
+                  Provider.of<Adulto>(context).motivo.add(Provider.of<Adulto>(context).motivotemp);
+                  Provider.of<Adulto>(context).fecha_ultima_visita.add(Provider.of<Adulto>(context).fecha_ultima_visitatemp);
+                  print(Provider.of<Adulto>(context).motivo.last);
                   Provider.of<Adulto>(context).addAdult();
                   Provider.of<Adulto>(context).cambiado=false;
 
@@ -89,13 +87,14 @@ class _BaseformulariosState extends State<Baseformularios> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      AspectRatio(
+                      Container(
                         child: CircleAvatar(
                           backgroundImage: NetworkImage(foto),
                           backgroundColor: Colors.black12,
                           foregroundColor: Colors.white,
                         ),
-                        aspectRatio: 0.001 / 0.0004,
+                        width: 120.0,
+                        height: 120.0,
                       ),
                       Text(
                         nombre,
@@ -110,7 +109,7 @@ class _BaseformulariosState extends State<Baseformularios> {
                           MaterialButton(
                             onPressed: () async {
                               //funcion de la camara aqui
-                              SubirFoto f;
+                              SubirFoto f=SubirFoto();
                               Provider.of<General>(context).foto =
                                   await f.tomarFoto(
                                       Provider.of<General>(context).nombre +
@@ -127,7 +126,7 @@ class _BaseformulariosState extends State<Baseformularios> {
                           MaterialButton(
                             onPressed: () async {
                               //funcion de la camara aqui
-                              SubirFoto f;
+                              SubirFoto f= SubirFoto();
                               Provider.of<General>(context).foto =
                                   await f.galeryFoto(
                                       Provider.of<General>(context).nombre +
@@ -150,6 +149,7 @@ class _BaseformulariosState extends State<Baseformularios> {
               title: Text("Historial"),
               onTap: () {
                 setState(() {
+                  Titulo="Historial";
                   bodycontent = Historial();
                 });
                 Navigator.pop(context);
@@ -159,6 +159,7 @@ class _BaseformulariosState extends State<Baseformularios> {
               title: Text("General"),
               onTap: () {
                 setState(() {
+                  Titulo="General";
                   bodycontent = I_II_III_IV();
                 });
                 Navigator.pop(context);
@@ -168,6 +169,7 @@ class _BaseformulariosState extends State<Baseformularios> {
               title: Text("Expediente Adulto"),
               onTap: () {
                 setState(() {
+                  Titulo="Historia Clinica";
                   bodycontent = V_VI_VII();
                 });
                 Navigator.pop(context);
@@ -178,6 +180,7 @@ class _BaseformulariosState extends State<Baseformularios> {
               title: Text("Cirugia"),
               onTap: () {
                 setState(() {
+                  Titulo="Cirugia";
                   bodycontent = I_V();
                 });
                 Navigator.pop(context);
@@ -187,7 +190,8 @@ class _BaseformulariosState extends State<Baseformularios> {
               title: Text("Control de placa"),
               onTap: () {
                 setState(() {
-                  bodycontent = ControlPlaca();
+                  Titulo="Control de placa";
+                  bodycontent = ListaControldeplacas();
                 });
                 Navigator.pop(context);
               },

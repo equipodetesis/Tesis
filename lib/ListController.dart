@@ -35,7 +35,7 @@ class ListController extends StatelessWidget{
             ));
             break;
             default:
-              return new ListView(
+              return  ListView(
                 children: snapshot.data.documents.map((DocumentSnapshot document){
                   General general=General();
                   general.fromJson(document.data);

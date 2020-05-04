@@ -17,9 +17,6 @@ class Historial extends StatelessWidget{
     Stream<QuerySnapshot> stream;
     stream=db.collection("Usuarios/"+Provider.of<LoginState>(context).uid+"/Cliente/"+Provider.of<General>(context).pacienteid+"/Expedientes").snapshots();
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Historial de visitas"),
-      ),
       body: StreamBuilder(
         stream: stream,
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
@@ -46,10 +43,11 @@ class Historial extends StatelessWidget{
                          Divider(color: Colors.black,
                            thickness: 0.12,
                          ),
-                         Text(tpo,textAlign:TextAlign.start,style: TextStyle(color: Colors.blue,fontSize: 20.0),),
+                         Text(tpo,textAlign:TextAlign.start,style: TextStyle(color: Colors.blue,fontSize: 22.0),),
                          ListTile(
-                           title: Text(element),
-                           subtitle: Text(element),
+                           title: Text(element.toString(),style: TextStyle(fontSize: 18.9)),
+                           subtitle: Text(Provider.of<Adulto>(context).fecha_ultima_visita[Provider.of<Adulto>(context).motivo.indexOf(element)].toString(),
+                               style: TextStyle(fontSize: 15.0)),
                          )
                        ],
                      );
@@ -78,9 +76,9 @@ class Historial extends StatelessWidget{
                  }
 
 
-                 return Column(
-                   children:hitorial,
-                 );
+                 return  hitorial.isNotEmpty?Column(
+                   children:hitorial
+                 ):Center(child: Text("Sin registros anteriores",style: TextStyle(fontSize: 20.0),),);
                }).toList());
           }
         }

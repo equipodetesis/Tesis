@@ -158,7 +158,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
               onChanged: (value) {
                 setState(() {
                   cuidado_medico = value;
-                  Provider.of<Adulto>(context,listen: false).cuidadoMedico=cuidado_medico ;
+                  Provider.of<Adulto>(context).cambiado = true;
+                  Provider.of<Adulto>(context).cuidadoMedico = cuidado_medico ;
                 });
               },
             )
@@ -189,6 +190,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                           onChanged: (value) {
                             setState(() {
                               _currentlocal = value;
+                              Provider.of<Adulto>(context).cambiado = true;
                             });
                           },
                         ),
@@ -207,6 +209,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                     initialValue: Provider.of<Adulto>(context).expediente,
                     onChanged: (value) {
                       Provider.of<Adulto>(context).expediente = value;
+                      Provider.of<Adulto>(context).cambiado = true;
                     },
                   ),
                 ),
@@ -246,6 +249,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                     initialValue: Provider.of<Adulto>(context).nombredelmedico,
                     onChanged: (value) {
                       Provider.of<Adulto>(context).nombredelmedico = value;
+                      Provider.of<Adulto>(context).cambiado = true;
                     },
                   ),
                 )
@@ -263,6 +267,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
           initialValue: Provider.of<Adulto>(context).medicamentos,
           onChanged: (value) {
             Provider.of<Adulto>(context).medicamentos = value;
+            Provider.of<Adulto>(context).cambiado = true;
           },
         ),
       ),
@@ -363,6 +368,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                         Provider.of<Adulto>(context).enfermedad_persiste,
                     onChanged: (value) {
                       Provider.of<Adulto>(context).enfermedad_persiste = value;
+                      Provider.of<Adulto>(context).cambiado = true;
                     },
                   ),
                 ),
@@ -377,6 +383,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                     initialValue: Provider.of<Adulto>(context).iniciacion_enf,
                     onChanged: (value) {
                       Provider.of<Adulto>(context).iniciacion_enf = value;
+                      Provider.of<Adulto>(context).cambiado = true;
                     },
                   ),
                 ),
@@ -391,6 +398,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                     initialValue: Provider.of<Adulto>(context).curso,
                     onChanged: (value) {
                       Provider.of<Adulto>(context).curso = value;
+                      Provider.of<Adulto>(context).cambiado = true;
                     },
                   ),
                 ),
@@ -405,6 +413,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                     initialValue: Provider.of<Adulto>(context).tratamiento,
                     onChanged: (value) {
                       Provider.of<Adulto>(context).tratamiento = value;
+                      Provider.of<Adulto>(context).cambiado = true;
                     },
                   ),
                 ),
@@ -419,6 +428,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                     initialValue: Provider.of<Adulto>(context).estadoactual,
                     onChanged: (value) {
                       Provider.of<Adulto>(context).estadoactual = value;
+                      Provider.of<Adulto>(context).cambiado = true;
                     },
                   ),
                 ),
@@ -435,6 +445,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                     onChanged: (value) {
                       Provider.of<Adulto>(context)
                           .otros_enfermedades_padecidas = value;
+                      Provider.of<Adulto>(context).cambiado = true;
                     },
                   ),
                 )
@@ -551,6 +562,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
           initialValue: Provider.of<Adulto>(context).vacunas_recibidas,
           onChanged: (value) {
             Provider.of<Adulto>(context).vacunas_recibidas = value;
+            Provider.of<Adulto>(context).cambiado = true;
           },
         ),
       ),
@@ -566,6 +578,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
           initialValue: Provider.of<Adulto>(context).historia_familiar,
           onChanged: (value) {
             Provider.of<Adulto>(context).historia_familiar = value;
+            Provider.of<Adulto>(context).cambiado = true;
           },
         ),
       ),
@@ -581,6 +594,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
           initialValue: Provider.of<Adulto>(context).historia_personal_social,
           onChanged: (value) {
             Provider.of<Adulto>(context).historia_personal_social = value;
+            Provider.of<Adulto>(context).cambiado = true;
           },
         ),
       ),
@@ -683,6 +697,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
               initialValue: Provider.of<Adulto>(context).describa_revision,
               onChanged: (value) {
                 Provider.of<Adulto>(context).describa_revision = value;
+                Provider.of<Adulto>(context).cambiado = true;
               },
             ),
           ),
@@ -699,6 +714,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
               initialValue: Provider.of<Adulto>(context).otros_sintomas,
               onChanged: (value) {
                 Provider.of<Adulto>(context).otros_sintomas = value;
+                Provider.of<Adulto>(context).cambiado = true;
               },
             ),
           ),
@@ -731,6 +747,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                   initialValue: Provider.of<Adulto>(context).presionsan_min,
                   onChanged: (value) {
                     Provider.of<Adulto>(context).presionsan_min = value;
+                    Provider.of<Adulto>(context).cambiado = true;
                   },
                 ),
               ),
@@ -747,6 +764,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                   initialValue: Provider.of<Adulto>(context).presionsan_max,
                   onChanged: (value) {
                     Provider.of<Adulto>(context).presionsan_max = value;
+                    Provider.of<Adulto>(context).cambiado = true;
                   },
                 ),
               ),
@@ -775,6 +793,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                   initialValue: Provider.of<Adulto>(context).pulsaciones,
                   onChanged: (value) {
                     Provider.of<Adulto>(context).pulsaciones = value;
+                    Provider.of<Adulto>(context).cambiado = true;
                   },
                 ),
               ),
@@ -791,6 +810,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                   initialValue: Provider.of<Adulto>(context).ritmo,
                   onChanged: (value) {
                     Provider.of<Adulto>(context).ritmo = value;
+                    Provider.of<Adulto>(context).cambiado = true;
                   },
                 ),
               ),
@@ -808,6 +828,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
             initialValue: Provider.of<Adulto>(context).temperatura,
             onChanged: (value) {
               Provider.of<Adulto>(context).temperatura = value;
+              Provider.of<Adulto>(context).cambiado = true;
             },
           ),
         ),
@@ -824,6 +845,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
             initialValue: Provider.of<Adulto>(context).descripcion_examenes,
             onChanged: (value) {
               Provider.of<Adulto>(context).descripcion_examenes = value;
+              Provider.of<Adulto>(context).cambiado = true;
             },
           ),
         ),
@@ -840,6 +862,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
             initialValue: Provider.of<Adulto>(context).revision_medica,
             onChanged: (value) {
               Provider.of<Adulto>(context).revision_medica = value;
+              Provider.of<Adulto>(context).cambiado = true;
             },
           ),
         ),
@@ -857,6 +880,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
             Provider.of<Adulto>(context).examenfisico_caracuello,
             onChanged: (value) {
               Provider.of<Adulto>(context).examenfisico_caracuello = value;
+              Provider.of<Adulto>(context).cambiado = true;
             },
           ),
         ),
@@ -871,6 +895,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
             initialValue: Provider.of<Adulto>(context).region_vestibular,
             onChanged: (value) {
               Provider.of<Adulto>(context).region_vestibular = value;
+              Provider.of<Adulto>(context).cambiado = true;
             },
           ),
         ),
@@ -887,6 +912,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
             initialValue: Provider.of<Adulto>(context).paladar_duro,
             onChanged: (value) {
               Provider.of<Adulto>(context).paladar_duro = value;
+              Provider.of<Adulto>(context).cambiado = true;
             },
           ),
         ),
@@ -903,6 +929,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
             initialValue: Provider.of<Adulto>(context).paladar_blando,
             onChanged: (value) {
               Provider.of<Adulto>(context).paladar_blando = value;
+              Provider.of<Adulto>(context).cambiado = true;
             },
           ),
         ),
@@ -919,6 +946,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
             initialValue: Provider.of<Adulto>(context).orofaringe,
             onChanged: (value) {
               Provider.of<Adulto>(context).orofaringe = value;
+              Provider.of<Adulto>(context).cambiado = true;
             },
           ),
         ),
@@ -935,6 +963,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
             initialValue: Provider.of<Adulto>(context).piso_boca,
             onChanged: (value) {
               Provider.of<Adulto>(context).piso_boca = value;
+              Provider.of<Adulto>(context).cambiado = true;
             },
           ),
         ),
@@ -959,6 +988,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
             initialValue: Provider.of<Adulto>(context).cara_dorsal,
             onChanged: (value) {
               Provider.of<Adulto>(context).cara_dorsal = value;
+              Provider.of<Adulto>(context).cambiado = true;
             },
           ),
         ),
@@ -975,6 +1005,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
             initialValue: Provider.of<Adulto>(context).cara_ventral,
             onChanged: (value) {
               Provider.of<Adulto>(context).cara_ventral = value;
+              Provider.of<Adulto>(context).cambiado = true;
             },
           ),
         ),
@@ -991,6 +1022,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
             initialValue: Provider.of<Adulto>(context).bordes,
             onChanged: (value) {
               Provider.of<Adulto>(context).bordes = value;
+              Provider.of<Adulto>(context).cambiado = true;
             },
           ),
         ),
@@ -1007,6 +1039,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
             initialValue: Provider.of<Adulto>(context).encia,
             onChanged: (value) {
               Provider.of<Adulto>(context).encia = value;
+              Provider.of<Adulto>(context).cambiado = true;
             },
           ),
         ),
@@ -1023,6 +1056,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
             initialValue: Provider.of<Adulto>(context).dientes,
             onChanged: (value) {
               Provider.of<Adulto>(context).dientes = value;
+              Provider.of<Adulto>(context).cambiado = true;
             },
           ),
         ),
@@ -1051,6 +1085,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                     setState(() {
                       _current_higiene = value;
                       Provider.of<Adulto>(context).higiene_oral = value;
+                      Provider.of<Adulto>(context).cambiado = true;
                     });
                   },
                 ),
@@ -1083,6 +1118,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                     setState(() {
                       _current_calculo = value;
                       Provider.of<Adulto>(context).prescencia_calculo = value;
+                      Provider.of<Adulto>(context).cambiado = true;
 
                     });
                   },
@@ -1116,6 +1152,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                     setState(() {
                       _current_salivacion = value;
                       Provider.of<Adulto>(context).salivacion = value;
+                      Provider.of<Adulto>(context).cambiado = true;
 
                     });
                   },

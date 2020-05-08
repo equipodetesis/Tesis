@@ -20,10 +20,10 @@ class Baseformularios extends StatefulWidget {
 class _BaseformulariosState extends State<Baseformularios> {
   _BaseformulariosState();
   I_II_III_IV formI = I_II_III_IV();
-  String nombre = "Nuevo registro",Titulo="Historias clinicas";
+  String nombre = "Nuevo registro",Titulo="Historial";
   bool actualizacion = false;
   Widget bodycontent;
-  String foto;
+
   List motivo=List<String>(),fecha=List<String>();
   @override
   void initState() {
@@ -34,8 +34,6 @@ class _BaseformulariosState extends State<Baseformularios> {
   @override
   Widget build(BuildContext context) {
 
-      actualizacion = true;
-      foto = Provider.of<General>(context).foto;
       nombre = Provider.of<General>(context).nombre;
 
     return Scaffold(
@@ -88,7 +86,7 @@ class _BaseformulariosState extends State<Baseformularios> {
                     children: <Widget>[
                       Container(
                         child: CircleAvatar(
-                          backgroundImage: NetworkImage(foto),
+                          backgroundImage: NetworkImage(Provider.of<General>(context).foto),
                           backgroundColor: Colors.black12,
                           foregroundColor: Colors.white,
                         ),
@@ -109,12 +107,13 @@ class _BaseformulariosState extends State<Baseformularios> {
                             onPressed: () async {
                               //funcion de la camara aqui
                               SubirFoto f=SubirFoto();
-                              Provider.of<General>(context).foto =
-                                  await f.tomarFoto(
-                                      Provider.of<General>(context).nombre +
-                                          "_foto");
+                              String foto=await f.tomarFoto(
+                                  Provider.of<General>(context).nombre +
+                                      "_foto");
+                              print(foto);
                               setState(() {
-                                foto = Provider.of<General>(context).foto;
+                                Provider.of<General>(context).foto =foto;
+                                print(Provider.of<General>(context).foto);
                               });
                             },
                             child: Text(
@@ -126,12 +125,13 @@ class _BaseformulariosState extends State<Baseformularios> {
                             onPressed: () async {
                               //funcion de la camara aqui
                               SubirFoto f= SubirFoto();
-                              Provider.of<General>(context).foto =
+                              String foto =
                                   await f.galeryFoto(
                                       Provider.of<General>(context).nombre +
                                           "_foto");
+                              print(foto);
                               setState(() {
-                                foto = Provider.of<General>(context).foto;
+                                Provider.of<General>(context).foto=foto;
                               });
                             },
                             child: Text(
@@ -194,7 +194,16 @@ class _BaseformulariosState extends State<Baseformularios> {
                 });
                 Navigator.pop(context);
               },
+
             ),
+            ListTile(
+              title: Text("Regresar"),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pop(context);
+              },
+
+            )
 
           ],
         ),

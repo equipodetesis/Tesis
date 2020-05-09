@@ -31,6 +31,17 @@ class Util {
     }
   }
 
+  List<List<DropdownMenuItem>> setitemlist(List listacompleta, List listaseleccionadas) {
+    List<List<DropdownMenuItem>> listaprocesada = List();
+    List<String> list_temp = List();
+    listaprocesada.add(Util().ajustarlistas(listacompleta, List()));
+    listaseleccionadas.forEach((element) {
+      list_temp.add(element);
+      listaprocesada.add(Util().ajustarlistas(listacompleta, list_temp));
+    });
+    return listaprocesada;
+  }
+
   Future<DateTime> selectDate(BuildContext context, DateTime fecha_inicio, DateTime fecha_fin) async {
     final DateTime picked = await showDatePicker(
         context: context,

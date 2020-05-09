@@ -13,7 +13,12 @@ class I_V extends StatefulWidget {
 }
 
 class _I_VState extends State<I_V> {
-  List<String> adicciones = ["Ninguna", "Tabaco", "Alcohol", "Otras"];
+  List<String> adicciones = [
+    "Ninguna",
+    "Tabaco",
+    "Alcohol",
+    "Otras"
+  ];
 
   List<List<DropdownMenuItem>> _items_adicciones = List();
 
@@ -165,7 +170,13 @@ class _I_VState extends State<I_V> {
 
   List<List<DropdownMenuItem>> _items_tegumentario = List();
 
-  List<String> clasificacion_asa = ["1", "2", "3", "4", "5"];
+  List<String> clasificacion_asa = [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5"
+  ];
 
   List<DropdownMenuItem> _items_clasificacion_asa = List();
 
@@ -222,53 +233,43 @@ class _I_VState extends State<I_V> {
     Provider.of<Cirugia>(context, listen: false).clienteid = Provider.of<General>(context, listen: false).pacienteid;
     print(Provider.of<Cirugia>(context, listen: false).adicciones);
     _items_clasificacion_asa = Util().getDropdownMenuItem(clasificacion_asa);
-    Provider.of<Cirugia>(context, listen: false).clasificacion_asa == null ? Provider.of<Cirugia>(context, listen: false).clasificacion_asa = _items_clasificacion_asa.first.value : Provider.of<Cirugia>(context, listen: false).clasificacion_asa;
+    if (Provider.of<Cirugia>(context, listen: false).clasificacion_asa == "") Provider.of<Cirugia>(context, listen: false).clasificacion_asa = _items_clasificacion_asa.first.value;
     _items_craneoforma = Util().getDropdownMenuItem(craneoforma);
-    Provider.of<Cirugia>(context, listen: false).craneo_tipo == null ? Provider.of<Cirugia>(context, listen: false).craneo_tipo = _items_craneoforma.first.value : Provider.of<Cirugia>(context, listen: false).craneo_tipo = _items_craneoforma.first.value;
-    _items_adicciones.addAll(setitemlist(adicciones, Provider.of<Cirugia>(context, listen: false).adicciones));
+    if (Provider.of<Cirugia>(context, listen: false).craneo_tipo == "") Provider.of<Cirugia>(context, listen: false).craneo_tipo = _items_craneoforma.first.value;
+    _items_adicciones.addAll(Util().setitemlist(adicciones, Provider.of<Cirugia>(context, listen: false).adicciones));
     Provider.of<Cirugia>(context, listen: false).adicciones.add(_items_adicciones.last.first.value);
-    _items_alergias.addAll(setitemlist(alergias, Provider.of<Cirugia>(context, listen: false).alergias));
+    _items_alergias.addAll(Util().setitemlist(alergias, Provider.of<Cirugia>(context, listen: false).alergias));
     Provider.of<Cirugia>(context, listen: false).alergias.add(_items_alergias.last.first.value);
-    _items_digestivo.addAll(setitemlist(digestivo, Provider.of<Cirugia>(context, listen: false).digestivo));
+    _items_digestivo.addAll(Util().setitemlist(digestivo, Provider.of<Cirugia>(context, listen: false).digestivo));
     Provider.of<Cirugia>(context, listen: false).digestivo.add(_items_digestivo.last.first.value);
-    _items_respiratorio.addAll(setitemlist(respiratorio, Provider.of<Cirugia>(context, listen: false).respiratorio));
+    _items_respiratorio.addAll(Util().setitemlist(respiratorio, Provider.of<Cirugia>(context, listen: false).respiratorio));
     Provider.of<Cirugia>(context, listen: false).respiratorio.add(_items_respiratorio.last.first.value);
-    _items_cardiovascular.addAll(setitemlist(cardiovascular, Provider.of<Cirugia>(context, listen: false).cardiovascular));
+    _items_cardiovascular.addAll(Util().setitemlist(cardiovascular, Provider.of<Cirugia>(context, listen: false).cardiovascular));
     Provider.of<Cirugia>(context, listen: false).cardiovascular.add(_items_cardiovascular.last.first.value);
-    _items_genitourinario.addAll(setitemlist(genitourinario, Provider.of<Cirugia>(context, listen: false).genitourinario));
+    _items_genitourinario.addAll(Util().setitemlist(genitourinario, Provider.of<Cirugia>(context, listen: false).genitourinario));
     Provider.of<Cirugia>(context, listen: false).genitourinario.add(_items_genitourinario.last.first.value);
-    _items_endocrino.addAll(setitemlist(endocrino, Provider.of<Cirugia>(context, listen: false).endocrino));
+    _items_endocrino.addAll(Util().setitemlist(endocrino, Provider.of<Cirugia>(context, listen: false).endocrino));
     Provider.of<Cirugia>(context, listen: false).endocrino.add(_items_endocrino.last.first.value);
-    _items_hematologicos.addAll(setitemlist(hematologicos, Provider.of<Cirugia>(context, listen: false).hematologico));
+    _items_hematologicos.addAll(Util().setitemlist(hematologicos, Provider.of<Cirugia>(context, listen: false).hematologico));
     Provider.of<Cirugia>(context, listen: false).hematologico.add(_items_hematologicos.last.first.value);
-    _items_neurologico.addAll(setitemlist(neurologico, Provider.of<Cirugia>(context, listen: false).neurologico));
+    _items_neurologico.addAll(Util().setitemlist(neurologico, Provider.of<Cirugia>(context, listen: false).neurologico));
     Provider.of<Cirugia>(context, listen: false).neurologico.add(_items_neurologico.last.first.value);
-    _items_musculo_esqueleto.addAll(setitemlist(musculo_esqueleto, Provider.of<Cirugia>(context, listen: false).musculo_esqueleto));
+    _items_musculo_esqueleto.addAll(Util().setitemlist(musculo_esqueleto, Provider.of<Cirugia>(context, listen: false).musculo_esqueleto));
     Provider.of<Cirugia>(context, listen: false).musculo_esqueleto.add(_items_musculo_esqueleto.last.first.value);
-    _items_inmunologico.addAll(setitemlist(inmunologico, Provider.of<Cirugia>(context, listen: false).inmunologico));
+    _items_inmunologico.addAll(Util().setitemlist(inmunologico, Provider.of<Cirugia>(context, listen: false).inmunologico));
     Provider.of<Cirugia>(context, listen: false).inmunologico.add(_items_inmunologico.last.first.value);
-    _items_tegumentario.addAll(setitemlist(tegumentario, Provider.of<Cirugia>(context, listen: false).tegumentario));
+    _items_tegumentario.addAll(Util().setitemlist(tegumentario, Provider.of<Cirugia>(context, listen: false).tegumentario));
     Provider.of<Cirugia>(context, listen: false).tegumentario.add(_items_tegumentario.last.first.value);
-    _items_temporomandibular.addAll(setitemlist(temporomandibular, Provider.of<Cirugia>(context, listen: false).temporomandibular));
+    _items_temporomandibular.addAll(Util().setitemlist(temporomandibular, Provider.of<Cirugia>(context, listen: false).temporomandibular));
     Provider.of<Cirugia>(context, listen: false).temporomandibular.add(_items_temporomandibular.last.first.value);
-    _items_radiografia.addAll(setitemlist(radiografia, Provider.of<Cirugia>(context, listen: false).radiografia));
+    _items_radiografia.addAll(Util().setitemlist(radiografia, Provider.of<Cirugia>(context, listen: false).radiografia));
     Provider.of<Cirugia>(context, listen: false).radiografia.add(_items_radiografia.last.first.value);
-    _items_analisis_laboratorio.addAll(setitemlist(analisis_laboratorio, Provider.of<Cirugia>(context, listen: false).analisis_laboratorio));
+    _items_analisis_laboratorio.addAll(Util().setitemlist(analisis_laboratorio, Provider.of<Cirugia>(context, listen: false).analisis_laboratorio));
     Provider.of<Cirugia>(context, listen: false).analisis_laboratorio.add(_items_analisis_laboratorio.last.first.value);
     // TODO: implement initState
     super.initState();
   }
 
-  List<List<DropdownMenuItem>> setitemlist(List listacompleta, List listaseleccionadas){
-    List<List<DropdownMenuItem>> listaprocesada = List();
-    List<String> list_temp = List();
-    listaprocesada.add(Util().ajustarlistas(listacompleta, List()));
-    listaseleccionadas.forEach((element) {
-      list_temp.add(element);
-      listaprocesada.add(Util().ajustarlistas(listacompleta, list_temp));
-    });
-    return listaprocesada;
-  }
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -313,8 +314,7 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               initialValue: Provider.of<Cirugia>(context).antec_pato_madre,
-              decoration: InputDecoration(
-                  labelText: "Madre", icon: Icon(FontAwesomeIcons.female)),
+              decoration: InputDecoration(labelText: "Madre", icon: Icon(FontAwesomeIcons.female)),
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).antec_pato_madre = value;
@@ -327,14 +327,11 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               initialValue: Provider.of<Cirugia>(context).antec_pato_abuelama,
-              decoration: InputDecoration(
-                  labelText: "Abuela materna",
-                  icon: Icon(FontAwesomeIcons.female)),
+              decoration: InputDecoration(labelText: "Abuela materna", icon: Icon(FontAwesomeIcons.female)),
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).antec_pato_abuelama = value;
                 Provider.of<Cirugia>(context).cambiado = true;
-
               },
             ),
           ),
@@ -342,9 +339,7 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               initialValue: Provider.of<Cirugia>(context).antec_pato_abueloma,
-              decoration: InputDecoration(
-                  labelText: "Abuelo materno",
-                  icon: Icon(FontAwesomeIcons.male)),
+              decoration: InputDecoration(labelText: "Abuelo materno", icon: Icon(FontAwesomeIcons.male)),
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).antec_pato_abueloma = value;
@@ -356,8 +351,7 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               initialValue: Provider.of<Cirugia>(context).antec_pato_padre,
-              decoration: InputDecoration(
-                  labelText: "Padre", icon: Icon(FontAwesomeIcons.male)),
+              decoration: InputDecoration(labelText: "Padre", icon: Icon(FontAwesomeIcons.male)),
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).antec_pato_padre = value;
@@ -369,9 +363,7 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               initialValue: Provider.of<Cirugia>(context).antec_pato_abuelopa,
-              decoration: InputDecoration(
-                  labelText: "Abuelo paterno",
-                  icon: Icon(FontAwesomeIcons.male)),
+              decoration: InputDecoration(labelText: "Abuelo paterno", icon: Icon(FontAwesomeIcons.male)),
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).antec_pato_abuelopa = value;
@@ -383,14 +375,11 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               initialValue: Provider.of<Cirugia>(context).antec_pato_abuelapa,
-              decoration: InputDecoration(
-                  labelText: "abuela paterna",
-                  icon: Icon(FontAwesomeIcons.female)),
+              decoration: InputDecoration(labelText: "abuela paterna", icon: Icon(FontAwesomeIcons.female)),
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).antec_pato_abuelapa = value;
                 Provider.of<Cirugia>(context).cambiado = true;
-
               },
             ),
           ),
@@ -411,9 +400,7 @@ class _I_VState extends State<I_V> {
                   margin: EdgeInsets.all(10),
                   child: TextFormField(
                     initialValue: Provider.of<Cirugia>(context).grupo_sanguineo,
-                    decoration: InputDecoration(
-                        labelText: "Grupo sanguineo",
-                        icon: Icon(FontAwesomeIcons.tint)),
+                    decoration: InputDecoration(labelText: "Grupo sanguineo", icon: Icon(FontAwesomeIcons.tint)),
                     keyboardType: TextInputType.text,
                     onChanged: (value) {
                       Provider.of<Cirugia>(context).grupo_sanguineo = value;
@@ -427,9 +414,7 @@ class _I_VState extends State<I_V> {
                   margin: EdgeInsets.all(10),
                   child: TextFormField(
                     initialValue: Provider.of<Cirugia>(context).factor_rh,
-                    decoration: InputDecoration(
-                        labelText: "Factor Rh",
-                        icon: Icon(FontAwesomeIcons.tint)),
+                    decoration: InputDecoration(labelText: "Factor Rh", icon: Icon(FontAwesomeIcons.tint)),
                     keyboardType: TextInputType.text,
                     onChanged: (value) {
                       Provider.of<Cirugia>(context).factor_rh = value;
@@ -444,9 +429,7 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               initialValue: Provider.of<Cirugia>(context).inmunizaciones_infancia,
-              decoration: InputDecoration(
-                  labelText: "Inmunizaciones infancia",
-                  icon: Icon(FontAwesomeIcons.baby)),
+              decoration: InputDecoration(labelText: "Inmunizaciones infancia", icon: Icon(FontAwesomeIcons.baby)),
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).inmunizaciones_infancia = value;
@@ -458,14 +441,12 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               initialValue: Provider.of<Cirugia>(context).inmunizaciones_adulto,
-              decoration: InputDecoration(
-                  labelText: "inmunizaciones adulto",
-                  icon: Icon(FontAwesomeIcons.male)),
+              decoration: InputDecoration(labelText: "inmunizaciones adulto", icon: Icon(FontAwesomeIcons.male)),
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).inmunizaciones_adulto = value;
                 Provider.of<Cirugia>(context).cambiado = true;
-                },
+              },
             ),
           ),
           Container(
@@ -475,92 +456,86 @@ class _I_VState extends State<I_V> {
           ),
           Column(
               children: Provider.of<Cirugia>(context).adicciones.map((value) {
-                return Column(
+            return Column(
+              children: <Widget>[
+                Row(
                   children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Container(
-                          child: Icon(FontAwesomeIcons.appleAlt),
-                          margin: EdgeInsets.all(10),
-                        ),
-                        Expanded(
-                          child: Container(
-                            margin: EdgeInsets.all(1),
-                            child: DropdownButton(
-                              isExpanded: true,
-                              disabledHint: Text(Provider.of<Cirugia>(context).adicciones[Provider.of<Cirugia>(context).adicciones.indexOf(value)]),
-                              items: _items_adicciones[Provider.of<Cirugia>(context).adicciones.indexOf(value)] == _items_adicciones.last ?
-                              _items_adicciones[Provider.of<Cirugia>(context).adicciones.indexOf(value)]:
-                              null,
-                              value: Provider.of<Cirugia>(context).adicciones[
-                              Provider.of<Cirugia>(context).adicciones.indexOf(value)],
-                              onChanged: (value2) {
-                                setState(() {
-                                  Provider.of<Cirugia>(context).adicciones[
-                                  Provider.of<Cirugia>(context).adicciones.indexOf(value)] = value2;
-                                  Provider.of<Cirugia>(context).cambiado = true;
-                                });
-                              },
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Provider.of<Cirugia>(context).adicciones[Provider.of<Cirugia>(context).adicciones.indexOf(value)] == adicciones.last
-                        ? Container(
+                    Container(
+                      child: Icon(FontAwesomeIcons.appleAlt),
                       margin: EdgeInsets.all(10),
-                      child: TextFormField(
-                        initialValue: Provider.of<Cirugia>(context).otra_adiccion,
-                        decoration: InputDecoration(
-                            labelText: "Otra Adiccion",
-                            icon: Icon(
-                              FontAwesomeIcons.appleAlt,
-                              color: Colors.blue,
-                            ),
-                            labelStyle: TextStyle(color: Colors.blue)),
-                        keyboardType: TextInputType.text,
-                        onChanged: (value) {
-                          Provider.of<Cirugia>(context).otra_adiccion = value;
-                          Provider.of<Cirugia>(context).cambiado = true;
-                        },
+                    ),
+                    Expanded(
+                      child: Container(
+                        margin: EdgeInsets.all(1),
+                        child: DropdownButton(
+                          isExpanded: true,
+                          disabledHint: Text(Provider.of<Cirugia>(context).adicciones[Provider.of<Cirugia>(context).adicciones.indexOf(value)]),
+                          items: _items_adicciones[Provider.of<Cirugia>(context).adicciones.indexOf(value)] == _items_adicciones.last ? _items_adicciones[Provider.of<Cirugia>(context).adicciones.indexOf(value)] : null,
+                          value: Provider.of<Cirugia>(context).adicciones[Provider.of<Cirugia>(context).adicciones.indexOf(value)],
+                          onChanged: (value2) {
+                            setState(() {
+                              Provider.of<Cirugia>(context).adicciones[Provider.of<Cirugia>(context).adicciones.indexOf(value)] = value2;
+                              Provider.of<Cirugia>(context).cambiado = true;
+                            });
+                          },
+                        ),
                       ),
-                    )
-                        : Container(),
+                    ),
                   ],
-                );
-              }).toList()),
+                ),
+                Provider.of<Cirugia>(context).adicciones[Provider.of<Cirugia>(context).adicciones.indexOf(value)] == adicciones.last
+                    ? Container(
+                        margin: EdgeInsets.all(10),
+                        child: TextFormField(
+                          initialValue: Provider.of<Cirugia>(context).otra_adiccion,
+                          decoration: InputDecoration(
+                              labelText: "Otra Adiccion",
+                              icon: Icon(
+                                FontAwesomeIcons.appleAlt,
+                                color: Colors.blue,
+                              ),
+                              labelStyle: TextStyle(color: Colors.blue)),
+                          keyboardType: TextInputType.text,
+                          onChanged: (value) {
+                            Provider.of<Cirugia>(context).otra_adiccion = value;
+                            Provider.of<Cirugia>(context).cambiado = true;
+                          },
+                        ),
+                      )
+                    : Container(),
+              ],
+            );
+          }).toList()),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Provider.of<Cirugia>(context).adicciones.last != adicciones.first && adicciones.last.length > 2
                   ? FlatButton(
-                child: Text(
-                  "Añadir",
-                  style: TextStyle(color: Colors.blue),
-                ),
-                onPressed: () {
-                  setState(() {
-                    _items_adicciones.add(Util()
-                        .ajustarlistas(adicciones, Provider.of<Cirugia>(context).adicciones));
-                    Provider.of<Cirugia>(context).adicciones
-                        .add(_items_adicciones.last.first.value);
-                  });
-                },
-              )
+                      child: Text(
+                        "Añadir",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _items_adicciones.add(Util().ajustarlistas(adicciones, Provider.of<Cirugia>(context).adicciones));
+                          Provider.of<Cirugia>(context).adicciones.add(_items_adicciones.last.first.value);
+                        });
+                      },
+                    )
                   : Container(),
               Provider.of<Cirugia>(context).adicciones.length > 1
                   ? FlatButton(
-                child: Text(
-                  "Eliminar",
-                  style: TextStyle(color: Colors.blue),
-                ),
-                onPressed: () {
-                  setState(() {
-                    Provider.of<Cirugia>(context).adicciones.removeLast();
-                    _items_adicciones.removeLast();
-                  });
-                },
-              )
+                      child: Text(
+                        "Eliminar",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          Provider.of<Cirugia>(context).adicciones.removeLast();
+                          _items_adicciones.removeLast();
+                        });
+                      },
+                    )
                   : Container(),
             ],
           ),
@@ -568,9 +543,7 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               initialValue: Provider.of<Cirugia>(context).regimen_alimenticio,
-              decoration: InputDecoration(
-                  labelText: "Regimen alimenticio",
-                  icon: Icon(FontAwesomeIcons.hamburger)),
+              decoration: InputDecoration(labelText: "Regimen alimenticio", icon: Icon(FontAwesomeIcons.hamburger)),
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).regimen_alimenticio = value;
@@ -582,9 +555,7 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               initialValue: Provider.of<Cirugia>(context).condiciones_habitacionales,
-              decoration: InputDecoration(
-                  labelText: "Condiciones habitacionales",
-                  icon: Icon(FontAwesomeIcons.houzz)),
+              decoration: InputDecoration(labelText: "Condiciones habitacionales", icon: Icon(FontAwesomeIcons.houzz)),
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).condiciones_habitacionales = value;
@@ -601,9 +572,7 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               initialValue: Provider.of<Cirugia>(context).enfermedades_infancia,
-              decoration: InputDecoration(
-                  labelText: "Enfermedades propias de la infancias",
-                  icon: Icon(FontAwesomeIcons.baby)),
+              decoration: InputDecoration(labelText: "Enfermedades propias de la infancias", icon: Icon(FontAwesomeIcons.baby)),
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).enfermedades_infancia = value;
@@ -615,9 +584,7 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               initialValue: Provider.of<Cirugia>(context).antecedentes_traumaticos,
-              decoration: InputDecoration(
-                  labelText: "Antecedentes traumaticos",
-                  icon: Icon(FontAwesomeIcons.userInjured)),
+              decoration: InputDecoration(labelText: "Antecedentes traumaticos", icon: Icon(FontAwesomeIcons.userInjured)),
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).antecedentes_traumaticos = value;
@@ -629,9 +596,7 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               initialValue: Provider.of<Cirugia>(context).antecedentes_quirurgicos,
-              decoration: InputDecoration(
-                  labelText: "Antecedentes quirurgicos",
-                  icon: Icon(FontAwesomeIcons.userMd)),
+              decoration: InputDecoration(labelText: "Antecedentes quirurgicos", icon: Icon(FontAwesomeIcons.userMd)),
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).antecedentes_quirurgicos = value;
@@ -660,15 +625,11 @@ class _I_VState extends State<I_V> {
                         child: DropdownButton(
                           isExpanded: true,
                           disabledHint: Text(Provider.of<Cirugia>(context).alergias[Provider.of<Cirugia>(context).alergias.indexOf(value)]),
-                          items: _items_alergias[Provider.of<Cirugia>(context).alergias.indexOf(value)] == _items_alergias.last ?
-                          _items_alergias[Provider.of<Cirugia>(context).alergias.indexOf(value)]:
-                          null,
-                          value: Provider.of<Cirugia>(context).alergias[
-                              Provider.of<Cirugia>(context).alergias.indexOf(value)],
+                          items: _items_alergias[Provider.of<Cirugia>(context).alergias.indexOf(value)] == _items_alergias.last ? _items_alergias[Provider.of<Cirugia>(context).alergias.indexOf(value)] : null,
+                          value: Provider.of<Cirugia>(context).alergias[Provider.of<Cirugia>(context).alergias.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
-                              Provider.of<Cirugia>(context).alergias[
-                                  Provider.of<Cirugia>(context).alergias.indexOf(value)] = value2;
+                              Provider.of<Cirugia>(context).alergias[Provider.of<Cirugia>(context).alergias.indexOf(value)] = value2;
                               Provider.of<Cirugia>(context).cambiado = true;
                             });
                           },
@@ -705,33 +666,31 @@ class _I_VState extends State<I_V> {
             children: <Widget>[
               Provider.of<Cirugia>(context).alergias.last != alergias.first && alergias.last.length > 2
                   ? FlatButton(
-                child: Text(
-                  "Añadir",
-                  style: TextStyle(color: Colors.blue),
-                ),
-                onPressed: () {
-                  setState(() {
-                    _items_alergias.add(Util()
-                        .ajustarlistas(alergias, Provider.of<Cirugia>(context).alergias));
-                    Provider.of<Cirugia>(context).alergias
-                        .add(_items_alergias.last.first.value);
-                  });
-                },
-              )
+                      child: Text(
+                        "Añadir",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _items_alergias.add(Util().ajustarlistas(alergias, Provider.of<Cirugia>(context).alergias));
+                          Provider.of<Cirugia>(context).alergias.add(_items_alergias.last.first.value);
+                        });
+                      },
+                    )
                   : Container(),
               Provider.of<Cirugia>(context).alergias.length > 1
                   ? FlatButton(
-                child: Text(
-                  "Eliminar",
-                  style: TextStyle(color: Colors.blue),
-                ),
-                onPressed: () {
-                  setState(() {
-                    Provider.of<Cirugia>(context).alergias.removeLast();
-                    _items_alergias.removeLast();
-                  });
-                },
-              )
+                      child: Text(
+                        "Eliminar",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          Provider.of<Cirugia>(context).alergias.removeLast();
+                          _items_alergias.removeLast();
+                        });
+                      },
+                    )
                   : Container(),
             ],
           ),
@@ -739,9 +698,7 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               initialValue: Provider.of<Cirugia>(context).transfuciones,
-              decoration: InputDecoration(
-                  labelText: "transfusiones",
-                  icon: Icon(FontAwesomeIcons.vials)),
+              decoration: InputDecoration(labelText: "transfusiones", icon: Icon(FontAwesomeIcons.vials)),
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).transfuciones = value;
@@ -753,9 +710,7 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               initialValue: Provider.of<Cirugia>(context).radio_quimioterapia,
-              decoration: InputDecoration(
-                  labelText: "¿Ha recibido radioterapia y/o quimioterapia",
-                  icon: Icon(FontAwesomeIcons.radiationAlt)),
+              decoration: InputDecoration(labelText: "¿Ha recibido radioterapia y/o quimioterapia", icon: Icon(FontAwesomeIcons.radiationAlt)),
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).radio_quimioterapia = value;
@@ -767,9 +722,7 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               initialValue: Provider.of<Cirugia>(context).experiencia_anestesia,
-              decoration: InputDecoration(
-                  labelText: "Experiencia previa con anestesia",
-                  icon: Icon(FontAwesomeIcons.syringe)),
+              decoration: InputDecoration(labelText: "Experiencia previa con anestesia", icon: Icon(FontAwesomeIcons.syringe)),
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).experiencia_anestesia = value;
@@ -807,11 +760,8 @@ class _I_VState extends State<I_V> {
                         child: DropdownButton(
                           isExpanded: true,
                           disabledHint: Text(Provider.of<Cirugia>(context).digestivo[Provider.of<Cirugia>(context).digestivo.indexOf(value)]),
-                          items: _items_digestivo[Provider.of<Cirugia>(context).digestivo.indexOf(value)] == _items_digestivo.last ?
-                          _items_digestivo[Provider.of<Cirugia>(context).digestivo.indexOf(value)]:
-                          null,
-                          value: Provider.of<Cirugia>(context).digestivo[
-                              Provider.of<Cirugia>(context).digestivo.indexOf(value)],
+                          items: _items_digestivo[Provider.of<Cirugia>(context).digestivo.indexOf(value)] == _items_digestivo.last ? _items_digestivo[Provider.of<Cirugia>(context).digestivo.indexOf(value)] : null,
+                          value: Provider.of<Cirugia>(context).digestivo[Provider.of<Cirugia>(context).digestivo.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
                               Provider.of<Cirugia>(context).digestivo[Provider.of<Cirugia>(context).digestivo.indexOf(value)] = value2;
@@ -848,52 +798,48 @@ class _I_VState extends State<I_V> {
           }).toList()),
           Provider.of<Cirugia>(context).digestivo.first != digestivo.first
               ? Container(
-            margin: EdgeInsets.all(10),
-            child: TextFormField(
-              initialValue: Provider.of<Cirugia>(context).tratamiento_digestivo,
-              decoration: InputDecoration(
-                  labelText: "Tratamiento",
-                  icon: Icon(FontAwesomeIcons.pills)),
-              keyboardType: TextInputType.text,
-              onChanged: (value) {
-                Provider.of<Cirugia>(context).tratamiento_digestivo = value;
-                Provider.of<Cirugia>(context).cambiado = true;
-              },
-            ),
-          )
+                  margin: EdgeInsets.all(10),
+                  child: TextFormField(
+                    initialValue: Provider.of<Cirugia>(context).tratamiento_digestivo,
+                    decoration: InputDecoration(labelText: "Tratamiento", icon: Icon(FontAwesomeIcons.pills)),
+                    keyboardType: TextInputType.text,
+                    onChanged: (value) {
+                      Provider.of<Cirugia>(context).tratamiento_digestivo = value;
+                      Provider.of<Cirugia>(context).cambiado = true;
+                    },
+                  ),
+                )
               : Container(),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Provider.of<Cirugia>(context).digestivo.last != digestivo.first && digestivo.last.length > 2
                   ? FlatButton(
-                child: Text(
-                  "Añadir",
-                  style: TextStyle(color: Colors.blue),
-                ),
-                onPressed: () {
-                  setState(() {
-                    _items_digestivo.add(Util()
-                        .ajustarlistas(digestivo, Provider.of<Cirugia>(context).digestivo));
-                    Provider.of<Cirugia>(context).digestivo
-                        .add(_items_digestivo.last.first.value);
-                  });
-                },
-              )
+                      child: Text(
+                        "Añadir",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _items_digestivo.add(Util().ajustarlistas(digestivo, Provider.of<Cirugia>(context).digestivo));
+                          Provider.of<Cirugia>(context).digestivo.add(_items_digestivo.last.first.value);
+                        });
+                      },
+                    )
                   : Container(),
               Provider.of<Cirugia>(context).digestivo.length > 1
                   ? FlatButton(
-                child: Text(
-                  "Eliminar",
-                  style: TextStyle(color: Colors.blue),
-                ),
-                onPressed: () {
-                  setState(() {
-                    Provider.of<Cirugia>(context).digestivo.removeLast();
-                    _items_digestivo.removeLast();
-                  });
-                },
-              )
+                      child: Text(
+                        "Eliminar",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          Provider.of<Cirugia>(context).digestivo.removeLast();
+                          _items_digestivo.removeLast();
+                        });
+                      },
+                    )
                   : Container(),
             ],
           ),
@@ -918,15 +864,11 @@ class _I_VState extends State<I_V> {
                         child: DropdownButton(
                           isExpanded: true,
                           disabledHint: Text(Provider.of<Cirugia>(context).respiratorio[Provider.of<Cirugia>(context).respiratorio.indexOf(value)]),
-                          items: _items_respiratorio[Provider.of<Cirugia>(context).respiratorio.indexOf(value)] == _items_respiratorio.last ?
-                          _items_respiratorio[Provider.of<Cirugia>(context).respiratorio.indexOf(value)]:
-                          null,
-                          value: Provider.of<Cirugia>(context).respiratorio[
-                              Provider.of<Cirugia>(context).respiratorio.indexOf(value)],
+                          items: _items_respiratorio[Provider.of<Cirugia>(context).respiratorio.indexOf(value)] == _items_respiratorio.last ? _items_respiratorio[Provider.of<Cirugia>(context).respiratorio.indexOf(value)] : null,
+                          value: Provider.of<Cirugia>(context).respiratorio[Provider.of<Cirugia>(context).respiratorio.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
-                              Provider.of<Cirugia>(context).respiratorio[Provider.of<Cirugia>(context).respiratorio
-                                  .indexOf(value)] = value2;
+                              Provider.of<Cirugia>(context).respiratorio[Provider.of<Cirugia>(context).respiratorio.indexOf(value)] = value2;
                               Provider.of<Cirugia>(context).cambiado = true;
                             });
                           },
@@ -957,56 +899,51 @@ class _I_VState extends State<I_V> {
                     : Container(),
               ],
             );
-          }).toList()
-          ),
+          }).toList()),
           Provider.of<Cirugia>(context).respiratorio.first != respiratorio.first
               ? Container(
-            margin: EdgeInsets.all(10),
-            child: TextFormField(
-              initialValue: Provider.of<Cirugia>(context).tratamiento_respiratorio,
-              decoration: InputDecoration(
-                  labelText: "Tratamiento",
-                  icon: Icon(FontAwesomeIcons.pills)),
-              keyboardType: TextInputType.text,
-              onChanged: (value) {
-                Provider.of<Cirugia>(context).tratamiento_respiratorio = value;
-                Provider.of<Cirugia>(context).cambiado = true;
-              },
-            ),
-          )
+                  margin: EdgeInsets.all(10),
+                  child: TextFormField(
+                    initialValue: Provider.of<Cirugia>(context).tratamiento_respiratorio,
+                    decoration: InputDecoration(labelText: "Tratamiento", icon: Icon(FontAwesomeIcons.pills)),
+                    keyboardType: TextInputType.text,
+                    onChanged: (value) {
+                      Provider.of<Cirugia>(context).tratamiento_respiratorio = value;
+                      Provider.of<Cirugia>(context).cambiado = true;
+                    },
+                  ),
+                )
               : Container(),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Provider.of<Cirugia>(context).respiratorio.last != respiratorio.first && respiratorio.last.length > 2
                   ? FlatButton(
-                child: Text(
-                  "Añadir",
-                  style: TextStyle(color: Colors.blue),
-                ),
-                onPressed: () {
-                  setState(() {
-                    _items_respiratorio.add(Util()
-                        .ajustarlistas(respiratorio, Provider.of<Cirugia>(context).respiratorio));
-                    Provider.of<Cirugia>(context).respiratorio
-                        .add(_items_respiratorio.last.first.value);
-                  });
-                },
-              )
+                      child: Text(
+                        "Añadir",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _items_respiratorio.add(Util().ajustarlistas(respiratorio, Provider.of<Cirugia>(context).respiratorio));
+                          Provider.of<Cirugia>(context).respiratorio.add(_items_respiratorio.last.first.value);
+                        });
+                      },
+                    )
                   : Container(),
               Provider.of<Cirugia>(context).respiratorio.length > 1
                   ? FlatButton(
-                child: Text(
-                  "Eliminar",
-                  style: TextStyle(color: Colors.blue),
-                ),
-                onPressed: () {
-                  setState(() {
-                    Provider.of<Cirugia>(context).respiratorio.removeLast();
-                    _items_respiratorio.removeLast();
-                  });
-                },
-              )
+                      child: Text(
+                        "Eliminar",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          Provider.of<Cirugia>(context).respiratorio.removeLast();
+                          _items_respiratorio.removeLast();
+                        });
+                      },
+                    )
                   : Container(),
             ],
           ),
@@ -1031,15 +968,11 @@ class _I_VState extends State<I_V> {
                         child: DropdownButton(
                           isExpanded: true,
                           disabledHint: Text(Provider.of<Cirugia>(context).cardiovascular[Provider.of<Cirugia>(context).cardiovascular.indexOf(value)]),
-                          items: _items_cardiovascular[Provider.of<Cirugia>(context).cardiovascular.indexOf(value)] == _items_cardiovascular.last ?
-                          _items_cardiovascular[Provider.of<Cirugia>(context).cardiovascular.indexOf(value)]:
-                          null,
-                          value: Provider.of<Cirugia>(context).cardiovascular[
-                              Provider.of<Cirugia>(context).cardiovascular.indexOf(value)],
+                          items: _items_cardiovascular[Provider.of<Cirugia>(context).cardiovascular.indexOf(value)] == _items_cardiovascular.last ? _items_cardiovascular[Provider.of<Cirugia>(context).cardiovascular.indexOf(value)] : null,
+                          value: Provider.of<Cirugia>(context).cardiovascular[Provider.of<Cirugia>(context).cardiovascular.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
-                              Provider.of<Cirugia>(context).cardiovascular[Provider.of<Cirugia>(context).cardiovascular
-                                  .indexOf(value)] = value2;
+                              Provider.of<Cirugia>(context).cardiovascular[Provider.of<Cirugia>(context).cardiovascular.indexOf(value)] = value2;
                               Provider.of<Cirugia>(context).cambiado = true;
                             });
                           },
@@ -1073,52 +1006,48 @@ class _I_VState extends State<I_V> {
           }).toList()),
           Provider.of<Cirugia>(context).cardiovascular.first != cardiovascular.first
               ? Container(
-            margin: EdgeInsets.all(10),
-            child: TextFormField(
-              initialValue: Provider.of<Cirugia>(context).tratamiento_cardiovascular,
-              decoration: InputDecoration(
-                  labelText: "Tratamiento",
-                  icon: Icon(FontAwesomeIcons.pills)),
-              keyboardType: TextInputType.text,
-              onChanged: (value) {
-                Provider.of<Cirugia>(context).tratamiento_cardiovascular = value;
-                Provider.of<Cirugia>(context).cambiado = true;
-              },
-            ),
-          )
+                  margin: EdgeInsets.all(10),
+                  child: TextFormField(
+                    initialValue: Provider.of<Cirugia>(context).tratamiento_cardiovascular,
+                    decoration: InputDecoration(labelText: "Tratamiento", icon: Icon(FontAwesomeIcons.pills)),
+                    keyboardType: TextInputType.text,
+                    onChanged: (value) {
+                      Provider.of<Cirugia>(context).tratamiento_cardiovascular = value;
+                      Provider.of<Cirugia>(context).cambiado = true;
+                    },
+                  ),
+                )
               : Container(),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Provider.of<Cirugia>(context).cardiovascular.last != cardiovascular.first && cardiovascular.last.length > 2
                   ? FlatButton(
-                child: Text(
-                  "Añadir",
-                  style: TextStyle(color: Colors.blue),
-                ),
-                onPressed: () {
-                  setState(() {
-                    _items_cardiovascular.add(Util()
-                        .ajustarlistas(cardiovascular, Provider.of<Cirugia>(context).cardiovascular));
-                    Provider.of<Cirugia>(context).cardiovascular
-                        .add(_items_cardiovascular.last.first.value);
-                  });
-                },
-              )
+                      child: Text(
+                        "Añadir",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _items_cardiovascular.add(Util().ajustarlistas(cardiovascular, Provider.of<Cirugia>(context).cardiovascular));
+                          Provider.of<Cirugia>(context).cardiovascular.add(_items_cardiovascular.last.first.value);
+                        });
+                      },
+                    )
                   : Container(),
               Provider.of<Cirugia>(context).cardiovascular.length > 1
                   ? FlatButton(
-                child: Text(
-                  "Eliminar",
-                  style: TextStyle(color: Colors.blue),
-                ),
-                onPressed: () {
-                  setState(() {
-                    Provider.of<Cirugia>(context).cardiovascular.removeLast();
-                    _items_cardiovascular.removeLast();
-                  });
-                },
-              )
+                      child: Text(
+                        "Eliminar",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          Provider.of<Cirugia>(context).cardiovascular.removeLast();
+                          _items_cardiovascular.removeLast();
+                        });
+                      },
+                    )
                   : Container(),
             ],
           ),
@@ -1143,15 +1072,11 @@ class _I_VState extends State<I_V> {
                         child: DropdownButton(
                           isExpanded: true,
                           disabledHint: Text(Provider.of<Cirugia>(context).genitourinario[Provider.of<Cirugia>(context).genitourinario.indexOf(value)]),
-                          items: _items_genitourinario[Provider.of<Cirugia>(context).genitourinario.indexOf(value)] == _items_genitourinario.last ?
-                          _items_genitourinario[Provider.of<Cirugia>(context).genitourinario.indexOf(value)]:
-                          null,
-                          value: Provider.of<Cirugia>(context).genitourinario[
-                              Provider.of<Cirugia>(context).genitourinario.indexOf(value)],
+                          items: _items_genitourinario[Provider.of<Cirugia>(context).genitourinario.indexOf(value)] == _items_genitourinario.last ? _items_genitourinario[Provider.of<Cirugia>(context).genitourinario.indexOf(value)] : null,
+                          value: Provider.of<Cirugia>(context).genitourinario[Provider.of<Cirugia>(context).genitourinario.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
-                              Provider.of<Cirugia>(context).genitourinario[Provider.of<Cirugia>(context).genitourinario
-                                  .indexOf(value)] = value2;
+                              Provider.of<Cirugia>(context).genitourinario[Provider.of<Cirugia>(context).genitourinario.indexOf(value)] = value2;
                               Provider.of<Cirugia>(context).cambiado = true;
                             });
                           },
@@ -1185,52 +1110,48 @@ class _I_VState extends State<I_V> {
           }).toList()),
           Provider.of<Cirugia>(context).genitourinario.first != genitourinario.first
               ? Container(
-            margin: EdgeInsets.all(10),
-            child: TextFormField(
-              initialValue: Provider.of<Cirugia>(context).tratamiento_genitourinario,
-              decoration: InputDecoration(
-                  labelText: "Tratamiento",
-                  icon: Icon(FontAwesomeIcons.pills)),
-              keyboardType: TextInputType.text,
-              onChanged: (value) {
-                Provider.of<Cirugia>(context).tratamiento_genitourinario = value;
-                Provider.of<Cirugia>(context).cambiado = true;
-              },
-            ),
-          )
+                  margin: EdgeInsets.all(10),
+                  child: TextFormField(
+                    initialValue: Provider.of<Cirugia>(context).tratamiento_genitourinario,
+                    decoration: InputDecoration(labelText: "Tratamiento", icon: Icon(FontAwesomeIcons.pills)),
+                    keyboardType: TextInputType.text,
+                    onChanged: (value) {
+                      Provider.of<Cirugia>(context).tratamiento_genitourinario = value;
+                      Provider.of<Cirugia>(context).cambiado = true;
+                    },
+                  ),
+                )
               : Container(),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Provider.of<Cirugia>(context).genitourinario.last != genitourinario.first && genitourinario.last.length > 2
                   ? FlatButton(
-                child: Text(
-                  "Añadir",
-                  style: TextStyle(color: Colors.blue),
-                ),
-                onPressed: () {
-                  setState(() {
-                    _items_genitourinario.add(Util()
-                        .ajustarlistas(genitourinario, Provider.of<Cirugia>(context).genitourinario));
-                    Provider.of<Cirugia>(context).genitourinario
-                        .add(_items_genitourinario.last.first.value);
-                  });
-                },
-              )
+                      child: Text(
+                        "Añadir",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _items_genitourinario.add(Util().ajustarlistas(genitourinario, Provider.of<Cirugia>(context).genitourinario));
+                          Provider.of<Cirugia>(context).genitourinario.add(_items_genitourinario.last.first.value);
+                        });
+                      },
+                    )
                   : Container(),
               Provider.of<Cirugia>(context).genitourinario.length > 1
                   ? FlatButton(
-                child: Text(
-                  "Eliminar",
-                  style: TextStyle(color: Colors.blue),
-                ),
-                onPressed: () {
-                  setState(() {
-                    Provider.of<Cirugia>(context).genitourinario.removeLast();
-                    _items_genitourinario.removeLast();
-                  });
-                },
-              )
+                      child: Text(
+                        "Eliminar",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          Provider.of<Cirugia>(context).genitourinario.removeLast();
+                          _items_genitourinario.removeLast();
+                        });
+                      },
+                    )
                   : Container(),
             ],
           ),
@@ -1255,15 +1176,11 @@ class _I_VState extends State<I_V> {
                         child: DropdownButton(
                           isExpanded: true,
                           disabledHint: Text(Provider.of<Cirugia>(context).endocrino[Provider.of<Cirugia>(context).endocrino.indexOf(value)]),
-                          items: _items_endocrino[Provider.of<Cirugia>(context).endocrino.indexOf(value)] == _items_endocrino.last ?
-                          _items_endocrino[Provider.of<Cirugia>(context).endocrino.indexOf(value)]:
-                          null,
-                          value: Provider.of<Cirugia>(context).endocrino[
-                              Provider.of<Cirugia>(context).endocrino.indexOf(value)],
+                          items: _items_endocrino[Provider.of<Cirugia>(context).endocrino.indexOf(value)] == _items_endocrino.last ? _items_endocrino[Provider.of<Cirugia>(context).endocrino.indexOf(value)] : null,
+                          value: Provider.of<Cirugia>(context).endocrino[Provider.of<Cirugia>(context).endocrino.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
-                              Provider.of<Cirugia>(context).endocrino[
-                                  Provider.of<Cirugia>(context).endocrino.indexOf(value)] = value2;
+                              Provider.of<Cirugia>(context).endocrino[Provider.of<Cirugia>(context).endocrino.indexOf(value)] = value2;
                               Provider.of<Cirugia>(context).cambiado = true;
                             });
                           },
@@ -1297,52 +1214,48 @@ class _I_VState extends State<I_V> {
           }).toList()),
           Provider.of<Cirugia>(context).endocrino.first != endocrino.first
               ? Container(
-            margin: EdgeInsets.all(10),
-            child: TextFormField(
-              initialValue: Provider.of<Cirugia>(context).tratamiento_endocrino,
-              decoration: InputDecoration(
-                  labelText: "Tratamiento",
-                  icon: Icon(FontAwesomeIcons.pills)),
-              keyboardType: TextInputType.text,
-              onChanged: (value) {
-                Provider.of<Cirugia>(context).tratamiento_endocrino = value;
-                Provider.of<Cirugia>(context).cambiado = true;
-              },
-            ),
-          )
+                  margin: EdgeInsets.all(10),
+                  child: TextFormField(
+                    initialValue: Provider.of<Cirugia>(context).tratamiento_endocrino,
+                    decoration: InputDecoration(labelText: "Tratamiento", icon: Icon(FontAwesomeIcons.pills)),
+                    keyboardType: TextInputType.text,
+                    onChanged: (value) {
+                      Provider.of<Cirugia>(context).tratamiento_endocrino = value;
+                      Provider.of<Cirugia>(context).cambiado = true;
+                    },
+                  ),
+                )
               : Container(),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Provider.of<Cirugia>(context).endocrino.last != endocrino.first && endocrino.last.length > 2
                   ? FlatButton(
-                child: Text(
-                  "Añadir",
-                  style: TextStyle(color: Colors.blue),
-                ),
-                onPressed: () {
-                  setState(() {
-                    _items_endocrino.add(Util()
-                        .ajustarlistas(endocrino, Provider.of<Cirugia>(context).endocrino));
-                    Provider.of<Cirugia>(context).endocrino
-                        .add(_items_endocrino.last.first.value);
-                  });
-                },
-              )
+                      child: Text(
+                        "Añadir",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _items_endocrino.add(Util().ajustarlistas(endocrino, Provider.of<Cirugia>(context).endocrino));
+                          Provider.of<Cirugia>(context).endocrino.add(_items_endocrino.last.first.value);
+                        });
+                      },
+                    )
                   : Container(),
               Provider.of<Cirugia>(context).endocrino.length > 1
                   ? FlatButton(
-                child: Text(
-                  "Eliminar",
-                  style: TextStyle(color: Colors.blue),
-                ),
-                onPressed: () {
-                  setState(() {
-                    Provider.of<Cirugia>(context).endocrino.removeLast();
-                    _items_endocrino.removeLast();
-                  });
-                },
-              )
+                      child: Text(
+                        "Eliminar",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          Provider.of<Cirugia>(context).endocrino.removeLast();
+                          _items_endocrino.removeLast();
+                        });
+                      },
+                    )
                   : Container(),
             ],
           ),
@@ -1367,15 +1280,11 @@ class _I_VState extends State<I_V> {
                         child: DropdownButton(
                           isExpanded: true,
                           disabledHint: Text(Provider.of<Cirugia>(context).hematologico[Provider.of<Cirugia>(context).hematologico.indexOf(value)]),
-                          items: _items_hematologicos[Provider.of<Cirugia>(context).hematologico.indexOf(value)] == _items_hematologicos.last ?
-                          _items_hematologicos[Provider.of<Cirugia>(context).hematologico.indexOf(value)]:
-                          null,
-                          value: Provider.of<Cirugia>(context).hematologico[
-                              Provider.of<Cirugia>(context).hematologico.indexOf(value)],
+                          items: _items_hematologicos[Provider.of<Cirugia>(context).hematologico.indexOf(value)] == _items_hematologicos.last ? _items_hematologicos[Provider.of<Cirugia>(context).hematologico.indexOf(value)] : null,
+                          value: Provider.of<Cirugia>(context).hematologico[Provider.of<Cirugia>(context).hematologico.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
-                              Provider.of<Cirugia>(context).hematologico[Provider.of<Cirugia>(context).hematologico
-                                  .indexOf(value)] = value2;
+                              Provider.of<Cirugia>(context).hematologico[Provider.of<Cirugia>(context).hematologico.indexOf(value)] = value2;
                               Provider.of<Cirugia>(context).cambiado = true;
                             });
                           },
@@ -1409,52 +1318,48 @@ class _I_VState extends State<I_V> {
           }).toList()),
           Provider.of<Cirugia>(context).hematologico.first != hematologicos.first
               ? Container(
-            margin: EdgeInsets.all(10),
-            child: TextFormField(
-              initialValue: Provider.of<Cirugia>(context).tratamiento_hematologico,
-              decoration: InputDecoration(
-                  labelText: "Tratamiento",
-                  icon: Icon(FontAwesomeIcons.pills)),
-              keyboardType: TextInputType.text,
-              onChanged: (value) {
-                Provider.of<Cirugia>(context).tratamiento_hematologico = value;
-                Provider.of<Cirugia>(context).cambiado = true;
-              },
-            ),
-          )
+                  margin: EdgeInsets.all(10),
+                  child: TextFormField(
+                    initialValue: Provider.of<Cirugia>(context).tratamiento_hematologico,
+                    decoration: InputDecoration(labelText: "Tratamiento", icon: Icon(FontAwesomeIcons.pills)),
+                    keyboardType: TextInputType.text,
+                    onChanged: (value) {
+                      Provider.of<Cirugia>(context).tratamiento_hematologico = value;
+                      Provider.of<Cirugia>(context).cambiado = true;
+                    },
+                  ),
+                )
               : Container(),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Provider.of<Cirugia>(context).hematologico.last != hematologicos.first && hematologicos.last.length > 2
                   ? FlatButton(
-                child: Text(
-                  "Añadir",
-                  style: TextStyle(color: Colors.blue),
-                ),
-                onPressed: () {
-                  setState(() {
-                    _items_hematologicos.add(Util()
-                        .ajustarlistas(hematologicos, Provider.of<Cirugia>(context).hematologico));
-                    Provider.of<Cirugia>(context).hematologico
-                        .add(_items_hematologicos.last.first.value);
-                  });
-                },
-              )
+                      child: Text(
+                        "Añadir",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _items_hematologicos.add(Util().ajustarlistas(hematologicos, Provider.of<Cirugia>(context).hematologico));
+                          Provider.of<Cirugia>(context).hematologico.add(_items_hematologicos.last.first.value);
+                        });
+                      },
+                    )
                   : Container(),
               Provider.of<Cirugia>(context).hematologico.length > 1
                   ? FlatButton(
-                child: Text(
-                  "Eliminar",
-                  style: TextStyle(color: Colors.blue),
-                ),
-                onPressed: () {
-                  setState(() {
-                    Provider.of<Cirugia>(context).hematologico.removeLast();
-                    _items_hematologicos.removeLast();
-                  });
-                },
-              )
+                      child: Text(
+                        "Eliminar",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          Provider.of<Cirugia>(context).hematologico.removeLast();
+                          _items_hematologicos.removeLast();
+                        });
+                      },
+                    )
                   : Container(),
             ],
           ),
@@ -1479,15 +1384,11 @@ class _I_VState extends State<I_V> {
                         child: DropdownButton(
                           isExpanded: true,
                           disabledHint: Text(Provider.of<Cirugia>(context).neurologico[Provider.of<Cirugia>(context).neurologico.indexOf(value)]),
-                          items: _items_neurologico[Provider.of<Cirugia>(context).neurologico.indexOf(value)] == _items_neurologico.last ?
-                          _items_neurologico[Provider.of<Cirugia>(context).neurologico.indexOf(value)]:
-                          null,
-                          value: Provider.of<Cirugia>(context).neurologico[
-                              Provider.of<Cirugia>(context).neurologico.indexOf(value)],
+                          items: _items_neurologico[Provider.of<Cirugia>(context).neurologico.indexOf(value)] == _items_neurologico.last ? _items_neurologico[Provider.of<Cirugia>(context).neurologico.indexOf(value)] : null,
+                          value: Provider.of<Cirugia>(context).neurologico[Provider.of<Cirugia>(context).neurologico.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
-                              Provider.of<Cirugia>(context).neurologico[
-                                  Provider.of<Cirugia>(context).neurologico.indexOf(value)] = value2;
+                              Provider.of<Cirugia>(context).neurologico[Provider.of<Cirugia>(context).neurologico.indexOf(value)] = value2;
                               Provider.of<Cirugia>(context).cambiado = true;
                             });
                           },
@@ -1521,52 +1422,48 @@ class _I_VState extends State<I_V> {
           }).toList()),
           Provider.of<Cirugia>(context).neurologico.first != neurologico.first
               ? Container(
-            margin: EdgeInsets.all(10),
-            child: TextFormField(
-              initialValue: Provider.of<Cirugia>(context).tratamiento_neurologico,
-              decoration: InputDecoration(
-                  labelText: "Tratamiento",
-                  icon: Icon(FontAwesomeIcons.pills)),
-              keyboardType: TextInputType.text,
-              onChanged: (value) {
-                Provider.of<Cirugia>(context).tratamiento_neurologico = value;
-                Provider.of<Cirugia>(context).cambiado = true;
-              },
-            ),
-          )
+                  margin: EdgeInsets.all(10),
+                  child: TextFormField(
+                    initialValue: Provider.of<Cirugia>(context).tratamiento_neurologico,
+                    decoration: InputDecoration(labelText: "Tratamiento", icon: Icon(FontAwesomeIcons.pills)),
+                    keyboardType: TextInputType.text,
+                    onChanged: (value) {
+                      Provider.of<Cirugia>(context).tratamiento_neurologico = value;
+                      Provider.of<Cirugia>(context).cambiado = true;
+                    },
+                  ),
+                )
               : Container(),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Provider.of<Cirugia>(context).neurologico.last != neurologico.first && neurologico.last.length > 2
                   ? FlatButton(
-                child: Text(
-                  "Añadir",
-                  style: TextStyle(color: Colors.blue),
-                ),
-                onPressed: () {
-                  setState(() {
-                    _items_neurologico.add(Util()
-                        .ajustarlistas(neurologico, Provider.of<Cirugia>(context).neurologico));
-                    Provider.of<Cirugia>(context).neurologico
-                        .add(_items_neurologico.last.first.value);
-                  });
-                },
-              )
+                      child: Text(
+                        "Añadir",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _items_neurologico.add(Util().ajustarlistas(neurologico, Provider.of<Cirugia>(context).neurologico));
+                          Provider.of<Cirugia>(context).neurologico.add(_items_neurologico.last.first.value);
+                        });
+                      },
+                    )
                   : Container(),
               Provider.of<Cirugia>(context).neurologico.length > 1
                   ? FlatButton(
-                child: Text(
-                  "Eliminar",
-                  style: TextStyle(color: Colors.blue),
-                ),
-                onPressed: () {
-                  setState(() {
-                    Provider.of<Cirugia>(context).neurologico.removeLast();
-                    _items_neurologico.removeLast();
-                  });
-                },
-              )
+                      child: Text(
+                        "Eliminar",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          Provider.of<Cirugia>(context).neurologico.removeLast();
+                          _items_neurologico.removeLast();
+                        });
+                      },
+                    )
                   : Container(),
             ],
           ),
@@ -1591,16 +1488,11 @@ class _I_VState extends State<I_V> {
                         child: DropdownButton(
                           isExpanded: true,
                           disabledHint: Text(Provider.of<Cirugia>(context).musculo_esqueleto[Provider.of<Cirugia>(context).musculo_esqueleto.indexOf(value)]),
-                          items: _items_musculo_esqueleto[Provider.of<Cirugia>(context).musculo_esqueleto.indexOf(value)] == _items_musculo_esqueleto.last ?
-                          _items_musculo_esqueleto[Provider.of<Cirugia>(context).musculo_esqueleto.indexOf(value)]:
-                          null,
-                          value: Provider.of<Cirugia>(context).musculo_esqueleto[
-                              Provider.of<Cirugia>(context).musculo_esqueleto.indexOf(value)],
+                          items: _items_musculo_esqueleto[Provider.of<Cirugia>(context).musculo_esqueleto.indexOf(value)] == _items_musculo_esqueleto.last ? _items_musculo_esqueleto[Provider.of<Cirugia>(context).musculo_esqueleto.indexOf(value)] : null,
+                          value: Provider.of<Cirugia>(context).musculo_esqueleto[Provider.of<Cirugia>(context).musculo_esqueleto.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
-                              Provider.of<Cirugia>(context).musculo_esqueleto[
-                                  Provider.of<Cirugia>(context).musculo_esqueleto
-                                      .indexOf(value)] = value2;
+                              Provider.of<Cirugia>(context).musculo_esqueleto[Provider.of<Cirugia>(context).musculo_esqueleto.indexOf(value)] = value2;
                               Provider.of<Cirugia>(context).cambiado = true;
                             });
                           },
@@ -1609,8 +1501,7 @@ class _I_VState extends State<I_V> {
                     ),
                   ],
                 ),
-                Provider.of<Cirugia>(context).musculo_esqueleto[
-                            Provider.of<Cirugia>(context).musculo_esqueleto.indexOf(value)] == musculo_esqueleto.last
+                Provider.of<Cirugia>(context).musculo_esqueleto[Provider.of<Cirugia>(context).musculo_esqueleto.indexOf(value)] == musculo_esqueleto.last
                     ? Container(
                         margin: EdgeInsets.all(10),
                         child: TextFormField(
@@ -1635,52 +1526,48 @@ class _I_VState extends State<I_V> {
           }).toList()),
           Provider.of<Cirugia>(context).musculo_esqueleto.first != musculo_esqueleto.first
               ? Container(
-            margin: EdgeInsets.all(10),
-            child: TextFormField(
-              initialValue: Provider.of<Cirugia>(context).tratamiento_musculo_esqueleto,
-              decoration: InputDecoration(
-                  labelText: "Tratamiento",
-                  icon: Icon(FontAwesomeIcons.pills)),
-              keyboardType: TextInputType.text,
-              onChanged: (value) {
-                Provider.of<Cirugia>(context).tratamiento_musculo_esqueleto = value;
-                Provider.of<Cirugia>(context).cambiado = true;
-              },
-            ),
-          )
+                  margin: EdgeInsets.all(10),
+                  child: TextFormField(
+                    initialValue: Provider.of<Cirugia>(context).tratamiento_musculo_esqueleto,
+                    decoration: InputDecoration(labelText: "Tratamiento", icon: Icon(FontAwesomeIcons.pills)),
+                    keyboardType: TextInputType.text,
+                    onChanged: (value) {
+                      Provider.of<Cirugia>(context).tratamiento_musculo_esqueleto = value;
+                      Provider.of<Cirugia>(context).cambiado = true;
+                    },
+                  ),
+                )
               : Container(),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Provider.of<Cirugia>(context).musculo_esqueleto.last != musculo_esqueleto.first && musculo_esqueleto.last.length > 2
                   ? FlatButton(
-                child: Text(
-                  "Añadir",
-                  style: TextStyle(color: Colors.blue),
-                ),
-                onPressed: () {
-                  setState(() {
-                    _items_musculo_esqueleto.add(Util()
-                        .ajustarlistas(musculo_esqueleto, Provider.of<Cirugia>(context).musculo_esqueleto));
-                    Provider.of<Cirugia>(context).musculo_esqueleto
-                        .add(_items_musculo_esqueleto.last.first.value);
-                  });
-                },
-              )
+                      child: Text(
+                        "Añadir",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _items_musculo_esqueleto.add(Util().ajustarlistas(musculo_esqueleto, Provider.of<Cirugia>(context).musculo_esqueleto));
+                          Provider.of<Cirugia>(context).musculo_esqueleto.add(_items_musculo_esqueleto.last.first.value);
+                        });
+                      },
+                    )
                   : Container(),
               Provider.of<Cirugia>(context).musculo_esqueleto.length > 1
                   ? FlatButton(
-                child: Text(
-                  "Eliminar",
-                  style: TextStyle(color: Colors.blue),
-                ),
-                onPressed: () {
-                  setState(() {
-                    Provider.of<Cirugia>(context).musculo_esqueleto.removeLast();
-                    _items_musculo_esqueleto.removeLast();
-                  });
-                },
-              )
+                      child: Text(
+                        "Eliminar",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          Provider.of<Cirugia>(context).musculo_esqueleto.removeLast();
+                          _items_musculo_esqueleto.removeLast();
+                        });
+                      },
+                    )
                   : Container(),
             ],
           ),
@@ -1705,15 +1592,11 @@ class _I_VState extends State<I_V> {
                         child: DropdownButton(
                           isExpanded: true,
                           disabledHint: Text(Provider.of<Cirugia>(context).inmunologico[Provider.of<Cirugia>(context).inmunologico.indexOf(value)]),
-                          items: _items_inmunologico[Provider.of<Cirugia>(context).inmunologico.indexOf(value)] == _items_inmunologico.last ?
-                          _items_inmunologico[Provider.of<Cirugia>(context).inmunologico.indexOf(value)]:
-                          null,
-                          value: Provider.of<Cirugia>(context).inmunologico[
-                              Provider.of<Cirugia>(context).inmunologico.indexOf(value)],
+                          items: _items_inmunologico[Provider.of<Cirugia>(context).inmunologico.indexOf(value)] == _items_inmunologico.last ? _items_inmunologico[Provider.of<Cirugia>(context).inmunologico.indexOf(value)] : null,
+                          value: Provider.of<Cirugia>(context).inmunologico[Provider.of<Cirugia>(context).inmunologico.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
-                              Provider.of<Cirugia>(context).inmunologico[Provider.of<Cirugia>(context).inmunologico
-                                  .indexOf(value)] = value2;
+                              Provider.of<Cirugia>(context).inmunologico[Provider.of<Cirugia>(context).inmunologico.indexOf(value)] = value2;
                               Provider.of<Cirugia>(context).cambiado = true;
                             });
                           },
@@ -1747,52 +1630,48 @@ class _I_VState extends State<I_V> {
           }).toList()),
           Provider.of<Cirugia>(context).inmunologico.first != inmunologico.first
               ? Container(
-            margin: EdgeInsets.all(10),
-            child: TextFormField(
-              initialValue: Provider.of<Cirugia>(context).tratamiento_inmunologico,
-              decoration: InputDecoration(
-                  labelText: "Tratamiento",
-                  icon: Icon(FontAwesomeIcons.pills)),
-              keyboardType: TextInputType.text,
-              onChanged: (value) {
-                Provider.of<Cirugia>(context).tratamiento_inmunologico = value;
-                Provider.of<Cirugia>(context).cambiado = true;
-              },
-            ),
-          )
+                  margin: EdgeInsets.all(10),
+                  child: TextFormField(
+                    initialValue: Provider.of<Cirugia>(context).tratamiento_inmunologico,
+                    decoration: InputDecoration(labelText: "Tratamiento", icon: Icon(FontAwesomeIcons.pills)),
+                    keyboardType: TextInputType.text,
+                    onChanged: (value) {
+                      Provider.of<Cirugia>(context).tratamiento_inmunologico = value;
+                      Provider.of<Cirugia>(context).cambiado = true;
+                    },
+                  ),
+                )
               : Container(),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Provider.of<Cirugia>(context).inmunologico.last != inmunologico.first && inmunologico.last.length > 2
                   ? FlatButton(
-                child: Text(
-                  "Añadir",
-                  style: TextStyle(color: Colors.blue),
-                ),
-                onPressed: () {
-                  setState(() {
-                    _items_inmunologico.add(Util()
-                        .ajustarlistas(inmunologico, Provider.of<Cirugia>(context).inmunologico));
-                    Provider.of<Cirugia>(context).inmunologico
-                        .add(_items_inmunologico.last.first.value);
-                  });
-                },
-              )
+                      child: Text(
+                        "Añadir",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _items_inmunologico.add(Util().ajustarlistas(inmunologico, Provider.of<Cirugia>(context).inmunologico));
+                          Provider.of<Cirugia>(context).inmunologico.add(_items_inmunologico.last.first.value);
+                        });
+                      },
+                    )
                   : Container(),
               Provider.of<Cirugia>(context).inmunologico.length > 1
                   ? FlatButton(
-                child: Text(
-                  "Eliminar",
-                  style: TextStyle(color: Colors.blue),
-                ),
-                onPressed: () {
-                  setState(() {
-                    Provider.of<Cirugia>(context).inmunologico.removeLast();
-                    _items_inmunologico.removeLast();
-                  });
-                },
-              )
+                      child: Text(
+                        "Eliminar",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          Provider.of<Cirugia>(context).inmunologico.removeLast();
+                          _items_inmunologico.removeLast();
+                        });
+                      },
+                    )
                   : Container(),
             ],
           ),
@@ -1817,15 +1696,11 @@ class _I_VState extends State<I_V> {
                         child: DropdownButton(
                           isExpanded: true,
                           disabledHint: Text(Provider.of<Cirugia>(context).tegumentario[Provider.of<Cirugia>(context).tegumentario.indexOf(value)]),
-                          items: _items_tegumentario[Provider.of<Cirugia>(context).tegumentario.indexOf(value)] == _items_tegumentario.last ?
-                          _items_tegumentario[Provider.of<Cirugia>(context).tegumentario.indexOf(value)]:
-                          null,
-                          value: Provider.of<Cirugia>(context).tegumentario[
-                              Provider.of<Cirugia>(context).tegumentario.indexOf(value)],
+                          items: _items_tegumentario[Provider.of<Cirugia>(context).tegumentario.indexOf(value)] == _items_tegumentario.last ? _items_tegumentario[Provider.of<Cirugia>(context).tegumentario.indexOf(value)] : null,
+                          value: Provider.of<Cirugia>(context).tegumentario[Provider.of<Cirugia>(context).tegumentario.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
-                              Provider.of<Cirugia>(context).tegumentario[Provider.of<Cirugia>(context).tegumentario
-                                  .indexOf(value)] = value2;
+                              Provider.of<Cirugia>(context).tegumentario[Provider.of<Cirugia>(context).tegumentario.indexOf(value)] = value2;
                               Provider.of<Cirugia>(context).cambiado = true;
                             });
                           },
@@ -1850,7 +1725,7 @@ class _I_VState extends State<I_V> {
                           onChanged: (value) {
                             Provider.of<Cirugia>(context).otra_tegumentario = value;
                             Provider.of<Cirugia>(context).cambiado = true;
-                            },
+                          },
                         ),
                       )
                     : Container(),
@@ -1859,52 +1734,48 @@ class _I_VState extends State<I_V> {
           }).toList()),
           Provider.of<Cirugia>(context).tegumentario.first != tegumentario.first
               ? Container(
-            margin: EdgeInsets.all(10),
-            child: TextFormField(
-              initialValue: Provider.of<Cirugia>(context).tratamiento_tegumentario,
-              decoration: InputDecoration(
-                  labelText: "Tratamiento",
-                  icon: Icon(FontAwesomeIcons.pills)),
-              keyboardType: TextInputType.text,
-              onChanged: (value) {
-                Provider.of<Cirugia>(context).tratamiento_tegumentario = value;
-                Provider.of<Cirugia>(context).cambiado = true;
-              },
-            ),
-          )
+                  margin: EdgeInsets.all(10),
+                  child: TextFormField(
+                    initialValue: Provider.of<Cirugia>(context).tratamiento_tegumentario,
+                    decoration: InputDecoration(labelText: "Tratamiento", icon: Icon(FontAwesomeIcons.pills)),
+                    keyboardType: TextInputType.text,
+                    onChanged: (value) {
+                      Provider.of<Cirugia>(context).tratamiento_tegumentario = value;
+                      Provider.of<Cirugia>(context).cambiado = true;
+                    },
+                  ),
+                )
               : Container(),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Provider.of<Cirugia>(context).tegumentario.last != tegumentario.first && tegumentario.last.length > 2
                   ? FlatButton(
-                child: Text(
-                  "Añadir",
-                  style: TextStyle(color: Colors.blue),
-                ),
-                onPressed: () {
-                  setState(() {
-                    _items_tegumentario.add(Util()
-                        .ajustarlistas(tegumentario, Provider.of<Cirugia>(context).tegumentario));
-                    Provider.of<Cirugia>(context).tegumentario
-                        .add(_items_tegumentario.last.first.value);
-                  });
-                },
-              )
+                      child: Text(
+                        "Añadir",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _items_tegumentario.add(Util().ajustarlistas(tegumentario, Provider.of<Cirugia>(context).tegumentario));
+                          Provider.of<Cirugia>(context).tegumentario.add(_items_tegumentario.last.first.value);
+                        });
+                      },
+                    )
                   : Container(),
               Provider.of<Cirugia>(context).tegumentario.length > 1
                   ? FlatButton(
-                child: Text(
-                  "Eliminar",
-                  style: TextStyle(color: Colors.blue),
-                ),
-                onPressed: () {
-                  setState(() {
-                    Provider.of<Cirugia>(context).tegumentario.removeLast();
-                    _items_tegumentario.removeLast();
-                  });
-                },
-              )
+                      child: Text(
+                        "Eliminar",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          Provider.of<Cirugia>(context).tegumentario.removeLast();
+                          _items_tegumentario.removeLast();
+                        });
+                      },
+                    )
                   : Container(),
             ],
           ),
@@ -2070,9 +1941,7 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               initialValue: Provider.of<Cirugia>(context).constitucion_fisica,
-              decoration: InputDecoration(
-                  labelText: "Constitucion fisica",
-                  icon: Icon(FontAwesomeIcons.running)),
+              decoration: InputDecoration(labelText: "Constitucion fisica", icon: Icon(FontAwesomeIcons.running)),
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).constitucion_fisica = value;
@@ -2116,9 +1985,7 @@ class _I_VState extends State<I_V> {
           ),
           Row(
             children: <Widget>[
-              Container(
-                  margin: EdgeInsets.only(right: 10, left: 10),
-                  child: Icon(FontAwesomeIcons.briefcaseMedical)),
+              Container(margin: EdgeInsets.only(right: 10, left: 10), child: Icon(FontAwesomeIcons.briefcaseMedical)),
               Expanded(child: Text("Exostosis")),
               Checkbox(
                 value: Provider.of<Cirugia>(context).exostosis,
@@ -2129,9 +1996,7 @@ class _I_VState extends State<I_V> {
                   });
                 },
               ),
-              Container(
-                  margin: EdgeInsets.only(right: 10, left: 10),
-                  child: Icon(FontAwesomeIcons.briefcaseMedical)),
+              Container(margin: EdgeInsets.only(right: 10, left: 10), child: Icon(FontAwesomeIcons.briefcaseMedical)),
               Expanded(child: Text("Endostosis")),
               Checkbox(
                 value: Provider.of<Cirugia>(context).exostosis,
@@ -2156,9 +2021,7 @@ class _I_VState extends State<I_V> {
           ),
           Row(
             children: <Widget>[
-              Container(
-                  margin: EdgeInsets.only(right: 10, left: 10),
-                  child: Icon(FontAwesomeIcons.briefcaseMedical)),
+              Container(margin: EdgeInsets.only(right: 10, left: 10), child: Icon(FontAwesomeIcons.briefcaseMedical)),
               Expanded(child: Text("Transversal")),
               Checkbox(
                 value: Provider.of<Cirugia>(context).asimetrias_transversales,
@@ -2169,9 +2032,7 @@ class _I_VState extends State<I_V> {
                   });
                 },
               ),
-              Container(
-                  margin: EdgeInsets.only(right: 10, left: 10),
-                  child: Icon(FontAwesomeIcons.briefcaseMedical)),
+              Container(margin: EdgeInsets.only(right: 10, left: 10), child: Icon(FontAwesomeIcons.briefcaseMedical)),
               Expanded(child: Text("Longitudinal")),
               Checkbox(
                 value: Provider.of<Cirugia>(context).asimetrias_longitudinales,
@@ -2191,9 +2052,7 @@ class _I_VState extends State<I_V> {
           ),
           Row(
             children: <Widget>[
-              Container(
-                  margin: EdgeInsets.only(right: 10, left: 10),
-                  child: Icon(FontAwesomeIcons.briefcaseMedical)),
+              Container(margin: EdgeInsets.only(right: 10, left: 10), child: Icon(FontAwesomeIcons.briefcaseMedical)),
               Expanded(child: Text("Enoftalmo")),
               Checkbox(
                 value: Provider.of<Cirugia>(context).enoftalmo,
@@ -2204,9 +2063,7 @@ class _I_VState extends State<I_V> {
                   });
                 },
               ),
-              Container(
-                  margin: EdgeInsets.only(right: 10, left: 10),
-                  child: Icon(FontAwesomeIcons.briefcaseMedical)),
+              Container(margin: EdgeInsets.only(right: 10, left: 10), child: Icon(FontAwesomeIcons.briefcaseMedical)),
               Expanded(child: Text("Exoftalmo")),
               Checkbox(
                 value: Provider.of<Cirugia>(context).exoftalmo,
@@ -2241,9 +2098,7 @@ class _I_VState extends State<I_V> {
           ),
           Row(
             children: <Widget>[
-              Container(
-                  margin: EdgeInsets.only(right: 10, left: 10),
-                  child: Icon(FontAwesomeIcons.briefcaseMedical)),
+              Container(margin: EdgeInsets.only(right: 10, left: 10), child: Icon(FontAwesomeIcons.briefcaseMedical)),
               Expanded(child: Text("Midriasis")),
               Checkbox(
                 value: Provider.of<Cirugia>(context).midriasis,
@@ -2254,9 +2109,7 @@ class _I_VState extends State<I_V> {
                   });
                 },
               ),
-              Container(
-                  margin: EdgeInsets.only(right: 10, left: 10),
-                  child: Icon(FontAwesomeIcons.briefcaseMedical)),
+              Container(margin: EdgeInsets.only(right: 10, left: 10), child: Icon(FontAwesomeIcons.briefcaseMedical)),
               Expanded(child: Text("Miosis")),
               Checkbox(
                 value: Provider.of<Cirugia>(context).miosis,
@@ -2288,8 +2141,7 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               initialValue: Provider.of<Cirugia>(context).nariz,
-              decoration: InputDecoration(
-                  labelText: "Nariz", icon: Icon(FontAwesomeIcons.userAlt)),
+              decoration: InputDecoration(labelText: "Nariz", icon: Icon(FontAwesomeIcons.userAlt)),
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).nariz = value;
@@ -2319,12 +2171,10 @@ class _I_VState extends State<I_V> {
           ),
           Row(
             children: <Widget>[
-              Container(
-                  margin: EdgeInsets.only(right: 10, left: 10),
-                  child: Icon(FontAwesomeIcons.briefcaseMedical)),
+              Container(margin: EdgeInsets.only(right: 10, left: 10), child: Icon(FontAwesomeIcons.briefcaseMedical)),
               Expanded(child: Text("Palida")),
               Checkbox(
-                value: Provider.of<Cirugia>(context).palida ,
+                value: Provider.of<Cirugia>(context).palida,
                 onChanged: (value) {
                   setState(() {
                     Provider.of<Cirugia>(context).palida = value;
@@ -2332,9 +2182,7 @@ class _I_VState extends State<I_V> {
                   });
                 },
               ),
-              Container(
-                  margin: EdgeInsets.only(right: 10, left: 10),
-                  child: Icon(FontAwesomeIcons.briefcaseMedical)),
+              Container(margin: EdgeInsets.only(right: 10, left: 10), child: Icon(FontAwesomeIcons.briefcaseMedical)),
               Expanded(child: Text("Cianotica")),
               Checkbox(
                 value: Provider.of<Cirugia>(context).cianotica,
@@ -2349,9 +2197,7 @@ class _I_VState extends State<I_V> {
           ),
           Row(
             children: <Widget>[
-              Container(
-                  margin: EdgeInsets.only(right: 10, left: 10),
-                  child: Icon(FontAwesomeIcons.briefcaseMedical)),
+              Container(margin: EdgeInsets.only(right: 10, left: 10), child: Icon(FontAwesomeIcons.briefcaseMedical)),
               Expanded(child: Text("Enrojecida")),
               Checkbox(
                 value: Provider.of<Cirugia>(context).enrojecida,
@@ -2362,9 +2208,7 @@ class _I_VState extends State<I_V> {
                   });
                 },
               ),
-              Container(
-                  margin: EdgeInsets.only(right: 10, left: 10),
-                  child: Icon(FontAwesomeIcons.briefcaseMedical)),
+              Container(margin: EdgeInsets.only(right: 10, left: 10), child: Icon(FontAwesomeIcons.briefcaseMedical)),
               Expanded(child: Text("Manchas")),
               Checkbox(
                 value: Provider.of<Cirugia>(context).manchas,
@@ -2384,9 +2228,7 @@ class _I_VState extends State<I_V> {
           ),
           Row(
             children: <Widget>[
-              Container(
-                  margin: EdgeInsets.only(right: 10, left: 10),
-                  child: Icon(FontAwesomeIcons.briefcaseMedical)),
+              Container(margin: EdgeInsets.only(right: 10, left: 10), child: Icon(FontAwesomeIcons.briefcaseMedical)),
               Expanded(child: Text("Hipotonico")),
               Checkbox(
                 value: Provider.of<Cirugia>(context).hipotonico,
@@ -2397,9 +2239,7 @@ class _I_VState extends State<I_V> {
                   });
                 },
               ),
-              Container(
-                  margin: EdgeInsets.only(right: 10, left: 10),
-                  child: Icon(FontAwesomeIcons.briefcaseMedical)),
+              Container(margin: EdgeInsets.only(right: 10, left: 10), child: Icon(FontAwesomeIcons.briefcaseMedical)),
               Expanded(child: Text("Hipertonido")),
               Checkbox(
                 value: Provider.of<Cirugia>(context).hipertonico,
@@ -2414,9 +2254,7 @@ class _I_VState extends State<I_V> {
           ),
           Row(
             children: <Widget>[
-              Container(
-                  margin: EdgeInsets.only(right: 10, left: 10),
-                  child: Icon(FontAwesomeIcons.briefcaseMedical)),
+              Container(margin: EdgeInsets.only(right: 10, left: 10), child: Icon(FontAwesomeIcons.briefcaseMedical)),
               Text("Espastico"),
               Checkbox(
                 value: Provider.of<Cirugia>(context).espasticos,
@@ -2438,9 +2276,7 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               initialValue: Provider.of<Cirugia>(context).ganglios_linfaticos,
-              decoration: InputDecoration(
-                  labelText: "Ganglios linfaticos",
-                  icon: Icon(FontAwesomeIcons.userAlt)),
+              decoration: InputDecoration(labelText: "Ganglios linfaticos", icon: Icon(FontAwesomeIcons.userAlt)),
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).ganglios_linfaticos = value;
@@ -2469,16 +2305,11 @@ class _I_VState extends State<I_V> {
                         child: DropdownButton(
                           isExpanded: true,
                           disabledHint: Text(Provider.of<Cirugia>(context).temporomandibular[Provider.of<Cirugia>(context).temporomandibular.indexOf(value)]),
-                          items: _items_temporomandibular[Provider.of<Cirugia>(context).temporomandibular.indexOf(value)] == _items_temporomandibular.last ?
-                          _items_temporomandibular[Provider.of<Cirugia>(context).temporomandibular.indexOf(value)]:
-                          null,
-                          value: Provider.of<Cirugia>(context).temporomandibular[
-                              Provider.of<Cirugia>(context).temporomandibular.indexOf(value)],
+                          items: _items_temporomandibular[Provider.of<Cirugia>(context).temporomandibular.indexOf(value)] == _items_temporomandibular.last ? _items_temporomandibular[Provider.of<Cirugia>(context).temporomandibular.indexOf(value)] : null,
+                          value: Provider.of<Cirugia>(context).temporomandibular[Provider.of<Cirugia>(context).temporomandibular.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
-                              Provider.of<Cirugia>(context).temporomandibular[
-                                  Provider.of<Cirugia>(context).temporomandibular
-                                      .indexOf(value)] = value2;
+                              Provider.of<Cirugia>(context).temporomandibular[Provider.of<Cirugia>(context).temporomandibular.indexOf(value)] = value2;
                               Provider.of<Cirugia>(context).cambiado = true;
                             });
                           },
@@ -2492,56 +2323,54 @@ class _I_VState extends State<I_V> {
           }).toList()),
           Provider.of<Cirugia>(context).temporomandibular.first != temporomandibular.first
               ? Container(
-            margin: EdgeInsets.all(10),
-            child: TextFormField(
-              initialValue: Provider.of<Cirugia>(context).tratamiento_temporomandibular,
-              decoration: InputDecoration(
-                  labelText: "Describa",
-                  icon: Icon(
-                    FontAwesomeIcons.female,
-                    color: Colors.blue,
+                  margin: EdgeInsets.all(10),
+                  child: TextFormField(
+                    initialValue: Provider.of<Cirugia>(context).tratamiento_temporomandibular,
+                    decoration: InputDecoration(
+                        labelText: "Describa",
+                        icon: Icon(
+                          FontAwesomeIcons.female,
+                          color: Colors.blue,
+                        ),
+                        labelStyle: TextStyle(color: Colors.blue)),
+                    keyboardType: TextInputType.text,
+                    onChanged: (value) {
+                      Provider.of<Cirugia>(context).tratamiento_temporomandibular = value;
+                      Provider.of<Cirugia>(context).cambiado = true;
+                    },
                   ),
-                  labelStyle: TextStyle(color: Colors.blue)),
-              keyboardType: TextInputType.text,
-              onChanged: (value) {
-                Provider.of<Cirugia>(context).tratamiento_temporomandibular = value;
-                Provider.of<Cirugia>(context).cambiado = true;
-              },
-            ),
-          )
+                )
               : Container(),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Provider.of<Cirugia>(context).temporomandibular.last != temporomandibular.first && temporomandibular.last.length > 2
                   ? FlatButton(
-                child: Text(
-                  "Añadir",
-                  style: TextStyle(color: Colors.blue),
-                ),
-                onPressed: () {
-                  setState(() {
-                    _items_temporomandibular.add(Util()
-                        .ajustarlistas(temporomandibular, Provider.of<Cirugia>(context).temporomandibular));
-                    Provider.of<Cirugia>(context).temporomandibular
-                        .add(_items_temporomandibular.last.first.value);
-                  });
-                },
-              )
+                      child: Text(
+                        "Añadir",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _items_temporomandibular.add(Util().ajustarlistas(temporomandibular, Provider.of<Cirugia>(context).temporomandibular));
+                          Provider.of<Cirugia>(context).temporomandibular.add(_items_temporomandibular.last.first.value);
+                        });
+                      },
+                    )
                   : Container(),
               Provider.of<Cirugia>(context).temporomandibular.length > 1
                   ? FlatButton(
-                child: Text(
-                  "Eliminar",
-                  style: TextStyle(color: Colors.blue),
-                ),
-                onPressed: () {
-                  setState(() {
-                    Provider.of<Cirugia>(context).temporomandibular.removeLast();
-                    _items_temporomandibular.removeLast();
-                  });
-                },
-              )
+                      child: Text(
+                        "Eliminar",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          Provider.of<Cirugia>(context).temporomandibular.removeLast();
+                          _items_temporomandibular.removeLast();
+                        });
+                      },
+                    )
                   : Container(),
             ],
           ),
@@ -2554,8 +2383,7 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               initialValue: Provider.of<Cirugia>(context).labios,
-              decoration: InputDecoration(
-                  labelText: "Labios", icon: Icon(FontAwesomeIcons.teethOpen)),
+              decoration: InputDecoration(labelText: "Labios", icon: Icon(FontAwesomeIcons.teethOpen)),
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).labios = value;
@@ -2567,8 +2395,7 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               initialValue: Provider.of<Cirugia>(context).carrillos,
-              decoration: InputDecoration(
-                  labelText: "Carrillos", icon: Icon(FontAwesomeIcons.teethOpen)),
+              decoration: InputDecoration(labelText: "Carrillos", icon: Icon(FontAwesomeIcons.teethOpen)),
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).carrillos = value;
@@ -2580,9 +2407,7 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               initialValue: Provider.of<Cirugia>(context).paladar_duro,
-              decoration: InputDecoration(
-                  labelText: "Paladar duro",
-                  icon: Icon(FontAwesomeIcons.teethOpen)),
+              decoration: InputDecoration(labelText: "Paladar duro", icon: Icon(FontAwesomeIcons.teethOpen)),
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).paladar_duro = value;
@@ -2594,9 +2419,7 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               initialValue: Provider.of<Cirugia>(context).paladar_blando,
-              decoration: InputDecoration(
-                  labelText: "Paladar blando",
-                  icon: Icon(FontAwesomeIcons.teethOpen)),
+              decoration: InputDecoration(labelText: "Paladar blando", icon: Icon(FontAwesomeIcons.teethOpen)),
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).paladar_blando = value;
@@ -2608,8 +2431,7 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               initialValue: Provider.of<Cirugia>(context).orafaringe,
-              decoration: InputDecoration(
-                  labelText: "Orafaringe", icon: Icon(FontAwesomeIcons.teethOpen)),
+              decoration: InputDecoration(labelText: "Orafaringe", icon: Icon(FontAwesomeIcons.teethOpen)),
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).orafaringe = value;
@@ -2621,9 +2443,7 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               initialValue: Provider.of<Cirugia>(context).piso_boca,
-              decoration: InputDecoration(
-                  labelText: "Piso de la boca",
-                  icon: Icon(FontAwesomeIcons.teethOpen)),
+              decoration: InputDecoration(labelText: "Piso de la boca", icon: Icon(FontAwesomeIcons.teethOpen)),
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).piso_boca = value;
@@ -2635,8 +2455,7 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               initialValue: Provider.of<Cirugia>(context).lengua,
-              decoration: InputDecoration(
-                  labelText: "Lengua", icon: Icon(FontAwesomeIcons.teethOpen)),
+              decoration: InputDecoration(labelText: "Lengua", icon: Icon(FontAwesomeIcons.teethOpen)),
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).lengua = value;
@@ -2648,8 +2467,7 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               initialValue: Provider.of<Cirugia>(context).encia,
-              decoration: InputDecoration(
-                  labelText: "Encia", icon: Icon(FontAwesomeIcons.teethOpen)),
+              decoration: InputDecoration(labelText: "Encia", icon: Icon(FontAwesomeIcons.teethOpen)),
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).encia = value;
@@ -2661,8 +2479,7 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               initialValue: Provider.of<Cirugia>(context).dientes,
-              decoration: InputDecoration(
-                  labelText: "Dientes", icon: Icon(FontAwesomeIcons.teethOpen)),
+              decoration: InputDecoration(labelText: "Dientes", icon: Icon(FontAwesomeIcons.teethOpen)),
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).dientes = value;
@@ -2673,15 +2490,13 @@ class _I_VState extends State<I_V> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
-              initialValue: Provider.of<Cirugia>(context).padecimiento_actual,
-              decoration: InputDecoration(
-                  labelText: "Padecimiento actual",
-                  icon: Icon(FontAwesomeIcons.userInjured)),
+              initialValue: Provider.of<Cirugia>(context).padecimiento_actual_temp,
+              decoration: InputDecoration(labelText: "Padecimiento actual", icon: Icon(FontAwesomeIcons.userInjured)),
               keyboardType: TextInputType.text,
               minLines: 1,
               maxLines: 6,
               onChanged: (value) {
-                Provider.of<Cirugia>(context).padecimiento_actual = value;
+                Provider.of<Cirugia>(context).padecimiento_actual_temp = value;
                 Provider.of<Cirugia>(context).cambiado = true;
               },
             ),
@@ -2716,15 +2531,11 @@ class _I_VState extends State<I_V> {
                         child: DropdownButton(
                           isExpanded: true,
                           disabledHint: Text(Provider.of<Cirugia>(context).radiografia[Provider.of<Cirugia>(context).radiografia.indexOf(value)]),
-                          items: _items_radiografia[Provider.of<Cirugia>(context).radiografia.indexOf(value)] == _items_radiografia.last ?
-                          _items_radiografia[Provider.of<Cirugia>(context).radiografia.indexOf(value)]:
-                          null,
-                          value: Provider.of<Cirugia>(context).radiografia[
-                              Provider.of<Cirugia>(context).radiografia.indexOf(value)],
+                          items: _items_radiografia[Provider.of<Cirugia>(context).radiografia.indexOf(value)] == _items_radiografia.last ? _items_radiografia[Provider.of<Cirugia>(context).radiografia.indexOf(value)] : null,
+                          value: Provider.of<Cirugia>(context).radiografia[Provider.of<Cirugia>(context).radiografia.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
-                              Provider.of<Cirugia>(context).radiografia[
-                                  Provider.of<Cirugia>(context).radiografia.indexOf(value)] = value2;
+                              Provider.of<Cirugia>(context).radiografia[Provider.of<Cirugia>(context).radiografia.indexOf(value)] = value2;
                               Provider.of<Cirugia>(context).cambiado = true;
                             });
                           },
@@ -2733,62 +2544,59 @@ class _I_VState extends State<I_V> {
                     ),
                   ],
                 ),
-
               ],
             );
           }).toList()),
           Provider.of<Cirugia>(context).radiografia.first == radiografia.last
               ? Container(
-            margin: EdgeInsets.all(10),
-            child: TextFormField(
-              initialValue: Provider.of<Cirugia>(context).otra_radiografia,
-              decoration: InputDecoration(
-                  labelText: "Describa",
-                  icon: Icon(
-                    FontAwesomeIcons.vectorSquare,
-                    color: Colors.blue,
+                  margin: EdgeInsets.all(10),
+                  child: TextFormField(
+                    initialValue: Provider.of<Cirugia>(context).otra_radiografia,
+                    decoration: InputDecoration(
+                        labelText: "Describa",
+                        icon: Icon(
+                          FontAwesomeIcons.vectorSquare,
+                          color: Colors.blue,
+                        ),
+                        labelStyle: TextStyle(color: Colors.blue)),
+                    keyboardType: TextInputType.text,
+                    onChanged: (value) {
+                      Provider.of<Cirugia>(context).otra_radiografia = value;
+                      Provider.of<Cirugia>(context).cambiado = true;
+                    },
                   ),
-                  labelStyle: TextStyle(color: Colors.blue)),
-              keyboardType: TextInputType.text,
-              onChanged: (value) {
-                Provider.of<Cirugia>(context).otra_radiografia = value;
-                Provider.of<Cirugia>(context).cambiado = true;
-              },
-            ),
-          )
+                )
               : Container(),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Provider.of<Cirugia>(context).radiografia.last != radiografia.first && radiografia.last.length > 2
                   ? FlatButton(
-                child: Text(
-                  "Añadir",
-                  style: TextStyle(color: Colors.blue),
-                ),
-                onPressed: () {
-                  setState(() {
-                    _items_radiografia.add(Util()
-                        .ajustarlistas(radiografia, Provider.of<Cirugia>(context).radiografia));
-                    Provider.of<Cirugia>(context).radiografia
-                        .add(_items_radiografia.last.first.value);
-                  });
-                },
-              )
+                      child: Text(
+                        "Añadir",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _items_radiografia.add(Util().ajustarlistas(radiografia, Provider.of<Cirugia>(context).radiografia));
+                          Provider.of<Cirugia>(context).radiografia.add(_items_radiografia.last.first.value);
+                        });
+                      },
+                    )
                   : Container(),
               Provider.of<Cirugia>(context).radiografia.length > 1
                   ? FlatButton(
-                child: Text(
-                  "Eliminar",
-                  style: TextStyle(color: Colors.blue),
-                ),
-                onPressed: () {
-                  setState(() {
-                    Provider.of<Cirugia>(context).radiografia.removeLast();
-                    _items_radiografia.removeLast();
-                  });
-                },
-              )
+                      child: Text(
+                        "Eliminar",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          Provider.of<Cirugia>(context).radiografia.removeLast();
+                          _items_radiografia.removeLast();
+                        });
+                      },
+                    )
                   : Container(),
             ],
           ),
@@ -2796,9 +2604,7 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               initialValue: Provider.of<Cirugia>(context).interpretacion_radiografica,
-              decoration: InputDecoration(
-                  labelText: "Interpretacion radiografica",
-                  icon: Icon(FontAwesomeIcons.vectorSquare)),
+              decoration: InputDecoration(labelText: "Interpretacion radiografica", icon: Icon(FontAwesomeIcons.vectorSquare)),
               keyboardType: TextInputType.text,
               minLines: 1,
               maxLines: 6,
@@ -2829,16 +2635,11 @@ class _I_VState extends State<I_V> {
                         child: DropdownButton(
                           isExpanded: true,
                           disabledHint: Text(Provider.of<Cirugia>(context).analisis_laboratorio[Provider.of<Cirugia>(context).analisis_laboratorio.indexOf(value)]),
-                          items: _items_analisis_laboratorio[Provider.of<Cirugia>(context).analisis_laboratorio.indexOf(value)] == _items_analisis_laboratorio.last ?
-                          _items_analisis_laboratorio[Provider.of<Cirugia>(context).analisis_laboratorio.indexOf(value)]:
-                          null,
-                          value: Provider.of<Cirugia>(context).analisis_laboratorio[
-                              Provider.of<Cirugia>(context).analisis_laboratorio.indexOf(value)],
+                          items: _items_analisis_laboratorio[Provider.of<Cirugia>(context).analisis_laboratorio.indexOf(value)] == _items_analisis_laboratorio.last ? _items_analisis_laboratorio[Provider.of<Cirugia>(context).analisis_laboratorio.indexOf(value)] : null,
+                          value: Provider.of<Cirugia>(context).analisis_laboratorio[Provider.of<Cirugia>(context).analisis_laboratorio.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
-                              Provider.of<Cirugia>(context).analisis_laboratorio[
-                                  Provider.of<Cirugia>(context).analisis_laboratorio
-                                      .indexOf(value)] = value2;
+                              Provider.of<Cirugia>(context).analisis_laboratorio[Provider.of<Cirugia>(context).analisis_laboratorio.indexOf(value)] = value2;
                               Provider.of<Cirugia>(context).cambiado = true;
                             });
                           },
@@ -2847,12 +2648,10 @@ class _I_VState extends State<I_V> {
                     ),
                   ],
                 ),
-                Provider.of<Cirugia>(context).analisis_laboratorio[
-                            Provider.of<Cirugia>(context).analisis_laboratorio.indexOf(value)] ==
-                        analisis_laboratorio[1]
+                Provider.of<Cirugia>(context).analisis_laboratorio[Provider.of<Cirugia>(context).analisis_laboratorio.indexOf(value)] == analisis_laboratorio[1]
                     ? Column(
-                      children: <Widget>[
-                        Row(
+                        children: <Widget>[
+                          Row(
                             children: <Widget>[
                               Expanded(
                                 child: Container(
@@ -2891,112 +2690,109 @@ class _I_VState extends State<I_V> {
                             ],
                           ),
                           Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: Container(
-                              margin: const EdgeInsets.all(10.0),
-                              child: TextFormField(
-                                initialValue: Provider.of<Cirugia>(context).neutrofilos,
-                                decoration: (InputDecoration(
-                                  labelText: "Neutrofilos",
-                                  icon: Icon(FontAwesomeIcons.tint),
-                                )),
-                                keyboardType: TextInputType.text,
-                                onChanged: (value) {
-                                  Provider.of<Cirugia>(context).neutrofilos = value;
-                                  Provider.of<Cirugia>(context).cambiado = true;
-                                },
+                            children: <Widget>[
+                              Expanded(
+                                child: Container(
+                                  margin: const EdgeInsets.all(10.0),
+                                  child: TextFormField(
+                                    initialValue: Provider.of<Cirugia>(context).neutrofilos,
+                                    decoration: (InputDecoration(
+                                      labelText: "Neutrofilos",
+                                      icon: Icon(FontAwesomeIcons.tint),
+                                    )),
+                                    keyboardType: TextInputType.text,
+                                    onChanged: (value) {
+                                      Provider.of<Cirugia>(context).neutrofilos = value;
+                                      Provider.of<Cirugia>(context).cambiado = true;
+                                    },
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              margin: const EdgeInsets.all(10.0),
-                              child: TextFormField(
-                                initialValue: Provider.of<Cirugia>(context).linfocitos,
-                                decoration: (InputDecoration(
-                                  labelText: "Linfocitos",
-                                  icon: Icon(FontAwesomeIcons.tint),
-                                )),
-                                keyboardType: TextInputType.text,
-                                onChanged: (value) {
-                                  Provider.of<Cirugia>(context).linfocitos = value;
-                                  Provider.of<Cirugia>(context).cambiado = true;
-                                },
+                              Expanded(
+                                child: Container(
+                                  margin: const EdgeInsets.all(10.0),
+                                  child: TextFormField(
+                                    initialValue: Provider.of<Cirugia>(context).linfocitos,
+                                    decoration: (InputDecoration(
+                                      labelText: "Linfocitos",
+                                      icon: Icon(FontAwesomeIcons.tint),
+                                    )),
+                                    keyboardType: TextInputType.text,
+                                    onChanged: (value) {
+                                      Provider.of<Cirugia>(context).linfocitos = value;
+                                      Provider.of<Cirugia>(context).cambiado = true;
+                                    },
+                                  ),
+                                ),
                               ),
-                            ),
+                            ],
                           ),
-                        ],
-                      ),
-                      Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: Container(
-                              margin: const EdgeInsets.all(10.0),
-                              child: TextFormField(
-                                initialValue: Provider.of<Cirugia>(context).eosinofilos,
-                                decoration: (InputDecoration(
-                                  labelText: "Eosinofilos",
-                                  icon: Icon(FontAwesomeIcons.tint),
-                                )),
-                                keyboardType: TextInputType.text,
-                                onChanged: (value) {
-                                  Provider.of<Cirugia>(context).eosinofilos = value;
-                                  Provider.of<Cirugia>(context).cambiado = true;
-                                },
+                          Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: Container(
+                                  margin: const EdgeInsets.all(10.0),
+                                  child: TextFormField(
+                                    initialValue: Provider.of<Cirugia>(context).eosinofilos,
+                                    decoration: (InputDecoration(
+                                      labelText: "Eosinofilos",
+                                      icon: Icon(FontAwesomeIcons.tint),
+                                    )),
+                                    keyboardType: TextInputType.text,
+                                    onChanged: (value) {
+                                      Provider.of<Cirugia>(context).eosinofilos = value;
+                                      Provider.of<Cirugia>(context).cambiado = true;
+                                    },
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              margin: const EdgeInsets.all(10.0),
-                              child: TextFormField(
-                                initialValue: Provider.of<Cirugia>(context).basofilos,
-                                decoration: (InputDecoration(
-                                  labelText: "Basofilos",
-                                  icon: Icon(FontAwesomeIcons.tint),
-                                )),
-                                keyboardType: TextInputType.text,
-                                onChanged: (value) {
-                                  Provider.of<Cirugia>(context).basofilos = value;
-                                  Provider.of<Cirugia>(context).cambiado = true;
-                                },
+                              Expanded(
+                                child: Container(
+                                  margin: const EdgeInsets.all(10.0),
+                                  child: TextFormField(
+                                    initialValue: Provider.of<Cirugia>(context).basofilos,
+                                    decoration: (InputDecoration(
+                                      labelText: "Basofilos",
+                                      icon: Icon(FontAwesomeIcons.tint),
+                                    )),
+                                    keyboardType: TextInputType.text,
+                                    onChanged: (value) {
+                                      Provider.of<Cirugia>(context).basofilos = value;
+                                      Provider.of<Cirugia>(context).cambiado = true;
+                                    },
+                                  ),
+                                ),
                               ),
-                            ),
+                            ],
                           ),
-                        ],
-                      ),
-                      Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: Container(
-                              margin: const EdgeInsets.all(10.0),
-                              child: TextFormField(
-                                initialValue: Provider.of<Cirugia>(context).monocitos,
-                                decoration: (InputDecoration(
-                                  labelText: "Monocitos",
-                                  icon: Icon(FontAwesomeIcons.tint),
-                                )),
-                                keyboardType: TextInputType.text,
-                                onChanged: (value) {
-                                  Provider.of<Cirugia>(context).monocitos = value;
-                                  Provider.of<Cirugia>(context).cambiado = true;
-                                },
+                          Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: Container(
+                                  margin: const EdgeInsets.all(10.0),
+                                  child: TextFormField(
+                                    initialValue: Provider.of<Cirugia>(context).monocitos,
+                                    decoration: (InputDecoration(
+                                      labelText: "Monocitos",
+                                      icon: Icon(FontAwesomeIcons.tint),
+                                    )),
+                                    keyboardType: TextInputType.text,
+                                    onChanged: (value) {
+                                      Provider.of<Cirugia>(context).monocitos = value;
+                                      Provider.of<Cirugia>(context).cambiado = true;
+                                    },
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
+                            ],
+                          )
                         ],
                       )
-                      ],
-                    )
                     : Container(),
-
-                    Provider.of<Cirugia>(context).analisis_laboratorio[
-                            Provider.of<Cirugia>(context).analisis_laboratorio.indexOf(value)] ==
-                        analisis_laboratorio[2]
+                Provider.of<Cirugia>(context).analisis_laboratorio[Provider.of<Cirugia>(context).analisis_laboratorio.indexOf(value)] == analisis_laboratorio[2]
                     ? Column(
-                      children: <Widget>[
-                        Row(
+                        children: <Widget>[
+                          Row(
                             children: <Widget>[
                               Expanded(
                                 child: Container(
@@ -3034,37 +2830,34 @@ class _I_VState extends State<I_V> {
                               ),
                             ],
                           ),
-                      Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: Container(
-                              margin: const EdgeInsets.all(10.0),
-                              child: TextFormField(
-                                initialValue: Provider.of<Cirugia>(context).otros_sangre,
-                                decoration: (InputDecoration(
-                                  labelText: "Otros",
-                                  icon: Icon(FontAwesomeIcons.tint),
-                                )),
-                                keyboardType: TextInputType.text,
-                                onChanged: (value) {
-                                  Provider.of<Cirugia>(context).otros_sangre = value;
-                                  Provider.of<Cirugia>(context).cambiado = true;
-                                },
+                          Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: Container(
+                                  margin: const EdgeInsets.all(10.0),
+                                  child: TextFormField(
+                                    initialValue: Provider.of<Cirugia>(context).otros_sangre,
+                                    decoration: (InputDecoration(
+                                      labelText: "Otros",
+                                      icon: Icon(FontAwesomeIcons.tint),
+                                    )),
+                                    keyboardType: TextInputType.text,
+                                    onChanged: (value) {
+                                      Provider.of<Cirugia>(context).otros_sangre = value;
+                                      Provider.of<Cirugia>(context).cambiado = true;
+                                    },
+                                  ),
+                                ),
                               ),
-                            ),
-                          ),
+                            ],
+                          )
                         ],
                       )
-                      ],
-                    )
                     : Container(),
-
-                    Provider.of<Cirugia>(context).analisis_laboratorio[
-                            Provider.of<Cirugia>(context).analisis_laboratorio.indexOf(value)] ==
-                        analisis_laboratorio[3]
+                Provider.of<Cirugia>(context).analisis_laboratorio[Provider.of<Cirugia>(context).analisis_laboratorio.indexOf(value)] == analisis_laboratorio[3]
                     ? Column(
-                      children: <Widget>[
-                        Row(
+                        children: <Widget>[
+                          Row(
                             children: <Widget>[
                               Expanded(
                                 child: Container(
@@ -3103,85 +2896,85 @@ class _I_VState extends State<I_V> {
                             ],
                           ),
                           Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: Container(
-                              margin: const EdgeInsets.all(10.0),
-                              child: TextFormField(
-                                initialValue: Provider.of<Cirugia>(context).cuenta_plaquetas,
-                                decoration: (InputDecoration(
-                                  labelText: "Cuenta plaquetas",
-                                  icon: Icon(FontAwesomeIcons.tint),
-                                )),
-                                keyboardType: TextInputType.text,
-                                onChanged: (value) {
-                                  Provider.of<Cirugia>(context).cuenta_plaquetas = value;
-                                  Provider.of<Cirugia>(context).cambiado = true;
-                                },
+                            children: <Widget>[
+                              Expanded(
+                                child: Container(
+                                  margin: const EdgeInsets.all(10.0),
+                                  child: TextFormField(
+                                    initialValue: Provider.of<Cirugia>(context).cuenta_plaquetas,
+                                    decoration: (InputDecoration(
+                                      labelText: "Cuenta plaquetas",
+                                      icon: Icon(FontAwesomeIcons.tint),
+                                    )),
+                                    keyboardType: TextInputType.text,
+                                    onChanged: (value) {
+                                      Provider.of<Cirugia>(context).cuenta_plaquetas = value;
+                                      Provider.of<Cirugia>(context).cambiado = true;
+                                    },
+                                  ),
+                                ),
                               ),
-                            ),
+                              Expanded(
+                                child: Container(
+                                  margin: const EdgeInsets.all(10.0),
+                                  child: TextFormField(
+                                    initialValue: Provider.of<Cirugia>(context).tiempo_protombina,
+                                    decoration: (InputDecoration(
+                                      labelText: "Tiempo protrombina",
+                                      labelStyle: TextStyle(fontSize: 13),
+                                      icon: Icon(FontAwesomeIcons.tint),
+                                    )),
+                                    keyboardType: TextInputType.text,
+                                    onChanged: (value) {
+                                      Provider.of<Cirugia>(context).tiempo_protombina = value;
+                                      Provider.of<Cirugia>(context).cambiado = true;
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                          Expanded(
-                            child: Container(
-                              margin: const EdgeInsets.all(10.0),
-                              child: TextFormField(
-                                initialValue: Provider.of<Cirugia>(context).tiempo_protombina,
-                                decoration: (InputDecoration(
-                                  labelText: "Tiempo protrombina",
-                                  labelStyle: TextStyle(fontSize: 13),
-                                  icon: Icon(FontAwesomeIcons.tint),
-                                )),
-                                keyboardType: TextInputType.text,
-                                onChanged: (value) {
-                                  Provider.of<Cirugia>(context).tiempo_protombina = value;
-                                  Provider.of<Cirugia>(context).cambiado = true;
-                                },
+                          Row(
+                            children: <Widget>[
+                              Expanded(
+                                child: Container(
+                                  margin: const EdgeInsets.all(10.0),
+                                  child: TextFormField(
+                                    initialValue: Provider.of<Cirugia>(context).tiempo_tromboplastina,
+                                    decoration: (InputDecoration(
+                                      labelText: "Tiempo tromboplastina",
+                                      labelStyle: TextStyle(fontSize: 13),
+                                      icon: Icon(FontAwesomeIcons.tint),
+                                    )),
+                                    keyboardType: TextInputType.text,
+                                    onChanged: (value) {
+                                      Provider.of<Cirugia>(context).tiempo_tromboplastina = value;
+                                      Provider.of<Cirugia>(context).cambiado = true;
+                                    },
+                                  ),
+                                ),
                               ),
-                            ),
+                              Expanded(
+                                child: Container(
+                                  margin: const EdgeInsets.all(10.0),
+                                  child: TextFormField(
+                                    initialValue: Provider.of<Cirugia>(context).inr,
+                                    decoration: (InputDecoration(
+                                      labelText: "INR",
+                                      icon: Icon(FontAwesomeIcons.tint),
+                                    )),
+                                    keyboardType: TextInputType.text,
+                                    onChanged: (value) {
+                                      Provider.of<Cirugia>(context).inr = value;
+                                      Provider.of<Cirugia>(context).cambiado = true;
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ],
-                      ),
-                      Row(
-                        children: <Widget>[
-                          Expanded(
-                            child: Container(
-                              margin: const EdgeInsets.all(10.0),
-                              child: TextFormField(
-                                initialValue: Provider.of<Cirugia>(context).tiempo_tromboplastina,
-                                decoration: (InputDecoration(
-                                  labelText: "Tiempo tromboplastina",
-                                  labelStyle: TextStyle(fontSize: 13),
-                                  icon: Icon(FontAwesomeIcons.tint),
-                                )),
-                                keyboardType: TextInputType.text,
-                                onChanged: (value) {
-                                  Provider.of<Cirugia>(context).tiempo_tromboplastina = value;
-                                  Provider.of<Cirugia>(context).cambiado = true;
-                                },
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              margin: const EdgeInsets.all(10.0),
-                              child: TextFormField(
-                                initialValue: Provider.of<Cirugia>(context).inr,
-                                decoration: (InputDecoration(
-                                  labelText: "INR",
-                                  icon: Icon(FontAwesomeIcons.tint),
-                                )),
-                                keyboardType: TextInputType.text,
-                                onChanged: (value) {
-                                  Provider.of<Cirugia>(context).inr = value;
-                                  Provider.of<Cirugia>(context).cambiado = true;
-                                },
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      ],
-                    )
+                      )
                     : Container(),
               ],
             );
@@ -3191,33 +2984,31 @@ class _I_VState extends State<I_V> {
             children: <Widget>[
               Provider.of<Cirugia>(context).analisis_laboratorio.last != analisis_laboratorio.first && analisis_laboratorio.last.length > 2
                   ? FlatButton(
-                child: Text(
-                  "Añadir",
-                  style: TextStyle(color: Colors.blue),
-                ),
-                onPressed: () {
-                  setState(() {
-                    _items_analisis_laboratorio.add(Util()
-                        .ajustarlistas(analisis_laboratorio, Provider.of<Cirugia>(context).analisis_laboratorio));
-                    Provider.of<Cirugia>(context).analisis_laboratorio
-                        .add(_items_analisis_laboratorio.last.first.value);
-                  });
-                },
-              )
+                      child: Text(
+                        "Añadir",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _items_analisis_laboratorio.add(Util().ajustarlistas(analisis_laboratorio, Provider.of<Cirugia>(context).analisis_laboratorio));
+                          Provider.of<Cirugia>(context).analisis_laboratorio.add(_items_analisis_laboratorio.last.first.value);
+                        });
+                      },
+                    )
                   : Container(),
               Provider.of<Cirugia>(context).analisis_laboratorio.length > 1
                   ? FlatButton(
-                child: Text(
-                  "Eliminar",
-                  style: TextStyle(color: Colors.blue),
-                ),
-                onPressed: () {
-                  setState(() {
-                    Provider.of<Cirugia>(context).analisis_laboratorio.removeLast();
-                    _items_analisis_laboratorio.removeLast();
-                  });
-                },
-              )
+                      child: Text(
+                        "Eliminar",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          Provider.of<Cirugia>(context).analisis_laboratorio.removeLast();
+                          _items_analisis_laboratorio.removeLast();
+                        });
+                      },
+                    )
                   : Container(),
             ],
           ),
@@ -3303,9 +3094,7 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               initialValue: Provider.of<Cirugia>(context).tratamiento,
-              decoration: InputDecoration(
-                  labelText: "Tratamiento",
-                  icon: Icon(FontAwesomeIcons.pills)),
+              decoration: InputDecoration(labelText: "Tratamiento", icon: Icon(FontAwesomeIcons.pills)),
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).tratamiento = value;
@@ -3503,8 +3292,7 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               initialValue: Provider.of<Cirugia>(context).analgesicos,
-              decoration: InputDecoration(
-                  labelText: "Analgesicos", icon: Icon(FontAwesomeIcons.syringe)),
+              decoration: InputDecoration(labelText: "Analgesicos", icon: Icon(FontAwesomeIcons.syringe)),
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).analgesicos = value;
@@ -3673,17 +3461,14 @@ class _I_VState extends State<I_V> {
             leading: Icon(Icons.calendar_today),
             title: Text(
               DateFormat("y-M-d").format(fecha_retiosutura),
-              style: TextStyle(
-                  fontSize: 20.0, color: Theme.of(context).accentColor),
+              style: TextStyle(fontSize: 20.0, color: Theme.of(context).accentColor),
             ),
             subtitle: Text("Retiro de sutura"),
             onTap: () {
-              Util()
-                  .selectDate(context, fecha_retiosutura, DateTime.now())
-                  .then((fecha) {
+              Util().selectDate(context, fecha_retiosutura, DateTime.now()).then((fecha) {
                 setState(() {
                   fecha_retiosutura = fecha;
-                  Provider.of<Cirugia>(context).retiro_sutura =  DateFormat("y-M-d").format(fecha);
+                  Provider.of<Cirugia>(context).retiro_sutura = DateFormat("y-M-d").format(fecha);
                 });
               });
             },
@@ -3692,9 +3477,7 @@ class _I_VState extends State<I_V> {
             margin: EdgeInsets.all(10),
             child: TextFormField(
               initialValue: Provider.of<Cirugia>(context).estado_postquirurgico,
-              decoration: InputDecoration(
-                  labelText: "Estado postquirurgico del paciente",
-                  icon: Icon(FontAwesomeIcons.userAlt)),
+              decoration: InputDecoration(labelText: "Estado postquirurgico del paciente", icon: Icon(FontAwesomeIcons.userAlt)),
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).estado_postquirurgico = value;
@@ -3706,17 +3489,14 @@ class _I_VState extends State<I_V> {
             leading: Icon(Icons.calendar_today),
             title: Text(
               DateFormat("y-M-d").format(fecha_alta),
-              style: TextStyle(
-                  fontSize: 20.0, color: Theme.of(context).accentColor),
+              style: TextStyle(fontSize: 20.0, color: Theme.of(context).accentColor),
             ),
             subtitle: Text("Dado de alta"),
             onTap: () {
-              Util()
-                  .selectDate(context, fecha_alta, DateTime.now())
-                  .then((fecha) {
+              Util().selectDate(context, fecha_alta, DateTime.now()).then((fecha) {
                 setState(() {
                   fecha_alta = fecha;
-                  Provider.of<Cirugia>(context).dado_alta =  DateFormat("y-M-d").format(fecha);
+                  Provider.of<Cirugia>(context).dado_alta = DateFormat("y-M-d").format(fecha);
                 });
               });
             },

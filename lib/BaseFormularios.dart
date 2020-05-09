@@ -10,6 +10,7 @@ import 'Formularios/adulto/I_II_III_IV.dart';
 import 'Formularios/adulto/V_VI_VII.dart';
 import 'ModelosFormularios/Adulto.dart';
 import 'ModelosFormularios/Cirugia.dart';
+import 'package:intl/intl.dart';
 
 class Baseformularios extends StatefulWidget {
   Baseformularios();
@@ -63,6 +64,8 @@ class _BaseformulariosState extends State<Baseformularios> {
                 }
                if (Provider.of<Cirugia>(context).cambiado) {
                   Provider.of<Cirugia>(context).checklist();
+                  Provider.of<Cirugia>(context).padecimiento_actual.add(Provider.of<Cirugia>(context).padecimiento_actual_temp);
+                  Provider.of<Cirugia>(context).fecha_cirugia.add(DateFormat("y-M-d").format(DateTime.now()));
                   Provider.of<Cirugia>(context).addCirugia();
                   Provider.of<Cirugia>(context).cambiado=false;
                   // print("Hola?");

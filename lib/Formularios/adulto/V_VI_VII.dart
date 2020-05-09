@@ -14,8 +14,6 @@ class V_VI_VII extends StatefulWidget {
 }
 
 class _V_VI_VII_State extends State<V_VI_VII> {
-  String _currentlocal;
-  bool cuidado_medico =false;
   List<DropdownMenuItem> _itemslocal;
   List<String> listlocales = ["Ninguna", "Hospital", "Clínica"];
 
@@ -98,7 +96,6 @@ class _V_VI_VII_State extends State<V_VI_VII> {
 
   @override
   void initState() {
-    cuidado_medico = Provider.of<Adulto>(context, listen: false).cuidadoMedico;
     _items_higiene = Util().getDropdownMenuItem(opciones1);
     _current_higiene = _items_higiene.first.value;
     _items_calculo = Util().getDropdownMenuItem(opciones2);
@@ -106,7 +103,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
     _items_salivacion = Util().getDropdownMenuItem(opciones2);
     _current_salivacion = _items_salivacion.first.value;
     _itemslocal = Util().getDropdownMenuItem(listlocales);
-    _currentlocal = _itemslocal.first.value;
+    Provider.of<Adulto>(context).hospital == "" ? Provider.of<Adulto>(context).hospital = _itemslocal.first.value : null;
     _items_enfermedades.add(Util().ajustarlistas(_enfermedades, _current_enfermedades));
     _current_enfermedades.add(_items_enfermedades.last.first.value);
     _items_revision_organos.add(Util().ajustarlistas(_revision_organos, _current_revision_organos));
@@ -154,19 +151,18 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                 child: Icon(FontAwesomeIcons.briefcaseMedical)),
             Expanded(child: Text("¿Ha estado el paciente bajo cuidado medico?")),
             Checkbox(
-              value: cuidado_medico,
+              value: Provider.of<Adulto>(context).cuidadoMedico,
               onChanged: (value) {
                 setState(() {
-                  cuidado_medico = value;
+                  Provider.of<Adulto>(context).cuidadoMedico = value;
                   Provider.of<Adulto>(context).cambiado = true;
-                  Provider.of<Adulto>(context).cuidadoMedico = cuidado_medico ;
                 });
               },
             )
           ],
         ),
       ),
-      cuidado_medico
+      Provider.of<Adulto>(context).cuidadoMedico
           ? Column(
               children: <Widget>[
                 Container(
@@ -186,10 +182,10 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                         child: DropdownButton(
                           isExpanded: true,
                           items: _itemslocal,
-                          value: _currentlocal,
+                          value: Provider.of<Adulto>(context).hospital,
                           onChanged: (value) {
                             setState(() {
-                              _currentlocal = value;
+                              Provider.of<Adulto>(context).hospital = value;
                               Provider.of<Adulto>(context).cambiado = true;
                             });
                           },

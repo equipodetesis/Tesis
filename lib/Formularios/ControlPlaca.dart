@@ -367,7 +367,7 @@ class _ControlPlacaState extends State<ControlPlaca>{
                   )),
               onChanged:  (value){
                 print("el value:"+value);
-                if(value.contains(".")||value.contains(","))
+                if(value.contains(".")||value.contains(",")){
                   showDialog(context: context,
                     builder:(BuildContext context){
                     return AlertDialog(
@@ -383,7 +383,27 @@ class _ControlPlacaState extends State<ControlPlaca>{
                       ],
                     );
                     });
-                else{
+                value=totaldientes.toString();
+                }
+                else {
+                  int val=int.parse(value);
+                  if(val>28){
+                    showDialog(context: context,
+                     builder: (BuildContext contex){
+                      return AlertDialog(
+                        content: Text("El valor no puede ser mayor a 28"),
+                        actions: <Widget>[
+                          FlatButton(
+                            child: Text("Aceptar"),
+                            onPressed: (){
+                              Navigator.of(context).pop();
+                            },
+                          )
+                        ],
+                      );
+                     }
+                    );
+                  }
                 setState(() {
                    totaldientes=int.parse(value);
                    porcentaje=(supafectadas/(totaldientes*4))*100;
@@ -430,7 +450,7 @@ class _ControlPlacaState extends State<ControlPlaca>{
               Divider(thickness: 10.0),
               calculo,
               Padding(
-                padding: const EdgeInsets.all(70.0),
+                padding: const EdgeInsets.fromLTRB(2.0, 175.0, 0.0, 0.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children:<Widget>[

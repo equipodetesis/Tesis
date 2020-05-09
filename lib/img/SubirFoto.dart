@@ -13,8 +13,8 @@ class SubirFoto{
 
     final StorageReference ref = FirebaseStorage.instance.ref().child('${user.email}/${user.email}_profilePicture.jpg');
     final StorageUploadTask uploadTask = ref.putFile(image);
-    final Uri downloadUrl = await (await uploadTask.onComplete).ref.getDownloadURL();
-    return downloadUrl.toString();
+    final String downloadUrl = await (await uploadTask.onComplete).ref.getDownloadURL();
+    return downloadUrl;
   }
   Future<String> galeryFoto(name) async {
     File image = await ImagePicker.pickImage(source: ImageSource.gallery);
@@ -22,7 +22,7 @@ class SubirFoto{
 
     final StorageReference ref = FirebaseStorage.instance.ref().child('${user.email}/${user.email}_profilePicture.jpg');
     final StorageUploadTask uploadTask = ref.putFile(image);
-    final Uri downloadUrl = await (await uploadTask.onComplete).ref.getDownloadURL();
-    return downloadUrl.toString();
+    final String downloadUrl = await (await uploadTask.onComplete).ref.getDownloadURL();
+    return downloadUrl;
   }
 }

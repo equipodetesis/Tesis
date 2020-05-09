@@ -6,13 +6,23 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-class NewCliente extends StatelessWidget{
+class NewCliente extends StatefulWidget{
 
+  @override
+  _NewClienteState createState() => _NewClienteState();
+}
+
+class _NewClienteState extends State<NewCliente> {
   List sexos = ["Masculino", "Femenino"];
+
   List<DropdownMenuItem> _sexolist;
+
   String _currentsexo;
+
   String fecha_inicio="";
+
   DateTime fecha = DateTime.now();
+ bool enviado=false,error=false;
   @override
   Widget build(BuildContext context) {
     _sexolist = Util().getDropdownMenuItem(sexos);
@@ -32,12 +42,39 @@ class NewCliente extends StatelessWidget{
           IconButton(
             icon: Icon(Icons.check),
             onPressed: (){
+              showDialog(context: context,
+                  barrierDismissible: true,
+                  builder: (BuildContext context){
+                    return AlertDialog(
+                      title: error?Text("Error"):enviado?Text("Exito"):Text("Enviando"),
+                      content:error? Text("No se pudo guardar"):enviado?Text("Guardado exitoso"):Center(child: CircularProgressIndicator(),),
+                      actions: enviado?<Widget>[
+                        Center(
+                          child: FlatButton(
+                            child: Text("Aceptar"),
+                            onPressed: (){
+                              Navigator.pop(context);
+                            },
+                          ),
+                        )
+                      ]:null,
+                    );
+                  }
 
+              );
                 if(Provider.of<General>(context).cambiado){
-                  print(Provider.of<General>(context).pacienteid+"!!!!!!");
-                  Provider.of<General>(context).addCLiente();
-                  Navigator.pop(context);
                   Provider.of<General>(context).cambiado=false;
+                 var comp= Provider.of<General>(context).addCLiente();
+                 comp.then((algo){
+                   setState(() {
+                     enviado=true;
+                   });
+                 });
+                 comp.catchError((){
+                   error=true;
+                 });
+                  Navigator.pop(context);
+
               }
             },
           )
@@ -240,7 +277,4 @@ class NewCliente extends StatelessWidget{
           ])),
     );
   }
-
-
-
 }

@@ -1,5 +1,6 @@
 import 'package:expedientesodontologicos_app/Formularios/ControlPlaca.dart';
-import 'package:expedientesodontologicos_app/Formularios/Historial.dart';
+import 'package:expedientesodontologicos_app/Formularios/ListaAdulto.dart';
+import 'package:expedientesodontologicos_app/Formularios/ListaCirugias.dart';
 import 'package:expedientesodontologicos_app/Formularios/cirugia/I_V.dart';
 import 'package:expedientesodontologicos_app/img/SubirFoto.dart';
 import 'package:expedientesodontologicos_app/ModelosFormularios/General.dart';
@@ -10,7 +11,7 @@ import 'Formularios/adulto/I_II_III_IV.dart';
 import 'Formularios/adulto/V_VI_VII.dart';
 import 'ModelosFormularios/Adulto.dart';
 import 'ModelosFormularios/Cirugia.dart';
-
+import 'package:cloud_functions/cloud_functions.dart';
 class Baseformularios extends StatefulWidget {
   Baseformularios();
   @override
@@ -21,55 +22,25 @@ class _BaseformulariosState extends State<Baseformularios> {
   _BaseformulariosState();
   I_II_III_IV formI = I_II_III_IV();
   String nombre = "Nuevo registro",Titulo="Historial";
-  bool actualizacion = false;
+  bool enviandoexitoso = false,error=false;
   Widget bodycontent;
-
   List motivo=List<String>(),fecha=List<String>();
+  BuildContext central;
   @override
   void initState() {
-    bodycontent = Historial();
+    bodycontent = I_II_III_IV();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-
+      central=context;
       nombre = Provider.of<General>(context).nombre;
 
     return Scaffold(
       appBar: AppBar(
         title: Text(Titulo),
         centerTitle: true,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.check),
-            onPressed: () {
-                //adds
-                if (Provider.of<General>(context).cambiado) {
-                  Provider.of<General>(context).addCLiente();
-                  Provider.of<General>(context).cambiado=false;
-                  // print("Hola?");
-                }
-                if (Provider.of<Adulto>(context).cambiado) {
-                  Provider.of<Adulto>(context).motivo.add(Provider.of<Adulto>(context).motivotemp);
-                  Provider.of<Adulto>(context).fecha_ultima_visita.add(Provider.of<Adulto>(context).fecha_ultima_visitatemp);
-                  print(Provider.of<Adulto>(context).motivo.last);
-                  Provider.of<Adulto>(context).addAdult();
-                  Provider.of<Adulto>(context).cambiado=false;
-
-                  // print("Hola?");
-                }
-               if (Provider.of<Cirugia>(context).cambiado) {
-                  Provider.of<Cirugia>(context).checklist();
-                  Provider.of<Cirugia>(context).addCirugia();
-                  Provider.of<Cirugia>(context).cambiado=false;
-                  // print("Hola?");
-                }
-                Navigator.pop(context);
-
-            },
-          )
-        ],
       ),
       body: bodycontent,
       drawer: Drawer(
@@ -113,9 +84,10 @@ class _BaseformulariosState extends State<Baseformularios> {
                                       "_foto");
                               print(foto);
                               setState(() {
-                                Provider.of<General>(context).foto =foto;
-                                print(Provider.of<General>(context).foto);
+                                Provider.of<General>(context).foto =foto.toString();
+                                Provider.of<General>(context).updateCLiente();
                               });
+
                             },
                             child: Text(
                               "Tomar foto",
@@ -132,7 +104,8 @@ class _BaseformulariosState extends State<Baseformularios> {
                                           "_foto");
                               print(foto);
                               setState(() {
-                                Provider.of<General>(context).foto=foto;
+                                Provider.of<General>(context).foto=foto.toString();
+                                Provider.of<General>(context).updateCLiente();
                               });
                             },
                             child: Text(
@@ -145,16 +118,7 @@ class _BaseformulariosState extends State<Baseformularios> {
                     ],
                   )),
             ),
-            ListTile(
-              title: Text("Historial"),
-              onTap: () {
-                setState(() {
-                  Titulo="Historial";
-                  bodycontent = Historial();
-                });
-                Navigator.pop(context);
-              },
-            ),
+
             ListTile(
               title: Text("General"),
               onTap: () {
@@ -170,7 +134,7 @@ class _BaseformulariosState extends State<Baseformularios> {
               onTap: () {
                 setState(() {
                   Titulo="Historia Clinica";
-                  bodycontent = V_VI_VII();
+                  bodycontent = HistorialGeneral();
                 });
                 Navigator.pop(context);
               },
@@ -181,7 +145,7 @@ class _BaseformulariosState extends State<Baseformularios> {
               onTap: () {
                 setState(() {
                   Titulo="Cirugia";
-                  bodycontent = I_V();
+                  bodycontent = HistorialCirugias();
                 });
                 Navigator.pop(context);
               },
@@ -200,7 +164,7 @@ class _BaseformulariosState extends State<Baseformularios> {
             ListTile(
               title: Text("Regresar"),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.of(central).pop();
                 Navigator.pop(context);
               },
 

@@ -4,27 +4,26 @@ import 'package:expedientesodontologicos_app/model/model.dart';
 import 'package:flutter/foundation.dart';
 
 class Adulto{
-  String  historia, fecha_ultima_visitatemp, tratamiento_recibido , dientes_perdidos , causa_dientesperdidos , experiencias_exodoncias , higiene_oral , tipo_cepillo , tecnica_cepillado ,
+  String  historia, fecha_ultima_visita, tratamiento_recibido , dientes_perdidos , causa_dientesperdidos , experiencias_exodoncias , higiene_oral , tipo_cepillo , tecnica_cepillado ,
       frecuencia_cepillado , ayudas_higiene_extras ,hospital,expediente,fecha_ultimo_examen_medico, medicamentos, nombredelmedico;
   List enfermedades=List<String>();
 
-  String enfermedad_persiste="", iniciacion_enf="", curso="", tratamiento="", estadoactual="", otros_enfermedades_padecidas="", vacunas_recibidas="",clienteid,desc_operacion;
+  String enfermedad_persiste="", fecha="",iniciacion_enf="", curso="", tratamiento="", estadoactual="", otros_enfermedades_padecidas="", vacunas_recibidas="",clienteid,desc_operacion;
   bool cambiado,cuidadoMedico;
   //aun no en los formularios , revision_medica a punto de considerarse inecesaria, de aqui hacia abajo no estan contemplados a subirse por ahora
   String historia_familiar,historia_personal_social,otros_sintomas,describa_revision,presionsan_max,presionsan_min,temperatura,pulsaciones,ritmo,descripcion_examenes,
-  revision_medica,actitudemocional,examenfisico_caracuello,motivotemp,
+  revision_medica,actitudemocional,examenfisico_caracuello,motivo,
   //examen clinico bucal, se pregunta 2 veces por higiene oral...
   region_vestibular,paladar_duro,paladar_blando,orofaringe,piso_boca,lengua,cara_dorsal,cara_ventral,bordes,encia,dientes,prescencia_calculo,salivacion
   ;
- List revision_organos=List<String>(),sometido=List<String>(),fecha_ultima_visita= List<String>();
- List motivo=List<String>();
+ List revision_organos=List<String>(),sometido=List<String>();
 // operaciones=data["operaciones"]; trans_sanguine_somet=data["trans_sanguine_somet"];
 //    radioterapia=data["radioterapia"]  estas variables fueron eliminadas y esto queda como recordatorio por si las moscas
   String Userid;
  Adulto();
 void clear(){
-  motivo = List<String>();
-  historia="";fecha_ultima_visita= List<String>(); tratamiento_recibido="" ;
+  motivo = "";fecha="";
+  historia="";fecha_ultima_visita= ""; tratamiento_recibido="" ;
   dientes_perdidos=""; causa_dientesperdidos="" ;experiencias_exodoncias="" ;
   higiene_oral="";tipo_cepillo ="";tecnica_cepillado="" ;
   frecuencia_cepillado="" ; ayudas_higiene_extras="" ;
@@ -38,12 +37,10 @@ void clear(){
   region_vestibular="";paladar_duro="";paladar_blando="";orofaringe="";piso_boca="";lengua="";cara_dorsal="";
   cara_ventral="";bordes="";encia="";dientes="";prescencia_calculo="";salivacion="";revision_organos=List<String>();
 }
- void addmotivosyfecha(mot,fecha){
-  motivo=mot;fecha_ultima_visita=fecha;
- }
+
   void fromjson(Map<String, dynamic> data) {
-    motivo=List.from(data["motivo_consulta"]);
-    historia=data["historia_enfermedad_actual"];fecha_ultima_visita=List.from(data["fecha_ultima_visita"]); tratamiento_recibido=data["tratamiento"] ;
+    motivo=data["motivo_consulta"];
+    historia=data["historia_enfermedad_actual"];fecha_ultima_visita=data["fecha_ultima_visita"]; tratamiento_recibido=data["tratamiento"] ;
     dientes_perdidos=data["dientes_perdidos"]; causa_dientesperdidos=data["causa_dientes_perdidos"] ;experiencias_exodoncias=data["exper_exodocias"] ;
     higiene_oral=data["higiene_oral"] ;tipo_cepillo =data["tipo_cepillo"];tecnica_cepillado=data["tipo_cepillado"] ;
     frecuencia_cepillado=data["frec_cepillado"] ; ayudas_higiene_extras=data["ayudas_higiene_extra"] ;
@@ -58,7 +55,7 @@ void clear(){
     region_vestibular=data["region_vestibular"];paladar_duro=data["paladar_duro"];paladar_blando=data["paladar_blando"];orofaringe=data["orofaringe"];
     piso_boca=data["piso_boca"];lengua=data["lengua"];cara_dorsal=data["cara_dorsal"];
     cara_ventral=data["cara_ventral"];bordes=data["bordes"];encia=data["encia"];dientes=data["dientes"];prescencia_calculo=data["prescencia_calculo"];salivacion=data["salivacion"];
-    revision_organos=List.from(data["RevisiondeOrganos"]);
+    revision_organos=List.from(data["RevisiondeOrganos"]);fecha=data["Fecha"];
   }
   Map<String,dynamic> toMap()=>{
      "historia_enfermedad_actual":historia, "fecha_ultima_visita":fecha_ultima_visita, "tratamiento":tratamiento_recibido , "dientes_perdidos":dientes_perdidos ,
@@ -74,20 +71,15 @@ void clear(){
   "temperatura":temperatura,"pulsaciones":pulsaciones,"ritmo":ritmo,"descripcion_examenes":descripcion_examenes,
   "revision_medica":revision_medica,"actitudemocional":actitudemocional,"examenfisico_caracuello":examenfisico_caracuello,
   "region_vestibular":region_vestibular,"paladar_duro":paladar_duro,"paladar_blando":paladar_blando,"orofaringe":orofaringe,
-  "piso_boca":piso_boca,"lengua":lengua,"cara_dorsal":cara_dorsal,
+  "piso_boca":piso_boca,"lengua":lengua,"cara_dorsal":cara_dorsal,"Fecha":fecha,
   "cara_ventral":cara_ventral,"bordes":bordes,"encia":encia,"dientes":dientes,"prescencia_calculo":prescencia_calculo,"salivacion":salivacion, "RevisiondeOrganos":revision_organos,"motivo_consulta":motivo,"sometido_a":sometido
   };
-  Future<void> addAdult() async {
+  Future<dynamic> addAdult() async {
     final HttpsCallable callable = CloudFunctions.instance.getHttpsCallable(
       functionName: 'addExpAdulto',
     );
-    dynamic resp = await callable.call(this.toMap()).whenComplete((){print("Expediente adulto añadido con exito"+motivo.last.toString());});
-  }
-  Future<void> UpdateAdult() async {
-    final HttpsCallable callable = CloudFunctions.instance.getHttpsCallable(
-      functionName: 'updateExpAdulto',
-    );
-    dynamic resp = await callable.call(this.toMap()).whenComplete((){print(motivo.last.toString());});
+    dynamic resp = await callable.call(this.toMap());
+    return resp;
   }
 
 }

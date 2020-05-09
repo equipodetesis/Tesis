@@ -39,9 +39,10 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
   }
   @override
   Widget build(BuildContext context) {
+    Provider.of<Adulto>(context).fecha = DateFormat("y-M-d").format(fecha_selec);
     general = generalI();
     motivohistoria = motivoHistoria();
-    Provider.of<Adulto>(context).fecha_ultima_visitatemp = DateFormat("y-M-d").format(fecha_selec);
+    Provider.of<Adulto>(context).fecha_ultima_visita = DateFormat("y-M-d").format(fecha_selec);
     if(Provider.of<General>(context).fecha_inicio.isEmpty){
       Provider.of<General>(context).sexo = _currentsexo;
       print("hola");
@@ -294,7 +295,7 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
                 Provider.of<Adulto>(context).Userid=Provider.of<LoginState>(context).uid;
                 Provider.of<Adulto>(context).clienteid=Provider.of<General>(context).pacienteid;
                 Provider.of<Adulto>(context).cambiado=true;
-                Provider.of<Adulto>(context).motivotemp=value;
+                Provider.of<Adulto>(context).motivo=value;
                 print(Provider.of<Adulto>(context).Userid+"/"+Provider.of<Adulto>(context).clienteid);
           },
             ),
@@ -331,7 +332,7 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
                   .then((fecha) {
                 setState(() {
                   fecha_selec = fecha;
-                  Provider.of<Adulto>(context).fecha_ultima_visitatemp = DateFormat("y-M-d").format(fecha);
+                  Provider.of<Adulto>(context).fecha_ultima_visita= DateFormat("y-M-d").format(fecha);
                   Provider.of<Adulto>(context).Userid=Provider.of<LoginState>(context).uid;
                   Provider.of<Adulto>(context).clienteid=Provider.of<General>(context).pacienteid;
                   Provider.of<Adulto>(context).cambiado=true;

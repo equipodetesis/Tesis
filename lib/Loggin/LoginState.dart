@@ -40,6 +40,7 @@ uid=user.uid;
     notifyListeners();
   }else{
     islogged=true;
+    error=false;
     loading=false;
     notifyListeners();
   }
@@ -55,6 +56,7 @@ void loginGoogle() async {
       notifyListeners();
     }else{
       islogged=true;
+      error=false;
       loading=false;
       notifyListeners();
     }

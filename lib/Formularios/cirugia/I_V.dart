@@ -220,6 +220,7 @@ class _I_VState extends State<I_V> {
     Provider.of<Cirugia>(context, listen: false).checklist();
     Provider.of<Cirugia>(context, listen: false).Userid = Provider.of<LoginState>(context, listen: false).uid;
     Provider.of<Cirugia>(context, listen: false).clienteid = Provider.of<General>(context, listen: false).pacienteid;
+    Provider.of<Cirugia>(context, listen: false).fecha=DateTime.now().toString();
     print(Provider.of<Cirugia>(context, listen: false).adicciones);
     _items_clasificacion_asa = Util().getDropdownMenuItem(clasificacion_asa);
     Provider.of<Cirugia>(context, listen: false).clasificacion_asa == null ? Provider.of<Cirugia>(context, listen: false).clasificacion_asa = _items_clasificacion_asa.first.value : Provider.of<Cirugia>(context, listen: false).clasificacion_asa;

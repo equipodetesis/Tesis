@@ -64,16 +64,17 @@ class _NewClienteState extends State<NewCliente> {
               );
                 if(Provider.of<General>(context).cambiado){
                   Provider.of<General>(context).cambiado=false;
-                 var comp= Provider.of<General>(context).addCLiente();
-                 comp.then((algo){
+                  print("Holas");
+                Provider.of<General>(context).addCLiente().then((algo){
                    setState(() {
                      enviado=true;
                    });
-                 });
-                 comp.catchError((){
-                   error=true;
-                 });
-                  Navigator.pop(context);
+                 }).catchError((onError,trace){
+                   setState(() {
+                     error=true;
+                   });
+                });
+
 
               }
             },

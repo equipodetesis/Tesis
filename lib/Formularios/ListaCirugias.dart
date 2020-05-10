@@ -40,7 +40,7 @@ class HistorialCirugias extends StatelessWidget{
                       var tpo;
                         Provider.of<Cirugia>(context).fromjson(documents.data);
                         tpo="Cirugia";
-
+                       print(Provider.of<Cirugia>(context).padecimiento_actual);
                       return  Provider.of<Cirugia>(context).padecimiento_actual.isNotEmpty?Column(
                         children: <Widget>[
                           Divider(color: Colors.black,
@@ -49,6 +49,9 @@ class HistorialCirugias extends StatelessWidget{
                           ListTile(
                             title: Text(Provider.of<Cirugia>(context).padecimiento_actual,style: TextStyle(fontSize: 22.0,color: Colors.blue),),
                             subtitle: Text(Provider.of<Cirugia>(context).fecha,style: TextStyle(fontSize: 15.0),),
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Masformularios("Cirugia")));
+                            },
                           )
                         ],
                       ):Center(child: Text("Sin registros anteriores",style: TextStyle(fontSize: 20.0),),);

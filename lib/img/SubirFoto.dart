@@ -11,7 +11,7 @@ class SubirFoto{
     File image = await ImagePicker.pickImage(source: ImageSource.camera);
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
 
-    final StorageReference ref = FirebaseStorage.instance.ref().child('${user.email}/${user.email}_profilePicture.jpg');
+    final StorageReference ref = FirebaseStorage.instance.ref().child('${user.email}/${name}_profilePicture.jpg');
     final StorageUploadTask uploadTask = ref.putFile(image);
     final String downloadUrl = await (await uploadTask.onComplete).ref.getDownloadURL();
     return downloadUrl;
@@ -20,7 +20,7 @@ class SubirFoto{
     File image = await ImagePicker.pickImage(source: ImageSource.gallery);
     FirebaseUser user = await FirebaseAuth.instance.currentUser();
 
-    final StorageReference ref = FirebaseStorage.instance.ref().child('${user.email}/${user.email}_profilePicture.jpg');
+    final StorageReference ref = FirebaseStorage.instance.ref().child('${user.email}/${name}_profilePicture.jpg');
     final StorageUploadTask uploadTask = ref.putFile(image);
     final String downloadUrl = await (await uploadTask.onComplete).ref.getDownloadURL();
     return downloadUrl;

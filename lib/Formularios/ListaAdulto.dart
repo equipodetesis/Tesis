@@ -20,6 +20,8 @@ class HistorialGeneral extends StatelessWidget{
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: (){
+          Provider.of<Adulto>(context).clear();
+
           Navigator.push(context, MaterialPageRoute(builder: (context)=>Masformularios("Adulto")));
         },
       ),
@@ -53,6 +55,9 @@ class HistorialGeneral extends StatelessWidget{
                           ListTile(
                             title: Text(Provider.of<Adulto>(context).motivo.toString(),style: TextStyle(fontSize:22.0,color: Colors.blue)),
                             subtitle:Text(Provider.of<Adulto>(context).fecha.toString(),style: TextStyle(fontSize: 15.0,)),
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Masformularios("Adulto")));
+                            },
 
                           )
                         ],

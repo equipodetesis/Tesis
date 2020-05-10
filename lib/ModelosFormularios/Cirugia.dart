@@ -24,6 +24,7 @@ class Cirugia{
 
   String Userid = "", clienteid = "";
   void fromjson(Map<String, dynamic> data) {
+    print(data["padecimiento_actual"]);
     fecha=data["Fecha"];
     antec_pato_madre = data["antec_pato_madre"]; antec_pato_abuelama = data["antec_pato_abuelama"]; antec_pato_abueloma = data["antec_pato_abueloma"]; antec_pato_padre = data["antec_pato_padre"]; antec_pato_abuelapa = data["antec_pato_abuelapa"]; antec_pato_abuelopa = data["antec_pato_abuelopa"]; grupo_sanguineo = data["grupo_sanguineo"];
     factor_rh = data["factor_rh"]; inmunizaciones_infancia = data["inmunizaciones_infancia"]; inmunizaciones_adulto = data["inmunizaciones_adulto"]; regimen_alimenticio = data["regimen_alimenticio"]; condiciones_habitacionales = data["condiciones_habitacionales"]; enfermedades_infancia = data["enfermedades_infancia"];

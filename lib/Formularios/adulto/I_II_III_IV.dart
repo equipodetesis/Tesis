@@ -30,6 +30,7 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
     _sexolist = Util().getDropdownMenuItem(sexos);
     _currentsexo = sexos[0];
     super.initState();
+
   }
 
   @override
@@ -39,7 +40,8 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
   }
   @override
   Widget build(BuildContext context) {
-    Provider.of<Adulto>(context).fecha = DateFormat("y-M-d").format(fecha_selec);
+
+    Provider.of<Adulto>(context).fecha =DateTime.now().toString();
     general = generalI();
     motivohistoria = motivoHistoria();
     Provider.of<Adulto>(context).fecha_ultima_visita = DateFormat("y-M-d").format(fecha_selec);

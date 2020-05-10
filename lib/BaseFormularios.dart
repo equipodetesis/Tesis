@@ -22,7 +22,7 @@ class _BaseformulariosState extends State<Baseformularios> {
   _BaseformulariosState();
   I_II_III_IV formI = I_II_III_IV();
   String nombre = "Nuevo registro",Titulo="Historial";
-  bool enviandoexitoso = false,error=false;
+  bool enviandoexitoso = false,error=false,check=false;
   Widget bodycontent;
   List motivo=List<String>(),fecha=List<String>();
   BuildContext central;
@@ -41,6 +41,58 @@ class _BaseformulariosState extends State<Baseformularios> {
       appBar: AppBar(
         title: Text(Titulo),
         centerTitle: true,
+        actions:check?<Widget>[
+          IconButton(
+            icon: Icon(Icons.check),
+            onPressed: () {
+              showDialog(context: context,
+                  builder: (BuildContext context){
+                    return AlertDialog(
+                      title: error?Text("Error"):enviandoexitoso?Text("Exito"):Text("Enviando"),
+                      content:error? Text("No se pudo guardar"):enviandoexitoso?Text("Guardado exitoso"):Center(child: CircularProgressIndicator(),),
+                      actions: enviandoexitoso?<Widget>[
+                        Center(
+                          child: FlatButton(
+                            child: Text("Aceptar"),
+                            onPressed: (){
+                              Navigator.pop(context);
+                            },
+                          ),
+                        )
+                      ]:null,
+                    );
+                  }
+
+              );
+              //adds
+              if (Provider.of<General>(context).cambiado) {
+                Provider.of<General>(context).addCLiente().then((onValue){
+
+                 setState(() {
+                   Provider
+                       .of<General>(context)
+                       .cambiado = false;
+                   enviandoexitoso = true;
+                   Navigator.pop(context);
+                 });
+
+                }).catchError((onError,trace){
+                  setState(() {
+                    Provider
+                        .of<General>(context)
+                        .cambiado = false;
+                    error = true;
+                    Navigator.pop(context);
+                  });
+                });
+
+              }
+
+              Navigator.pop(context);
+
+            },
+          )
+        ]:null,
       ),
       body: bodycontent,
       drawer: Drawer(
@@ -80,7 +132,7 @@ class _BaseformulariosState extends State<Baseformularios> {
                               //funcion de la camara aqui
                               SubirFoto f=SubirFoto();
                               String foto=await f.tomarFoto(
-                                  Provider.of<General>(context).nombre +
+                                  Provider.of<General>(context).pacienteid +
                                       "_foto");
                               print(foto);
                               setState(() {
@@ -100,7 +152,7 @@ class _BaseformulariosState extends State<Baseformularios> {
                               SubirFoto f= SubirFoto();
                               String foto =
                                   await f.galeryFoto(
-                                      Provider.of<General>(context).nombre +
+                                      Provider.of<General>(context).pacienteid +
                                           "_foto");
                               print(foto);
                               setState(() {
@@ -124,6 +176,7 @@ class _BaseformulariosState extends State<Baseformularios> {
               onTap: () {
                 setState(() {
                   Titulo="General";
+                  check=true;
                   bodycontent = I_II_III_IV();
                 });
                 Navigator.pop(context);
@@ -133,6 +186,7 @@ class _BaseformulariosState extends State<Baseformularios> {
               title: Text("Expediente Adulto"),
               onTap: () {
                 setState(() {
+                  check=false;
                   Titulo="Historia Clinica";
                   bodycontent = HistorialGeneral();
                 });
@@ -145,6 +199,7 @@ class _BaseformulariosState extends State<Baseformularios> {
               onTap: () {
                 setState(() {
                   Titulo="Cirugia";
+                  check=false;
                   bodycontent = HistorialCirugias();
                 });
                 Navigator.pop(context);
@@ -155,6 +210,7 @@ class _BaseformulariosState extends State<Baseformularios> {
               onTap: () {
                 setState(() {
                   Titulo="Control de placa";
+                  check=false;
                   bodycontent = ListaControldeplacas();
                 });
                 Navigator.pop(context);
@@ -164,6 +220,7 @@ class _BaseformulariosState extends State<Baseformularios> {
             ListTile(
               title: Text("Regresar"),
               onTap: () {
+                check=false;
                 Navigator.of(central).pop();
                 Navigator.pop(context);
               },

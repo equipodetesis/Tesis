@@ -72,11 +72,10 @@ class _MasformulariosState extends State<Masformularios> {
               );
               //adds
               if (Provider.of<Adulto>(context).cambiado) {
-                 bool e=false,ex=false;
                 Provider.of<Adulto>(context).addAdult().then((result){
-                    ex=true;
+                    enviandoexitoso=true;
                 }).catchError((onError,trace){
-                  e=true;
+                  error=true;
                 });
                 Provider.of<Adulto>(context).cambiado=false;
                 setState(() {

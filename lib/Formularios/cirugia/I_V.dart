@@ -313,6 +313,20 @@ class _I_VState extends State<I_V> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              initialValue: Provider.of<Cirugia>(context).padecimiento_actual_temp,
+              decoration: InputDecoration(labelText: "Padecimiento actual", icon: Icon(FontAwesomeIcons.userInjured)),
+              keyboardType: TextInputType.text,
+              minLines: 1,
+              maxLines: 6,
+              onChanged: (value) {
+                Provider.of<Cirugia>(context).padecimiento_actual_temp = value;
+                Provider.of<Cirugia>(context).cambiado = true;
+              },
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.all(10),
+            child: TextFormField(
               initialValue: Provider.of<Cirugia>(context).antec_pato_madre,
               decoration: InputDecoration(labelText: "Madre", icon: Icon(FontAwesomeIcons.female)),
               keyboardType: TextInputType.text,
@@ -2483,20 +2497,6 @@ class _I_VState extends State<I_V> {
               keyboardType: TextInputType.text,
               onChanged: (value) {
                 Provider.of<Cirugia>(context).dientes = value;
-                Provider.of<Cirugia>(context).cambiado = true;
-              },
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.all(10),
-            child: TextFormField(
-              initialValue: Provider.of<Cirugia>(context).padecimiento_actual_temp,
-              decoration: InputDecoration(labelText: "Padecimiento actual", icon: Icon(FontAwesomeIcons.userInjured)),
-              keyboardType: TextInputType.text,
-              minLines: 1,
-              maxLines: 6,
-              onChanged: (value) {
-                Provider.of<Cirugia>(context).padecimiento_actual_temp = value;
                 Provider.of<Cirugia>(context).cambiado = true;
               },
             ),

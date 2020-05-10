@@ -50,7 +50,6 @@ class _MasformulariosState extends State<Masformularios> {
             icon: Icon(Icons.check),
             onPressed: () {
               showDialog(context: context,
-                  barrierDismissible: true,
                   builder: (BuildContext context){
                     return AlertDialog(
                       title: error?Text("Error"):enviandoexitoso?Text("Exito"):Text("Enviando"),
@@ -61,7 +60,6 @@ class _MasformulariosState extends State<Masformularios> {
                             child: Text("Aceptar"),
                             onPressed: (){
                               Navigator.pop(context);
-                              !error? Navigator.pop(context):null;
                             },
                           ),
                         )
@@ -71,40 +69,51 @@ class _MasformulariosState extends State<Masformularios> {
 
               );
               //adds
-              if (Provider.of<Adulto>(context).cambiado) {
-                Provider.of<Adulto>(context).addAdult().then((result){
+              if (Provider.of<General>(context).cambiado) {
+                var comp=Provider.of<General>(context).addCLiente();
+                comp.then((r){
+                  setState(() {
                     enviandoexitoso=true;
-                }).catchError((onError,trace){
+                  });
+                });
+                comp.catchError((){
                   error=true;
                 });
-                Provider.of<Adulto>(context).cambiado=false;
-                setState(() {
-                  print("refrescando");
+                Provider.of<General>(context).cambiado=false;
+                // print("Hola?");
+              }
+              if (Provider.of<Adulto>(context).cambiado) {
+                Provider.of<Adulto>(context).addAdult().then((result){
+                  setState(() {
+                    enviandoexitoso=true;
+                  });
+                }).catchError((){
+                  setState(() {
+                    error=true;
+                  });
                 });
+                Provider.of<Adulto>(context).cambiado=false;
 
                 // print("Hola?");
               }
               if (Provider.of<Cirugia>(context).cambiado) {
                 Provider.of<Cirugia>(context).checklist();
-                Provider.of<Cirugia>(context).addCirugia().then((onValue){
+                var comp=Provider.of<Cirugia>(context).addCirugia();
+                comp.then((result){
                   setState(() {
-                    Provider.of<Cirugia>(context).cambiado=false;
                     enviandoexitoso=true;
-                    Navigator.pop(context);
-                  });
-                }).catchError((onError,trace){
-                  setState(() {
-                    Provider.of<Cirugia>(context).cambiado=false;
-                    error=true;
-                    Navigator.pop(context);
                   });
                 });
-
-
+                comp.catchError((){
+                  setState(() {
+                    error=true;
+                  });
+                });
+                Provider.of<Cirugia>(context).cambiado=false;
                 // print("Hola?");
               }
 
-
+              Navigator.pop(context);
 
             },
           )

@@ -1,4 +1,5 @@
 import 'package:expedientesodontologicos_app/ModelosFormularios/Adulto.dart';
+import 'package:expedientesodontologicos_app/ModelosFormularios/Cirugia.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'ListItem.dart';
@@ -72,7 +73,8 @@ class ListController extends StatelessWidget{
                           Provider.of<General>(context).pacienteid=document.documentID;
                           Provider.of<General>(context).actualizar=true;
                           print(document.data["nombre"]);
-                            Provider.of<Adulto>(context).clear();
+                          Provider.of<Adulto>(context).clear();
+                          Provider.of<Cirugia>(context).clear();
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => Baseformularios()),
@@ -121,6 +123,7 @@ class ListController extends StatelessWidget{
                                   print("A"+Provider.of<Adulto>(context).Userid);}
                               }else{
                                 Provider.of<Adulto>(context).clear();
+                                Provider.of<Cirugia>(context).clear();
                               }
                               Navigator.push(
                                 context,

@@ -58,7 +58,7 @@ class _LogginState extends State<Loggin> {
                       Icons.mail,
                       color: Colors.grey,
                     )),
-                validator: (value) => value.isEmpty ? 'Este campo no puede estar vacio' : null,
+                validator: (value) => RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value) ?  null: 'Email invalido',
                 onSaved: (value) => _email = value.trim(),
               ),
             ),
@@ -89,20 +89,15 @@ class _LogginState extends State<Loggin> {
                     onPressed: () async {
                      if( _formKey.currentState.validate())
                        _formKey.currentState.save();
-
-                     print(_email);
-
-                       try {
-                         Provider.of<LoginState>(context).login(
-                             _email, _password);
-                       } on Exception catch (e) {
+                     print(Provider.of<LoginState>(context).error);
+                         if(Provider.of<LoginState>(context).error)
                          showDialog(
                              context: context,
                              builder: (BuildContext context){
                                return AlertDialog(
                                  elevation: 2.0,
                                  title: Text("Error de autenticación"),
-                                 content: Text(e.toString()),
+                                 content: Text("Contraseña o Nombre de usuario incorrecto"),
                                  actions: <Widget>[
                                    FlatButton(
                                      child: Text("Cerrar"),
@@ -114,8 +109,8 @@ class _LogginState extends State<Loggin> {
                                );
                              }
                          );
-                       }
-
+                     Provider.of<LoginState>(context).login(
+                         _email, _password,context);
 
                     },
                     materialTapTargetSize: MaterialTapTargetSize.padded,

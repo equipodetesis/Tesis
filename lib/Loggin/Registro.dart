@@ -1,5 +1,6 @@
 import 'package:expedientesodontologicos_app/Loggin/BaseAuth.dart';
 import 'package:expedientesodontologicos_app/Loggin/FireAuth.dart';
+import 'package:expedientesodontologicos_app/principal.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +52,7 @@ class _RegistroState extends State<Registro> {
                             Icons.mail,
                             color: Colors.grey,
                           )),
-                      validator: (value) => value.isEmpty ? 'Email can\'t be empty' : null,
+                      validator: (value) => RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value) ?  null: 'Email invalido',
                       onSaved:  (value){
                         setState(() {
                           _email = value.trim();
@@ -72,8 +73,8 @@ class _RegistroState extends State<Registro> {
                             Icons.lock,
                             color: Colors.grey,
                           )),
-                      validator: (value) => value.isEmpty ? 'Password can\'t be empty' : null,
-                      onSaved: (value){
+                      validator: (value) => value.length<6 ? 'Contraseña debil' : null,
+                      onChanged: (value){
                         setState(() {
                           _password = value.trim();
                         });
@@ -92,10 +93,11 @@ class _RegistroState extends State<Registro> {
                             Icons.lock,
                             color: Colors.grey,
                           )),
-                      validator: (value) => value!=_password? 'Las contraseñas no coinciden' : null,
+                      validator: (value) => value!=_password? "No coinciden" : null,
                       onSaved: (value){
                         setState(() {
                           _password = value.trim();
+                          print("value");
                         });
                       },
                     ),
@@ -105,17 +107,55 @@ class _RegistroState extends State<Registro> {
                     padding: EdgeInsets.fromLTRB(0.0,20, 0.0, 0.0),
                     child: RaisedButton(
                       elevation: 5.0,
-                      child: Text("Crear cuenta",style: TextStyle(color: Colors.white),),
+                      child: Text(_password,style: TextStyle(color: Colors.white),),
                       color: Colors.amberAccent,
                       splashColor: Colors.deepOrange,
                       onPressed: () async {
                         if(_formKey.currentState.validate()){
                           _formKey.currentState.save();
                         print(_password);
-                        FirebaseUser uid=await fireuser.signUp(_email,_password);
-                        if (uid != null)
+                        FirebaseUser uid=await fireuser.signUp(_email,_password).then((onValue){
                           fireuser.sendEmailVerification();
-                          Navigator.pop(context);
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context){
+                                return AlertDialog(
+                                  elevation: 2.0,
+                                  title: Text("Bienvenido "),
+                                  content: Text("Ahora tienes una cuenta"),
+                                  actions: <Widget>[
+                                    FlatButton(
+                                      child: Text("Cerrar"),
+                                      onPressed: (){
+                                        Navigator.of(context).pop();
+                                      },
+                                    )
+                                  ],
+                                );
+                              }
+                          );
+                          Navigator.push(context,MaterialPageRoute(builder: (context)=>principal()));
+                        }).catchError((onError,trace){
+                          showDialog(
+                              context: context,
+                              builder: (BuildContext context){
+                                return AlertDialog(
+                                  elevation: 2.0,
+                                  title: Text("Error "),
+                                  content: Text("Contraseña o Nombre de usuario incorrecto"+onError.toString()),
+                                  actions: <Widget>[
+                                    FlatButton(
+                                      child: Text("Cerrar"),
+                                      onPressed: (){
+                                        Navigator.of(context).pop();
+                                      },
+                                    )
+                                  ],
+                                );
+                              }
+                          );
+                        });
+
                         }
                       },
                       materialTapTargetSize: MaterialTapTargetSize.padded,

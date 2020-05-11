@@ -6,7 +6,7 @@ class Cirugia{
   antecedentes_traumaticos, antecedentes_quirurgicos, transfuciones, radio_quimioterapia, experiencia_anestesia, clasificacion_asa, frecuencia_cardiaca,
   tension_arterial, frecuencia_respiratoria, temperatura, peso, talla, constitucion_fisica, craneo_tipo,   movilidad, reflejo_pupilar, nariz,
   color_piel, ganglios_linfaticos, labios, carrillos, paladar_duro,
-  paladar_blando, orafaringe, piso_boca, lengua, encia, dientes, padecimiento_actual_temp, interpretacion_radiografica, hemoglobina, hematocrito,
+  paladar_blando, orafaringe, piso_boca, lengua, encia, dientes, interpretacion_radiografica, hemoglobina, hematocrito,
   neutrofilos, linfocitos, eosinofilos, basofilos, monocitos, hemoglobina_glucolisada, glicemia, otros_sangre, tiempo_sangrado, tiempo_coagulacion,
   cuenta_plaquetas, tiempo_protombina, tiempo_tromboplastina, inr, maxilar_superior, maxilar_inferior, diagnostico, pronostico, tratamiento,
   antisepsia, anestesia, incision, diseccion_mucoperiostica, osteotomia_ostectomia, operacion, cuidados_herida, sutura, primeras_24h,
@@ -14,22 +14,23 @@ class Cirugia{
   nombre_asistente, hora_inicio, hora_termino, valor_tratamiento, retiro_sutura, estado_postquirurgico, dado_alta, otra_adiccion, otra_alergia,
   tratamiento_digestivo, tratamiento_respiratorio, tratamiento_cardiovascular, tratamiento_genitourinario, tratamiento_endocrino, tratamiento_hematologico, tratamiento_neurologico, tratamiento_musculo_esqueleto,
   tratamiento_inmunologico, tratamiento_tegumentario, tratamiento_temporomandibular, otra_digestivo, otra_respiratorio, otra_cardiovascular, otra_genitourinario, otra_endocrino, otra_hematologico, otra_neurologico, otra_musculo_esqueleto,
-      otra_inmunologico, otra_tegumentario, otra_radiografia, Userid, clienteid, fecha_cirugia, padecimiento_actual;
+      otra_inmunologico, otra_tegumentario, otra_radiografia, Userid, clienteid, fecha, padecimiento_actual;
 
 
   bool cambiado = false , exostosis = false, endostosis = false, asimetrias_transversales = false, asimetrias_longitudinales = false, enoftalmo = false, exoftalmo = false, midriasis = false, miosis = false, palida = false, cianotica = false, enrojecida = false, manchas = false, hipotonico = false,
-      hipertonico = false, espasticos = false;
+      hipertonico = false, espasticos = false,editable=false;
 
   List adicciones = List(), alergias = List(), digestivo = List(), respiratorio = List(), cardiovascular = List(), genitourinario = List(), endocrino = List(), hematologico = List(), neurologico = List(), musculo_esqueleto = List(),
   inmunologico = List(), tegumentario = List(), temporomandibular = List(), radiografia = List(), analisis_laboratorio = List();
 
   void clear(){
+    editable=false;
     antec_pato_madre = ""; antec_pato_abuelama = ""; antec_pato_abueloma = ""; antec_pato_padre = ""; antec_pato_abuelapa = ""; antec_pato_abuelopa = ""; grupo_sanguineo = "";
     factor_rh = ""; inmunizaciones_infancia = ""; inmunizaciones_adulto = ""; regimen_alimenticio = ""; condiciones_habitacionales = ""; enfermedades_infancia = "";
     antecedentes_traumaticos = ""; antecedentes_quirurgicos = ""; transfuciones = ""; radio_quimioterapia = ""; experiencia_anestesia = ""; clasificacion_asa = ""; frecuencia_cardiaca = "";
     tension_arterial = ""; frecuencia_respiratoria = ""; temperatura = ""; peso = ""; talla = ""; constitucion_fisica = ""; craneo_tipo = "";   movilidad = ""; reflejo_pupilar = ""; nariz = "";
     color_piel = ""; ganglios_linfaticos = ""; labios = ""; carrillos = ""; paladar_duro = "";
-    paladar_blando = ""; orafaringe = ""; piso_boca = ""; lengua = ""; encia = ""; dientes = ""; padecimiento_actual_temp = ""; interpretacion_radiografica = ""; hemoglobina = ""; hematocrito = "";
+    paladar_blando = ""; orafaringe = ""; piso_boca = ""; lengua = ""; encia = ""; dientes = ""; interpretacion_radiografica = ""; hemoglobina = ""; hematocrito = "";
     neutrofilos = ""; linfocitos = ""; eosinofilos = ""; basofilos = ""; monocitos = ""; hemoglobina_glucolisada = ""; glicemia = ""; otros_sangre = ""; tiempo_sangrado = ""; tiempo_coagulacion = "";
     cuenta_plaquetas = ""; tiempo_protombina = ""; tiempo_tromboplastina = ""; inr = ""; maxilar_superior = ""; maxilar_inferior = ""; diagnostico = ""; pronostico = ""; tratamiento = "";
     antisepsia = ""; anestesia = ""; incision = ""; diseccion_mucoperiostica = ""; osteotomia_ostectomia = ""; operacion = ""; cuidados_herida = ""; sutura = ""; primeras_24h = "";
@@ -38,11 +39,11 @@ class Cirugia{
     tratamiento_digestivo = ""; tratamiento_respiratorio = ""; tratamiento_cardiovascular = ""; tratamiento_genitourinario = ""; tratamiento_endocrino = ""; tratamiento_hematologico = ""; tratamiento_neurologico = ""; tratamiento_musculo_esqueleto = "";
     tratamiento_inmunologico = ""; tratamiento_tegumentario = ""; tratamiento_temporomandibular = ""; otra_digestivo = ""; otra_respiratorio = ""; otra_cardiovascular = ""; otra_genitourinario = ""; otra_endocrino = ""; otra_hematologico = ""; otra_neurologico = ""; otra_musculo_esqueleto = "";
     otra_inmunologico = ""; otra_tegumentario = ""; otra_radiografia = ""; Userid = ""; clienteid = ""; adicciones = List(); alergias = List(); digestivo = List(); respiratorio = List(); cardiovascular = List(); genitourinario = List(); endocrino = List(); hematologico = List(); neurologico = List(); musculo_esqueleto = List();
-    inmunologico = List(); tegumentario = List(); temporomandibular = List(); radiografia = List(); analisis_laboratorio = List(); padecimiento_actual = ""; fecha_cirugia = ""; cambiado = false ; exostosis = false; endostosis = false; asimetrias_transversales = false; asimetrias_longitudinales = false; enoftalmo = false;
+    inmunologico = List(); tegumentario = List(); temporomandibular = List(); radiografia = List(); analisis_laboratorio = List(); padecimiento_actual = ""; fecha = ""; cambiado = false ; exostosis = false; endostosis = false; asimetrias_transversales = false; asimetrias_longitudinales = false; enoftalmo = false;
     exoftalmo = false; midriasis = false; miosis = false; palida = false; cianotica = false; enrojecida = false; manchas = false; hipotonico = false; hipertonico = false; espasticos = false;
   }
   void fromjson(Map<String, dynamic> data) {
-    fecha_cirugia=data["fecha_cirugia"];
+    fecha=data["Fecha"];
     antec_pato_madre = data["antec_pato_madre"]; antec_pato_abuelama = data["antec_pato_abuelama"]; antec_pato_abueloma = data["antec_pato_abueloma"]; antec_pato_padre = data["antec_pato_padre"]; antec_pato_abuelapa = data["antec_pato_abuelapa"]; antec_pato_abuelopa = data["antec_pato_abuelopa"]; grupo_sanguineo = data["grupo_sanguineo"];
     factor_rh = data["factor_rh"]; inmunizaciones_infancia = data["inmunizaciones_infancia"]; inmunizaciones_adulto = data["inmunizaciones_adulto"]; regimen_alimenticio = data["regimen_alimenticio"]; condiciones_habitacionales = data["condiciones_habitacionales"]; enfermedades_infancia = data["enfermedades_infancia"];
     antecedentes_traumaticos = data["antecedentes_traumaticos"]; antecedentes_quirurgicos = data["antecedentes_quirurgicos"]; transfuciones = data["transfuciones"]; radio_quimioterapia = data["radio_quimioterapia"]; experiencia_anestesia = data["experiencia_anestesia"]; clasificacion_asa = data["clasificacion_asa"]; frecuencia_cardiaca = data["frecuencia_cardiaca"];
@@ -145,7 +146,7 @@ class Cirugia{
     "tratamiento_digestivo":tratamiento_digestivo, "tratamiento_respiratorio":tratamiento_respiratorio, "tratamiento_cardiovascular":tratamiento_cardiovascular, "tratamiento_genitourinario":tratamiento_genitourinario, "tratamiento_endocrino":tratamiento_endocrino, "tratamiento_hematologico":tratamiento_hematologico,
     "tratamiento_neurologico":tratamiento_neurologico, "tratamiento_musculo_esqueleto":tratamiento_musculo_esqueleto, "tratamiento_inmunologico":tratamiento_inmunologico, "tratamiento_tegumentario":tratamiento_tegumentario, "tratamiento_temporomandibular":tratamiento_temporomandibular,"otra_digestivo":otra_digestivo,
     "otra_respiratorio":otra_respiratorio, "otra_cardiovascular":otra_cardiovascular, "otra_genitourinario":otra_genitourinario, "otra_endocrino":otra_endocrino, "otra_hematologico":otra_hematologico, "otra_neurologico":otra_neurologico, "otra_musculo_esqueleto":otra_musculo_esqueleto, "otra_inmunologico":otra_inmunologico,
-    "otra_tegumentario":otra_tegumentario, "otra_radiografia":otra_radiografia, "ClienteID":clienteid, "UserID":Userid,"fecha_cirugia":fecha_cirugia
+    "otra_tegumentario":otra_tegumentario, "otra_radiografia":otra_radiografia, "ClienteID":clienteid, "UserID":Userid,"Fecha":fecha
   };
 Future<dynamic> addCirugia() async {
   final HttpsCallable callable = CloudFunctions.instance.getHttpsCallable(

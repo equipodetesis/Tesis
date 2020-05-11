@@ -21,7 +21,6 @@ class HistorialGeneral extends StatelessWidget{
         child: Icon(Icons.add),
         onPressed: (){
           Provider.of<Adulto>(context).clear();
-
           Navigator.push(context, MaterialPageRoute(builder: (context)=>Masformularios("Adulto")));
         },
       ),
@@ -39,23 +38,22 @@ class HistorialGeneral extends StatelessWidget{
               default:
                 return ListView(
                     children:snapshot.data.documents.map((DocumentSnapshot documents){
-                      var tpo;
-
-                        Provider.of<Adulto>(context).fromjson(documents.data);
-                        print(Provider.of<Adulto>(context).dientes_perdidos);
-                        tpo="Adulto";
-
-
-
-                      return Provider.of<Adulto>(context).motivo.isNotEmpty?Column(
+                      var tama =snapshot.data.documents.indexOf(documents);
+                      var adulto=Adulto();
+                        adulto.fromjson(documents.data);
+                      return adulto.motivo!=""?Column(
                         children: <Widget>[
                           Divider(color: Colors.black,
                             thickness: 0.12,
                           ),
                           ListTile(
-                            title: Text(Provider.of<Adulto>(context).motivo.toString(),style: TextStyle(fontSize:22.0,color: Colors.blue)),
-                            subtitle:Text(Provider.of<Adulto>(context).fecha.toString(),style: TextStyle(fontSize: 15.0,)),
+                            title: Text(adulto.motivo.toString(),style: TextStyle(fontSize:22.0,color: Colors.blue)),
+                            subtitle:Text(adulto.fecha.toString()+"Tamaño:$tama",style: TextStyle(fontSize: 15.0,)),
                             onTap: (){
+                              Provider.of<Adulto>(context).clear();
+                              if(snapshot.data.documents.indexOf(documents)==(snapshot.data.documents.length-1))
+                                Provider.of<Adulto>(context).editable=true;
+                              Provider.of<Adulto>(context).fromjson(documents.data);
                               Navigator.push(context, MaterialPageRoute(builder: (context)=>Masformularios("Adulto")));
                             },
 

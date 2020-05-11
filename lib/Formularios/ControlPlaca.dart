@@ -464,12 +464,72 @@ class _ControlPlacaState extends State<ControlPlaca>{
                       splashColor: Colors.deepOrange,
                       padding:const EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 10.0) ,
                       onPressed: (){
+
                        controldePlaca.porcentaje=porcentaje;
                        controldePlaca.totaldientes=totaldientes;
                        controldePlaca.userid=Provider.of<LoginState>(context).uid;
                        controldePlaca.clienteid=Provider.of<General>(context).pacienteid;
                        controldePlaca.Fecha=_fecha;
-                       controldePlaca.addControldeplaca();
+                       showDialog(context: context,
+                           barrierDismissible: false,
+                           builder: (BuildContext context){
+                             return AlertDialog(
+                               title: Text("Enviando"),
+                               content:Container(
+                                   height: 250,
+                                   width: 500,
+                                   child: Center(child: CircularProgressIndicator(),)),
+
+                             );
+                           }
+
+                       );
+                       controldePlaca.addControldeplaca().then((onValue){
+                         showDialog(context: context,
+                             barrierDismissible: false,
+                             builder: (BuildContext context){
+                               return AlertDialog(
+                                 title: Text("Exito"),
+                                 content:Text("Guardado"),
+                                 actions: <Widget>[
+                                   Center(
+                                     child: FlatButton(
+                                       child: Text("Aceptar"),
+                                       onPressed: (){
+                                         Navigator.pop(context);
+                                         Navigator.pop(context);
+                                       },
+                                     ),
+                                   )
+                                 ],
+                               );
+                             }
+
+                         );
+                       }).catchError((onError,trace){
+                         Navigator.pop(context);
+                         showDialog(context: context,
+                             barrierDismissible: false,
+                             builder: (BuildContext context){
+                               return AlertDialog(
+                                 title: Text("Eror"),
+                                 content:Text(onError.toString()),
+                                 actions: <Widget>[
+                                   Center(
+                                     child: FlatButton(
+                                       child: Text("Aceptar"),
+                                       onPressed: (){
+                                         Navigator.pop(context);
+                                         Navigator.pop(context);
+                                       },
+                                     ),
+                                   )
+                                 ],
+                               );
+                             }
+
+                         );
+                       });
                        Navigator.pop(context);
                       },
                       ),

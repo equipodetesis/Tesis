@@ -20,6 +20,7 @@ class HistorialCirugias extends StatelessWidget{
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: (){
+          Provider.of<Cirugia>(context).clear();
           Navigator.push(context, MaterialPageRoute(builder: (context)=>Masformularios("Cirugia")));
         },
       ),
@@ -37,18 +38,24 @@ class HistorialCirugias extends StatelessWidget{
               default:
                 return ListView(
                     children:snapshot.data.documents.map((DocumentSnapshot documents){
-                      var tpo;
-                        Provider.of<Cirugia>(context).fromjson(documents.data);
-                        tpo="Cirugia";
+                        var cirugia=Cirugia();
+                        cirugia.fromjson(documents.data);
 
-                      return  Provider.of<Cirugia>(context).padecimiento_actual.isNotEmpty?Column(
+                      return  cirugia.padecimiento_actual!=""?Column(
                         children: <Widget>[
                           Divider(color: Colors.black,
                             thickness: 0.12,
                           ),
                           ListTile(
-                            title: Text(Provider.of<Cirugia>(context).padecimiento_actual,style: TextStyle(fontSize: 22.0,color: Colors.blue),),
-                            subtitle: Text(Provider.of<Cirugia>(context).fecha_cirugia,style: TextStyle(fontSize: 15.0),),
+                            title: Text(cirugia.padecimiento_actual,style: TextStyle(fontSize: 22.0,color: Colors.blue),),
+                            subtitle: Text(cirugia.fecha,style: TextStyle(fontSize: 15.0),),
+                            onTap: (){
+                              if(snapshot.data.documents.indexOf(documents)==(snapshot.data.documents.length-1))
+                                Provider.of<Cirugia>(context).editable=true;
+                              Provider.of<Cirugia>(context).clear();
+                              Provider.of<Cirugia>(context).fromjson(documents.data);
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Masformularios("Cirugia")));
+                            },
                           )
                         ],
                       ):Center(child: Text("Sin registros anteriores",style: TextStyle(fontSize: 20.0),),);

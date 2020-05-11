@@ -16,7 +16,6 @@ class LoginState with ChangeNotifier{
 
     if (user == null) {
       islogged=false;
-      error=true;
       loading=false;
     }else{
       uid=user.uid;
@@ -27,23 +26,33 @@ class LoginState with ChangeNotifier{
 
     return log;
   }
-void login(_email,_password) async{
+void login(_email,_password,context) async{
   loading=true;
-  notifyListeners();
-  var user= await fireuser.signIn(_email, _password);
-print(user.uid);
-uid=user.uid;
-  if (user.uid == null) {
-    islogged=false;
-    error=true;
-    loading=false;
-    notifyListeners();
-  }else{
+  print(_email);
+  var user= await fireuser.signIn(_email, _password).then((onValue){
     islogged=true;
     error=false;
-    loading=false;
     notifyListeners();
-  }
+  }).catchError((onError,trace){
+    showDialog(
+        context: context,
+        builder: (BuildContext context){
+          return AlertDialog(
+            elevation: 2.0,
+            title: Text("Error "),
+            content: Text("Contraseña o Nombre de usuario incorrecto"),
+            actions: <Widget>[
+              FlatButton(
+                child: Text("Cerrar"),
+                onPressed: (){
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
+        }
+    );
+  });
 }
 void loginGoogle() async {
     var user= await fireuser.googleSignin();

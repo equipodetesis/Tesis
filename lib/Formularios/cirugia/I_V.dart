@@ -231,7 +231,7 @@ class _I_VState extends State<I_V> {
     Provider.of<Cirugia>(context, listen: false).checklist();
     Provider.of<Cirugia>(context, listen: false).Userid = Provider.of<LoginState>(context, listen: false).uid;
     Provider.of<Cirugia>(context, listen: false).clienteid = Provider.of<General>(context, listen: false).pacienteid;
-    Provider.of<Cirugia>(context, listen: false).fecha=DateTime.now().toString();
+    Provider.of<Cirugia>(context, listen: false).fecha=DateFormat("dd-MM-yyyy").format(DateTime.now());
     print(Provider.of<Cirugia>(context, listen: false).adicciones);
     _items_clasificacion_asa = Util().getDropdownMenuItem(clasificacion_asa);
     if (Provider.of<Cirugia>(context, listen: false).clasificacion_asa == "") Provider.of<Cirugia>(context, listen: false).clasificacion_asa = _items_clasificacion_asa.first.value;
@@ -314,13 +314,13 @@ class _I_VState extends State<I_V> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
-              initialValue: Provider.of<Cirugia>(context).padecimiento_actual_temp,
+              initialValue: Provider.of<Cirugia>(context).padecimiento_actual,
               decoration: InputDecoration(labelText: "Padecimiento actual", icon: Icon(FontAwesomeIcons.userInjured)),
               keyboardType: TextInputType.text,
               minLines: 1,
               maxLines: 6,
               onChanged: (value) {
-                Provider.of<Cirugia>(context).padecimiento_actual_temp = value;
+                Provider.of<Cirugia>(context).padecimiento_actual = value;
                 Provider.of<Cirugia>(context).cambiado = true;
               },
             ),

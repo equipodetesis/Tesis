@@ -43,21 +43,15 @@ class _NewClienteState extends State<NewCliente> {
             icon: Icon(Icons.check),
             onPressed: (){
               showDialog(context: context,
-                  barrierDismissible: true,
+                  barrierDismissible: false,
                   builder: (BuildContext context){
                     return AlertDialog(
-                      title: error?Text("Error"):enviado?Text("Exito"):Text("Enviando"),
-                      content:error? Text("No se pudo guardar"):enviado?Text("Guardado exitoso"):Center(child: CircularProgressIndicator(),),
-                      actions: enviado?<Widget>[
-                        Center(
-                          child: FlatButton(
-                            child: Text("Aceptar"),
-                            onPressed: (){
-                              Navigator.pop(context);
-                            },
-                          ),
-                        )
-                      ]:null,
+                      title: Text("Enviando"),
+                      content:Container(
+                          height: 250,
+                          width: 500,
+                          child: Center(child: CircularProgressIndicator(),)),
+
                     );
                   }
 
@@ -66,13 +60,52 @@ class _NewClienteState extends State<NewCliente> {
                   Provider.of<General>(context).cambiado=false;
                   print("Holas");
                 Provider.of<General>(context).addCLiente().then((algo){
-                   setState(() {
-                     enviado=true;
-                   });
+                  Navigator.pop(context);
+                  showDialog(context: context,
+                      barrierDismissible: false,
+                      builder: (BuildContext context){
+                        return AlertDialog(
+                          title: Text("Exito"),
+                          content:Text("Guardado"),
+                          actions: <Widget>[
+                            Center(
+                              child: FlatButton(
+                                child: Text("Aceptar"),
+                                onPressed: (){
+                                  Navigator.pop(context);
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            )
+                          ],
+                        );
+                      }
+
+                  );
                  }).catchError((onError,trace){
-                   setState(() {
-                     error=true;
-                   });
+                  Navigator.pop(context);
+                  showDialog(context: context,
+                      barrierDismissible: false,
+                      builder: (BuildContext context){
+                        return AlertDialog(
+                          title: Text("Eror"),
+                          content:Text(onError.toString()),
+                          actions: <Widget>[
+                            Center(
+                              child: FlatButton(
+                                child: Text("Aceptar"),
+                                onPressed: (){
+                                  Navigator.pop(context);
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            )
+                          ],
+                        );
+                      }
+
+                  );
+
                 });
 
 

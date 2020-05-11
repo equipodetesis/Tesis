@@ -32,9 +32,13 @@ class _MasformulariosState extends State<Masformularios> {
   void initState() {
     print(tpo);
     if(tpo=="Adulto"){
-      bodycontent = V_VI_VII();}
+      bodycontent = V_VI_VII();
+    Titulo="Nueva consulta";
+    }
     if(tpo=="Cirugia"){
-      bodycontent=I_V();}
+      bodycontent=I_V();
+      Titulo="Nueva cirugia";
+    }
     super.initState();
   }
 
@@ -50,70 +54,123 @@ class _MasformulariosState extends State<Masformularios> {
             icon: Icon(Icons.check),
             onPressed: () {
               showDialog(context: context,
+                  barrierDismissible: false,
                   builder: (BuildContext context){
                     return AlertDialog(
-                      title: error?Text("Error"):enviandoexitoso?Text("Exito"):Text("Enviando"),
-                      content:error? Text("No se pudo guardar"):enviandoexitoso?Text("Guardado exitoso"):Center(child: CircularProgressIndicator(),),
-                      actions: enviandoexitoso?<Widget>[
-                        Center(
-                          child: FlatButton(
-                            child: Text("Aceptar"),
-                            onPressed: (){
-                              Navigator.pop(context);
-                            },
-                          ),
-                        )
-                      ]:null,
+                      title: Text("Enviando"),
+                      content:Container(
+                          height: 250,
+                          width: 500,
+                          child: Center(child: CircularProgressIndicator(),)),
                     );
                   }
-
               );
               //adds
-              if (Provider.of<General>(context).cambiado) {
-                var comp=Provider.of<General>(context).addCLiente();
-                comp.then((r){
-                  setState(() {
-                    enviandoexitoso=true;
-                  });
-                });
-                comp.catchError((){
-                  error=true;
-                });
-                Provider.of<General>(context).cambiado=false;
-                // print("Hola?");
-              }
               if (Provider.of<Adulto>(context).cambiado) {
-                Provider.of<Adulto>(context).addAdult().then((result){
-                  setState(() {
-                    enviandoexitoso=true;
-                  });
-                }).catchError((){
-                  setState(() {
-                    error=true;
-                  });
-                });
                 Provider.of<Adulto>(context).cambiado=false;
+                Provider.of<Adulto>(context).addAdult().then((result){
+                  Navigator.pop(context);
+                  showDialog(context: context,
+                      barrierDismissible: false,
+                      builder: (BuildContext context){
+                        return AlertDialog(
+                          title: Text("Exito"),
+                          content:Text("Guardado"),
+                          actions: <Widget>[
+                            Center(
+                              child: FlatButton(
+                                child: Text("Aceptar"),
+                                onPressed: (){
+                                  Navigator.pop(context);
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            )
+                          ],
+                        );
+                      }
+
+                  );
+                }).catchError((onError,trace){
+                  Navigator.pop(context);
+                  showDialog(context: context,
+                      barrierDismissible: false,
+                      builder: (BuildContext context){
+                        return AlertDialog(
+                          title: Text("Eror"),
+                          content:Text(onError.toString()),
+                          actions: <Widget>[
+                            Center(
+                              child: FlatButton(
+                                child: Text("Aceptar"),
+                                onPressed: (){
+                                  Navigator.pop(context);
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            )
+                          ],
+                        );
+                      }
+
+                  );
+                });
+
 
                 // print("Hola?");
               }
               if (Provider.of<Cirugia>(context).cambiado) {
                 Provider.of<Cirugia>(context).checklist();
-                var comp=Provider.of<Cirugia>(context).addCirugia();
-                comp.then((result){
-                  setState(() {
-                    enviandoexitoso=true;
-                  });
+                Provider.of<Cirugia>(context).addCirugia().then((onValue){
+                  Navigator.pop(context);
+                  showDialog(context: context,
+                      barrierDismissible: false,
+                      builder: (BuildContext context){
+                        return AlertDialog(
+                          title: Text("Exito"),
+                          content:Text("Guardado"),
+                          actions: <Widget>[
+                            Center(
+                              child: FlatButton(
+                                child: Text("Aceptar"),
+                                onPressed: (){
+                                  Navigator.pop(context);
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            )
+                          ],
+                        );
+                      }
+
+                  );
+                }).catchError((onError,trace){
+                  Navigator.pop(context);
+                  showDialog(context: context,
+                      barrierDismissible: false,
+                      builder: (BuildContext context){
+                        return AlertDialog(
+                          title: Text("Eror"),
+                          content:Text(onError.toString()),
+                          actions: <Widget>[
+                            Center(
+                              child: FlatButton(
+                                child: Text("Aceptar"),
+                                onPressed: (){
+                                  Navigator.pop(context);
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            )
+                          ],
+                        );
+                      }
+
+                  );
                 });
-                comp.catchError((){
-                  setState(() {
-                    error=true;
-                  });
-                });
-                Provider.of<Cirugia>(context).cambiado=false;
-                // print("Hola?");
               }
 
-              Navigator.pop(context);
+
 
             },
           )

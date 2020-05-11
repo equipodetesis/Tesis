@@ -9,7 +9,7 @@ class Adulto{
   List enfermedades=List<String>();
 
   String enfermedad_persiste="", fecha="",iniciacion_enf="", curso="", tratamiento="", estadoactual="", otros_enfermedades_padecidas="", vacunas_recibidas="",clienteid,desc_operacion;
-  bool cambiado,cuidadoMedico;
+  bool cambiado,cuidadoMedico,editable=false;
   //aun no en los formularios , revision_medica a punto de considerarse inecesaria, de aqui hacia abajo no estan contemplados a subirse por ahora
   String historia_familiar,historia_personal_social,otros_sintomas,describa_revision,presionsan_max,presionsan_min,temperatura,pulsaciones,ritmo,descripcion_examenes,
   revision_medica,actitudemocional,examenfisico_caracuello,motivo, nivel_higiene_oral,
@@ -22,7 +22,7 @@ class Adulto{
   String Userid;
  Adulto();
 void clear(){
-  motivo = "";fecha="";
+  motivo = "";fecha="";editable=false;
   historia="";fecha_ultima_visita= ""; tratamiento_recibido="" ;
   dientes_perdidos=""; causa_dientesperdidos="" ;experiencias_exodoncias="" ;
   higiene_oral="";tipo_cepillo ="";tecnica_cepillado="" ;

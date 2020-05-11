@@ -23,13 +23,14 @@ class Baseformularios extends StatefulWidget {
 class _BaseformulariosState extends State<Baseformularios> {
   _BaseformulariosState();
   I_II_III_IV formI = I_II_III_IV();
-  String nombre = "Nuevo registro",Titulo="Historial";
+  String nombre = "Nuevo registro",Titulo="";
   bool enviandoexitoso = false,error=false,check=false;
   Widget bodycontent;
   List motivo=List<String>(),fecha=List<String>();
   BuildContext central;
   @override
   void initState() {
+    Titulo="Datos generales";
     bodycontent = I_II_III_IV();
     super.initState();
   }
@@ -48,36 +49,48 @@ class _BaseformulariosState extends State<Baseformularios> {
             icon: Icon(Icons.check),
             onPressed: () {
               showDialog(context: context,
+                  barrierDismissible: false,
                   builder: (BuildContext context){
                     return AlertDialog(
-                      title: error?Text("Error"):enviandoexitoso?Text("Exito"):Text("Enviando"),
-                      content:error? Text("No se pudo guardar"):enviandoexitoso?Text("Guardado exitoso"):Center(child: CircularProgressIndicator(),),
-                      actions: enviandoexitoso?<Widget>[
-                        Center(
-                          child: FlatButton(
-                            child: Text("Aceptar"),
-                            onPressed: (){
-                              Navigator.pop(context);
-                            },
-                          ),
-                        )
-                      ]:null,
+                      title: Text("Enviando"),
+                      content:Container(
+                          height: 250,
+                          width: 500,
+                          child: Center(child: CircularProgressIndicator(),)),
+
                     );
                   }
 
               );
               //adds
               if (Provider.of<General>(context).cambiado) {
-                Provider.of<General>(context).addCLiente().then((onValue){
+                Provider
+                    .of<General>(context)
+                    .cambiado = false;
+                enviandoexitoso = true;
+                Provider.of<General>(context).updateCLiente().then((onValue){
+                  Navigator.pop(context);
+                  showDialog(context: context,
+                      barrierDismissible: false,
+                      builder: (BuildContext context){
+                        return AlertDialog(
+                          title: Text("Exito"),
+                          content:Text("Guardado"),
+                          actions: <Widget>[
+                            Center(
+                              child: FlatButton(
+                                child: Text("Aceptar"),
+                                onPressed: (){
+                                  Navigator.pop(context);
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            )
+                          ],
+                        );
+                      }
 
-                 setState(() {
-                   Provider
-                       .of<General>(context)
-                       .cambiado = false;
-                   enviandoexitoso = true;
-                   Navigator.pop(context);
-                 });
-
+                  );
                 }).catchError((onError,trace){
                   setState(() {
                     Provider
@@ -132,10 +145,11 @@ class _BaseformulariosState extends State<Baseformularios> {
                           MaterialButton(
                             onPressed: () async {
                               //funcion de la camara aqui
+
                               SubirFoto f=SubirFoto();
                               String foto=await f.tomarFoto(
                                   Provider.of<General>(context).pacienteid +
-                                      "_foto");
+                                      "_foto",context);
                               print(foto);
                               setState(() {
                                 Provider.of<General>(context).foto =foto.toString();
@@ -155,7 +169,7 @@ class _BaseformulariosState extends State<Baseformularios> {
                               String foto =
                                   await f.galeryFoto(
                                       Provider.of<General>(context).pacienteid +
-                                          "_foto");
+                                          "_foto",context);
                               print(foto);
                               setState(() {
                                 Provider.of<General>(context).foto=foto.toString();
@@ -174,10 +188,10 @@ class _BaseformulariosState extends State<Baseformularios> {
             ),
 
             ListTile(
-              title: Text("General"),
+              title: Text("Datos Generales"),
               onTap: () {
                 setState(() {
-                  Titulo="General";
+                  Titulo="Datos Generales";
                   check=true;
                   bodycontent = I_II_III_IV();
                 });
@@ -185,11 +199,11 @@ class _BaseformulariosState extends State<Baseformularios> {
               },
             ),
             ListTile(
-              title: Text("Expediente Adulto"),
+              title: Text("Consulta General"),
               onTap: () {
                 setState(() {
                   check=false;
-                  Titulo="Historia Clinica";
+                  Titulo="Consulta General";
                   bodycontent = HistorialGeneral();
                 });
                 Navigator.pop(context);

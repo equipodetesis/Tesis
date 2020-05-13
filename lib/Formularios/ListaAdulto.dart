@@ -38,7 +38,6 @@ class HistorialGeneral extends StatelessWidget{
               default:
                 return ListView(
                     children:snapshot.data.documents.map((DocumentSnapshot documents){
-                      var tama =snapshot.data.documents.indexOf(documents);
                       var adulto=Adulto();
                         adulto.fromjson(documents.data);
                       return adulto.motivo!=""?Column(
@@ -48,7 +47,7 @@ class HistorialGeneral extends StatelessWidget{
                           ),
                           ListTile(
                             title: Text(adulto.motivo.toString(),style: TextStyle(fontSize:22.0,color: Colors.blue)),
-                            subtitle:Text(adulto.fecha.toString()+"Tamaño:$tama",style: TextStyle(fontSize: 15.0,)),
+                            subtitle:Text(adulto.fecha.toString(),style: TextStyle(fontSize: 15.0,)),
                             onTap: (){
                               Provider.of<Adulto>(context).clear();
                               if(snapshot.data.documents.indexOf(documents)==(snapshot.data.documents.length-1))

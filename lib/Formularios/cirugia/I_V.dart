@@ -489,6 +489,7 @@ class _I_VState extends State<I_V> {
                           value: Provider.of<Cirugia>(context).adicciones[Provider.of<Cirugia>(context).adicciones.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
+                              FocusScope.of(context).requestFocus(FocusNode());
                               Provider.of<Cirugia>(context).adicciones[Provider.of<Cirugia>(context).adicciones.indexOf(value)] = value2;
                               Provider.of<Cirugia>(context).cambiado = true;
                             });
@@ -644,6 +645,7 @@ class _I_VState extends State<I_V> {
                           value: Provider.of<Cirugia>(context).alergias[Provider.of<Cirugia>(context).alergias.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
+                              FocusScope.of(context).requestFocus(FocusNode());
                               Provider.of<Cirugia>(context).alergias[Provider.of<Cirugia>(context).alergias.indexOf(value)] = value2;
                               Provider.of<Cirugia>(context).cambiado = true;
                             });
@@ -779,6 +781,7 @@ class _I_VState extends State<I_V> {
                           value: Provider.of<Cirugia>(context).digestivo[Provider.of<Cirugia>(context).digestivo.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
+                              FocusScope.of(context).requestFocus(FocusNode());
                               Provider.of<Cirugia>(context).digestivo[Provider.of<Cirugia>(context).digestivo.indexOf(value)] = value2;
                               Provider.of<Cirugia>(context).cambiado = true;
                             });
@@ -883,6 +886,7 @@ class _I_VState extends State<I_V> {
                           value: Provider.of<Cirugia>(context).respiratorio[Provider.of<Cirugia>(context).respiratorio.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
+                              FocusScope.of(context).requestFocus(FocusNode());
                               Provider.of<Cirugia>(context).respiratorio[Provider.of<Cirugia>(context).respiratorio.indexOf(value)] = value2;
                               Provider.of<Cirugia>(context).cambiado = true;
                             });
@@ -987,6 +991,7 @@ class _I_VState extends State<I_V> {
                           value: Provider.of<Cirugia>(context).cardiovascular[Provider.of<Cirugia>(context).cardiovascular.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
+                              FocusScope.of(context).requestFocus(FocusNode());
                               Provider.of<Cirugia>(context).cardiovascular[Provider.of<Cirugia>(context).cardiovascular.indexOf(value)] = value2;
                               Provider.of<Cirugia>(context).cambiado = true;
                             });
@@ -1091,6 +1096,7 @@ class _I_VState extends State<I_V> {
                           value: Provider.of<Cirugia>(context).genitourinario[Provider.of<Cirugia>(context).genitourinario.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
+                              FocusScope.of(context).requestFocus(FocusNode());
                               Provider.of<Cirugia>(context).genitourinario[Provider.of<Cirugia>(context).genitourinario.indexOf(value)] = value2;
                               Provider.of<Cirugia>(context).cambiado = true;
                             });
@@ -1195,6 +1201,7 @@ class _I_VState extends State<I_V> {
                           value: Provider.of<Cirugia>(context).endocrino[Provider.of<Cirugia>(context).endocrino.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
+                              FocusScope.of(context).requestFocus(FocusNode());
                               Provider.of<Cirugia>(context).endocrino[Provider.of<Cirugia>(context).endocrino.indexOf(value)] = value2;
                               Provider.of<Cirugia>(context).cambiado = true;
                             });
@@ -1299,6 +1306,7 @@ class _I_VState extends State<I_V> {
                           value: Provider.of<Cirugia>(context).hematologico[Provider.of<Cirugia>(context).hematologico.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
+                              FocusScope.of(context).requestFocus(FocusNode());
                               Provider.of<Cirugia>(context).hematologico[Provider.of<Cirugia>(context).hematologico.indexOf(value)] = value2;
                               Provider.of<Cirugia>(context).cambiado = true;
                             });
@@ -1403,6 +1411,7 @@ class _I_VState extends State<I_V> {
                           value: Provider.of<Cirugia>(context).neurologico[Provider.of<Cirugia>(context).neurologico.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
+                              FocusScope.of(context).requestFocus(FocusNode());
                               Provider.of<Cirugia>(context).neurologico[Provider.of<Cirugia>(context).neurologico.indexOf(value)] = value2;
                               Provider.of<Cirugia>(context).cambiado = true;
                             });
@@ -1507,6 +1516,7 @@ class _I_VState extends State<I_V> {
                           value: Provider.of<Cirugia>(context).musculo_esqueleto[Provider.of<Cirugia>(context).musculo_esqueleto.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
+                              FocusScope.of(context).requestFocus(FocusNode());
                               Provider.of<Cirugia>(context).musculo_esqueleto[Provider.of<Cirugia>(context).musculo_esqueleto.indexOf(value)] = value2;
                               Provider.of<Cirugia>(context).cambiado = true;
                             });
@@ -1611,6 +1621,7 @@ class _I_VState extends State<I_V> {
                           value: Provider.of<Cirugia>(context).inmunologico[Provider.of<Cirugia>(context).inmunologico.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
+                              FocusScope.of(context).requestFocus(FocusNode());
                               Provider.of<Cirugia>(context).inmunologico[Provider.of<Cirugia>(context).inmunologico.indexOf(value)] = value2;
                               Provider.of<Cirugia>(context).cambiado = true;
                             });
@@ -1715,6 +1726,7 @@ class _I_VState extends State<I_V> {
                           value: Provider.of<Cirugia>(context).tegumentario[Provider.of<Cirugia>(context).tegumentario.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
+                              FocusScope.of(context).requestFocus(FocusNode());
                               Provider.of<Cirugia>(context).tegumentario[Provider.of<Cirugia>(context).tegumentario.indexOf(value)] = value2;
                               Provider.of<Cirugia>(context).cambiado = true;
                             });
@@ -1814,6 +1826,7 @@ class _I_VState extends State<I_V> {
                     value: Provider.of<Cirugia>(context).clasificacion_asa,
                     onChanged: (value) {
                       setState(() {
+                        FocusScope.of(context).requestFocus(FocusNode());
                         Provider.of<Cirugia>(context).clasificacion_asa = value;
                         Provider.of<Cirugia>(context).cambiado = true;
                       });
@@ -1989,6 +2002,7 @@ class _I_VState extends State<I_V> {
                     value: Provider.of<Cirugia>(context).craneo_tipo,
                     onChanged: (value) {
                       setState(() {
+                        FocusScope.of(context).requestFocus(FocusNode());
                         Provider.of<Cirugia>(context).craneo_tipo = value;
                         Provider.of<Cirugia>(context).cambiado = true;
                       });
@@ -2324,6 +2338,7 @@ class _I_VState extends State<I_V> {
                           value: Provider.of<Cirugia>(context).temporomandibular[Provider.of<Cirugia>(context).temporomandibular.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
+                              FocusScope.of(context).requestFocus(FocusNode());
                               Provider.of<Cirugia>(context).temporomandibular[Provider.of<Cirugia>(context).temporomandibular.indexOf(value)] = value2;
                               Provider.of<Cirugia>(context).cambiado = true;
                             });
@@ -2536,6 +2551,7 @@ class _I_VState extends State<I_V> {
                           value: Provider.of<Cirugia>(context).radiografia[Provider.of<Cirugia>(context).radiografia.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
+                              FocusScope.of(context).requestFocus(FocusNode());
                               Provider.of<Cirugia>(context).radiografia[Provider.of<Cirugia>(context).radiografia.indexOf(value)] = value2;
                               Provider.of<Cirugia>(context).cambiado = true;
                             });
@@ -2640,6 +2656,7 @@ class _I_VState extends State<I_V> {
                           value: Provider.of<Cirugia>(context).analisis_laboratorio[Provider.of<Cirugia>(context).analisis_laboratorio.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
+                              FocusScope.of(context).requestFocus(FocusNode());
                               Provider.of<Cirugia>(context).analisis_laboratorio[Provider.of<Cirugia>(context).analisis_laboratorio.indexOf(value)] = value2;
                               Provider.of<Cirugia>(context).cambiado = true;
                             });

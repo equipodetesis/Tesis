@@ -171,9 +171,6 @@ class _MasformulariosState extends State<Masformularios> {
                   );
                 });
               }
-
-
-
             },
           )
         ],

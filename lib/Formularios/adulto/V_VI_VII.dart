@@ -90,7 +90,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
   void initState() {
     Provider.of<Adulto>(context, listen: false).Userid=Provider.of<LoginState>(context, listen: false).uid;
     Provider.of<Adulto>(context, listen: false).clienteid=Provider.of<General>(context, listen: false).pacienteid;
-    Provider.of<Adulto>(context, listen: false).fecha_ultima_visita=DateFormat("dd-MM-yyyy").format(DateTime.now());
+    if(Provider.of<Adulto>(context, listen: false).fecha == "") Provider.of<Adulto>(context, listen: false).fecha=DateFormat("dd-MM-yyyy").format(DateTime.now());
     if(Provider.of<Adulto>(context, listen: false).fecha_ultima_visita == "")Provider.of<Adulto>(context, listen: false).fecha_ultima_visita = DateFormat("y-M-d").format(DateTime.now());
     if(Provider.of<Adulto>(context, listen: false).fecha_ultimo_examen_medico == "")Provider.of<Adulto>(context, listen: false).fecha_ultimo_examen_medico = DateFormat("y-M-d").format(DateTime.now());
 
@@ -110,6 +110,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
     _items_sometido.addAll(Util().setitemlist(_sometido, Provider.of<Adulto>(context, listen: false).sometido));
     Provider.of<Adulto>(context, listen: false).sometido.add(_items_sometido.last.first.value);
     print(Provider.of<Adulto>(context, listen: false).desc_operacion);
+    if(Provider.of<Adulto>(context, listen: false).editable == false) Provider.of<Adulto>(context, listen: false).checklist();
     // TODO: implement initState
     super.initState();
   }
@@ -375,6 +376,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                 Expanded(child: Text("¿Ha estado el paciente bajo cuidado medico?")),
                 Checkbox(
                   value: Provider.of<Adulto>(context).cuidadoMedico,
+                  activeColor: Provider.of<Adulto>(context).editable ? Theme.of(context).accentColor : Colors.grey,
                   onChanged: (value) {
                     Provider.of<Adulto>(context).editable ?
                     setState(() {

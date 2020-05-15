@@ -18,7 +18,6 @@ class V_VI_VII extends StatefulWidget {
 class _V_VI_VII_State extends State<V_VI_VII> {
   List<DropdownMenuItem> _itemslocal;
   List<String> listlocales = ["Ninguna", "Hospital", "Clínica"];
-
   List _enfermedades = [
     "Ninguna",
     "Alergias",
@@ -114,7 +113,11 @@ class _V_VI_VII_State extends State<V_VI_VII> {
     // TODO: implement initState
     super.initState();
   }
-
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -407,6 +410,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                         value: Provider.of<Adulto>(context).hospital,
                         onChanged: (value) {
                           setState(() {
+                            FocusScope.of(context).requestFocus(FocusNode());
                             Provider.of<Adulto>(context).hospital = value;
                             Provider.of<Adulto>(context).cambiado = true;
                           });
@@ -521,6 +525,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                         itemHeight: 48,
                         onChanged: (selection) {
                           setState(() {
+                            FocusScope.of(context).requestFocus(FocusNode());
                             Provider.of<Adulto>(context).enfermedades[
                             Provider.of<Adulto>(context).enfermedades.indexOf(value)] = selection;
                             Provider.of<Adulto>(context).enfermedades =
@@ -720,6 +725,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                               value: Provider.of<Adulto>(context).sometido[Provider.of<Adulto>(context).sometido.indexOf(value)],
                               onChanged: (value2) {
                                 setState(() {
+                                  FocusScope.of(context).requestFocus(FocusNode());
                                   Provider.of<Adulto>(context).sometido[Provider.of<Adulto>(context).sometido.indexOf(value)] =
                                       value2;
                                   Provider.of<Adulto>(context).sometido=Provider.of<Adulto>(context).sometido;
@@ -873,8 +879,10 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                         itemHeight: 48,
                         onChanged: (selection) {
                           setState(() {
+                            FocusScope.of(context).requestFocus(FocusNode());
                             Provider.of<Adulto>(context).revision_organos[Provider.of<Adulto>(context).revision_organos.indexOf(value)] = selection;
-                            Provider.of<Adulto>(context).revision_organos = Provider.of<Adulto>(context).revision_organos;
+                            Provider.of<Adulto>(context).revision_organos =
+                                Provider.of<Adulto>(context).revision_organos;
                             //DUDAS
                           });
                         },
@@ -1363,6 +1371,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                   value: Provider.of<Adulto>(context).nivel_higiene_oral,
                   onChanged: (value) {
                     setState(() {
+                      FocusScope.of(context).requestFocus(FocusNode());
                       Provider.of<Adulto>(context).nivel_higiene_oral = value;
                       Provider.of<Adulto>(context).cambiado = true;
                     });
@@ -1396,6 +1405,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                   value: Provider.of<Adulto>(context).prescencia_calculo,
                   onChanged: (value) {
                     setState(() {
+                      FocusScope.of(context).requestFocus(FocusNode());
                       Provider.of<Adulto>(context).prescencia_calculo = value;
                       Provider.of<Adulto>(context).cambiado = true;
 
@@ -1430,6 +1440,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                   value: Provider.of<Adulto>(context).salivacion,
                   onChanged: (value) {
                     setState(() {
+                      FocusScope.of(context).requestFocus(FocusNode());
                       Provider.of<Adulto>(context).salivacion = value;
                       Provider.of<Adulto>(context).salivacion = value;
                       Provider.of<Adulto>(context).cambiado = true;

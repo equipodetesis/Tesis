@@ -98,6 +98,7 @@ class I_II_III_IV_State extends State<I_II_III_IV> {
                 value: Provider.of<General>(context).sexo,
                 onChanged: (value) {
                   setState(() {
+                    FocusScope.of(context).requestFocus(FocusNode());
                     Provider.of<General>(context).sexo = value;
                     Provider.of<General>(context).cambiado=true;
                   });

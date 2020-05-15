@@ -31,7 +31,7 @@ class _NewClienteState extends State<NewCliente> {
 
       Provider.of<General>(context).sexo = _currentsexo;
       print("hola");
-      Provider.of<General>(context).fecha_inicio=DateFormat("y-M-d").format(fecha);
+      Provider.of<General>(context).fecha_inicio=DateFormat("dd-MM-yyyy").format(fecha);
       fecha_inicio=Provider.of<General>(context).fecha_inicio;
 
     return Scaffold(

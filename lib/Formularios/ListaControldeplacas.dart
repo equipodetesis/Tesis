@@ -65,7 +65,7 @@ class ListaControldeplacas extends StatelessWidget{
                     Divider(),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0.0, 10.0, 200.0, 10.0),
-                      child: Text("Fecha:"+DateFormat("dd-MM-yy/hh:mm").format(fecha).toString(),
+                      child: Text("Fecha:"+DateFormat("dd-MM-yyyy/hh:mm").format(fecha).toString(),
                         style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.bold),),
                     ),
                     dentadura,

@@ -23,7 +23,7 @@ class _MasformulariosState extends State<Masformularios> {
     this.tpo=tpo;
   }
   I_II_III_IV formI = I_II_III_IV();
-  String nombre = "Nuevo registro",Titulo="Nuevo Registro";
+  String Titulo="Nuevo Registro";
   bool enviandoexitoso = false,error=false;
   Widget bodycontent;
   List motivo=List<String>(),fecha=List<String>();

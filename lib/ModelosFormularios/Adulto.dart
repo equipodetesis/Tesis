@@ -39,6 +39,20 @@ void clear(){
   desc_operacion = "";
 }
 
+  void checklist(){
+    if(enfermedades.length > 0){
+      if(enfermedades.last == "Ninguna")
+        enfermedades.removeLast();
+    }
+    if(revision_organos.length > 0){
+      if(revision_organos.last == "Ninguna")
+        revision_organos.removeLast();
+    }
+    if(sometido.length > 0){
+      if(sometido.last == "Ninguna")
+        sometido.removeLast();
+    }
+  }
   void fromjson(Map<String, dynamic> data) {
     motivo=data["motivo_consulta"];
     historia=data["historia_enfermedad_actual"];fecha_ultima_visita=data["fecha_ultima_visita"]; tratamiento_recibido=data["tratamiento"] ;

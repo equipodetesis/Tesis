@@ -67,6 +67,7 @@ class _MasformulariosState extends State<Masformularios> {
               );
               //adds
               if (Provider.of<Adulto>(context).cambiado) {
+                Provider.of<Adulto>(context).checklist();
                 Provider.of<Adulto>(context).cambiado=false;
                 Provider.of<Adulto>(context).addAdult().then((result){
                   Navigator.pop(context);
@@ -121,6 +122,7 @@ class _MasformulariosState extends State<Masformularios> {
               }
               if (Provider.of<Cirugia>(context).cambiado) {
                 Provider.of<Cirugia>(context).checklist();
+                Provider.of<Cirugia>(context).cambiado = false;
                 Provider.of<Cirugia>(context).addCirugia().then((onValue){
                   Navigator.pop(context);
                   showDialog(context: context,

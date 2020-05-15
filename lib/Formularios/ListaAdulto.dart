@@ -21,6 +21,7 @@ class HistorialGeneral extends StatelessWidget{
         child: Icon(Icons.add),
         onPressed: (){
           Provider.of<Adulto>(context).clear();
+          Provider.of<Adulto>(context).editable =  true;
           Navigator.push(context, MaterialPageRoute(builder: (context)=>Masformularios("Adulto")));
         },
       ),

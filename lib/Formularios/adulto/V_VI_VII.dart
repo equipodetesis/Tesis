@@ -91,8 +91,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
   void initState() {
     Provider.of<Adulto>(context, listen: false).Userid=Provider.of<LoginState>(context, listen: false).uid;
     Provider.of<Adulto>(context, listen: false).clienteid=Provider.of<General>(context, listen: false).pacienteid;
-    Provider.of<Adulto>(context, listen: false).fecha=DateFormat("dd-MM-yyyy").format(DateTime.now());
-    if(Provider.of<Adulto>(context, listen: false).fecha == "")Provider.of<Adulto>(context, listen: false).fecha = DateFormat("y-M-d").format(DateTime.now());
+    Provider.of<Adulto>(context, listen: false).fecha_ultima_visita=DateFormat("dd-MM-yyyy").format(DateTime.now());
+    if(Provider.of<Adulto>(context, listen: false).fecha_ultima_visita == "")Provider.of<Adulto>(context, listen: false).fecha_ultima_visita = DateFormat("y-M-d").format(DateTime.now());
     if(Provider.of<Adulto>(context, listen: false).fecha_ultimo_examen_medico == "")Provider.of<Adulto>(context, listen: false).fecha_ultimo_examen_medico = DateFormat("y-M-d").format(DateTime.now());
 
     _items_higiene = Util().getDropdownMenuItem(opciones1);
@@ -110,6 +110,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
     Provider.of<Adulto>(context, listen: false).revision_organos.add(_items_revision_organos.last.first.value);
     _items_sometido.addAll(Util().setitemlist(_sometido, Provider.of<Adulto>(context, listen: false).sometido));
     Provider.of<Adulto>(context, listen: false).sometido.add(_items_sometido.last.first.value);
+    print(Provider.of<Adulto>(context, listen: false).desc_operacion);
     // TODO: implement initState
     super.initState();
   }
@@ -150,11 +151,13 @@ class _V_VI_VII_State extends State<V_VI_VII> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+              enabled: Provider.of<Adulto>(context).editable,
               /*************************************************************************
                * ************************************************************************
                * ***************************************************************************
                * ***/
-              //initialValue: Provider.of<Adulto>(context).motivo.last,
+              initialValue: Provider.of<Adulto>(context).motivo,
               decoration: InputDecoration(
                   labelText: "Motivo de la consulta",
                   icon: Icon(FontAwesomeIcons.fileAlt)),
@@ -164,13 +167,14 @@ class _V_VI_VII_State extends State<V_VI_VII> {
               onChanged: (value){
                 Provider.of<Adulto>(context).cambiado=true;
                 Provider.of<Adulto>(context).motivo=value;
-                print(Provider.of<Adulto>(context).Userid+"/"+Provider.of<Adulto>(context).clienteid);
               },
             ),
           ),
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+              enabled: Provider.of<Adulto>(context).editable,
               initialValue: Provider.of<Adulto>(context).historia,
               decoration: InputDecoration(
                   labelText: "Historia de la enfermedad actual",
@@ -189,23 +193,27 @@ class _V_VI_VII_State extends State<V_VI_VII> {
             title: Text(
               Provider.of<Adulto>(context).fecha,
               style: TextStyle(
-                  fontSize: 20.0, color: Theme.of(context).accentColor),
+                  fontSize: 20.0, color: Provider.of<Adulto>(context).editable ? Theme.of(context).accentColor : Colors.grey),
             ),
             subtitle: Text("Ultima visita odontologica"),
             onTap: () {
+              Provider.of<Adulto>(context).editable ?
               Util()
-                  .selectDate(context, DateFormat("y-M-d").parse(Provider.of<Adulto>(context).fecha), DateTime.now())
+                  .selectDate(context, DateFormat("y-M-d").parse(Provider.of<Adulto>(context).fecha_ultima_visita), DateTime.now())
                   .then((fecha) {
                 setState(() {
-                  Provider.of<Adulto>(context).fecha = DateFormat("y-M-d").format(fecha);
+                  Provider.of<Adulto>(context).fecha_ultima_visita = DateFormat("y-M-d").format(fecha);
                   Provider.of<Adulto>(context).cambiado=true;
                 });
-              });
+              })
+              : null;
             },
           ),
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+              enabled: Provider.of<Adulto>(context).editable,
               initialValue: Provider.of<Adulto>(context).tratamiento_recibido,
               decoration: InputDecoration(
                   labelText: "Tratamiento Recibido",
@@ -220,6 +228,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+              enabled: Provider.of<Adulto>(context).editable,
               initialValue: Provider.of<Adulto>(context).dientes_perdidos,
               decoration: InputDecoration(
                   labelText: "Dientes Perdidos",
@@ -234,6 +244,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+              enabled: Provider.of<Adulto>(context).editable,
               initialValue: Provider.of<Adulto>(context).causa_dientesperdidos,
               decoration: InputDecoration(
                   labelText: "Causa de Pérdida",
@@ -248,6 +260,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+              enabled: Provider.of<Adulto>(context).editable,
               initialValue: Provider.of<Adulto>(context).experiencias_exodoncias,
               decoration: InputDecoration(
                   labelText: "Experiencias de exodoncias previas",
@@ -262,6 +276,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+              enabled: Provider.of<Adulto>(context).editable,
               initialValue: Provider.of<Adulto>(context).higiene_oral,
               decoration: InputDecoration(
                   labelText: "Higiene oral",
@@ -276,6 +292,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+              enabled: Provider.of<Adulto>(context).editable,
               initialValue: Provider.of<Adulto>(context).tipo_cepillo,
               decoration: InputDecoration(
                   labelText: "Tipo de Cepillo",
@@ -290,6 +308,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+              enabled: Provider.of<Adulto>(context).editable,
               initialValue: Provider.of<Adulto>(context).tecnica_cepillado,
               decoration: InputDecoration(
                   labelText: "Técnica de cepillado",
@@ -304,6 +324,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+              enabled: Provider.of<Adulto>(context).editable,
               initialValue: Provider.of<Adulto>(context).frecuencia_cepillado,
               decoration: InputDecoration(
                   labelText: "Frecuencia de cepillado",
@@ -318,6 +340,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+              enabled: Provider.of<Adulto>(context).editable,
               initialValue: Provider.of<Adulto>(context).ayudas_higiene_extras,
               decoration: InputDecoration(
                   labelText: "Otras ayuda para la higiene oral",
@@ -349,10 +373,11 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                 Checkbox(
                   value: Provider.of<Adulto>(context).cuidadoMedico,
                   onChanged: (value) {
+                    Provider.of<Adulto>(context).editable ?
                     setState(() {
                       Provider.of<Adulto>(context).cuidadoMedico = value;
                       Provider.of<Adulto>(context).cambiado = true;
-                    });
+                    }) : null ;
                   },
                 )
               ],
@@ -377,7 +402,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                       margin: EdgeInsets.all(1),
                       child: DropdownButton(
                         isExpanded: true,
-                        items: _itemslocal,
+                        disabledHint: Text(Provider.of<Adulto>(context).hospital),
+                        items: Provider.of<Adulto>(context, listen: false).editable ? _itemslocal : null,
                         value: Provider.of<Adulto>(context).hospital,
                         onChanged: (value) {
                           setState(() {
@@ -393,6 +419,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
               Container(
                 margin: const EdgeInsets.all(10.0),
                 child: TextFormField(
+                  style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+                  enabled: Provider.of<Adulto>(context).editable,
                   decoration: (InputDecoration(
                     labelText: "Expediente",
                     icon: Icon(FontAwesomeIcons.fileAlt),
@@ -412,11 +440,12 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                   textAlign: TextAlign.start,
                   style: TextStyle(
                     fontSize: 20.0,
-                    color: ThemeData().accentColor,
+                    color: Provider.of<Adulto>(context).editable ? ThemeData().accentColor : Colors.grey,
                   ),
                 ),
                 subtitle: Text("Ultimo examen medico"),
                 onTap: () {
+                  Provider.of<Adulto>(context).editable ?
                   Util()
                       .selectDate(
                       context, DateFormat("y-M-d").parse(Provider.of<Adulto>(context).fecha_ultimo_examen_medico), DateTime.now())
@@ -424,12 +453,15 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                     setState(() {
                       Provider.of<Adulto>(context).fecha_ultimo_examen_medico = DateFormat("y-M-d").format(fecha);
                     });
-                  });
+                  })
+                  : null;
                 },
               ),
               Container(
                 margin: const EdgeInsets.all(10.0),
                 child: TextFormField(
+                  style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+                  enabled: Provider.of<Adulto>(context).editable,
                   decoration: (InputDecoration(
                     labelText: "Nombre del medico",
                     icon: Icon(FontAwesomeIcons.userMd),
@@ -448,6 +480,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
           Container(
             margin: const EdgeInsets.all(10.0),
             child: TextFormField(
+              style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+              enabled: Provider.of<Adulto>(context).editable,
               decoration: (InputDecoration(
                 labelText: "Describa drogas o medicamentos que toma",
                 icon: Icon(FontAwesomeIcons.pills),
@@ -479,7 +513,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                       child: DropdownButton(
                         isExpanded: true,
                         disabledHint: Text(Provider.of<Adulto>(context).enfermedades[Provider.of<Adulto>(context).enfermedades.indexOf(value)]),
-                        items: _items_enfermedades[Provider.of<Adulto>(context).enfermedades.indexOf(value)] == _items_enfermedades.last ?
+                        items: _items_enfermedades[Provider.of<Adulto>(context).enfermedades.indexOf(value)] == _items_enfermedades.last && Provider.of<Adulto>(context).editable ?
                         _items_enfermedades[Provider.of<Adulto>(context).enfermedades.indexOf(value)]:
                         null,
                         value: Provider.of<Adulto>(context).enfermedades[
@@ -503,7 +537,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Provider.of<Adulto>(context).enfermedades.last != _enfermedades.first && _enfermedades.last.length > 2
+              Provider.of<Adulto>(context).enfermedades.last != _enfermedades.first && _enfermedades.last.length > 2 && Provider.of<Adulto>(context).editable
                   ? FlatButton(
                 child: Text(
                   "Añadir",
@@ -519,7 +553,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                 },
               )
                   : Container(),
-              Provider.of<Adulto>(context).enfermedades.length > 1
+              Provider.of<Adulto>(context).enfermedades.length > 1 && Provider.of<Adulto>(context).editable
                   ? FlatButton(
                 child: Text(
                   "Eliminar",
@@ -548,6 +582,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
               Container(
                 margin: const EdgeInsets.all(10.0),
                 child: TextFormField(
+                  style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+                  enabled: Provider.of<Adulto>(context).editable,
                   decoration: (InputDecoration(
                     labelText: "Que enfermedad",
                     icon: Icon(FontAwesomeIcons.briefcaseMedical),
@@ -564,6 +600,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
               Container(
                 margin: const EdgeInsets.all(10.0),
                 child: TextFormField(
+                  style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+                  enabled: Provider.of<Adulto>(context).editable,
                   decoration: (InputDecoration(
                     labelText: "Inicio",
                     icon: Icon(FontAwesomeIcons.calendarDay),
@@ -579,6 +617,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
               Container(
                 margin: const EdgeInsets.all(10.0),
                 child: TextFormField(
+                  style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+                  enabled: Provider.of<Adulto>(context).editable,
                   decoration: (InputDecoration(
                     labelText: "Curso",
                     icon: Icon(FontAwesomeIcons.calendarWeek),
@@ -594,6 +634,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
               Container(
                 margin: const EdgeInsets.all(10.0),
                 child: TextFormField(
+                  style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+                  enabled: Provider.of<Adulto>(context).editable,
                   decoration: (InputDecoration(
                     labelText: "Tratamiento",
                     icon: Icon(FontAwesomeIcons.capsules),
@@ -609,6 +651,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
               Container(
                 margin: const EdgeInsets.all(10.0),
                 child: TextFormField(
+                  style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+                  enabled: Provider.of<Adulto>(context).editable,
                   decoration: (InputDecoration(
                     labelText: "Estado Actual",
                     icon: Icon(FontAwesomeIcons.userInjured),
@@ -624,6 +668,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
               Container(
                 margin: const EdgeInsets.all(10.0),
                 child: TextFormField(
+                  style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+                  enabled: Provider.of<Adulto>(context).editable,
                   decoration: (InputDecoration(
                     labelText: "Describa 'Otros'",
                     icon: Icon(FontAwesomeIcons.briefcaseMedical),
@@ -668,7 +714,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                             child: DropdownButton(
                               isExpanded: true,
                               disabledHint: Text(Provider.of<Adulto>(context).sometido[Provider.of<Adulto>(context).sometido.indexOf(value)]),
-                              items: _items_sometido[Provider.of<Adulto>(context).sometido.indexOf(value)] == _items_sometido.last ?
+                              items: _items_sometido[Provider.of<Adulto>(context).sometido.indexOf(value)] == _items_sometido.last && Provider.of<Adulto>(context).editable ?
                               _items_sometido[Provider.of<Adulto>(context).sometido.indexOf(value)]:
                               null,
                               value: Provider.of<Adulto>(context).sometido[Provider.of<Adulto>(context).sometido.indexOf(value)],
@@ -688,10 +734,13 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                         ? Container(
                       margin: EdgeInsets.all(10),
                       child: TextFormField(
+                        style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+                        enabled: Provider.of<Adulto>(context).editable,
                         decoration: InputDecoration(
                             labelText: "Describa operacion",
                             icon: Icon(FontAwesomeIcons.pills)),
                         keyboardType: TextInputType.text,
+                        initialValue: Provider.of<Adulto>(context).desc_operacion,
                         onChanged: (value) {
                           Provider.of<Adulto>(context).desc_operacion=value;
                         },
@@ -704,7 +753,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Provider.of<Adulto>(context).sometido.last != _sometido.first && _items_sometido.last.length > 2
+              Provider.of<Adulto>(context).sometido.last != _sometido.first && _items_sometido.last.length > 2 && Provider.of<Adulto>(context).editable
                   ? Container(
                 alignment: Alignment.centerLeft,
                 child: FlatButton(
@@ -723,7 +772,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                 ),
               )
                   : Container(),
-              Provider.of<Adulto>(context).sometido.length > 1
+              Provider.of<Adulto>(context).sometido.length > 1 && Provider.of<Adulto>(context).editable
                   ? FlatButton(
                 child: Text(
                   "Eliminar",
@@ -743,6 +792,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
           Container(
             margin: const EdgeInsets.all(10.0),
             child: TextFormField(
+              style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+              enabled: Provider.of<Adulto>(context).editable,
               decoration: (InputDecoration(
                 labelText: "Vacunas recibidas especifique",
                 icon: Icon(FontAwesomeIcons.plusCircle),
@@ -758,6 +809,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+              enabled: Provider.of<Adulto>(context).editable,
               decoration: InputDecoration(
                   labelText: "Historia familiar",
                   icon: Icon(FontAwesomeIcons.fileAlt)),
@@ -774,6 +827,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+              enabled: Provider.of<Adulto>(context).editable,
               decoration: InputDecoration(
                   labelText: "Historia personal y social",
                   icon: Icon(FontAwesomeIcons.fileAlt)),
@@ -810,21 +865,16 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                         isExpanded: true,
                         disabledHint: Text(Provider.of<Adulto>(context).revision_organos[
                         Provider.of<Adulto>(context).revision_organos.indexOf(value)]),
-                        items: _items_revision_organos[
-                        Provider.of<Adulto>(context).revision_organos.indexOf(value)] ==
-                            _items_revision_organos.last
-                            ? _items_revision_organos[
-                        Provider.of<Adulto>(context).revision_organos.indexOf(value)]
+                        items: _items_revision_organos[Provider.of<Adulto>(context).revision_organos.indexOf(value)] == _items_revision_organos.last && Provider.of<Adulto>(context).editable
+                            ? _items_revision_organos[Provider.of<Adulto>(context).revision_organos.indexOf(value)]
                             : null,
                         value: Provider.of<Adulto>(context).revision_organos[
                         Provider.of<Adulto>(context).revision_organos.indexOf(value)],
                         itemHeight: 48,
                         onChanged: (selection) {
                           setState(() {
-                            Provider.of<Adulto>(context).revision_organos[Provider.of<Adulto>(context).revision_organos
-                                .indexOf(value)] = selection;
-                            Provider.of<Adulto>(context).revision_organos =
-                                Provider.of<Adulto>(context).revision_organos;
+                            Provider.of<Adulto>(context).revision_organos[Provider.of<Adulto>(context).revision_organos.indexOf(value)] = selection;
+                            Provider.of<Adulto>(context).revision_organos = Provider.of<Adulto>(context).revision_organos;
                             //DUDAS
                           });
                         },
@@ -838,7 +888,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Provider.of<Adulto>(context).revision_organos.last != _revision_organos.first && _items_revision_organos.last.length > 2
+              Provider.of<Adulto>(context).revision_organos.last != _revision_organos.first && _items_revision_organos.last.length > 2 && Provider.of<Adulto>(context).editable
                   ? FlatButton(
                 child: Text(
                   "Añadir",
@@ -856,7 +906,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                 },
               )
                   : Container(),
-              Provider.of<Adulto>(context).revision_organos.length > 1
+              Provider.of<Adulto>(context).revision_organos.length > 1 && Provider.of<Adulto>(context).editable
                   ? FlatButton(
                 child: Text(
                   "Eliminar",
@@ -877,6 +927,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+              enabled: Provider.of<Adulto>(context).editable,
               decoration: InputDecoration(
                   labelText: "Describa si es necesario",
                   icon: Icon(FontAwesomeIcons.fileAlt)),
@@ -893,6 +945,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+              enabled: Provider.of<Adulto>(context).editable,
               decoration: InputDecoration(
                   labelText:
                   "otros signos o sintomas que ha tenido recientemente",
@@ -928,6 +982,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
               child: Container(
                 margin: const EdgeInsets.all(10.0),
                 child: TextFormField(
+                  style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+                  enabled: Provider.of<Adulto>(context).editable,
                   decoration: (InputDecoration(
                     labelText: "Minima",
                     icon: Icon(FontAwesomeIcons.thermometerEmpty),
@@ -945,6 +1001,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
               child: Container(
                 margin: const EdgeInsets.all(10.0),
                 child: TextFormField(
+                  style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+                  enabled: Provider.of<Adulto>(context).editable,
                   decoration: (InputDecoration(
                     labelText: "Maxima",
                     icon: Icon(FontAwesomeIcons.thermometerFull),
@@ -974,6 +1032,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
               child: Container(
                 margin: const EdgeInsets.all(10.0),
                 child: TextFormField(
+                  style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+                  enabled: Provider.of<Adulto>(context).editable,
                   decoration: (InputDecoration(
                     labelText: "Pulsaciones",
                     icon: Icon(FontAwesomeIcons.heartbeat),
@@ -991,6 +1051,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
               child: Container(
                 margin: const EdgeInsets.all(10.0),
                 child: TextFormField(
+                  style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+                  enabled: Provider.of<Adulto>(context).editable,
                   decoration: (InputDecoration(
                     labelText: "Ritmo",
                     icon: Icon(FontAwesomeIcons.heartbeat),
@@ -1009,6 +1071,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
         Container(
           margin: const EdgeInsets.all(10.0),
           child: TextFormField(
+            style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+            enabled: Provider.of<Adulto>(context).editable,
             decoration: (InputDecoration(
               labelText: "Temperatura, (Tomela de ser necesario)",
               icon: Icon(FontAwesomeIcons.fire),
@@ -1024,6 +1088,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
         Container(
           margin: const EdgeInsets.all(10.0),
           child: TextFormField(
+            style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+            enabled: Provider.of<Adulto>(context).editable,
             decoration: (InputDecoration(
               labelText: "Examenes de laboratorio, describa",
               icon: Icon(FontAwesomeIcons.fileAlt),
@@ -1041,6 +1107,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
         Container(
           margin: const EdgeInsets.all(10.0),
           child: TextFormField(
+            style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+            enabled: Provider.of<Adulto>(context).editable,
             decoration: (InputDecoration(
               labelText: "Revision Medica, describa",
               icon: Icon(FontAwesomeIcons.fileAlt),
@@ -1058,6 +1126,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
         Container(
           margin: const EdgeInsets.all(10.0),
           child: TextFormField(
+            style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+            enabled: Provider.of<Adulto>(context).editable,
             decoration: (InputDecoration(
               labelText: "Examen fisico de cara y cuello",
               icon: Icon(FontAwesomeIcons.fileAlt),
@@ -1076,6 +1146,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
         Container(
           margin: const EdgeInsets.all(10.0),
           child: TextFormField(
+            style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+            enabled: Provider.of<Adulto>(context).editable,
             decoration: (InputDecoration(
               labelText: "Region vestibular",
               icon: Icon(FontAwesomeIcons.fileAlt),
@@ -1091,6 +1163,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
         Container(
           margin: const EdgeInsets.all(10.0),
           child: TextFormField(
+            style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+            enabled: Provider.of<Adulto>(context).editable,
             decoration: (InputDecoration(
               labelText: "paladar duro",
               icon: Icon(FontAwesomeIcons.fileAlt),
@@ -1108,6 +1182,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
         Container(
           margin: const EdgeInsets.all(10.0),
           child: TextFormField(
+            style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+            enabled: Provider.of<Adulto>(context).editable,
             decoration: (InputDecoration(
               labelText: "Paladar blando",
               icon: Icon(FontAwesomeIcons.fileAlt),
@@ -1125,6 +1201,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
         Container(
           margin: const EdgeInsets.all(10.0),
           child: TextFormField(
+            style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+            enabled: Provider.of<Adulto>(context).editable,
             decoration: (InputDecoration(
               labelText: "Orofaringe",
               icon: Icon(FontAwesomeIcons.fileAlt),
@@ -1142,6 +1220,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
         Container(
           margin: const EdgeInsets.all(10.0),
           child: TextFormField(
+            style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+            enabled: Provider.of<Adulto>(context).editable,
             decoration: (InputDecoration(
               labelText: "Piso de la boca",
               icon: Icon(FontAwesomeIcons.fileAlt),
@@ -1167,6 +1247,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
         Container(
           margin: const EdgeInsets.all(10.0),
           child: TextFormField(
+            style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+            enabled: Provider.of<Adulto>(context).editable,
             decoration: (InputDecoration(
               labelText: "Cara dorsal",
               icon: Icon(FontAwesomeIcons.fileAlt),
@@ -1184,6 +1266,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
         Container(
           margin: const EdgeInsets.all(10.0),
           child: TextFormField(
+            style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+            enabled: Provider.of<Adulto>(context).editable,
             decoration: (InputDecoration(
               labelText: "Cara ventral",
               icon: Icon(FontAwesomeIcons.fileAlt),
@@ -1201,6 +1285,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
         Container(
           margin: const EdgeInsets.all(10.0),
           child: TextFormField(
+            style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+            enabled: Provider.of<Adulto>(context).editable,
             decoration: (InputDecoration(
               labelText: "Bordes",
               icon: Icon(FontAwesomeIcons.fileAlt),
@@ -1218,6 +1304,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
         Container(
           margin: const EdgeInsets.all(10.0),
           child: TextFormField(
+            style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+            enabled: Provider.of<Adulto>(context).editable,
             decoration: (InputDecoration(
               labelText: "Encia",
               icon: Icon(FontAwesomeIcons.fileAlt),
@@ -1235,6 +1323,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
         Container(
           margin: const EdgeInsets.all(10.0),
           child: TextFormField(
+            style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
+            enabled: Provider.of<Adulto>(context).editable,
             decoration: (InputDecoration(
               labelText: "Dientes",
               icon: Icon(FontAwesomeIcons.fileAlt),
@@ -1268,7 +1358,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                 margin: EdgeInsets.all(1),
                 child: DropdownButton(
                   isExpanded: true,
-                  items: _items_higiene,
+                  disabledHint: Text(Provider.of<Adulto>(context).nivel_higiene_oral),
+                  items: Provider.of<Adulto>(context).editable ? _items_higiene : null,
                   value: Provider.of<Adulto>(context).nivel_higiene_oral,
                   onChanged: (value) {
                     setState(() {
@@ -1300,7 +1391,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                 margin: EdgeInsets.all(1),
                 child: DropdownButton(
                   isExpanded: true,
-                  items: _items_calculo,
+                  disabledHint: Text(Provider.of<Adulto>(context).prescencia_calculo),
+                  items: Provider.of<Adulto>(context).editable ? _items_calculo : null,
                   value: Provider.of<Adulto>(context).prescencia_calculo,
                   onChanged: (value) {
                     setState(() {
@@ -1333,7 +1425,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                 margin: EdgeInsets.all(1),
                 child: DropdownButton(
                   isExpanded: true,
-                  items: _items_salivacion,
+                  disabledHint: Text(Provider.of<Adulto>(context).salivacion),
+                  items: Provider.of<Adulto>(context).editable ? _items_salivacion : null,
                   value: Provider.of<Adulto>(context).salivacion,
                   onChanged: (value) {
                     setState(() {

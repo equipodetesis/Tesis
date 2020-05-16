@@ -358,6 +358,7 @@ class _ControlPlacaState extends State<ControlPlaca>{
               keyboardType: TextInputType.number,
               autofocus: false,
               autovalidate: true,
+              initialValue: totaldientes.toString(),
               validator: (value)=>value.isEmpty&&value.contains(".")?"Valor no valido":null,
               decoration: new InputDecoration(
                   hintText: 'Cantidad de dientes',
@@ -383,7 +384,7 @@ class _ControlPlacaState extends State<ControlPlaca>{
                       ],
                     );
                     });
-                value=totaldientes.toString();
+
                 }
                 else {
                   int val=int.parse(value);
@@ -403,7 +404,7 @@ class _ControlPlacaState extends State<ControlPlaca>{
                       );
                      }
                     );
-                  }
+                  }else
                 setState(() {
                    totaldientes=int.parse(value);
                    porcentaje=(supafectadas/(totaldientes*4))*100;

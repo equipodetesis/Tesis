@@ -90,8 +90,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
   void initState() {
     Provider.of<Adulto>(context, listen: false).Userid=Provider.of<LoginState>(context, listen: false).uid;
     Provider.of<Adulto>(context, listen: false).clienteid=Provider.of<General>(context, listen: false).pacienteid;
-    Provider.of<Adulto>(context, listen: false).fecha=DateFormat("dd-MM-yyyy").format(DateTime.now());
-    if(Provider.of<Adulto>(context, listen: false).fecha == "")Provider.of<Adulto>(context, listen: false).fecha = DateFormat("y-M-d").format(DateTime.now());
+    if(Provider.of<Adulto>(context, listen: false).fecha == "")Provider.of<Adulto>(context, listen: false).fecha=DateFormat("dd-MM-yyyy").format(DateTime.now());
+    Provider.of<Adulto>(context, listen: false).fecha_ultima_visita = DateFormat("y-M-d").format(DateTime.now());
     if(Provider.of<Adulto>(context, listen: false).fecha_ultimo_examen_medico == "")Provider.of<Adulto>(context, listen: false).fecha_ultimo_examen_medico = DateFormat("y-M-d").format(DateTime.now());
 
     _items_higiene = Util().getDropdownMenuItem(opciones1);

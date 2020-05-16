@@ -21,6 +21,7 @@ class HistorialCirugias extends StatelessWidget{
         child: Icon(Icons.add),
         onPressed: (){
           Provider.of<Cirugia>(context).clear();
+          Provider.of<Cirugia>(context).editable = true;
           Navigator.push(context, MaterialPageRoute(builder: (context)=>Masformularios("Cirugia")));
         },
       ),
@@ -50,9 +51,9 @@ class HistorialCirugias extends StatelessWidget{
                             title: Text(cirugia.padecimiento_actual,style: TextStyle(fontSize: 22.0,color: Colors.blue),),
                             subtitle: Text(cirugia.fecha,style: TextStyle(fontSize: 15.0),),
                             onTap: (){
+                              Provider.of<Cirugia>(context).clear();
                               if(snapshot.data.documents.indexOf(documents)==(snapshot.data.documents.length-1))
                                 Provider.of<Cirugia>(context).editable=true;
-                              Provider.of<Cirugia>(context).clear();
                               Provider.of<Cirugia>(context).fromjson(documents.data);
                               Navigator.push(context, MaterialPageRoute(builder: (context)=>Masformularios("Cirugia")));
                             },

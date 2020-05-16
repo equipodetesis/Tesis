@@ -228,10 +228,13 @@ class _I_VState extends State<I_V> {
   @override
   void initState() {
     madreNode = FocusNode();
-    Provider.of<Cirugia>(context, listen: false).checklist();
     Provider.of<Cirugia>(context, listen: false).Userid = Provider.of<LoginState>(context, listen: false).uid;
     Provider.of<Cirugia>(context, listen: false).clienteid = Provider.of<General>(context, listen: false).pacienteid;
-    Provider.of<Cirugia>(context, listen: false).fecha=DateFormat("dd-MM-yyyy").format(DateTime.now());
+
+    if(Provider.of<Cirugia>(context, listen: false).retiro_sutura == "")Provider.of<Cirugia>(context, listen: false).fecha=DateFormat("dd-MM-yyyy").format(DateTime.now());
+    if(Provider.of<Cirugia>(context, listen: false).dado_alta == "")Provider.of<Cirugia>(context, listen: false).fecha=DateFormat("dd-MM-yyyy").format(DateTime.now());
+
+    if(Provider.of<Cirugia>(context, listen: false).fecha == "")Provider.of<Cirugia>(context, listen: false).fecha=DateFormat("dd-MM-yyyy").format(DateTime.now());
     print(Provider.of<Cirugia>(context, listen: false).adicciones);
     _items_clasificacion_asa = Util().getDropdownMenuItem(clasificacion_asa);
     if (Provider.of<Cirugia>(context, listen: false).clasificacion_asa == "") Provider.of<Cirugia>(context, listen: false).clasificacion_asa = _items_clasificacion_asa.first.value;
@@ -267,6 +270,9 @@ class _I_VState extends State<I_V> {
     Provider.of<Cirugia>(context, listen: false).radiografia.add(_items_radiografia.last.first.value);
     _items_analisis_laboratorio.addAll(Util().setitemlist(analisis_laboratorio, Provider.of<Cirugia>(context, listen: false).analisis_laboratorio));
     Provider.of<Cirugia>(context, listen: false).analisis_laboratorio.add(_items_analisis_laboratorio.last.first.value);
+
+    if(Provider.of<Cirugia>(context, listen: false).editable == false) Provider.of<Cirugia>(context, listen: false).checklist();
+    print(Provider.of<Cirugia>(context, listen: false).editable);
     // TODO: implement initState
     super.initState();
   }
@@ -314,6 +320,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).padecimiento_actual,
               decoration: InputDecoration(labelText: "Padecimiento actual", icon: Icon(FontAwesomeIcons.userInjured)),
               keyboardType: TextInputType.text,
@@ -328,6 +336,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).antec_pato_madre,
               decoration: InputDecoration(labelText: "Madre", icon: Icon(FontAwesomeIcons.female)),
               keyboardType: TextInputType.text,
@@ -341,6 +351,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).antec_pato_abuelama,
               decoration: InputDecoration(labelText: "Abuela materna", icon: Icon(FontAwesomeIcons.female)),
               keyboardType: TextInputType.text,
@@ -353,6 +365,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).antec_pato_abueloma,
               decoration: InputDecoration(labelText: "Abuelo materno", icon: Icon(FontAwesomeIcons.male)),
               keyboardType: TextInputType.text,
@@ -365,6 +379,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).antec_pato_padre,
               decoration: InputDecoration(labelText: "Padre", icon: Icon(FontAwesomeIcons.male)),
               keyboardType: TextInputType.text,
@@ -377,6 +393,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).antec_pato_abuelopa,
               decoration: InputDecoration(labelText: "Abuelo paterno", icon: Icon(FontAwesomeIcons.male)),
               keyboardType: TextInputType.text,
@@ -389,6 +407,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).antec_pato_abuelapa,
               decoration: InputDecoration(labelText: "abuela paterna", icon: Icon(FontAwesomeIcons.female)),
               keyboardType: TextInputType.text,
@@ -414,6 +434,8 @@ class _I_VState extends State<I_V> {
                 child: Container(
                   margin: EdgeInsets.all(10),
                   child: TextFormField(
+                    enabled: Provider.of<Cirugia>(context).editable,
+                    style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                     initialValue: Provider.of<Cirugia>(context).grupo_sanguineo,
                     decoration: InputDecoration(labelText: "Grupo sanguineo", icon: Icon(FontAwesomeIcons.tint)),
                     keyboardType: TextInputType.text,
@@ -428,6 +450,8 @@ class _I_VState extends State<I_V> {
                 child: Container(
                   margin: EdgeInsets.all(10),
                   child: TextFormField(
+                    enabled: Provider.of<Cirugia>(context).editable,
+                    style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                     initialValue: Provider.of<Cirugia>(context).factor_rh,
                     decoration: InputDecoration(labelText: "Factor Rh", icon: Icon(FontAwesomeIcons.tint)),
                     keyboardType: TextInputType.text,
@@ -443,6 +467,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).inmunizaciones_infancia,
               decoration: InputDecoration(labelText: "Inmunizaciones infancia", icon: Icon(FontAwesomeIcons.baby)),
               keyboardType: TextInputType.text,
@@ -455,6 +481,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).inmunizaciones_adulto,
               decoration: InputDecoration(labelText: "inmunizaciones adulto", icon: Icon(FontAwesomeIcons.male)),
               keyboardType: TextInputType.text,
@@ -485,7 +513,7 @@ class _I_VState extends State<I_V> {
                         child: DropdownButton(
                           isExpanded: true,
                           disabledHint: Text(Provider.of<Cirugia>(context).adicciones[Provider.of<Cirugia>(context).adicciones.indexOf(value)]),
-                          items: _items_adicciones[Provider.of<Cirugia>(context).adicciones.indexOf(value)] == _items_adicciones.last ? _items_adicciones[Provider.of<Cirugia>(context).adicciones.indexOf(value)] : null,
+                          items: Provider.of<Cirugia>(context).editable && _items_adicciones[Provider.of<Cirugia>(context).adicciones.indexOf(value)] == _items_adicciones.last ? _items_adicciones[Provider.of<Cirugia>(context).adicciones.indexOf(value)] : null,
                           value: Provider.of<Cirugia>(context).adicciones[Provider.of<Cirugia>(context).adicciones.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
@@ -503,6 +531,8 @@ class _I_VState extends State<I_V> {
                     ? Container(
                         margin: EdgeInsets.all(10),
                         child: TextFormField(
+                          enabled: Provider.of<Cirugia>(context).editable,
+                          style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                           initialValue: Provider.of<Cirugia>(context).otra_adiccion,
                           decoration: InputDecoration(
                               labelText: "Otra Adiccion",
@@ -525,7 +555,7 @@ class _I_VState extends State<I_V> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Provider.of<Cirugia>(context).adicciones.last != adicciones.first && adicciones.last.length > 2
+              Provider.of<Cirugia>(context).adicciones.last != adicciones.first && adicciones.last.length > 2 && Provider.of<Cirugia>(context).editable
                   ? FlatButton(
                       child: Text(
                         "Añadir",
@@ -539,7 +569,7 @@ class _I_VState extends State<I_V> {
                       },
                     )
                   : Container(),
-              Provider.of<Cirugia>(context).adicciones.length > 1
+              Provider.of<Cirugia>(context).adicciones.length > 1 && Provider.of<Cirugia>(context).editable
                   ? FlatButton(
                       child: Text(
                         "Eliminar",
@@ -558,6 +588,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).regimen_alimenticio,
               decoration: InputDecoration(labelText: "Regimen alimenticio", icon: Icon(FontAwesomeIcons.hamburger)),
               keyboardType: TextInputType.text,
@@ -570,6 +602,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).condiciones_habitacionales,
               decoration: InputDecoration(labelText: "Condiciones habitacionales", icon: Icon(FontAwesomeIcons.houzz)),
               keyboardType: TextInputType.text,
@@ -587,6 +621,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).enfermedades_infancia,
               decoration: InputDecoration(labelText: "Enfermedades propias de la infancias", icon: Icon(FontAwesomeIcons.baby)),
               keyboardType: TextInputType.text,
@@ -599,6 +635,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).antecedentes_traumaticos,
               decoration: InputDecoration(labelText: "Antecedentes traumaticos", icon: Icon(FontAwesomeIcons.userInjured)),
               keyboardType: TextInputType.text,
@@ -611,6 +649,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).antecedentes_quirurgicos,
               decoration: InputDecoration(labelText: "Antecedentes quirurgicos", icon: Icon(FontAwesomeIcons.userMd)),
               keyboardType: TextInputType.text,
@@ -641,7 +681,7 @@ class _I_VState extends State<I_V> {
                         child: DropdownButton(
                           isExpanded: true,
                           disabledHint: Text(Provider.of<Cirugia>(context).alergias[Provider.of<Cirugia>(context).alergias.indexOf(value)]),
-                          items: _items_alergias[Provider.of<Cirugia>(context).alergias.indexOf(value)] == _items_alergias.last ? _items_alergias[Provider.of<Cirugia>(context).alergias.indexOf(value)] : null,
+                          items: Provider.of<Cirugia>(context).editable && _items_alergias[Provider.of<Cirugia>(context).alergias.indexOf(value)] == _items_alergias.last ? _items_alergias[Provider.of<Cirugia>(context).alergias.indexOf(value)] : null,
                           value: Provider.of<Cirugia>(context).alergias[Provider.of<Cirugia>(context).alergias.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
@@ -659,6 +699,8 @@ class _I_VState extends State<I_V> {
                     ? Container(
                         margin: EdgeInsets.all(10),
                         child: TextFormField(
+                          enabled: Provider.of<Cirugia>(context).editable,
+                          style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                           initialValue: Provider.of<Cirugia>(context).otra_alergia,
                           decoration: InputDecoration(
                               labelText: "Otra alergia",
@@ -681,7 +723,7 @@ class _I_VState extends State<I_V> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Provider.of<Cirugia>(context).alergias.last != alergias.first && alergias.last.length > 2
+              Provider.of<Cirugia>(context).alergias.last != alergias.first && alergias.last.length > 2 && Provider.of<Cirugia>(context).editable
                   ? FlatButton(
                       child: Text(
                         "Añadir",
@@ -695,7 +737,7 @@ class _I_VState extends State<I_V> {
                       },
                     )
                   : Container(),
-              Provider.of<Cirugia>(context).alergias.length > 1
+              Provider.of<Cirugia>(context).alergias.length > 1 && Provider.of<Cirugia>(context).editable
                   ? FlatButton(
                       child: Text(
                         "Eliminar",
@@ -714,6 +756,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).transfuciones,
               decoration: InputDecoration(labelText: "transfusiones", icon: Icon(FontAwesomeIcons.vials)),
               keyboardType: TextInputType.text,
@@ -726,6 +770,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).radio_quimioterapia,
               decoration: InputDecoration(labelText: "¿Ha recibido radioterapia y/o quimioterapia", icon: Icon(FontAwesomeIcons.radiationAlt)),
               keyboardType: TextInputType.text,
@@ -738,6 +784,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).experiencia_anestesia,
               decoration: InputDecoration(labelText: "Experiencia previa con anestesia", icon: Icon(FontAwesomeIcons.syringe)),
               keyboardType: TextInputType.text,
@@ -777,7 +825,7 @@ class _I_VState extends State<I_V> {
                         child: DropdownButton(
                           isExpanded: true,
                           disabledHint: Text(Provider.of<Cirugia>(context).digestivo[Provider.of<Cirugia>(context).digestivo.indexOf(value)]),
-                          items: _items_digestivo[Provider.of<Cirugia>(context).digestivo.indexOf(value)] == _items_digestivo.last ? _items_digestivo[Provider.of<Cirugia>(context).digestivo.indexOf(value)] : null,
+                          items: Provider.of<Cirugia>(context).editable && _items_digestivo[Provider.of<Cirugia>(context).digestivo.indexOf(value)] == _items_digestivo.last ? _items_digestivo[Provider.of<Cirugia>(context).digestivo.indexOf(value)] : null,
                           value: Provider.of<Cirugia>(context).digestivo[Provider.of<Cirugia>(context).digestivo.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
@@ -795,6 +843,8 @@ class _I_VState extends State<I_V> {
                     ? Container(
                         margin: EdgeInsets.all(10),
                         child: TextFormField(
+                          enabled: Provider.of<Cirugia>(context).editable,
+                          style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                           initialValue: Provider.of<Cirugia>(context).otra_digestivo,
                           decoration: InputDecoration(
                               labelText: "otra",
@@ -818,6 +868,8 @@ class _I_VState extends State<I_V> {
               ? Container(
                   margin: EdgeInsets.all(10),
                   child: TextFormField(
+                    enabled: Provider.of<Cirugia>(context).editable,
+                    style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                     initialValue: Provider.of<Cirugia>(context).tratamiento_digestivo,
                     decoration: InputDecoration(labelText: "Tratamiento", icon: Icon(FontAwesomeIcons.pills)),
                     keyboardType: TextInputType.text,
@@ -831,7 +883,7 @@ class _I_VState extends State<I_V> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Provider.of<Cirugia>(context).digestivo.last != digestivo.first && digestivo.last.length > 2
+              Provider.of<Cirugia>(context).digestivo.last != digestivo.first && digestivo.last.length > 2 && Provider.of<Cirugia>(context).editable
                   ? FlatButton(
                       child: Text(
                         "Añadir",
@@ -845,7 +897,7 @@ class _I_VState extends State<I_V> {
                       },
                     )
                   : Container(),
-              Provider.of<Cirugia>(context).digestivo.length > 1
+              Provider.of<Cirugia>(context).digestivo.length > 1 && Provider.of<Cirugia>(context).editable
                   ? FlatButton(
                       child: Text(
                         "Eliminar",
@@ -882,7 +934,7 @@ class _I_VState extends State<I_V> {
                         child: DropdownButton(
                           isExpanded: true,
                           disabledHint: Text(Provider.of<Cirugia>(context).respiratorio[Provider.of<Cirugia>(context).respiratorio.indexOf(value)]),
-                          items: _items_respiratorio[Provider.of<Cirugia>(context).respiratorio.indexOf(value)] == _items_respiratorio.last ? _items_respiratorio[Provider.of<Cirugia>(context).respiratorio.indexOf(value)] : null,
+                          items: Provider.of<Cirugia>(context).editable && _items_respiratorio[Provider.of<Cirugia>(context).respiratorio.indexOf(value)] == _items_respiratorio.last ? _items_respiratorio[Provider.of<Cirugia>(context).respiratorio.indexOf(value)] : null,
                           value: Provider.of<Cirugia>(context).respiratorio[Provider.of<Cirugia>(context).respiratorio.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
@@ -900,6 +952,8 @@ class _I_VState extends State<I_V> {
                     ? Container(
                         margin: EdgeInsets.all(10),
                         child: TextFormField(
+                          enabled: Provider.of<Cirugia>(context).editable,
+                          style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                           initialValue: Provider.of<Cirugia>(context).otra_respiratorio,
                           decoration: InputDecoration(
                               labelText: "otra",
@@ -923,6 +977,8 @@ class _I_VState extends State<I_V> {
               ? Container(
                   margin: EdgeInsets.all(10),
                   child: TextFormField(
+                    enabled: Provider.of<Cirugia>(context).editable,
+                    style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                     initialValue: Provider.of<Cirugia>(context).tratamiento_respiratorio,
                     decoration: InputDecoration(labelText: "Tratamiento", icon: Icon(FontAwesomeIcons.pills)),
                     keyboardType: TextInputType.text,
@@ -936,7 +992,7 @@ class _I_VState extends State<I_V> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Provider.of<Cirugia>(context).respiratorio.last != respiratorio.first && respiratorio.last.length > 2
+              Provider.of<Cirugia>(context).respiratorio.last != respiratorio.first && respiratorio.last.length > 2 && Provider.of<Cirugia>(context).editable
                   ? FlatButton(
                       child: Text(
                         "Añadir",
@@ -950,7 +1006,7 @@ class _I_VState extends State<I_V> {
                       },
                     )
                   : Container(),
-              Provider.of<Cirugia>(context).respiratorio.length > 1
+              Provider.of<Cirugia>(context).respiratorio.length > 1 && Provider.of<Cirugia>(context).editable
                   ? FlatButton(
                       child: Text(
                         "Eliminar",
@@ -987,7 +1043,7 @@ class _I_VState extends State<I_V> {
                         child: DropdownButton(
                           isExpanded: true,
                           disabledHint: Text(Provider.of<Cirugia>(context).cardiovascular[Provider.of<Cirugia>(context).cardiovascular.indexOf(value)]),
-                          items: _items_cardiovascular[Provider.of<Cirugia>(context).cardiovascular.indexOf(value)] == _items_cardiovascular.last ? _items_cardiovascular[Provider.of<Cirugia>(context).cardiovascular.indexOf(value)] : null,
+                          items: Provider.of<Cirugia>(context).editable && _items_cardiovascular[Provider.of<Cirugia>(context).cardiovascular.indexOf(value)] == _items_cardiovascular.last ? _items_cardiovascular[Provider.of<Cirugia>(context).cardiovascular.indexOf(value)] : null,
                           value: Provider.of<Cirugia>(context).cardiovascular[Provider.of<Cirugia>(context).cardiovascular.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
@@ -1005,6 +1061,8 @@ class _I_VState extends State<I_V> {
                     ? Container(
                         margin: EdgeInsets.all(10),
                         child: TextFormField(
+                          enabled: Provider.of<Cirugia>(context).editable,
+                          style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                           initialValue: Provider.of<Cirugia>(context).otra_cardiovascular,
                           decoration: InputDecoration(
                               labelText: "otra",
@@ -1028,6 +1086,8 @@ class _I_VState extends State<I_V> {
               ? Container(
                   margin: EdgeInsets.all(10),
                   child: TextFormField(
+                    enabled: Provider.of<Cirugia>(context).editable,
+                    style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                     initialValue: Provider.of<Cirugia>(context).tratamiento_cardiovascular,
                     decoration: InputDecoration(labelText: "Tratamiento", icon: Icon(FontAwesomeIcons.pills)),
                     keyboardType: TextInputType.text,
@@ -1041,7 +1101,7 @@ class _I_VState extends State<I_V> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Provider.of<Cirugia>(context).cardiovascular.last != cardiovascular.first && cardiovascular.last.length > 2
+              Provider.of<Cirugia>(context).cardiovascular.last != cardiovascular.first && cardiovascular.last.length > 2 && Provider.of<Cirugia>(context).editable
                   ? FlatButton(
                       child: Text(
                         "Añadir",
@@ -1055,7 +1115,7 @@ class _I_VState extends State<I_V> {
                       },
                     )
                   : Container(),
-              Provider.of<Cirugia>(context).cardiovascular.length > 1
+              Provider.of<Cirugia>(context).cardiovascular.length > 1 && Provider.of<Cirugia>(context).editable
                   ? FlatButton(
                       child: Text(
                         "Eliminar",
@@ -1092,7 +1152,7 @@ class _I_VState extends State<I_V> {
                         child: DropdownButton(
                           isExpanded: true,
                           disabledHint: Text(Provider.of<Cirugia>(context).genitourinario[Provider.of<Cirugia>(context).genitourinario.indexOf(value)]),
-                          items: _items_genitourinario[Provider.of<Cirugia>(context).genitourinario.indexOf(value)] == _items_genitourinario.last ? _items_genitourinario[Provider.of<Cirugia>(context).genitourinario.indexOf(value)] : null,
+                          items: Provider.of<Cirugia>(context).editable && _items_genitourinario[Provider.of<Cirugia>(context).genitourinario.indexOf(value)] == _items_genitourinario.last ? _items_genitourinario[Provider.of<Cirugia>(context).genitourinario.indexOf(value)] : null,
                           value: Provider.of<Cirugia>(context).genitourinario[Provider.of<Cirugia>(context).genitourinario.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
@@ -1110,6 +1170,8 @@ class _I_VState extends State<I_V> {
                     ? Container(
                         margin: EdgeInsets.all(10),
                         child: TextFormField(
+                          enabled: Provider.of<Cirugia>(context).editable,
+                          style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                           initialValue: Provider.of<Cirugia>(context).otra_genitourinario,
                           decoration: InputDecoration(
                               labelText: "otra ",
@@ -1133,6 +1195,8 @@ class _I_VState extends State<I_V> {
               ? Container(
                   margin: EdgeInsets.all(10),
                   child: TextFormField(
+                    enabled: Provider.of<Cirugia>(context).editable,
+                    style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                     initialValue: Provider.of<Cirugia>(context).tratamiento_genitourinario,
                     decoration: InputDecoration(labelText: "Tratamiento", icon: Icon(FontAwesomeIcons.pills)),
                     keyboardType: TextInputType.text,
@@ -1146,7 +1210,7 @@ class _I_VState extends State<I_V> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Provider.of<Cirugia>(context).genitourinario.last != genitourinario.first && genitourinario.last.length > 2
+              Provider.of<Cirugia>(context).genitourinario.last != genitourinario.first && genitourinario.last.length > 2 && Provider.of<Cirugia>(context).editable
                   ? FlatButton(
                       child: Text(
                         "Añadir",
@@ -1160,7 +1224,7 @@ class _I_VState extends State<I_V> {
                       },
                     )
                   : Container(),
-              Provider.of<Cirugia>(context).genitourinario.length > 1
+              Provider.of<Cirugia>(context).genitourinario.length > 1 && Provider.of<Cirugia>(context).editable
                   ? FlatButton(
                       child: Text(
                         "Eliminar",
@@ -1197,7 +1261,7 @@ class _I_VState extends State<I_V> {
                         child: DropdownButton(
                           isExpanded: true,
                           disabledHint: Text(Provider.of<Cirugia>(context).endocrino[Provider.of<Cirugia>(context).endocrino.indexOf(value)]),
-                          items: _items_endocrino[Provider.of<Cirugia>(context).endocrino.indexOf(value)] == _items_endocrino.last ? _items_endocrino[Provider.of<Cirugia>(context).endocrino.indexOf(value)] : null,
+                          items: Provider.of<Cirugia>(context).editable && _items_endocrino[Provider.of<Cirugia>(context).endocrino.indexOf(value)] == _items_endocrino.last ? _items_endocrino[Provider.of<Cirugia>(context).endocrino.indexOf(value)] : null,
                           value: Provider.of<Cirugia>(context).endocrino[Provider.of<Cirugia>(context).endocrino.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
@@ -1215,6 +1279,8 @@ class _I_VState extends State<I_V> {
                     ? Container(
                         margin: EdgeInsets.all(10),
                         child: TextFormField(
+                          enabled: Provider.of<Cirugia>(context).editable,
+                          style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                           initialValue: Provider.of<Cirugia>(context).otra_endocrino,
                           decoration: InputDecoration(
                               labelText: "otra ",
@@ -1238,6 +1304,8 @@ class _I_VState extends State<I_V> {
               ? Container(
                   margin: EdgeInsets.all(10),
                   child: TextFormField(
+                    enabled: Provider.of<Cirugia>(context).editable,
+                    style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                     initialValue: Provider.of<Cirugia>(context).tratamiento_endocrino,
                     decoration: InputDecoration(labelText: "Tratamiento", icon: Icon(FontAwesomeIcons.pills)),
                     keyboardType: TextInputType.text,
@@ -1251,7 +1319,7 @@ class _I_VState extends State<I_V> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Provider.of<Cirugia>(context).endocrino.last != endocrino.first && endocrino.last.length > 2
+              Provider.of<Cirugia>(context).endocrino.last != endocrino.first && endocrino.last.length > 2 && Provider.of<Cirugia>(context).editable
                   ? FlatButton(
                       child: Text(
                         "Añadir",
@@ -1265,7 +1333,7 @@ class _I_VState extends State<I_V> {
                       },
                     )
                   : Container(),
-              Provider.of<Cirugia>(context).endocrino.length > 1
+              Provider.of<Cirugia>(context).endocrino.length > 1 && Provider.of<Cirugia>(context).editable
                   ? FlatButton(
                       child: Text(
                         "Eliminar",
@@ -1302,7 +1370,7 @@ class _I_VState extends State<I_V> {
                         child: DropdownButton(
                           isExpanded: true,
                           disabledHint: Text(Provider.of<Cirugia>(context).hematologico[Provider.of<Cirugia>(context).hematologico.indexOf(value)]),
-                          items: _items_hematologicos[Provider.of<Cirugia>(context).hematologico.indexOf(value)] == _items_hematologicos.last ? _items_hematologicos[Provider.of<Cirugia>(context).hematologico.indexOf(value)] : null,
+                          items: Provider.of<Cirugia>(context).editable && _items_hematologicos[Provider.of<Cirugia>(context).hematologico.indexOf(value)] == _items_hematologicos.last ? _items_hematologicos[Provider.of<Cirugia>(context).hematologico.indexOf(value)] : null,
                           value: Provider.of<Cirugia>(context).hematologico[Provider.of<Cirugia>(context).hematologico.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
@@ -1320,6 +1388,8 @@ class _I_VState extends State<I_V> {
                     ? Container(
                         margin: EdgeInsets.all(10),
                         child: TextFormField(
+                          enabled: Provider.of<Cirugia>(context).editable,
+                          style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                           initialValue: Provider.of<Cirugia>(context).otra_hematologico,
                           decoration: InputDecoration(
                               labelText: "otra ",
@@ -1343,6 +1413,8 @@ class _I_VState extends State<I_V> {
               ? Container(
                   margin: EdgeInsets.all(10),
                   child: TextFormField(
+                    enabled: Provider.of<Cirugia>(context).editable,
+                    style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                     initialValue: Provider.of<Cirugia>(context).tratamiento_hematologico,
                     decoration: InputDecoration(labelText: "Tratamiento", icon: Icon(FontAwesomeIcons.pills)),
                     keyboardType: TextInputType.text,
@@ -1356,7 +1428,7 @@ class _I_VState extends State<I_V> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Provider.of<Cirugia>(context).hematologico.last != hematologicos.first && hematologicos.last.length > 2
+              Provider.of<Cirugia>(context).hematologico.last != hematologicos.first && hematologicos.last.length > 2 && Provider.of<Cirugia>(context).editable
                   ? FlatButton(
                       child: Text(
                         "Añadir",
@@ -1370,7 +1442,7 @@ class _I_VState extends State<I_V> {
                       },
                     )
                   : Container(),
-              Provider.of<Cirugia>(context).hematologico.length > 1
+              Provider.of<Cirugia>(context).hematologico.length > 1 && Provider.of<Cirugia>(context).editable
                   ? FlatButton(
                       child: Text(
                         "Eliminar",
@@ -1407,7 +1479,7 @@ class _I_VState extends State<I_V> {
                         child: DropdownButton(
                           isExpanded: true,
                           disabledHint: Text(Provider.of<Cirugia>(context).neurologico[Provider.of<Cirugia>(context).neurologico.indexOf(value)]),
-                          items: _items_neurologico[Provider.of<Cirugia>(context).neurologico.indexOf(value)] == _items_neurologico.last ? _items_neurologico[Provider.of<Cirugia>(context).neurologico.indexOf(value)] : null,
+                          items: Provider.of<Cirugia>(context).editable && _items_neurologico[Provider.of<Cirugia>(context).neurologico.indexOf(value)] == _items_neurologico.last ? _items_neurologico[Provider.of<Cirugia>(context).neurologico.indexOf(value)] : null,
                           value: Provider.of<Cirugia>(context).neurologico[Provider.of<Cirugia>(context).neurologico.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
@@ -1425,6 +1497,8 @@ class _I_VState extends State<I_V> {
                     ? Container(
                         margin: EdgeInsets.all(10),
                         child: TextFormField(
+                          enabled: Provider.of<Cirugia>(context).editable,
+                          style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                           initialValue: Provider.of<Cirugia>(context).otra_neurologico,
                           decoration: InputDecoration(
                               labelText: "otra ",
@@ -1448,6 +1522,8 @@ class _I_VState extends State<I_V> {
               ? Container(
                   margin: EdgeInsets.all(10),
                   child: TextFormField(
+                    enabled: Provider.of<Cirugia>(context).editable,
+                    style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                     initialValue: Provider.of<Cirugia>(context).tratamiento_neurologico,
                     decoration: InputDecoration(labelText: "Tratamiento", icon: Icon(FontAwesomeIcons.pills)),
                     keyboardType: TextInputType.text,
@@ -1461,7 +1537,7 @@ class _I_VState extends State<I_V> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Provider.of<Cirugia>(context).neurologico.last != neurologico.first && neurologico.last.length > 2
+              Provider.of<Cirugia>(context).neurologico.last != neurologico.first && neurologico.last.length > 2 && Provider.of<Cirugia>(context).editable
                   ? FlatButton(
                       child: Text(
                         "Añadir",
@@ -1475,7 +1551,7 @@ class _I_VState extends State<I_V> {
                       },
                     )
                   : Container(),
-              Provider.of<Cirugia>(context).neurologico.length > 1
+              Provider.of<Cirugia>(context).neurologico.length > 1 && Provider.of<Cirugia>(context).editable
                   ? FlatButton(
                       child: Text(
                         "Eliminar",
@@ -1512,7 +1588,7 @@ class _I_VState extends State<I_V> {
                         child: DropdownButton(
                           isExpanded: true,
                           disabledHint: Text(Provider.of<Cirugia>(context).musculo_esqueleto[Provider.of<Cirugia>(context).musculo_esqueleto.indexOf(value)]),
-                          items: _items_musculo_esqueleto[Provider.of<Cirugia>(context).musculo_esqueleto.indexOf(value)] == _items_musculo_esqueleto.last ? _items_musculo_esqueleto[Provider.of<Cirugia>(context).musculo_esqueleto.indexOf(value)] : null,
+                          items: Provider.of<Cirugia>(context).editable && _items_musculo_esqueleto[Provider.of<Cirugia>(context).musculo_esqueleto.indexOf(value)] == _items_musculo_esqueleto.last ? _items_musculo_esqueleto[Provider.of<Cirugia>(context).musculo_esqueleto.indexOf(value)] : null,
                           value: Provider.of<Cirugia>(context).musculo_esqueleto[Provider.of<Cirugia>(context).musculo_esqueleto.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
@@ -1530,6 +1606,8 @@ class _I_VState extends State<I_V> {
                     ? Container(
                         margin: EdgeInsets.all(10),
                         child: TextFormField(
+                          enabled: Provider.of<Cirugia>(context).editable,
+                          style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                           initialValue: Provider.of<Cirugia>(context).otra_musculo_esqueleto,
                           decoration: InputDecoration(
                               labelText: "otra ",
@@ -1553,6 +1631,8 @@ class _I_VState extends State<I_V> {
               ? Container(
                   margin: EdgeInsets.all(10),
                   child: TextFormField(
+                    enabled: Provider.of<Cirugia>(context).editable,
+                    style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                     initialValue: Provider.of<Cirugia>(context).tratamiento_musculo_esqueleto,
                     decoration: InputDecoration(labelText: "Tratamiento", icon: Icon(FontAwesomeIcons.pills)),
                     keyboardType: TextInputType.text,
@@ -1566,7 +1646,7 @@ class _I_VState extends State<I_V> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Provider.of<Cirugia>(context).musculo_esqueleto.last != musculo_esqueleto.first && musculo_esqueleto.last.length > 2
+              Provider.of<Cirugia>(context).musculo_esqueleto.last != musculo_esqueleto.first && musculo_esqueleto.last.length > 2 && Provider.of<Cirugia>(context).editable
                   ? FlatButton(
                       child: Text(
                         "Añadir",
@@ -1580,7 +1660,7 @@ class _I_VState extends State<I_V> {
                       },
                     )
                   : Container(),
-              Provider.of<Cirugia>(context).musculo_esqueleto.length > 1
+              Provider.of<Cirugia>(context).musculo_esqueleto.length > 1 && Provider.of<Cirugia>(context).editable
                   ? FlatButton(
                       child: Text(
                         "Eliminar",
@@ -1617,7 +1697,7 @@ class _I_VState extends State<I_V> {
                         child: DropdownButton(
                           isExpanded: true,
                           disabledHint: Text(Provider.of<Cirugia>(context).inmunologico[Provider.of<Cirugia>(context).inmunologico.indexOf(value)]),
-                          items: _items_inmunologico[Provider.of<Cirugia>(context).inmunologico.indexOf(value)] == _items_inmunologico.last ? _items_inmunologico[Provider.of<Cirugia>(context).inmunologico.indexOf(value)] : null,
+                          items: Provider.of<Cirugia>(context).editable && _items_inmunologico[Provider.of<Cirugia>(context).inmunologico.indexOf(value)] == _items_inmunologico.last ? _items_inmunologico[Provider.of<Cirugia>(context).inmunologico.indexOf(value)] : null,
                           value: Provider.of<Cirugia>(context).inmunologico[Provider.of<Cirugia>(context).inmunologico.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
@@ -1635,6 +1715,8 @@ class _I_VState extends State<I_V> {
                     ? Container(
                         margin: EdgeInsets.all(10),
                         child: TextFormField(
+                          enabled: Provider.of<Cirugia>(context).editable,
+                          style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                           initialValue: Provider.of<Cirugia>(context).otra_inmunologico,
                           decoration: InputDecoration(
                               labelText: "otra ",
@@ -1658,6 +1740,8 @@ class _I_VState extends State<I_V> {
               ? Container(
                   margin: EdgeInsets.all(10),
                   child: TextFormField(
+                    enabled: Provider.of<Cirugia>(context).editable,
+                    style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                     initialValue: Provider.of<Cirugia>(context).tratamiento_inmunologico,
                     decoration: InputDecoration(labelText: "Tratamiento", icon: Icon(FontAwesomeIcons.pills)),
                     keyboardType: TextInputType.text,
@@ -1671,7 +1755,7 @@ class _I_VState extends State<I_V> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Provider.of<Cirugia>(context).inmunologico.last != inmunologico.first && inmunologico.last.length > 2
+              Provider.of<Cirugia>(context).inmunologico.last != inmunologico.first && inmunologico.last.length > 2 && Provider.of<Cirugia>(context).editable
                   ? FlatButton(
                       child: Text(
                         "Añadir",
@@ -1685,7 +1769,7 @@ class _I_VState extends State<I_V> {
                       },
                     )
                   : Container(),
-              Provider.of<Cirugia>(context).inmunologico.length > 1
+              Provider.of<Cirugia>(context).inmunologico.length > 1 && Provider.of<Cirugia>(context).editable
                   ? FlatButton(
                       child: Text(
                         "Eliminar",
@@ -1722,7 +1806,7 @@ class _I_VState extends State<I_V> {
                         child: DropdownButton(
                           isExpanded: true,
                           disabledHint: Text(Provider.of<Cirugia>(context).tegumentario[Provider.of<Cirugia>(context).tegumentario.indexOf(value)]),
-                          items: _items_tegumentario[Provider.of<Cirugia>(context).tegumentario.indexOf(value)] == _items_tegumentario.last ? _items_tegumentario[Provider.of<Cirugia>(context).tegumentario.indexOf(value)] : null,
+                          items: Provider.of<Cirugia>(context).editable && _items_tegumentario[Provider.of<Cirugia>(context).tegumentario.indexOf(value)] == _items_tegumentario.last ? _items_tegumentario[Provider.of<Cirugia>(context).tegumentario.indexOf(value)] : null,
                           value: Provider.of<Cirugia>(context).tegumentario[Provider.of<Cirugia>(context).tegumentario.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
@@ -1740,6 +1824,8 @@ class _I_VState extends State<I_V> {
                     ? Container(
                         margin: EdgeInsets.all(10),
                         child: TextFormField(
+                          enabled: Provider.of<Cirugia>(context).editable,
+                          style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                           initialValue: Provider.of<Cirugia>(context).otra_tegumentario,
                           decoration: InputDecoration(
                               labelText: "otra ",
@@ -1763,6 +1849,8 @@ class _I_VState extends State<I_V> {
               ? Container(
                   margin: EdgeInsets.all(10),
                   child: TextFormField(
+                    enabled: Provider.of<Cirugia>(context).editable,
+                    style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                     initialValue: Provider.of<Cirugia>(context).tratamiento_tegumentario,
                     decoration: InputDecoration(labelText: "Tratamiento", icon: Icon(FontAwesomeIcons.pills)),
                     keyboardType: TextInputType.text,
@@ -1776,7 +1864,7 @@ class _I_VState extends State<I_V> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Provider.of<Cirugia>(context).tegumentario.last != tegumentario.first && tegumentario.last.length > 2
+              Provider.of<Cirugia>(context).tegumentario.last != tegumentario.first && tegumentario.last.length > 2 && Provider.of<Cirugia>(context).editable
                   ? FlatButton(
                       child: Text(
                         "Añadir",
@@ -1790,7 +1878,7 @@ class _I_VState extends State<I_V> {
                       },
                     )
                   : Container(),
-              Provider.of<Cirugia>(context).tegumentario.length > 1
+              Provider.of<Cirugia>(context).tegumentario.length > 1 && Provider.of<Cirugia>(context).editable
                   ? FlatButton(
                       child: Text(
                         "Eliminar",
@@ -1822,7 +1910,8 @@ class _I_VState extends State<I_V> {
                   margin: EdgeInsets.all(10),
                   child: DropdownButton(
                     isExpanded: true,
-                    items: _items_clasificacion_asa,
+                    disabledHint: Text(Provider.of<Cirugia>(context).clasificacion_asa),
+                    items: Provider.of<Cirugia>(context).editable ? _items_clasificacion_asa : null,
                     value: Provider.of<Cirugia>(context).clasificacion_asa,
                     onChanged: (value) {
                       setState(() {
@@ -1851,6 +1940,8 @@ class _I_VState extends State<I_V> {
                 child: Container(
                   margin: const EdgeInsets.all(10.0),
                   child: TextFormField(
+                    enabled: Provider.of<Cirugia>(context).editable,
+                    style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                     initialValue: Provider.of<Cirugia>(context).frecuencia_cardiaca,
                     decoration: (InputDecoration(
                       labelText: "Frec cardiaca",
@@ -1868,6 +1959,8 @@ class _I_VState extends State<I_V> {
                 child: Container(
                   margin: const EdgeInsets.all(10.0),
                   child: TextFormField(
+                    enabled: Provider.of<Cirugia>(context).editable,
+                    style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                     initialValue: Provider.of<Cirugia>(context).tension_arterial,
                     decoration: (InputDecoration(
                       labelText: "Tension arterial",
@@ -1889,6 +1982,8 @@ class _I_VState extends State<I_V> {
                 child: Container(
                   margin: const EdgeInsets.all(10.0),
                   child: TextFormField(
+                    enabled: Provider.of<Cirugia>(context).editable,
+                    style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                     initialValue: Provider.of<Cirugia>(context).frecuencia_respiratoria,
                     decoration: (InputDecoration(
                       labelText: "Frec respiratoria",
@@ -1907,6 +2002,8 @@ class _I_VState extends State<I_V> {
                 child: Container(
                   margin: const EdgeInsets.all(10.0),
                   child: TextFormField(
+                    enabled: Provider.of<Cirugia>(context).editable,
+                    style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                     initialValue: Provider.of<Cirugia>(context).temperatura,
                     decoration: (InputDecoration(
                       labelText: "Temperatura",
@@ -1933,6 +2030,8 @@ class _I_VState extends State<I_V> {
                 child: Container(
                   margin: const EdgeInsets.all(10.0),
                   child: TextFormField(
+                    enabled: Provider.of<Cirugia>(context).editable,
+                    style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                     initialValue: Provider.of<Cirugia>(context).peso,
                     decoration: (InputDecoration(
                       labelText: "Peso (kg)",
@@ -1950,6 +2049,8 @@ class _I_VState extends State<I_V> {
                 child: Container(
                   margin: const EdgeInsets.all(10.0),
                   child: TextFormField(
+                    enabled: Provider.of<Cirugia>(context).editable,
+                    style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                     initialValue: Provider.of<Cirugia>(context).talla,
                     decoration: (InputDecoration(
                       labelText: "Talla",
@@ -1968,6 +2069,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).constitucion_fisica,
               decoration: InputDecoration(labelText: "Constitucion fisica", icon: Icon(FontAwesomeIcons.running)),
               keyboardType: TextInputType.text,
@@ -1998,7 +2101,8 @@ class _I_VState extends State<I_V> {
                   margin: EdgeInsets.all(10),
                   child: DropdownButton(
                     isExpanded: true,
-                    items: _items_craneoforma,
+                    disabledHint: Text(Provider.of<Cirugia>(context).craneo_tipo),
+                    items: Provider.of<Cirugia>(context).editable ? _items_craneoforma : null,
                     value: Provider.of<Cirugia>(context).craneo_tipo,
                     onChanged: (value) {
                       setState(() {
@@ -2017,23 +2121,27 @@ class _I_VState extends State<I_V> {
               Container(margin: EdgeInsets.only(right: 10, left: 10), child: Icon(FontAwesomeIcons.briefcaseMedical)),
               Expanded(child: Text("Exostosis")),
               Checkbox(
+                activeColor: Provider.of<Cirugia>(context).editable ? Theme.of(context).accentColor : Colors.grey,
                 value: Provider.of<Cirugia>(context).exostosis,
                 onChanged: (value) {
+                  Provider.of<Cirugia>(context).editable ?
                   setState(() {
                     Provider.of<Cirugia>(context).exostosis = value;
                     Provider.of<Cirugia>(context).cambiado = true;
-                  });
+                  }): null;
                 },
               ),
               Container(margin: EdgeInsets.only(right: 10, left: 10), child: Icon(FontAwesomeIcons.briefcaseMedical)),
               Expanded(child: Text("Endostosis")),
               Checkbox(
-                value: Provider.of<Cirugia>(context).exostosis,
+                activeColor: Provider.of<Cirugia>(context).editable ? Theme.of(context).accentColor : Colors.grey,
+                value: Provider.of<Cirugia>(context).endostosis,
                 onChanged: (value) {
+                  Provider.of<Cirugia>(context).editable ?
                   setState(() {
                     Provider.of<Cirugia>(context).endostosis = value;
                     Provider.of<Cirugia>(context).cambiado = true;
-                  });
+                  }): null;
                 },
               ),
             ],
@@ -2053,23 +2161,27 @@ class _I_VState extends State<I_V> {
               Container(margin: EdgeInsets.only(right: 10, left: 10), child: Icon(FontAwesomeIcons.briefcaseMedical)),
               Expanded(child: Text("Transversal")),
               Checkbox(
+                activeColor: Provider.of<Cirugia>(context).editable ? Theme.of(context).accentColor : Colors.grey,
                 value: Provider.of<Cirugia>(context).asimetrias_transversales,
                 onChanged: (value) {
+                  Provider.of<Cirugia>(context).editable ?
                   setState(() {
                     Provider.of<Cirugia>(context).asimetrias_transversales = value;
                     Provider.of<Cirugia>(context).cambiado = true;
-                  });
+                  }): null;
                 },
               ),
               Container(margin: EdgeInsets.only(right: 10, left: 10), child: Icon(FontAwesomeIcons.briefcaseMedical)),
               Expanded(child: Text("Longitudinal")),
               Checkbox(
+                activeColor: Provider.of<Cirugia>(context).editable ? Theme.of(context).accentColor : Colors.grey,
                 value: Provider.of<Cirugia>(context).asimetrias_longitudinales,
                 onChanged: (value) {
+                  Provider.of<Cirugia>(context).editable ?
                   setState(() {
                     Provider.of<Cirugia>(context).asimetrias_longitudinales = value;
                     Provider.of<Cirugia>(context).cambiado = true;
-                  });
+                  }): null;
                 },
               ),
             ],
@@ -2084,23 +2196,27 @@ class _I_VState extends State<I_V> {
               Container(margin: EdgeInsets.only(right: 10, left: 10), child: Icon(FontAwesomeIcons.briefcaseMedical)),
               Expanded(child: Text("Enoftalmo")),
               Checkbox(
+                activeColor: Provider.of<Cirugia>(context).editable ? Theme.of(context).accentColor : Colors.grey,
                 value: Provider.of<Cirugia>(context).enoftalmo,
                 onChanged: (value) {
+                  Provider.of<Cirugia>(context).editable ?
                   setState(() {
                     Provider.of<Cirugia>(context).enoftalmo = value;
                     Provider.of<Cirugia>(context).cambiado = true;
-                  });
+                  }): null;
                 },
               ),
               Container(margin: EdgeInsets.only(right: 10, left: 10), child: Icon(FontAwesomeIcons.briefcaseMedical)),
               Expanded(child: Text("Exoftalmo")),
               Checkbox(
+                activeColor: Provider.of<Cirugia>(context).editable ? Theme.of(context).accentColor : Colors.grey,
                 value: Provider.of<Cirugia>(context).exoftalmo,
                 onChanged: (value) {
+                  Provider.of<Cirugia>(context).editable ?
                   setState(() {
                     Provider.of<Cirugia>(context).exoftalmo = value;
                     Provider.of<Cirugia>(context).cambiado = true;
-                  });
+                  }): null;
                 },
               ),
             ],
@@ -2108,6 +2224,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: const EdgeInsets.all(10.0),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).movilidad,
               decoration: (InputDecoration(
                 labelText: "Movilidad",
@@ -2130,23 +2248,27 @@ class _I_VState extends State<I_V> {
               Container(margin: EdgeInsets.only(right: 10, left: 10), child: Icon(FontAwesomeIcons.briefcaseMedical)),
               Expanded(child: Text("Midriasis")),
               Checkbox(
+                activeColor: Provider.of<Cirugia>(context).editable ? Theme.of(context).accentColor : Colors.grey,
                 value: Provider.of<Cirugia>(context).midriasis,
                 onChanged: (value) {
+                  Provider.of<Cirugia>(context).editable ?
                   setState(() {
                     Provider.of<Cirugia>(context).midriasis = value;
                     Provider.of<Cirugia>(context).cambiado = true;
-                  });
+                  }): null;
                 },
               ),
               Container(margin: EdgeInsets.only(right: 10, left: 10), child: Icon(FontAwesomeIcons.briefcaseMedical)),
               Expanded(child: Text("Miosis")),
               Checkbox(
+                activeColor: Provider.of<Cirugia>(context).editable ? Theme.of(context).accentColor : Colors.grey,
                 value: Provider.of<Cirugia>(context).miosis,
                 onChanged: (value) {
+                  Provider.of<Cirugia>(context).editable ?
                   setState(() {
                     Provider.of<Cirugia>(context).miosis = value;
                     Provider.of<Cirugia>(context).cambiado = true;
-                  });
+                  }): null;
                 },
               ),
             ],
@@ -2154,6 +2276,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: const EdgeInsets.all(10.0),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).reflejo_pupilar,
               decoration: (InputDecoration(
                 labelText: "Reflejo pupilar",
@@ -2169,6 +2293,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).nariz,
               decoration: InputDecoration(labelText: "Nariz", icon: Icon(FontAwesomeIcons.userAlt)),
               keyboardType: TextInputType.text,
@@ -2186,6 +2312,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: const EdgeInsets.all(10.0),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).color_piel,
               decoration: (InputDecoration(
                 labelText: "Color",
@@ -2203,23 +2331,27 @@ class _I_VState extends State<I_V> {
               Container(margin: EdgeInsets.only(right: 10, left: 10), child: Icon(FontAwesomeIcons.briefcaseMedical)),
               Expanded(child: Text("Palida")),
               Checkbox(
+                activeColor: Provider.of<Cirugia>(context).editable ? Theme.of(context).accentColor : Colors.grey,
                 value: Provider.of<Cirugia>(context).palida,
                 onChanged: (value) {
+                  Provider.of<Cirugia>(context).editable ?
                   setState(() {
                     Provider.of<Cirugia>(context).palida = value;
                     Provider.of<Cirugia>(context).cambiado = true;
-                  });
+                  }): null;
                 },
               ),
               Container(margin: EdgeInsets.only(right: 10, left: 10), child: Icon(FontAwesomeIcons.briefcaseMedical)),
               Expanded(child: Text("Cianotica")),
               Checkbox(
+                activeColor: Provider.of<Cirugia>(context).editable ? Theme.of(context).accentColor : Colors.grey,
                 value: Provider.of<Cirugia>(context).cianotica,
                 onChanged: (value) {
+                  Provider.of<Cirugia>(context).editable ?
                   setState(() {
                     Provider.of<Cirugia>(context).cianotica = value;
                     Provider.of<Cirugia>(context).cambiado = true;
-                  });
+                  }): null;
                 },
               )
             ],
@@ -2229,23 +2361,27 @@ class _I_VState extends State<I_V> {
               Container(margin: EdgeInsets.only(right: 10, left: 10), child: Icon(FontAwesomeIcons.briefcaseMedical)),
               Expanded(child: Text("Enrojecida")),
               Checkbox(
+                activeColor: Provider.of<Cirugia>(context).editable ? Theme.of(context).accentColor : Colors.grey,
                 value: Provider.of<Cirugia>(context).enrojecida,
                 onChanged: (value) {
+                  Provider.of<Cirugia>(context).editable ?
                   setState(() {
                     Provider.of<Cirugia>(context).enrojecida = value;
                     Provider.of<Cirugia>(context).cambiado = true;
-                  });
+                  }): null;
                 },
               ),
               Container(margin: EdgeInsets.only(right: 10, left: 10), child: Icon(FontAwesomeIcons.briefcaseMedical)),
               Expanded(child: Text("Manchas")),
               Checkbox(
+                activeColor: Provider.of<Cirugia>(context).editable ? Theme.of(context).accentColor : Colors.grey,
                 value: Provider.of<Cirugia>(context).manchas,
                 onChanged: (value) {
+                  Provider.of<Cirugia>(context).editable ?
                   setState(() {
                     Provider.of<Cirugia>(context).manchas = value;
                     Provider.of<Cirugia>(context).cambiado = true;
-                  });
+                  }): null;
                 },
               )
             ],
@@ -2260,23 +2396,27 @@ class _I_VState extends State<I_V> {
               Container(margin: EdgeInsets.only(right: 10, left: 10), child: Icon(FontAwesomeIcons.briefcaseMedical)),
               Expanded(child: Text("Hipotonico")),
               Checkbox(
+                activeColor: Provider.of<Cirugia>(context).editable ? Theme.of(context).accentColor : Colors.grey,
                 value: Provider.of<Cirugia>(context).hipotonico,
                 onChanged: (value) {
+                  Provider.of<Cirugia>(context).editable ?
                   setState(() {
                     Provider.of<Cirugia>(context).hipotonico = value;
                     Provider.of<Cirugia>(context).cambiado = true;
-                  });
+                  }): null;
                 },
               ),
               Container(margin: EdgeInsets.only(right: 10, left: 10), child: Icon(FontAwesomeIcons.briefcaseMedical)),
               Expanded(child: Text("Hipertonido")),
               Checkbox(
+                activeColor: Provider.of<Cirugia>(context).editable ? Theme.of(context).accentColor : Colors.grey,
                 value: Provider.of<Cirugia>(context).hipertonico,
                 onChanged: (value) {
+                  Provider.of<Cirugia>(context).editable ?
                   setState(() {
                     Provider.of<Cirugia>(context).hipertonico = value;
                     Provider.of<Cirugia>(context).cambiado = true;
-                  });
+                  }): null;
                 },
               ),
             ],
@@ -2286,12 +2426,14 @@ class _I_VState extends State<I_V> {
               Container(margin: EdgeInsets.only(right: 10, left: 10), child: Icon(FontAwesomeIcons.briefcaseMedical)),
               Text("Espastico"),
               Checkbox(
+                activeColor: Provider.of<Cirugia>(context).editable ? Theme.of(context).accentColor : Colors.grey,
                 value: Provider.of<Cirugia>(context).espasticos,
                 onChanged: (value) {
+                  Provider.of<Cirugia>(context).editable ?
                   setState(() {
                     Provider.of<Cirugia>(context).espasticos = value;
                     Provider.of<Cirugia>(context).cambiado = true;
-                  });
+                  }): null;
                 },
               )
             ],
@@ -2304,6 +2446,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).ganglios_linfaticos,
               decoration: InputDecoration(labelText: "Ganglios linfaticos", icon: Icon(FontAwesomeIcons.userAlt)),
               keyboardType: TextInputType.text,
@@ -2334,7 +2478,7 @@ class _I_VState extends State<I_V> {
                         child: DropdownButton(
                           isExpanded: true,
                           disabledHint: Text(Provider.of<Cirugia>(context).temporomandibular[Provider.of<Cirugia>(context).temporomandibular.indexOf(value)]),
-                          items: _items_temporomandibular[Provider.of<Cirugia>(context).temporomandibular.indexOf(value)] == _items_temporomandibular.last ? _items_temporomandibular[Provider.of<Cirugia>(context).temporomandibular.indexOf(value)] : null,
+                          items: Provider.of<Cirugia>(context).editable && _items_temporomandibular[Provider.of<Cirugia>(context).temporomandibular.indexOf(value)] == _items_temporomandibular.last ? _items_temporomandibular[Provider.of<Cirugia>(context).temporomandibular.indexOf(value)] : null,
                           value: Provider.of<Cirugia>(context).temporomandibular[Provider.of<Cirugia>(context).temporomandibular.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
@@ -2355,6 +2499,8 @@ class _I_VState extends State<I_V> {
               ? Container(
                   margin: EdgeInsets.all(10),
                   child: TextFormField(
+                    enabled: Provider.of<Cirugia>(context).editable,
+                    style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                     initialValue: Provider.of<Cirugia>(context).tratamiento_temporomandibular,
                     decoration: InputDecoration(
                         labelText: "Describa",
@@ -2374,7 +2520,7 @@ class _I_VState extends State<I_V> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Provider.of<Cirugia>(context).temporomandibular.last != temporomandibular.first && temporomandibular.last.length > 2
+              Provider.of<Cirugia>(context).temporomandibular.last != temporomandibular.first && temporomandibular.last.length > 2 && Provider.of<Cirugia>(context).editable
                   ? FlatButton(
                       child: Text(
                         "Añadir",
@@ -2388,7 +2534,7 @@ class _I_VState extends State<I_V> {
                       },
                     )
                   : Container(),
-              Provider.of<Cirugia>(context).temporomandibular.length > 1
+              Provider.of<Cirugia>(context).temporomandibular.length > 1 && Provider.of<Cirugia>(context).editable
                   ? FlatButton(
                       child: Text(
                         "Eliminar",
@@ -2412,6 +2558,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).labios,
               decoration: InputDecoration(labelText: "Labios", icon: Icon(FontAwesomeIcons.teethOpen)),
               keyboardType: TextInputType.text,
@@ -2424,6 +2572,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).carrillos,
               decoration: InputDecoration(labelText: "Carrillos", icon: Icon(FontAwesomeIcons.teethOpen)),
               keyboardType: TextInputType.text,
@@ -2436,6 +2586,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).paladar_duro,
               decoration: InputDecoration(labelText: "Paladar duro", icon: Icon(FontAwesomeIcons.teethOpen)),
               keyboardType: TextInputType.text,
@@ -2448,6 +2600,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).paladar_blando,
               decoration: InputDecoration(labelText: "Paladar blando", icon: Icon(FontAwesomeIcons.teethOpen)),
               keyboardType: TextInputType.text,
@@ -2460,6 +2614,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).orafaringe,
               decoration: InputDecoration(labelText: "Orafaringe", icon: Icon(FontAwesomeIcons.teethOpen)),
               keyboardType: TextInputType.text,
@@ -2472,6 +2628,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).piso_boca,
               decoration: InputDecoration(labelText: "Piso de la boca", icon: Icon(FontAwesomeIcons.teethOpen)),
               keyboardType: TextInputType.text,
@@ -2484,6 +2642,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).lengua,
               decoration: InputDecoration(labelText: "Lengua", icon: Icon(FontAwesomeIcons.teethOpen)),
               keyboardType: TextInputType.text,
@@ -2496,6 +2656,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).encia,
               decoration: InputDecoration(labelText: "Encia", icon: Icon(FontAwesomeIcons.teethOpen)),
               keyboardType: TextInputType.text,
@@ -2508,6 +2670,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).dientes,
               decoration: InputDecoration(labelText: "Dientes", icon: Icon(FontAwesomeIcons.teethOpen)),
               keyboardType: TextInputType.text,
@@ -2547,7 +2711,7 @@ class _I_VState extends State<I_V> {
                         child: DropdownButton(
                           isExpanded: true,
                           disabledHint: Text(Provider.of<Cirugia>(context).radiografia[Provider.of<Cirugia>(context).radiografia.indexOf(value)]),
-                          items: _items_radiografia[Provider.of<Cirugia>(context).radiografia.indexOf(value)] == _items_radiografia.last ? _items_radiografia[Provider.of<Cirugia>(context).radiografia.indexOf(value)] : null,
+                          items: Provider.of<Cirugia>(context).editable && _items_radiografia[Provider.of<Cirugia>(context).radiografia.indexOf(value)] == _items_radiografia.last ? _items_radiografia[Provider.of<Cirugia>(context).radiografia.indexOf(value)] : null,
                           value: Provider.of<Cirugia>(context).radiografia[Provider.of<Cirugia>(context).radiografia.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
@@ -2568,6 +2732,8 @@ class _I_VState extends State<I_V> {
               ? Container(
                   margin: EdgeInsets.all(10),
                   child: TextFormField(
+                    enabled: Provider.of<Cirugia>(context).editable,
+                    style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                     initialValue: Provider.of<Cirugia>(context).otra_radiografia,
                     decoration: InputDecoration(
                         labelText: "Describa",
@@ -2587,7 +2753,7 @@ class _I_VState extends State<I_V> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Provider.of<Cirugia>(context).radiografia.last != radiografia.first && radiografia.last.length > 2
+              Provider.of<Cirugia>(context).radiografia.last != radiografia.first && radiografia.last.length > 2 && Provider.of<Cirugia>(context).editable
                   ? FlatButton(
                       child: Text(
                         "Añadir",
@@ -2601,7 +2767,7 @@ class _I_VState extends State<I_V> {
                       },
                     )
                   : Container(),
-              Provider.of<Cirugia>(context).radiografia.length > 1
+              Provider.of<Cirugia>(context).radiografia.length > 1 && Provider.of<Cirugia>(context).editable
                   ? FlatButton(
                       child: Text(
                         "Eliminar",
@@ -2620,6 +2786,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).interpretacion_radiografica,
               decoration: InputDecoration(labelText: "Interpretacion radiografica", icon: Icon(FontAwesomeIcons.vectorSquare)),
               keyboardType: TextInputType.text,
@@ -2652,7 +2820,7 @@ class _I_VState extends State<I_V> {
                         child: DropdownButton(
                           isExpanded: true,
                           disabledHint: Text(Provider.of<Cirugia>(context).analisis_laboratorio[Provider.of<Cirugia>(context).analisis_laboratorio.indexOf(value)]),
-                          items: _items_analisis_laboratorio[Provider.of<Cirugia>(context).analisis_laboratorio.indexOf(value)] == _items_analisis_laboratorio.last ? _items_analisis_laboratorio[Provider.of<Cirugia>(context).analisis_laboratorio.indexOf(value)] : null,
+                          items: Provider.of<Cirugia>(context).editable && _items_analisis_laboratorio[Provider.of<Cirugia>(context).analisis_laboratorio.indexOf(value)] == _items_analisis_laboratorio.last ? _items_analisis_laboratorio[Provider.of<Cirugia>(context).analisis_laboratorio.indexOf(value)] : null,
                           value: Provider.of<Cirugia>(context).analisis_laboratorio[Provider.of<Cirugia>(context).analisis_laboratorio.indexOf(value)],
                           onChanged: (value2) {
                             setState(() {
@@ -2675,6 +2843,8 @@ class _I_VState extends State<I_V> {
                                 child: Container(
                                   margin: const EdgeInsets.all(10.0),
                                   child: TextFormField(
+                                    enabled: Provider.of<Cirugia>(context).editable,
+                                    style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                                     initialValue: Provider.of<Cirugia>(context).hemoglobina,
                                     decoration: (InputDecoration(
                                       labelText: "Hemoglobina",
@@ -2692,6 +2862,8 @@ class _I_VState extends State<I_V> {
                                 child: Container(
                                   margin: const EdgeInsets.all(10.0),
                                   child: TextFormField(
+                                    enabled: Provider.of<Cirugia>(context).editable,
+                                    style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                                     initialValue: Provider.of<Cirugia>(context).hematocrito,
                                     decoration: (InputDecoration(
                                       labelText: "Hematocrito",
@@ -2713,6 +2885,8 @@ class _I_VState extends State<I_V> {
                                 child: Container(
                                   margin: const EdgeInsets.all(10.0),
                                   child: TextFormField(
+                                    enabled: Provider.of<Cirugia>(context).editable,
+                                    style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                                     initialValue: Provider.of<Cirugia>(context).neutrofilos,
                                     decoration: (InputDecoration(
                                       labelText: "Neutrofilos",
@@ -2730,6 +2904,8 @@ class _I_VState extends State<I_V> {
                                 child: Container(
                                   margin: const EdgeInsets.all(10.0),
                                   child: TextFormField(
+                                    enabled: Provider.of<Cirugia>(context).editable,
+                                    style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                                     initialValue: Provider.of<Cirugia>(context).linfocitos,
                                     decoration: (InputDecoration(
                                       labelText: "Linfocitos",
@@ -2751,6 +2927,8 @@ class _I_VState extends State<I_V> {
                                 child: Container(
                                   margin: const EdgeInsets.all(10.0),
                                   child: TextFormField(
+                                    enabled: Provider.of<Cirugia>(context).editable,
+                                    style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                                     initialValue: Provider.of<Cirugia>(context).eosinofilos,
                                     decoration: (InputDecoration(
                                       labelText: "Eosinofilos",
@@ -2768,6 +2946,8 @@ class _I_VState extends State<I_V> {
                                 child: Container(
                                   margin: const EdgeInsets.all(10.0),
                                   child: TextFormField(
+                                    enabled: Provider.of<Cirugia>(context).editable,
+                                    style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                                     initialValue: Provider.of<Cirugia>(context).basofilos,
                                     decoration: (InputDecoration(
                                       labelText: "Basofilos",
@@ -2789,6 +2969,8 @@ class _I_VState extends State<I_V> {
                                 child: Container(
                                   margin: const EdgeInsets.all(10.0),
                                   child: TextFormField(
+                                    enabled: Provider.of<Cirugia>(context).editable,
+                                    style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                                     initialValue: Provider.of<Cirugia>(context).monocitos,
                                     decoration: (InputDecoration(
                                       labelText: "Monocitos",
@@ -2816,6 +2998,9 @@ class _I_VState extends State<I_V> {
                                 child: Container(
                                   margin: const EdgeInsets.all(10.0),
                                   child: TextFormField(
+                                    enabled: Provider.of<Cirugia>(context).editable,
+                                    initialValue: Provider.of<Cirugia>(context).hemoglobina_glucolisada,
+                                    style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                                     decoration: (InputDecoration(
                                       labelText: "Hemoglobina glucosilada",
                                       labelStyle: TextStyle(fontSize: 12),
@@ -2833,6 +3018,8 @@ class _I_VState extends State<I_V> {
                                 child: Container(
                                   margin: const EdgeInsets.all(10.0),
                                   child: TextFormField(
+                                    enabled: Provider.of<Cirugia>(context).editable,
+                                    style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                                     initialValue: Provider.of<Cirugia>(context).glicemia,
                                     decoration: (InputDecoration(
                                       labelText: "Glicemia",
@@ -2854,6 +3041,8 @@ class _I_VState extends State<I_V> {
                                 child: Container(
                                   margin: const EdgeInsets.all(10.0),
                                   child: TextFormField(
+                                    enabled: Provider.of<Cirugia>(context).editable,
+                                    style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                                     initialValue: Provider.of<Cirugia>(context).otros_sangre,
                                     decoration: (InputDecoration(
                                       labelText: "Otros",
@@ -2881,6 +3070,8 @@ class _I_VState extends State<I_V> {
                                 child: Container(
                                   margin: const EdgeInsets.all(10.0),
                                   child: TextFormField(
+                                    enabled: Provider.of<Cirugia>(context).editable,
+                                    style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                                     initialValue: Provider.of<Cirugia>(context).tiempo_sangrado,
                                     decoration: (InputDecoration(
                                       labelText: "Tiempo sangrado",
@@ -2898,6 +3089,8 @@ class _I_VState extends State<I_V> {
                                 child: Container(
                                   margin: const EdgeInsets.all(10.0),
                                   child: TextFormField(
+                                    enabled: Provider.of<Cirugia>(context).editable,
+                                    style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                                     initialValue: Provider.of<Cirugia>(context).tiempo_coagulacion,
                                     decoration: (InputDecoration(
                                       labelText: "Tiempo coagulacion",
@@ -2919,6 +3112,8 @@ class _I_VState extends State<I_V> {
                                 child: Container(
                                   margin: const EdgeInsets.all(10.0),
                                   child: TextFormField(
+                                    enabled: Provider.of<Cirugia>(context).editable,
+                                    style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                                     initialValue: Provider.of<Cirugia>(context).cuenta_plaquetas,
                                     decoration: (InputDecoration(
                                       labelText: "Cuenta plaquetas",
@@ -2936,6 +3131,8 @@ class _I_VState extends State<I_V> {
                                 child: Container(
                                   margin: const EdgeInsets.all(10.0),
                                   child: TextFormField(
+                                    enabled: Provider.of<Cirugia>(context).editable,
+                                    style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                                     initialValue: Provider.of<Cirugia>(context).tiempo_protombina,
                                     decoration: (InputDecoration(
                                       labelText: "Tiempo protrombina",
@@ -2958,6 +3155,8 @@ class _I_VState extends State<I_V> {
                                 child: Container(
                                   margin: const EdgeInsets.all(10.0),
                                   child: TextFormField(
+                                    enabled: Provider.of<Cirugia>(context).editable,
+                                    style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                                     initialValue: Provider.of<Cirugia>(context).tiempo_tromboplastina,
                                     decoration: (InputDecoration(
                                       labelText: "Tiempo tromboplastina",
@@ -2976,6 +3175,8 @@ class _I_VState extends State<I_V> {
                                 child: Container(
                                   margin: const EdgeInsets.all(10.0),
                                   child: TextFormField(
+                                    enabled: Provider.of<Cirugia>(context).editable,
+                                    style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                                     initialValue: Provider.of<Cirugia>(context).inr,
                                     decoration: (InputDecoration(
                                       labelText: "INR",
@@ -3000,7 +3201,7 @@ class _I_VState extends State<I_V> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Provider.of<Cirugia>(context).analisis_laboratorio.last != analisis_laboratorio.first && analisis_laboratorio.last.length > 2
+              Provider.of<Cirugia>(context).analisis_laboratorio.last != analisis_laboratorio.first && analisis_laboratorio.last.length > 2 && Provider.of<Cirugia>(context).editable
                   ? FlatButton(
                       child: Text(
                         "Añadir",
@@ -3014,7 +3215,7 @@ class _I_VState extends State<I_V> {
                       },
                     )
                   : Container(),
-              Provider.of<Cirugia>(context).analisis_laboratorio.length > 1
+              Provider.of<Cirugia>(context).analisis_laboratorio.length > 1 && Provider.of<Cirugia>(context).editable
                   ? FlatButton(
                       child: Text(
                         "Eliminar",
@@ -3041,6 +3242,8 @@ class _I_VState extends State<I_V> {
                 child: Container(
                   margin: const EdgeInsets.all(10.0),
                   child: TextFormField(
+                    enabled: Provider.of<Cirugia>(context).editable,
+                    style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                     initialValue: Provider.of<Cirugia>(context).maxilar_superior,
                     decoration: (InputDecoration(
                       labelText: "Maxilar superior",
@@ -3058,6 +3261,8 @@ class _I_VState extends State<I_V> {
                 child: Container(
                   margin: const EdgeInsets.all(10.0),
                   child: TextFormField(
+                    enabled: Provider.of<Cirugia>(context).editable,
+                    style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                     initialValue: Provider.of<Cirugia>(context).maxilar_inferior,
                     decoration: (InputDecoration(
                       labelText: "Maxilar inferior",
@@ -3081,6 +3286,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: const EdgeInsets.all(10.0),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).diagnostico,
               decoration: (InputDecoration(
                 labelText: "Diagnostico",
@@ -3096,6 +3303,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: const EdgeInsets.all(10.0),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).pronostico,
               decoration: (InputDecoration(
                 labelText: "Pronostico",
@@ -3111,6 +3320,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).tratamiento,
               decoration: InputDecoration(labelText: "Tratamiento", icon: Icon(FontAwesomeIcons.pills)),
               keyboardType: TextInputType.text,
@@ -3128,6 +3339,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: const EdgeInsets.all(10.0),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).antisepsia,
               decoration: (InputDecoration(
                 labelText: "Antisepsia",
@@ -3143,6 +3356,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: const EdgeInsets.all(10.0),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).anestesia,
               decoration: (InputDecoration(
                 labelText: "Anestesia",
@@ -3158,6 +3373,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: const EdgeInsets.all(10.0),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).incision,
               decoration: (InputDecoration(
                 labelText: "Incision",
@@ -3173,6 +3390,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: const EdgeInsets.all(10.0),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).diseccion_mucoperiostica,
               decoration: (InputDecoration(
                 labelText: "Diseccion mucoperiostica",
@@ -3188,6 +3407,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: const EdgeInsets.all(10.0),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).osteotomia_ostectomia,
               decoration: (InputDecoration(
                 labelText: "Osteotomia-Ostectomia",
@@ -3203,6 +3424,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: const EdgeInsets.all(10.0),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).operacion,
               decoration: (InputDecoration(
                 labelText: "Operacion",
@@ -3218,6 +3441,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: const EdgeInsets.all(10.0),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).cuidados_herida,
               decoration: (InputDecoration(
                 labelText: "Cuidados herida",
@@ -3233,6 +3458,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: const EdgeInsets.all(10.0),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).sutura,
               decoration: (InputDecoration(
                 labelText: "Sutura",
@@ -3253,6 +3480,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: const EdgeInsets.all(10.0),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).primeras_24h,
               decoration: (InputDecoration(
                 labelText: "Primeras 24h",
@@ -3270,6 +3499,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: const EdgeInsets.all(10.0),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).despues_24h,
               decoration: (InputDecoration(
                 labelText: "despues de 24h",
@@ -3287,6 +3518,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: const EdgeInsets.all(10.0),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).incidentes,
               decoration: (InputDecoration(
                 labelText: "Incidentes en el procedimiento",
@@ -3309,6 +3542,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).analgesicos,
               decoration: InputDecoration(labelText: "Analgesicos", icon: Icon(FontAwesomeIcons.syringe)),
               keyboardType: TextInputType.text,
@@ -3321,6 +3556,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: const EdgeInsets.all(10.0),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).antibioticos,
               decoration: (InputDecoration(
                 labelText: "Antibioticos",
@@ -3336,6 +3573,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: const EdgeInsets.all(10.0),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).ansioliticos,
               decoration: (InputDecoration(
                 labelText: "Ansioliticos",
@@ -3351,6 +3590,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: const EdgeInsets.all(10.0),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).otros_medicamentos,
               decoration: (InputDecoration(
                 labelText: "Otros",
@@ -3366,6 +3607,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: const EdgeInsets.all(10.0),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).nombre_cirujano,
               decoration: (InputDecoration(
                 labelText: "Nombre del cirujano",
@@ -3381,6 +3624,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: const EdgeInsets.all(10.0),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).nombre_ayudante,
               decoration: (InputDecoration(
                 labelText: "Nombre del ayudante",
@@ -3396,6 +3641,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: const EdgeInsets.all(10.0),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).nombre_instrumentista,
               decoration: (InputDecoration(
                 labelText: "Nombre del instrumentista",
@@ -3411,6 +3658,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: const EdgeInsets.all(10.0),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).nombre_asistente,
               decoration: (InputDecoration(
                 labelText: "Nombre del asistente circulante",
@@ -3429,6 +3678,9 @@ class _I_VState extends State<I_V> {
                 child: Container(
                   margin: const EdgeInsets.all(10.0),
                   child: TextFormField(
+                    enabled: Provider.of<Cirugia>(context).editable,
+                    style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
+                    initialValue: Provider.of<Cirugia>(context).hora_inicio,
                     decoration: (InputDecoration(
                       labelText: "Hora inicio",
                       icon: Icon(FontAwesomeIcons.clock),
@@ -3445,6 +3697,8 @@ class _I_VState extends State<I_V> {
                 child: Container(
                   margin: const EdgeInsets.all(10.0),
                   child: TextFormField(
+                    enabled: Provider.of<Cirugia>(context).editable,
+                    style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
                     initialValue: Provider.of<Cirugia>(context).hora_termino,
                     decoration: (InputDecoration(
                       labelText: "Hora termino",
@@ -3463,6 +3717,8 @@ class _I_VState extends State<I_V> {
           Container(
             margin: const EdgeInsets.all(10.0),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).valor_tratamiento,
               decoration: (InputDecoration(
                 labelText: "Valor del tratamiento quirurgico",
@@ -3479,21 +3735,24 @@ class _I_VState extends State<I_V> {
             leading: Icon(Icons.calendar_today),
             title: Text(
               DateFormat("y-M-d").format(fecha_retiosutura),
-              style: TextStyle(fontSize: 20.0, color: Theme.of(context).accentColor),
+              style: TextStyle(fontSize: 20.0, color: Provider.of<Cirugia>(context).editable ? Theme.of(context).accentColor : Colors.grey),
             ),
             subtitle: Text("Retiro de sutura"),
             onTap: () {
+              Provider.of<Cirugia>(context).editable ?
               Util().selectDate(context, fecha_retiosutura, DateTime.now()).then((fecha) {
                 setState(() {
                   fecha_retiosutura = fecha;
                   Provider.of<Cirugia>(context).retiro_sutura = DateFormat("y-M-d").format(fecha);
                 });
-              });
+              }) : null;
             },
           ),
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
+              enabled: Provider.of<Cirugia>(context).editable,
+              style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).estado_postquirurgico,
               decoration: InputDecoration(labelText: "Estado postquirurgico del paciente", icon: Icon(FontAwesomeIcons.userAlt)),
               keyboardType: TextInputType.text,
@@ -3507,16 +3766,17 @@ class _I_VState extends State<I_V> {
             leading: Icon(Icons.calendar_today),
             title: Text(
               DateFormat("y-M-d").format(fecha_alta),
-              style: TextStyle(fontSize: 20.0, color: Theme.of(context).accentColor),
+              style: TextStyle(fontSize: 20.0, color: Provider.of<Cirugia>(context).editable ? Theme.of(context).accentColor : Colors.grey),
             ),
             subtitle: Text("Dado de alta"),
             onTap: () {
+              Provider.of<Cirugia>(context).editable ?
               Util().selectDate(context, fecha_alta, DateTime.now()).then((fecha) {
                 setState(() {
                   fecha_alta = fecha;
                   Provider.of<Cirugia>(context).dado_alta = DateFormat("y-M-d").format(fecha);
                 });
-              });
+              }) : null;
             },
           ),
         ],

@@ -146,7 +146,7 @@ class Cirugia{
     "tratamiento_digestivo":tratamiento_digestivo, "tratamiento_respiratorio":tratamiento_respiratorio, "tratamiento_cardiovascular":tratamiento_cardiovascular, "tratamiento_genitourinario":tratamiento_genitourinario, "tratamiento_endocrino":tratamiento_endocrino, "tratamiento_hematologico":tratamiento_hematologico,
     "tratamiento_neurologico":tratamiento_neurologico, "tratamiento_musculo_esqueleto":tratamiento_musculo_esqueleto, "tratamiento_inmunologico":tratamiento_inmunologico, "tratamiento_tegumentario":tratamiento_tegumentario, "tratamiento_temporomandibular":tratamiento_temporomandibular,"otra_digestivo":otra_digestivo,
     "otra_respiratorio":otra_respiratorio, "otra_cardiovascular":otra_cardiovascular, "otra_genitourinario":otra_genitourinario, "otra_endocrino":otra_endocrino, "otra_hematologico":otra_hematologico, "otra_neurologico":otra_neurologico, "otra_musculo_esqueleto":otra_musculo_esqueleto, "otra_inmunologico":otra_inmunologico,
-    "otra_tegumentario":otra_tegumentario, "otra_radiografia":otra_radiografia, "ClienteID":clienteid, "UserID":Userid,"Fecha":fecha
+    "otra_tegumentario":otra_tegumentario, "otra_radiografia":otra_radiografia, "ClienteID":clienteid, "UserID":Userid,"Fecha":fecha, "otra_adiccion":otra_adiccion, "otra_alergia":otra_alergia
   };
 Future<dynamic> addCirugia() async {
   final HttpsCallable callable = CloudFunctions.instance.getHttpsCallable(

@@ -195,7 +195,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
           ListTile(
             leading: Icon(Icons.calendar_today),
             title: Text(
-              Provider.of<Adulto>(context).fecha,
+              Provider.of<Adulto>(context).fecha_ultima_visita,
               style: TextStyle(
                   fontSize: 20.0, color: Provider.of<Adulto>(context).editable ? Theme.of(context).accentColor : Colors.grey),
             ),
@@ -203,10 +203,10 @@ class _V_VI_VII_State extends State<V_VI_VII> {
             onTap: () {
               Provider.of<Adulto>(context).editable ?
               Util()
-                  .selectDate(context, DateFormat("y-M-d").parse(Provider.of<Adulto>(context).fecha_ultima_visita), DateTime.now())
+                  .selectDate(context, DateTime(1900,1), DateTime.now())
                   .then((fecha) {
                 setState(() {
-                  Provider.of<Adulto>(context).fecha_ultima_visita = DateFormat("y-M-d").format(fecha);
+                  Provider.of<Adulto>(context).fecha_ultima_visita = DateFormat("dd-MM-yyyy").format(fecha);
                   Provider.of<Adulto>(context).cambiado=true;
                 });
               })
@@ -454,10 +454,10 @@ class _V_VI_VII_State extends State<V_VI_VII> {
                   Provider.of<Adulto>(context).editable ?
                   Util()
                       .selectDate(
-                      context, DateFormat("y-M-d").parse(Provider.of<Adulto>(context).fecha_ultimo_examen_medico), DateTime.now())
+                      context, DateTime(1900,1), DateTime.now())
                       .then((fecha) {
                     setState(() {
-                      Provider.of<Adulto>(context).fecha_ultimo_examen_medico = DateFormat("y-M-d").format(fecha);
+                      Provider.of<Adulto>(context).fecha_ultimo_examen_medico = DateFormat("dd-MM-yyyy").format(fecha);
                     });
                   })
                   : null;

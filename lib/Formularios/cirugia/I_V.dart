@@ -3740,7 +3740,7 @@ class _I_VState extends State<I_V> {
             subtitle: Text("Retiro de sutura"),
             onTap: () {
               Provider.of<Cirugia>(context).editable ?
-              Util().selectDate(context, fecha_retiosutura, DateTime.now()).then((fecha) {
+              Util().selectDate(context, fecha_retiosutura, DateTime(2100,12)).then((fecha) {
                 setState(() {
                   fecha_retiosutura = fecha;
                   Provider.of<Cirugia>(context).retiro_sutura = DateFormat("y-M-d").format(fecha);
@@ -3771,7 +3771,7 @@ class _I_VState extends State<I_V> {
             subtitle: Text("Dado de alta"),
             onTap: () {
               Provider.of<Cirugia>(context).editable ?
-              Util().selectDate(context, fecha_alta, DateTime.now()).then((fecha) {
+              Util().selectDate(context, fecha_alta, DateTime(2100,1)).then((fecha) {
                 setState(() {
                   fecha_alta = fecha;
                   Provider.of<Cirugia>(context).dado_alta = DateFormat("y-M-d").format(fecha);

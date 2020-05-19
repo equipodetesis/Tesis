@@ -25,7 +25,6 @@ dependencies:
   firebase_core:
   firebase_auth:
   firebase_storage:
-  camera:
   path_provider:
   provider:
   google_sign_in:
@@ -34,8 +33,6 @@ dependencies:
   line_awesome_icons:
   font_awesome_flutter:
   flutter_datetime_picker:
-  sqfentity:
-  sqfentity_gen:
   flutter:
     sdk: flutter
   # The following adds the Cupertino Icons font to your application.
@@ -69,8 +66,6 @@ flutter:
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
   assets:
-    - Imagenes/incognito.png
-    - Imagenes/zelda.jpg
     - Imagenes/dientearr.png
     - Imagenes/dienteabajo.png
     - Imagenes/dienteizq.png

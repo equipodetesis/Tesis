@@ -1,6 +1,5 @@
 
 import 'package:cloud_functions/cloud_functions.dart';
-import 'package:expedientesodontologicos_app/model/model.dart';
 import 'package:flutter/foundation.dart';
 
 class Adulto{

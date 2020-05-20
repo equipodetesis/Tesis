@@ -19,7 +19,7 @@ class _ControlPlacaState extends State<ControlPlaca>{
   int totaldientes=0,supafectadas=0;
   int s=1,d=7,i=0,s2=3,d2=1;
   bool cambioas2=false;
-
+TextEditingController td=TextEditingController();
   List<Diente> dientesarriba = List(14),dientesabajo=List(14);
   ControldePlaca controldePlaca=ControldePlaca();
 
@@ -28,6 +28,7 @@ class _ControlPlacaState extends State<ControlPlaca>{
   void initState() {
     // TODO: implement initState
     super.initState();
+    td.text=totaldientes.toString();
     while(i < dientesarriba.length){
       dientesarriba[i] = Diente();
       dientesabajo[i]=Diente();
@@ -358,7 +359,7 @@ class _ControlPlacaState extends State<ControlPlaca>{
               keyboardType: TextInputType.number,
               autofocus: false,
               autovalidate: true,
-              initialValue: totaldientes.toString(),
+              controller: td,
               validator: (value)=>value.isEmpty&&value.contains(".")?"Valor no valido":null,
               decoration: new InputDecoration(
                   hintText: 'Cantidad de dientes',
@@ -387,7 +388,6 @@ class _ControlPlacaState extends State<ControlPlaca>{
 
                 }
                 else {
-                  int val=int.parse(value);
                   if(val>28){
                     showDialog(context: context,
                      builder: (BuildContext contex){
@@ -397,6 +397,7 @@ class _ControlPlacaState extends State<ControlPlaca>{
                           FlatButton(
                             child: Text("Aceptar"),
                             onPressed: (){
+                              td.text=totaldientes.toString();
                               Navigator.of(context).pop();
                             },
                           )
@@ -407,6 +408,7 @@ class _ControlPlacaState extends State<ControlPlaca>{
                   }else
                 setState(() {
                    totaldientes=int.parse(value);
+                   td.text=totaldientes.toString();
                    porcentaje=(supafectadas/(totaldientes*4))*100;
                 });}
 

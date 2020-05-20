@@ -64,13 +64,13 @@ class _LogginState extends State<Loggin> {
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
-              child: new TextFormField(
+              child:  TextFormField(
                 maxLines: 1,
                 obscureText: true,
                 autofocus: false,
-                decoration: new InputDecoration(
+                decoration:  InputDecoration(
                     hintText: 'Contraseña',
-                    icon: new Icon(
+                    icon:  Icon(
                       Icons.lock,
                       color: Colors.grey,
                     )),
@@ -89,7 +89,6 @@ class _LogginState extends State<Loggin> {
                     onPressed: () async {
                      if( _formKey.currentState.validate())
                        _formKey.currentState.save();
-                     print(Provider.of<LoginState>(context).error);
                          if(Provider.of<LoginState>(context).error)
                          showDialog(
                              context: context,

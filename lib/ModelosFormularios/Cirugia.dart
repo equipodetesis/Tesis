@@ -1,6 +1,7 @@
 import 'package:cloud_functions/cloud_functions.dart';
+import 'package:flutter/cupertino.dart';
 
-class Cirugia{
+class Cirugia extends ChangeNotifier{
   String antec_pato_madre, antec_pato_abuelama, antec_pato_abueloma, antec_pato_padre, antec_pato_abuelapa, antec_pato_abuelopa, grupo_sanguineo,
   factor_rh, inmunizaciones_infancia, inmunizaciones_adulto, regimen_alimenticio, condiciones_habitacionales, enfermedades_infancia,
   antecedentes_traumaticos, antecedentes_quirurgicos, transfuciones, radio_quimioterapia, experiencia_anestesia, clasificacion_asa, frecuencia_cardiaca,
@@ -18,7 +19,7 @@ class Cirugia{
 
 
   bool cambiado = false , exostosis = false, endostosis = false, asimetrias_transversales = false, asimetrias_longitudinales = false, enoftalmo = false, exoftalmo = false, midriasis = false, miosis = false, palida = false, cianotica = false, enrojecida = false, manchas = false, hipotonico = false,
-      hipertonico = false, espasticos = false,editable=false;
+      hipertonico = false, espasticos = false,editable=false, enviable;
 
   List adicciones = List(), alergias = List(), digestivo = List(), respiratorio = List(), cardiovascular = List(), genitourinario = List(), endocrino = List(), hematologico = List(), neurologico = List(), musculo_esqueleto = List(),
   inmunologico = List(), tegumentario = List(), temporomandibular = List(), radiografia = List(), analisis_laboratorio = List();
@@ -41,6 +42,7 @@ class Cirugia{
     otra_inmunologico = ""; otra_tegumentario = ""; otra_radiografia = ""; Userid = ""; clienteid = ""; adicciones = List(); alergias = List(); digestivo = List(); respiratorio = List(); cardiovascular = List(); genitourinario = List(); endocrino = List(); hematologico = List(); neurologico = List(); musculo_esqueleto = List();
     inmunologico = List(); tegumentario = List(); temporomandibular = List(); radiografia = List(); analisis_laboratorio = List(); padecimiento_actual = ""; fecha = ""; cambiado = false ; exostosis = false; endostosis = false; asimetrias_transversales = false; asimetrias_longitudinales = false; enoftalmo = false;
     exoftalmo = false; midriasis = false; miosis = false; palida = false; cianotica = false; enrojecida = false; manchas = false; hipotonico = false; hipertonico = false; espasticos = false;
+    enviable = true;
   }
   void fromjson(Map<String, dynamic> data) {
     fecha=data["Fecha"];
@@ -154,5 +156,10 @@ Future<dynamic> addCirugia() async {
   );
   dynamic resp = await callable.call(this.toMap());
   return resp;
+}
+
+void setError(bool res){
+  enviable = res;
+  notifyListeners();
 }
 }

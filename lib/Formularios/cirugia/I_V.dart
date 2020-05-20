@@ -278,36 +278,47 @@ class _I_VState extends State<I_V> {
   }
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
+  @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 4,
-      child: Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: TabBar(
-            tabs: <Widget>[
-              Tab(
-                child: Text("Antecedentes patologicos hereditarios"),
-              ),
-              Tab(
-                child: Text("Interrogatorio por aparatos y sistemas"),
-              ),
-              Tab(
-                child: Text("Signos Vitales"),
-              ),
-              Tab(
-                child: Text("Estudios de gabinete"),
-              )
+      child: WillPopScope(
+        onWillPop: () async {
+          Provider.of<Cirugia>(context).clear();
+          return true;
+        },
+        child: Scaffold(
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            title: TabBar(
+              tabs: <Widget>[
+                Tab(
+                  child: Text("Antecedentes patologicos hereditarios"),
+                ),
+                Tab(
+                  child: Text("Interrogatorio por aparatos y sistemas"),
+                ),
+                Tab(
+                  child: Text("Signos Vitales"),
+                ),
+                Tab(
+                  child: Text("Estudios de gabinete"),
+                )
+              ],
+            ),
+          ),
+          body: TabBarView(
+            children: <Widget>[
+              antecedentes_patologicos_hereditarios(),
+              interrogatorio_aparatos_sistemas(),
+              signos_vitales(),
+              estudios_gabinete()
             ],
           ),
-        ),
-        body: TabBarView(
-          children: <Widget>[
-            antecedentes_patologicos_hereditarios(),
-            interrogatorio_aparatos_sistemas(),
-            signos_vitales(),
-            estudios_gabinete()
-          ],
         ),
       ),
     );
@@ -323,7 +334,12 @@ class _I_VState extends State<I_V> {
               enabled: Provider.of<Cirugia>(context).editable,
               style: TextStyle(color: Provider.of<Cirugia>(context).editable ? null : Colors.grey),
               initialValue: Provider.of<Cirugia>(context).padecimiento_actual,
-              decoration: InputDecoration(labelText: "Padecimiento actual", icon: Icon(FontAwesomeIcons.userInjured)),
+              decoration: InputDecoration(
+                labelText: "Padecimiento actual",
+                icon: Icon(FontAwesomeIcons.userInjured),
+                errorText: Provider.of<Cirugia>(context).enviable ? null : "Este campo es obligatorio"
+
+              ),
               keyboardType: TextInputType.text,
               minLines: 1,
               maxLines: 6,

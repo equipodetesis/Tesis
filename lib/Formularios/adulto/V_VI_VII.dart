@@ -123,25 +123,31 @@ class _V_VI_VII_State extends State<V_VI_VII> {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 3,
-      child: Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: TabBar(
-            tabs: <Widget>[
-              Tab(
-                child: Text("Motivo e historia"),
-              ),
-              Tab(
-                child: Text("Historia medica anterior"),
-              ),
-              Tab(
-                child: Text("Revision organos y sistemas"),
-              )
-            ],
+      child: WillPopScope(
+        onWillPop: () async{
+          Provider.of<Adulto>(context).clear();
+          return true;
+        },
+        child: Scaffold(
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            title: TabBar(
+              tabs: <Widget>[
+                Tab(
+                  child: Text("Motivo e historia"),
+                ),
+                Tab(
+                  child: Text("Historia medica anterior"),
+                ),
+                Tab(
+                  child: Text("Revision organos y sistemas"),
+                )
+              ],
+            ),
           ),
-        ),
-        body: TabBarView(
-          children: <Widget>[motivoHistoria(), historiaMedica(), revision_organos_y_sistemas()],
+          body: TabBarView(
+            children: <Widget>[motivoHistoria(), historiaMedica(), revision_organos_y_sistemas()],
+          ),
         ),
       ),
     );
@@ -157,14 +163,12 @@ class _V_VI_VII_State extends State<V_VI_VII> {
             child: TextFormField(
               style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
               enabled: Provider.of<Adulto>(context).editable,
-              /*************************************************************************
-               * ************************************************************************
-               * ***************************************************************************
-               * ***/
               initialValue: Provider.of<Adulto>(context).motivo,
               decoration: InputDecoration(
                   labelText: "Motivo de la consulta",
-                  icon: Icon(FontAwesomeIcons.fileAlt)),
+                  icon: Icon(FontAwesomeIcons.fileAlt),
+                  errorText: Provider.of<Adulto>(context).enviable ? null : "Este campo es obligatorio"
+              ),
               minLines: 1,
               maxLines: 6,
               keyboardType: TextInputType.multiline,

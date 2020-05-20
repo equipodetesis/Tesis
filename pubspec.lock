@@ -106,13 +106,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "7.0.8"
-  camera:
-    dependency: "direct main"
-    description:
-      name: camera
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.5.7+2"
   charcode:
     dependency: transitive
     description:
@@ -574,13 +567,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
-  source_gen:
-    dependency: transitive
-    description:
-      name: source_gen
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.9.4+7"
   source_map_stack_trace:
     dependency: transitive
     description:
@@ -602,27 +588,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.5.5"
-  sqfentity:
-    dependency: "direct main"
-    description:
-      name: sqfentity
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.2.3+6"
-  sqfentity_gen:
-    dependency: "direct main"
-    description:
-      name: sqfentity_gen
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.2.3+10"
-  sqflite:
-    dependency: transitive
-    description:
-      name: sqflite
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.2.0"
   stack_trace:
     dependency: transitive
     description:
@@ -651,13 +616,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.5"
-  synchronized:
-    dependency: transitive
-    description:
-      name: synchronized
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.2.0"
   term_glyph:
     dependency: transitive
     description:

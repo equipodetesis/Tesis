@@ -1,15 +1,14 @@
 
 import 'package:cloud_functions/cloud_functions.dart';
-import 'package:expedientesodontologicos_app/model/model.dart';
 import 'package:flutter/foundation.dart';
 
-class Adulto{
+class Adulto extends ChangeNotifier{
   String  historia, fecha_ultima_visita, tratamiento_recibido , dientes_perdidos , causa_dientesperdidos , experiencias_exodoncias , higiene_oral , tipo_cepillo , tecnica_cepillado ,
       frecuencia_cepillado , ayudas_higiene_extras ,hospital,expediente,fecha_ultimo_examen_medico, medicamentos, nombredelmedico;
   List enfermedades=List<String>();
 
   String enfermedad_persiste="", fecha="",iniciacion_enf="", curso="", tratamiento="", estadoactual="", otros_enfermedades_padecidas="", vacunas_recibidas="",clienteid,desc_operacion;
-  bool cambiado,cuidadoMedico,editable=false;
+  bool cambiado,cuidadoMedico,editable=false, enviable;
   //aun no en los formularios , revision_medica a punto de considerarse inecesaria, de aqui hacia abajo no estan contemplados a subirse por ahora
   String historia_familiar,historia_personal_social,otros_sintomas,describa_revision,presionsan_max,presionsan_min,temperatura,pulsaciones,ritmo,descripcion_examenes,
   revision_medica,actitudemocional,examenfisico_caracuello,motivo, nivel_higiene_oral,
@@ -36,7 +35,7 @@ void clear(){
   revision_medica="";actitudemocional="";examenfisico_caracuello="";
   region_vestibular="";paladar_duro="";paladar_blando="";orofaringe="";piso_boca="";lengua="";cara_dorsal="";
   cara_ventral="";bordes="";encia="";dientes="";prescencia_calculo="";salivacion="";revision_organos=List<String>();
-  desc_operacion = "";
+  desc_operacion = ""; enviable = true;
 }
 
   void checklist(){
@@ -97,5 +96,8 @@ void clear(){
     dynamic resp = await callable.call(this.toMap());
     return resp;
   }
-
+  void setError(bool res){
+    enviable = res;
+    notifyListeners();
+  }
 }

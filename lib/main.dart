@@ -17,9 +17,9 @@ void main(){
         create: (context) => LoginState(),),
       Provider<General>(
         create: (context) => General(),),
-      Provider<Adulto>(
+      ChangeNotifierProvider<Adulto>(
         create: (context) => Adulto(),),
-      Provider<Cirugia>(
+      ChangeNotifierProvider<Cirugia>(
         create: (context) => Cirugia(),)
     ],
     child: MyApp()

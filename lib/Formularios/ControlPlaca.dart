@@ -380,6 +380,7 @@ TextEditingController td=TextEditingController();
                           child: new Text("Ok"),
                           onPressed: () {
                             Navigator.of(context).pop();
+                            td.text=totaldientes.toString();
                           },
                         ),
                       ],
@@ -388,6 +389,7 @@ TextEditingController td=TextEditingController();
 
                 }
                 else {
+                  int val=int.parse(value);
                   if(val>28){
                     showDialog(context: context,
                      builder: (BuildContext contex){

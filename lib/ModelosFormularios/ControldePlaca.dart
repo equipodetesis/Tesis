@@ -28,7 +28,7 @@ class ControldePlaca{
     clienteid=data["ClienteID"];
     Fecha=data["Fecha"];
     totaldientes=data[ "Dientes totales"];
-    porcentaje=data["Porcentaje de superficies afectadas"];
+    porcentaje=double.parse(data["Porcentaje de superficies afectadas"].toString());
     cara_arriba=data["Caras_superior"];
     cara_inferior=data["Caras_inferior"];
     cara_derecha=data["Caras_derechas"];
@@ -42,20 +42,5 @@ class ControldePlaca{
     );
     dynamic resp = await callable.call(this.toMap()).whenComplete((){print("Listo con exito");});
   }
-  void addAll(){
-    print(arriba.length.toString());
-    arriba.map((Diente value){
-      print(arriba.length.toString());
-      value.userid=userid;
-      value.pacienteid=clienteid;
-      value.fecha=Fecha;
-      value.addDiente();
-    }).toList();
-    abajo.map((Diente value){
-      value.userid=userid;
-      value.pacienteid=clienteid;
-      value.fecha=Fecha;
-      value.addDiente();
-    }).toList();
-  }
+
 }

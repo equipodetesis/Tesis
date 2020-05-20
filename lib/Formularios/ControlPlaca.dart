@@ -410,7 +410,7 @@ TextEditingController td=TextEditingController();
                   }else
                 setState(() {
                    totaldientes=int.parse(value);
-                   td.text=totaldientes.toString(); 
+                   td.text=totaldientes.toString();
                    porcentaje=(supafectadas/(totaldientes*4))*100;
                 });}
 

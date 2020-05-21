@@ -354,69 +354,86 @@ TextEditingController td=TextEditingController();
           padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.0),
           child: Container(
             width: 120.0,
-            child: TextFormField(
+            child: TextField(
               maxLines: 1,
               keyboardType: TextInputType.number,
-              autofocus: false,
-              autovalidate: true,
               controller: td,
-              validator: (value)=>value.isEmpty&&value.contains(".")?"Valor no valido":null,
-              decoration: new InputDecoration(
+              onChanged: (value){
+                print("el value:"+value);
+                if(value.contains(".")||value.contains(",")){
+                  showDialog(context: context,
+                      builder:(BuildContext context){
+                        return AlertDialog(
+                          content: Text("Solo se permiten enteros"),
+                          actions: <Widget>[
+                            // usually buttons at the bottom of the dialog
+                            FlatButton(
+                              child: new Text("Ok"),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                                value=totaldientes.toString();
+                                td.value=td.value.copyWith(
+                                  text: value,
+                                  selection:
+                                  TextSelection(baseOffset: value.length, extentOffset: value.length),
+                                  composing: TextRange.empty,
+                                );
+                              },
+                            ),
+                          ],
+                        );
+                      });
+
+                }
+                else {
+                  int val = int.parse(value);
+                  if (val > 28) {
+                    showDialog(context: context,
+                        builder: (BuildContext contex) {
+                          return AlertDialog(
+                            content: Text("El valor no puede ser mayor a 28"),
+                            actions: <Widget>[
+                              FlatButton(
+                                child: Text("Aceptar"),
+                                onPressed: () {
+                                  value = totaldientes.toString();
+                                  td.value=td.value.copyWith(
+                                    text: value,
+                                    selection:
+                                    TextSelection(baseOffset: value.length, extentOffset: value.length),
+                                    composing: TextRange.empty,
+                                  );
+                                  Navigator.of(context).pop();
+                                },
+                              )
+                            ],
+                          );
+                        }
+                    );
+                  } else {
+                    setState(() {
+                      totaldientes = int.parse(value);
+                      value = totaldientes.toString();
+                      porcentaje = (supafectadas / (totaldientes * 4)) * 100;
+                      td.value=td.value.copyWith(
+                        text: value,
+                        selection:
+                        TextSelection(baseOffset: value.length, extentOffset: value.length),
+                        composing: TextRange.empty,
+                      );
+                    });
+                  }
+
+                }
+                return value;
+              },
+              decoration:  InputDecoration(
                   hintText: 'Cantidad de dientes',
                   icon: new Icon(
                     Icons.bookmark_border,
                     color: Colors.grey,
                   )),
-              onChanged:  (value){
-                print("el value:"+value);
-                if(value.contains(".")||value.contains(",")){
-                  showDialog(context: context,
-                    builder:(BuildContext context){
-                    return AlertDialog(
-                      content: Text("Solo se permiten enteros"),
-                      actions: <Widget>[
-                        // usually buttons at the bottom of the dialog
-                         FlatButton(
-                          child: new Text("Ok"),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                            td.text=totaldientes.toString();
-                          },
-                        ),
-                      ],
-                    );
-                    });
 
-                }
-                else {
-                  int val=int.parse(value);
-                  if(val>28){
-                    showDialog(context: context,
-                     builder: (BuildContext contex){
-                      return AlertDialog(
-                        content: Text("El valor no puede ser mayor a 28"),
-                        actions: <Widget>[
-                          FlatButton(
-                            child: Text("Aceptar"),
-                            onPressed: (){
-                              td.text=totaldientes.toString();
-                              Navigator.of(context).pop();
-                            },
-                          )
-                        ],
-                      );
-                     }
-                    );
-                  }else
-                setState(() {
-                   totaldientes=int.parse(value);
-                   td.text=totaldientes.toString();
-                   porcentaje=(supafectadas/(totaldientes*4))*100;
-                });}
-
-
-
-              },
             ),
           ),
         ),
@@ -469,73 +486,100 @@ TextEditingController td=TextEditingController();
                       splashColor: Colors.deepOrange,
                       padding:const EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 10.0) ,
                       onPressed: (){
+                        if(porcentaje<=100.0) {
+                          controldePlaca.porcentaje = porcentaje;
+                          controldePlaca.totaldientes = totaldientes;
+                          controldePlaca.userid = Provider
+                              .of<LoginState>(context)
+                              .uid;
+                          controldePlaca.clienteid = Provider
+                              .of<General>(context)
+                              .pacienteid;
+                          controldePlaca.Fecha = _fecha;
+                          showDialog(context: context,
+                              barrierDismissible: false,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: Text("Enviando"),
+                                  content: Container(
+                                      height: 250,
+                                      width: 500,
+                                      child: Center(
+                                        child: CircularProgressIndicator(),)),
 
-                       controldePlaca.porcentaje=porcentaje;
-                       controldePlaca.totaldientes=totaldientes;
-                       controldePlaca.userid=Provider.of<LoginState>(context).uid;
-                       controldePlaca.clienteid=Provider.of<General>(context).pacienteid;
-                       controldePlaca.Fecha=_fecha;
-                       showDialog(context: context,
-                           barrierDismissible: false,
-                           builder: (BuildContext context){
-                             return AlertDialog(
-                               title: Text("Enviando"),
-                               content:Container(
-                                   height: 250,
-                                   width: 500,
-                                   child: Center(child: CircularProgressIndicator(),)),
+                                );
+                              }
 
-                             );
-                           }
+                          );
+                          controldePlaca.addControldeplaca().then((onValue) {
+                            showDialog(context: context,
+                                barrierDismissible: false,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: Text("Exito"),
+                                    content: Text("Guardado"),
+                                    actions: <Widget>[
+                                      Center(
+                                        child: FlatButton(
+                                          child: Text("Aceptar"),
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                            Navigator.pop(context);
+                                          },
+                                        ),
+                                      )
+                                    ],
+                                  );
+                                }
 
-                       );
-                       controldePlaca.addControldeplaca().then((onValue){
-                         showDialog(context: context,
-                             barrierDismissible: false,
-                             builder: (BuildContext context){
-                               return AlertDialog(
-                                 title: Text("Exito"),
-                                 content:Text("Guardado"),
-                                 actions: <Widget>[
-                                   Center(
-                                     child: FlatButton(
-                                       child: Text("Aceptar"),
-                                       onPressed: (){
-                                         Navigator.pop(context);
-                                         Navigator.pop(context);
-                                       },
-                                     ),
-                                   )
-                                 ],
-                               );
-                             }
+                            );
+                          }).catchError((onError, trace) {
+                            Navigator.pop(context);
+                            showDialog(context: context,
+                                barrierDismissible: false,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: Text("Eror"),
+                                    content: Text(onError.toString()),
+                                    actions: <Widget>[
+                                      Center(
+                                        child: FlatButton(
+                                          child: Text("Aceptar"),
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                            Navigator.pop(context);
+                                          },
+                                        ),
+                                      )
+                                    ],
+                                  );
+                                }
 
-                         );
-                       }).catchError((onError,trace){
-                         Navigator.pop(context);
-                         showDialog(context: context,
-                             barrierDismissible: false,
-                             builder: (BuildContext context){
-                               return AlertDialog(
-                                 title: Text("Eror"),
-                                 content:Text(onError.toString()),
-                                 actions: <Widget>[
-                                   Center(
-                                     child: FlatButton(
-                                       child: Text("Aceptar"),
-                                       onPressed: (){
-                                         Navigator.pop(context);
-                                         Navigator.pop(context);
-                                       },
-                                     ),
-                                   )
-                                 ],
-                               );
-                             }
+                            );
+                          });
+                          Navigator.pop(context);
+                        }
+                        else
+                          showDialog(context: context,
+                            builder: (BuildContext context){
+                            return AlertDialog(
+                              title: Text("Error"),
+                              content: Text("Cantidad dientes afectados supera al total de dientes"),
+                              actions: <Widget>[
+                                Center(
+                                  child: FlatButton(
+                                    child: Text("Aceptar"),
+                                    onPressed: () {
+                                      Navigator.pop(context);
 
-                         );
-                       });
-                       Navigator.pop(context);
+                                    },
+                                  ),
+                                )
+                              ],
+                            );
+                            }
+                          );
+
                       },
                       ),
                   ),

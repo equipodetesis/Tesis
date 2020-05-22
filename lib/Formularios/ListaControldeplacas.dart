@@ -12,7 +12,8 @@ class ListaControldeplacas extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     Stream<QuerySnapshot> stream;
-    stream=database.collection("Usuarios/"+Provider.of<LoginState>(context).uid+"/Cliente/"+Provider.of<General>(context).pacienteid+"/Expedientes/Graficos/ControldePlacas").snapshots();
+    String path="Usuarios/"+Provider.of<LoginState>(context).uid+"/Cliente/"+Provider.of<General>(context).pacienteid+"/Expedientes/Graficos/ControldePlacas";
+    stream=database.collection(path).snapshots();
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
@@ -60,22 +61,41 @@ class ListaControldeplacas extends StatelessWidget{
                   ),
                 );
                 DateTime fecha=DateTime.parse(controlPlaca.Fecha);
-                return Column(
-                  children: <Widget>[
-                    Divider(),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0.0, 10.0, 200.0, 10.0),
-                      child: Text("Fecha:"+DateFormat("dd-MM-yyyy/hh:mm").format(fecha).toString(),
-                        style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.bold),),
-                    ),
-                    dentadura,
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0.0, 10.0, 200.0, 10.0),
-                      child: Text("Superfices afectadas:"+controlPlaca.porcentaje.toStringAsFixed(2)+"%",
-                        style: TextStyle(fontSize: 15.0,fontWeight: FontWeight.bold),),
-                    )
+                return ListTile(
+                  title: Column(
+                    children: <Widget>[
+                      Divider(),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0.0, 10.0, 200.0, 10.0),
+                        child: Text("Fecha:"+DateFormat("dd-MM-yyyy/hh:mm").format(fecha).toString(),
+                          style: TextStyle(fontSize: 18.0,fontWeight: FontWeight.bold),),
+                      ),
+                      dentadura,
+                      Row(
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(0.0, 10.0, 50.0, 10.0),
+                            child: Text("Superfices afectadas:"+controlPlaca.porcentaje.toStringAsFixed(2)+"%",
+                              style: TextStyle(fontSize: 15.0,fontWeight: FontWeight.bold),),
+                          ),
+                          Container(
+                            child: Tooltip(
+                              message: "Eliminar registro",
+                              showDuration: Duration(seconds: 3),
+                              child: IconButton(
+                                icon: Icon(Icons.delete,size: 35.0,),
+                                onPressed: (){
+                                  controlPlaca.deleteControldeplaca(path);
+                                },
+                              ),
+                            ),
+                          )
+                        ],
+                      )
 
-                  ],
+
+                    ],
+                  ),
                 );
               }).toList()
             );

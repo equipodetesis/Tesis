@@ -86,6 +86,8 @@ class _V_VI_VII_State extends State<V_VI_VII> {
   List<DropdownMenuItem> _items_calculo = List();
 
   List<DropdownMenuItem> _items_salivacion = List();
+
+  bool motivo_storaged = true;
   @override
   void initState() {
     Provider.of<Adulto>(context, listen: false).Userid=Provider.of<LoginState>(context, listen: false).uid;
@@ -93,6 +95,7 @@ class _V_VI_VII_State extends State<V_VI_VII> {
     if(Provider.of<Adulto>(context, listen: false).fecha == "") Provider.of<Adulto>(context, listen: false).fecha=DateFormat("dd-MM-yyyy").format(DateTime.now());
     if(Provider.of<Adulto>(context, listen: false).fecha_ultima_visita == "")Provider.of<Adulto>(context, listen: false).fecha_ultima_visita = DateFormat("y-M-d").format(DateTime.now());
     if(Provider.of<Adulto>(context, listen: false).fecha_ultimo_examen_medico == "")Provider.of<Adulto>(context, listen: false).fecha_ultimo_examen_medico = DateFormat("y-M-d").format(DateTime.now());
+    if(Provider.of<Adulto>(context, listen: false).motivo != "") motivo_storaged = false;
 
     _items_higiene = Util().getDropdownMenuItem(opciones1);
     if(Provider.of<Adulto>(context, listen: false).nivel_higiene_oral == "") Provider.of<Adulto>(context, listen: false).nivel_higiene_oral = _items_higiene.first.value;
@@ -123,25 +126,31 @@ class _V_VI_VII_State extends State<V_VI_VII> {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 3,
-      child: Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: TabBar(
-            tabs: <Widget>[
-              Tab(
-                child: Text("Motivo e historia"),
-              ),
-              Tab(
-                child: Text("Historia medica anterior"),
-              ),
-              Tab(
-                child: Text("Revision organos y sistemas"),
-              )
-            ],
+      child: WillPopScope(
+        onWillPop: () async{
+          Provider.of<Adulto>(context).clear();
+          return true;
+        },
+        child: Scaffold(
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            title: TabBar(
+              tabs: <Widget>[
+                Tab(
+                  child: Text("Motivo e historia"),
+                ),
+                Tab(
+                  child: Text("Historia medica anterior"),
+                ),
+                Tab(
+                  child: Text("Revision organos y sistemas"),
+                )
+              ],
+            ),
           ),
-        ),
-        body: TabBarView(
-          children: <Widget>[motivoHistoria(), historiaMedica(), revision_organos_y_sistemas()],
+          body: TabBarView(
+            children: <Widget>[motivoHistoria(), historiaMedica(), revision_organos_y_sistemas()],
+          ),
         ),
       ),
     );
@@ -155,16 +164,14 @@ class _V_VI_VII_State extends State<V_VI_VII> {
           Container(
             margin: EdgeInsets.all(10),
             child: TextFormField(
-              style: TextStyle(color: Provider.of<Adulto>(context).editable ? null : Colors.grey),
-              enabled: Provider.of<Adulto>(context).editable,
-              /*************************************************************************
-               * ************************************************************************
-               * ***************************************************************************
-               * ***/
+              style: TextStyle(color: motivo_storaged ? null : Colors.grey),
+              enabled: motivo_storaged,
               initialValue: Provider.of<Adulto>(context).motivo,
               decoration: InputDecoration(
                   labelText: "Motivo de la consulta",
-                  icon: Icon(FontAwesomeIcons.fileAlt)),
+                  icon: Icon(FontAwesomeIcons.fileAlt),
+                  errorText: Provider.of<Adulto>(context).enviable ? null : "Este campo es obligatorio"
+              ),
               minLines: 1,
               maxLines: 6,
               keyboardType: TextInputType.multiline,

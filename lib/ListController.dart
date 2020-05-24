@@ -9,7 +9,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'Loggin/LoginState.dart';
 import 'ModelosFormularios/General.dart';
 // ignore: must_be_immutable
-class ListController extends StatelessWidget{
+class ListController extends StatefulWidget{
   bool search;
   String searchtext;
   Firestore database;
@@ -21,10 +21,15 @@ class ListController extends StatelessWidget{
   }
 
   @override
+  _ListControllerState createState() => _ListControllerState();
+}
+
+class _ListControllerState extends State<ListController> {
+  @override
   Widget build(BuildContext context) {
     Stream<QuerySnapshot> stream;
     String path="Usuarios/"+Provider.of<LoginState>(context).uid+"/Cliente";
-    stream=database.collection(path).snapshots();
+    stream=widget.database.collection(path).snapshots();
 
     return  StreamBuilder<QuerySnapshot>(
       stream: stream,
@@ -47,7 +52,7 @@ class ListController extends StatelessWidget{
                      general.nombre,general.fecha_inicio);
 
                   return
-                    searchtext==null||searchtext==""? Column(
+                    widget.searchtext==null||widget.searchtext==""? Column(
                       children: <Widget>[
                         Divider(color: Colors.black,
                         thickness: 0.12,
@@ -80,7 +85,10 @@ class ListController extends StatelessWidget{
                                           },
                                               child: Text("Si")),
                                           FlatButton(onPressed: (){
+                                            setState(() {
+                                            });
                                             Navigator.pop(context);
+
                                           },
                                               child: Text("No"))
                                         ],
@@ -129,7 +137,7 @@ class ListController extends StatelessWidget{
                     ),
                         )
                       ],
-                    ):item.Nombre.toLowerCase().contains(searchtext.toLowerCase())?Column(
+                    ):item.Nombre.toLowerCase().contains(widget.searchtext.toLowerCase())?Column(
                       children: <Widget>[
                         Divider(color: Colors.black,
                           thickness: 0.12,
@@ -163,6 +171,7 @@ class ListController extends StatelessWidget{
                                               child: Text("Si")),
                                           FlatButton(onPressed: (){
                                             Navigator.pop(context);
+                                            (context as Element).reassemble();
                                           },
                                               child: Text("No"))
                                         ],

@@ -9,8 +9,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 
-class HistorialGeneral extends StatelessWidget{
+class HistorialGeneral extends StatefulWidget{
 
+  @override
+  _HistorialGeneralState createState() => _HistorialGeneralState();
+}
+
+class _HistorialGeneralState extends State<HistorialGeneral> {
   @override
   Widget build(BuildContext context) {
     Firestore db= Firestore.instance;
@@ -75,6 +80,8 @@ class HistorialGeneral extends StatelessWidget{
                                             },
                                                 child: Text("Si")),
                                             FlatButton(onPressed: (){
+                                              setState(() {
+                                              });
                                               Navigator.pop(context);
                                             },
                                                 child: Text("No"))
@@ -107,5 +114,4 @@ class HistorialGeneral extends StatelessWidget{
       ),
     );
   }
-
 }

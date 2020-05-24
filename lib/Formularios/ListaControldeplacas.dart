@@ -7,8 +7,14 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class ListaControldeplacas extends StatelessWidget{
+class ListaControldeplacas extends StatefulWidget{
+  @override
+  _ListaControldeplacasState createState() => _ListaControldeplacasState();
+}
+
+class _ListaControldeplacasState extends State<ListaControldeplacas> {
   Firestore database=Firestore.instance;
+
   @override
   Widget build(BuildContext context) {
     Stream<QuerySnapshot> stream;
@@ -89,6 +95,8 @@ class ListaControldeplacas extends StatelessWidget{
                                 },
                                     child: Text("Si")),
                                 FlatButton(onPressed: (){
+                                  setState(() {
+                                  });
                                   Navigator.pop(context);
                                 },
                                     child: Text("No"))
@@ -133,6 +141,7 @@ class ListaControldeplacas extends StatelessWidget{
       ),
     );
   }
+
 List<Widget> dientes(superior,inferior,izquierda,derecha,numdiente){
     List<Widget> dientes=List<Widget>();
     for(int i=0;i<14;i++) {

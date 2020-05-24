@@ -42,13 +42,9 @@ class ControldePlaca{
     );
     dynamic resp = await callable.call(this.toMap()).whenComplete((){print("Listo con exito");});
   }
-  Future<void> deleteControldeplaca(path) async {
 
 
-    final HttpsCallable callable = CloudFunctions.instance.getHttpsCallable(
-      functionName: 'DeleteControlPlacas',
-    );
-    dynamic resp = await callable.call(path).whenComplete((){print("Listo con exito");});
-  }
+
+
 
 }
